@@ -1,6 +1,5 @@
 OpenNote
 =============
-
 OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
 
 Features
@@ -40,20 +39,25 @@ If you want to open something just click it.
 ## Login
 To login simple go to your instance on OpenNote. You will need to have javascript enabled
 Then simply click "Login"
-![alt text][login]
+
+![][login]
 
 ## Browsing
 Now that you are logged in, you can browse around. At first you won't have any folders or notes. So, create some!
 Once you have some stuff simply click on a folder(Always Green) or browse a tree view on the left to crawl into you notes.
-![alt text][topLevel]
+
+![][topLevel]
 Eventually you'll find a note(Always blue) that you want to open. Simply click it or touch it.
-![alt text][plants]	
+
+![][plants]	
 
 ## Notes
 Once you click on a note you'll will be presented with it in a read only view.
-![alt text][seedsView]
+
+![][seedsView]
 If you want to edit a note, click on the "Edit" button in the top bar
-![alt text][seedsEdit]
+
+![][seedsEdit]
 This will bring you to the CKEditor. Once you are all done editing, click "Save" to store the note.
 Dont worry to much about the changing the content of your notes. The program keeps a history of what you changed.
 
@@ -79,8 +83,8 @@ Credits
 	Microsoft - For making terrible products
 	Evernote - For making better products in a slightly evil way
 
-[login]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/login.png
+[login]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/login.png 
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/topLevel.png
-[plants]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/plants.png
+[plants]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/plants.png 
 [seedsView]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/seedsView.png
 [seedsEdit]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/seedsEdit.png
