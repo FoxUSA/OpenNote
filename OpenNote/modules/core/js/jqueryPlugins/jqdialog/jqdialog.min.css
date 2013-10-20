@@ -1,0 +1,65 @@
+/* 
+	Below CSS is for jqdialog.min.js library, used for notifications and alerts.
+	Downloaded and installed from https://github.com/knadh/jqdialog 
+*/
+
+#jqDialog_box {
+	background: #f5f5f5;
+	position: absolute;
+	width: 450px;
+	font-family: Arial;
+	
+	border-width: 1px 3px 3px 1px;
+	border-style: solid;
+	border-color: #ccc;
+
+	border-radius:4px;/*round the corners*/
+	
+	box-shadow: 0 0 10px #bbb;
+}
+
+#jqDialog_content {
+	margin: 10px;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#jqDialog_options {
+	margin: 10px;
+	text-align: center;
+}
+
+#jqDialog_options button {
+	font-family: Arial;
+	margin-right: 5px;
+	background: #000;
+	border: 0px;
+
+	font-size: 1.5em;
+	color: #fff;
+	width: auto;
+	
+	cursor: pointer;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	border-radius:4px;/*round the corners*/
+}
+
+#jqDialog_input {
+	padding: 4px;
+	width: 250px;
+}
+
+#jqDialog_close {
+	background: none;
+	border: none;
+	float: right;
+	font-weight: bold;
+	font-size: 10px;
+	color: #ff0000;
+	cursor: pointer;
+}
