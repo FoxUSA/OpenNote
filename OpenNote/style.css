@@ -10,9 +10,8 @@ body{
 	cursor: pointer; /* fix for IOS */
 }
 
-ul, li{ /*remove the list prefix*/
-    list-style-type: none;
-    background: #fff;
+.jstree-default.jstree-focused{ /* yellowish background color from jstree*/
+    background-color:transparent !important; 
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
