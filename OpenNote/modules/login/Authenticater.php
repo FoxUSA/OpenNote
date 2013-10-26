@@ -1,6 +1,6 @@
 <?php
-
 include_once dirname(__FILE__).'/../core/Common.php';
+Authenticater::sessionHeader(); //this page gets included as part of the include tree. This method will be called for every page
 
 	abstract class Authenticater{
 		
@@ -140,10 +140,10 @@ include_once dirname(__FILE__).'/../core/Common.php';
 		 * @return - https if supported or http is not
 		 */
 		public static function supportsSSL(){
-			$SSLCheck = fsockopen($_SERVER["HTTP_HOST"], 443, $errno, $errstr, 30);
+			$SSLCheck = null;
+			$SSLCheck = @fsockopen($_SERVER["HTTP_HOST"], 443, $errno, $errstr, 30);
 			
-			if (!$SSL_Check){
-				fclose($SSL_Check);  
+			if ($SSLCheck==null || !$SSL_Check){
 				return "http://";
 			}
 		 	fclose($SSL_Check); 

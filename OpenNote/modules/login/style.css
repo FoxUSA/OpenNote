@@ -110,3 +110,7 @@ h1,h2,h3 {
 .clear{
 	clear: both;
 }
+
+#copyRight{
+	color: #9A9A9A;
+}

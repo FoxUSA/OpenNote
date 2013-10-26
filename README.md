@@ -11,6 +11,11 @@ Features
 - Multi user support
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
 
+Demo
+----
+http://stardrive.us/OpenNote/
+
+
 How To Install
 --------------
 - Create a MYSQL database named "OpenNote"

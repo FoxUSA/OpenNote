@@ -80,6 +80,7 @@ include_once dirname(__FILE__)."/../core/Common.php";
 		
 				</div>
 				<div class="clear"> </div>
+				<div id="copyRight">&#169; 2013 Jacob Liscom</div>
 			</div>
 		</div>
 	</body>

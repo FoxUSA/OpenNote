@@ -1,14 +1,15 @@
 <?php
+ob_start (); //buffer output
 /**
  *	Project name: OpenNote
  * 	Author: Jacob Liscom
  *	Version: 13.3.0
 **/
+	include_once dirname(__FILE__)."/../login/Authenticater.php";//this must be first
 	include_once dirname(__FILE__)."/../../NoteBook.php";
 	include_once dirname(__FILE__)."/../../NoteEditor.php";
-	include_once dirname(__FILE__)."/../../ajax.php";
-	include_once dirname(__FILE__)."/../login/Authenticater.php";	
-	include_once dirname(__FILE__)."../interfaces/ICore.php";	
+	include_once dirname(__FILE__)."/../../ajax.php";	
+	include_once dirname(__FILE__)."/./interfaces/ICore.php";
 	
 	//clean inputs to prevent sql injection
 	foreach($_POST as $key => $val) {
@@ -25,7 +26,6 @@
 		}
 	}
 	
-	Authenticater::sessionHeader(); //this page gets included as part of the include tree. This method will be called for every page
 
 	class Core implements ICore{
 		//mysql connection info
