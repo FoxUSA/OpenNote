@@ -74,7 +74,7 @@ $(document).ready(function(){
 				$("#folderList").hide();
 			
 			if($.trim(response)==""){
-				$("#folderList").html("It Looks Like You Dont Have Any Folders. You Can Create One Using The \"New Folder\" Button In The Top Right.");
+				$("#folderList").html("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page.");
 				$("#folderList").fadeIn(fadeSpeedShort);
 				return;
 			}

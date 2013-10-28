@@ -61,21 +61,19 @@ include_once dirname(__FILE__)."/../core/Common.php";
 				<div id="register">
 		
 					<form method="post" id="regForm">
-							<p>
-								<label>Choose a Username</label>
-								<input type="text" name="regUser" id="regU"/> <span id="availability"></span>
-							</p>
-		
-							<p>
-								<label>Choose a Password</label>
-								<label><input type="password" name="reg_pass" id="regP"/></label>
-							</p>
-				
-							<p>
-								<input type="submit" value="Register" class="button" />
-							</p>
-		
-						</table>
+						<p>
+							<label>Choose a Username</label>
+							<input type="text" name="regUser" id="regU"/> <span id="availability"></span>
+						</p>
+	
+						<p>
+							<label>Choose a Password</label>
+							<label><input type="password" name="reg_pass" id="regP"/></label>
+						</p>
+			
+						<p>
+							<input type="submit" value="Register" class="button" />
+						</p>
 					</form>
 		
 				</div>

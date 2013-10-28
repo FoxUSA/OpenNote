@@ -12,19 +12,19 @@ ob_start (); //buffer output
 	include_once dirname(__FILE__)."/./interfaces/ICore.php";
 	
 	//clean inputs to prevent sql injection
-	foreach($_POST as $key => $val) {
-		if(isset($_GET[$key])&&is_String($_GET[$key])){
-			$_POST[$key] = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
-			$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
-		}
-	}
-	
-	foreach($_GET as $key => $val) {
-		if(isset($_GET[$key])&&is_String($_GET[$key])){
-			$_GET[$key] = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
-			$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
-		}
-	}
+		/*foreach($_POST as $key => $val) {
+			if(isset($_POST[$key])&&is_String($_POST[$key])){
+				$_POST[$key] = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
+				$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
+			}
+		};*/ //in this app we allow html code to sent back
+		
+		foreach($_GET as $key => $val) {
+			if(isset($_GET[$key]) && is_String($_GET[$key])){
+				$_GET[$key] = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
+				$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
+			}
+		};
 	
 
 	class Core implements ICore{
