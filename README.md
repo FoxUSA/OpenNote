@@ -73,9 +73,7 @@ License
 
 	CKEditor - Distributed under the MPL License
 
-	OpenNote Code - Distributed under GPL v3 with the following added condition:
-
-	This software(OpenNote) cannot be sold as a product, as a component, as a service, or in any other way unless a distribution license is purchased from the author(J. Liscom)
+	OpenNote Code - Distributed under Creative Commons  Attribution-NonCommercial-ShareAlike 3.0 Unported License
 
 	Other OpenNote licenses are available for purchase from the author
 	
