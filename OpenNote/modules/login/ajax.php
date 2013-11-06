@@ -1,6 +1,6 @@
 <?php
 /**
- *	Project name: InFood
+ *	Project name: OpenNote
  * 	Author: Jacob Liscom
  *	Version: 12.10.0
  * 

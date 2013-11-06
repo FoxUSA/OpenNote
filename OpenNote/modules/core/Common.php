@@ -46,21 +46,21 @@ ob_start (); //buffer output
 		 * @return - returns true if connected
 		 */
 		private static function mysqlConnect(){
-			if(self::$pdo == NULL)
-				self::$pdo = new PDO(sprintf("mysql:host=%s;dbname=%s",self::$mysqlServer,self::$mysqlDB), self::$mysqlUser, self::$mysqlPass);
- 			
-			//ping equivalent
-				try{
-					self::$pdo->query("SELECT 1");
-				}
-				catch (Exception $e){
+			try{
+				if(self::$pdo == NULL)
+					self::$pdo = new PDO(sprintf("mysql:host=%s;dbname=%s",self::$mysqlServer,self::$mysqlDB), self::$mysqlUser, self::$mysqlPass);
+	 			
+				//ping equivalent
 					try{
-						self::$pdo = new PDO(sprintf("mysql:host=%s;dbname=%s",self::$mysqlServer,self::$mysqlDB), self::$mysqlUser, self::$mysqlPass);
+						self::$pdo->query("SELECT 1");
 					}
 					catch (Exception $e){
-						return FALSE;
+						self::$pdo = new PDO(sprintf("mysql:host=%s;dbname=%s",self::$mysqlServer,self::$mysqlDB), self::$mysqlUser, self::$mysqlPass);
 					}
 				}
+			catch (Exception $e){
+				return FALSE;
+			}
 			
 			return TRUE;
 		}

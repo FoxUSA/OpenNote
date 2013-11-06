@@ -4,6 +4,8 @@
  * 	Author: Jacob Liscom
  *	Version: 13.10.0
 **/
+	include_once dirname(__FILE__)."/Common.php";
+
 	$url =  "./upload/".time()."_".$_FILES["upload"]["name"];
 	 //extensive suitability check before doing anything with the file...
 	    if (($_FILES["upload"] == "none") OR (empty($_FILES["upload"]["name"])))

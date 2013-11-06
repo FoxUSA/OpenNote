@@ -13,6 +13,16 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserUploadUrl 		=  	"/OpenNote/modules/core/upload.php";
 	config.filebrowserImageUploadUrl 	=  	"/OpenNote/modules/core/upload.php";
 	
+	//include imagepaste plugin if present
+		$.ajax({
+		  url: "/OpenNote/modules/core/js/ckeditor/plugins/imagepaste/plugin.js", //or your url
+		  success: function(data){
+		    config.extraPlugins			=	"imagepaste";
+		  },
+		  error: function(data){
+		  },
+		});
+		
 	config.height 						= 	"500px";
 	config.disableNativeSpellChecker 	= 	false; 
 	

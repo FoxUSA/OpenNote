@@ -6,15 +6,20 @@ Features
 --------
 - Full WYSIWYG editor
 - Touch friendly and mouse friendly ui
-- Upload manager
+- Upload manager (not enabled in demo :) )
 - Light weight
 - Multi user support
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
+
+Upcoming Features
+-----------------
+Search
 
 Demo
 ----
 http://stardrive.us/OpenNote/
 
+Please like us at http://alternativeto.net/software/opennote/
 
 How To Install
 --------------
@@ -73,7 +78,7 @@ License
 
 	CKEditor - Distributed under the MPL License
 
-	OpenNote Code - Distributed under Creative Commons  Attribution-NonCommercial-ShareAlike 3.0 Unported License
+	OpenNote Code - Distributed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
 
 	Other OpenNote licenses are available for purchase from the author
 	
