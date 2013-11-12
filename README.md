@@ -43,7 +43,7 @@ These are stored in the following lines of code in /OpenNote/modules/core/common
 
 How To Use
 ----------
-OneNote uses a touch to open scheme.
+OpenNote uses a touch to open scheme.
 If you want to open something just click it.
 	
 ## Login
