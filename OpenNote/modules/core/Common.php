@@ -5,11 +5,19 @@ ob_start (); //buffer output
  * 	Author: Jacob Liscom
  *	Version: 13.3.0
 **/
+
+	//Include the vendor's autoloading library
+	include_once(dirname(__FILE__).'/../../../vendor/autoload.php');
+
+	//Continue with non psr-0 specific pre-loaded classes
 	include_once dirname(__FILE__)."/../login/Authenticater.php";//this must be first
 	include_once dirname(__FILE__)."/../../NoteBook.php";
 	include_once dirname(__FILE__)."/../../NoteEditor.php";
 	include_once dirname(__FILE__)."/../../ajax.php";	
 	include_once dirname(__FILE__)."/./interfaces/ICore.php";
+
+	//Setup the timezone
+	date_default_timezone_set('America/Montreal');
 	
 	//clean inputs to prevent sql injection
 		/*foreach($_POST as $key => $val) {
@@ -25,14 +33,18 @@ ob_start (); //buffer output
 				$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
 			}
 		};
-	
 
+	//Create an Inversion of Control Container
+	global $ioc;
+	$ioc = new \Illuminate\Container\Container();
+
+	//Declaration of the core connectivity classe, will be replaced later with the repositories
 	class Core implements ICore{
 		//mysql connection info
 			static $mysqlServer = "localhost";
-			static $mysqlUser = "notebook";
-			static $mysqlPass = "password";
-			static $mysqlDB = "notebook";
+			static $mysqlUser = "opennote";
+			static $mysqlPass = "opennote";
+			static $mysqlDB = "opennote";
 			
 		//PDO object
 			private static $pdo;
@@ -66,6 +78,17 @@ ob_start (); //buffer output
 		}
 		
 		/**
+		 * Escape data using the pdo quote facilities
+		 * @return Escape content
+		 */
+		private static function escape($data){
+			if(!self::mysqlConnect())
+				die ("Could not connect to sql server");
+
+			return self::$pdo->quote($data);
+		}
+		
+		/**
 		 * Disconnect from MYSQL
 		 */
 		public static function mysqlDisconnect(){
@@ -85,8 +108,10 @@ ob_start (); //buffer output
 			if(!($stmt = self::$pdo->prepare($query))) //prepare the query
 				die("There was an error with the query");	
 			
-			if(!$stmt->execute($param)) //execute the statement	
+			if(!$stmt->execute($param)){ //execute the statement	
+				var_dump($stmt->errorInfo());
 				die("The query did not work.");
+			}
 				
 			return $stmt->fetchAll();
 		}

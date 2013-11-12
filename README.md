@@ -38,6 +38,18 @@ These are stored in the following lines of code in /OpenNote/modules/core/common
 			static $mysqlDB = "notebook";
 ```
 			
+- Run composer install on the command line to install the required dependencies
+
+The web has many resources on how to install composer. In normal scenarios a simple:
+```bash
+			curl -S http://getcomposer.org/installer | php
+```
+will do the trick. You can then use:
+```bash
+			./composer.phar install
+```
+to install required dependencies.
+
 - Now the site install is complete. You can now open the site by going to your webserver url +/OpenNote
 
 

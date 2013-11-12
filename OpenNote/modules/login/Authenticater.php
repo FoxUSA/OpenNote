@@ -14,12 +14,19 @@ Authenticater::sessionHeader(); //this page gets included as part of the include
 				return;
 			}
 
-			$result = Core::query("SELECT COUNT(*) AS count FROM users WHERE userName= ?",array($userName));
-			
-			if($result[0]["count"]==0)
+			global $ioc;
+			$userRepository = $ioc->make('\OpenNote\Data\Repositories\UserRepository');
+			if(count($userRepository->get(array(
+				'username' => $userName
+			))) == 0)
+			{
 				echo "*Available";
-			else 
-				echo "*Not Available";	
+			}
+			else
+			{
+				echo "*Not Available";
+			}
+
 		}
 		
 		/**
@@ -28,29 +35,43 @@ Authenticater::sessionHeader(); //this page gets included as part of the include
 		 * @param password - the password fort the user
 		 */
 		public static function register($userName, $password){
-	
+			
+			//Validate the username
 			if(self::validateUsername($userName)){
 				echo "Invalid username";
 				return;
 			}
-	
-			$result = Core::query("SELECT COUNT(*) AS count FROM users WHERE userName= ?",array($userName));
-			
-			if($result[0]["count"]!=0){
+
+			//Build an instance of a new user
+			global $ioc;
+			$userRepository = $ioc->make('\OpenNote\Data\Repositories\UserRepository');
+			if(count($userRepository->get(array(
+				'username' => $userName
+			))) != 0)
+			{
 				echo "The username is taken. Please try something else.";
 				return;
 			}
 
-			//Encrypting password
-			$password = crypt($password);//hash password
+			//Encrypt the password
+			$password = crypt($password);
 
-			Core::query("INSERT INTO users(userName, password, lastLoginIP) VALUES(?,?,?);",array($userName,$password,$_SERVER['REMOTE_ADDR']));
+			//Persist the user
+			$userBuilder = $ioc->make('\OpenNote\Data\Builders\UserBuilder');
+			$newUser = $userBuilder->build(array(
+				'id' => null,
+				'username' => $userName,
+				'password' => $password
+			));
+			$userRepository->create($newUser);
 			
-			$_SESSION["userID"] = Core::getInsertID();
+			//Port the user's id into the session storage
+			$_SESSION["userID"] = $newUser->getId();
 			echo "Thank You For Registering
 				<script type=\"text/javascript\">
 					document.location.href =\"../../\";
 				</script>";
+
 		}
 
 		/**
@@ -59,23 +80,47 @@ Authenticater::sessionHeader(); //this page gets included as part of the include
 		 * @param password
 		 */
 		public static function login($userName, $password){
+
+			//Set default value of where to go after login
 			if(!isset($_SESSION["reguestURL"]))
-				$_SESSION["reguestURL"]= "../../"; //set default value of where to go after login
+			{
+				$_SESSION["reguestURL"]= "../../";	
+			}
 			
-			$result = Core::query("SELECT id, password FROM users WHERE userName = ?",array($userName));
-			
-			if($result==NULL||!self::validatePassword($password, $result[0]["password"])){//compare hashes
+			//Check if user exists
+			global $ioc;
+			$userRepository = $ioc->make('\OpenNote\Data\Repositories\UserRepository');
+			if(count($users = $userRepository->get(array(
+				'username' => $userName
+			))) != 1)
+			{
 				echo "Invalid Username or Password";
 				return;
 			}
+
+			//Extract the user
+			$user = reset($users);
+
+			//Encrypt the password
+			$password = crypt($password);
+
+			//Validate the user password
+			if($password != $user->getPassword())
+			{
+				echo "Invalid Username or Password";
+				return;
+			}
+
+			//Port the user's id into the session storage
+			$_SESSION["userID"] = $newUser->getId();
 			
-			$_SESSION["userID"]=$result[0]["id"]; //set them as logged in
-			
+			//Redirect the user
 			echo sprintf("	Credentials Accepted
 								<script type=\"text/javascript\">
 									document.location.href =\"%s\";
 								</script>",
 							$_SESSION["reguestURL"]); //of to the races
+
 		}
 		
 		/**
@@ -84,15 +129,6 @@ Authenticater::sessionHeader(); //this page gets included as part of the include
 		 */
 		private static function validateUsername($username) {
 			return preg_match("/[^0-9a-z_]/i", $username);
-		}
-		
-		/**
-		 * @param password - the password the user entered
-		 * @param $hashedPassword - the password that has been pre hashed
-		 * @return - returns true if the password matched
-		 */
-		private static function validatePassword($password,$hashedPassword){
-			return crypt($password, $hashedPassword)==$hashedPassword;
 		}
 		
 		/**
