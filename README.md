@@ -27,7 +27,7 @@ How To Install
 --------------
 - Create a MYSQL database named "OpenNote"
 - Download and extract OpenNote into a folder on your php web-server called "OpenNote"
-- Open up the sql folder and run "notebook.sql" in your OpenNote database
+- Open up the model/sql folder and run "notebook.sql" in your OpenNote database
 - Change the database connection settings inside of web-server path/OpenNote/Config.php to match your db settings.
 These are stored in the following lines of code in /OpenNote/Config.php:
 ```php
