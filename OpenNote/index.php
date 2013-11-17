@@ -6,7 +6,7 @@
  *	Version: 13.6.0
 **/
 
-	include_once dirname(__FILE__)."/modules/core/Common.php";
+	include_once dirname(__FILE__)."/controller/Common.php";
 	
 	$folderID = null;
 	$noteID = null;
@@ -32,13 +32,13 @@
 	<![endif]-->
 	
 	<!-- JQuery -->
-		<script src="./modules/core/js/jquery.js" type="text/javascript"></script>
-			<script src="./modules/core/js/jqueryPlugins/jqdialog/jqdialog.min.js" type="text/javascript"></script>
-				<link rel="stylesheet" type="text/css" media="screen" href="./modules/core/js/jqueryPlugins/jqdialog/jqdialog.min.css"><!--Style sheet for jqdialog.min-->
-			<script src="./modules/core/js/jqueryPlugins/jstree/jquery.jstree.js" type="text/javascript"></script>
+		<script src="./controller/js/jquery.js" type="text/javascript"></script>
+			<script src="./controller/js/jqueryPlugins/jqdialog/jqdialog.min.js" type="text/javascript"></script>
+				<link rel="stylesheet" type="text/css" media="screen" href="./controller/js/jqueryPlugins/jqdialog/jqdialog.min.css"><!--Style sheet for jqdialog.min-->
+			<script src="./controller/js/jqueryPlugins/jstree/jquery.jstree.js" type="text/javascript"></script>
 			
 		
-	<script src="./modules/core/js/ckeditor/ckeditor.js"></script>
+	<script src="./controller/js/ckeditor/ckeditor.js"></script>
 	
 	<script src="./ajax.js" type="text/javascript"></script><!--JS event code and ajax client code-->
  

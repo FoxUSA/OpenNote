@@ -10,10 +10,12 @@ Features
 - Light weight
 - Multi user support
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
+- Search
+
 
 Upcoming Features
 -----------------
-Search
+- Multiple DB Cores
 
 Demo
 ----
@@ -26,16 +28,13 @@ How To Install
 - Create a MYSQL database named "OpenNote"
 - Download and extract OpenNote into a folder on your php web-server called "OpenNote"
 - Open up the sql folder and run "notebook.sql" in your OpenNote database
-- Change the database connection settings inside of web-server path/OpenNote/modules/core/common.php to match your db settings.
-These are stored in the following lines of code in /OpenNote/modules/core/common.php:
+- Change the database connection settings inside of web-server path/OpenNote/Config.php to match your db settings.
+These are stored in the following lines of code in /OpenNote/Config.php:
 ```php
-			static $mysqlServer = "localhost";
-			
-			static $mysqlUser = "notebook";
-			
-			static $mysqlPass = "password";
-			
-			static $mysqlDB = "notebook";
+	public static $dbUserName = "notebook";
+	public static $dbPassword = "password";
+	public static $dbServer = "localhost";
+	public static $dbName = "notebook";
 ```
 			
 - Now the site install is complete. You can now open the site by going to your webserver url +/OpenNote

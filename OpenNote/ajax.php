@@ -7,7 +7,7 @@
  * Handles the java script to php calls
 **/
 
-	include_once dirname(__FILE__)."/modules/core/Common.php";
+	include_once dirname(__FILE__)."/controller/Common.php";
 	
 	
 	//some default values for optional parameters
@@ -18,8 +18,15 @@
 			$_POST["folderID"]=null;
 			
 	//save Note
-		if(isset($_POST["saveNote"],$_POST["folderID"],$_POST["title"],$_POST["note"]))
-			NoteEditor::save($_POST["folderID"],$_POST["noteID"],$_POST["title"],$_POST["note"]);
+		if(isset($_POST["saveNote"],$_POST["folderID"],$_POST["title"],$_POST["note"])){
+			$note = new Note();
+			$note->folderID=$_POST["folderID"];
+			$note->id=$_POST["noteID"];
+			$note->title=$_POST["title"];
+			$note->note=$_POST["note"];
+			
+			NoteEditor::save($note);
+		}
 		
 	//New note
 		if(isset($_POST["newNote"],$_POST["folderID"]))
@@ -52,4 +59,8 @@
 	//Get folder List
 		if(isset($_POST["getFolderList"]))
 			NoteBook::getFolderList();
+		
+	//Search
+		if(isset($_POST["search"],$_POST["searchString"]))
+			NoteBook::search($_POST["searchString"]);
 ?>	

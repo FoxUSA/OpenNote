@@ -33,38 +33,8 @@ var fadeSpeedLong = 2000;
 	window.onpopstate = function(){
 		//window.location.reload();
 	};
-	
-//invert colors
-	function invertColor(){
-		// the css we are going to inject
-		var css = 'html {-webkit-filter: invert(100%);' +
-		    '-moz-filter: invert(100%);' + 
-		    '-o-filter: invert(100%);' + 
-		    '-ms-filter: invert(100%); }',
-		
-		head = document.getElementsByTagName('head')[0],
-		style = document.createElement('style');
-		
-		// a hack, so you can "invert back" clicking the bookmarklet again
-		if (!window.counter) { window.counter = 1;} else  { window.counter ++;
-		if (window.counter % 2 == 0) { var css ='html {-webkit-filter: invert(0%); -moz-filter:    invert(0%); -o-filter: invert(0%); -ms-filter: invert(0%); }'}
-		 };
-		
-		style.type = 'text/css';
-		if (style.styleSheet){
-		style.styleSheet.cssText = css;
-		} else {
-		style.appendChild(document.createTextNode(css));
-		}
-		
-		//injecting the css to the head
-		head.appendChild(style);
-	}
-
-
 
 $(document).ready(function(){	
-	
 //get the folder list
 	window.getFolderList= function(){
 		$.post("ajax.php",{getFolderList: true}, function(response){
@@ -225,7 +195,6 @@ $(document).ready(function(){
 					});
 					break;
 				
-				
 				case "Clear":
 					var folderID = $("#note").attr("folderID");
 					var noteID = $("#note").attr("noteID")
@@ -242,6 +211,24 @@ $(document).ready(function(){
 							});
 						},		// callback function for 'YES' button
 						null		//callback function for 'NO' button
+					);
+					break;
+				
+				case "Find":
+					$.jqDialog.prompt("Search:",
+						"",
+						function(data) { 
+							$.jqDialog.notify(waitText);
+							
+							$(".boxContainer").fadeOut(fadeSpeedShort);
+							$.post("ajax.php",{search: true, searchString: data}, function(response){
+								$(".boxContainer").html(response); //set the contents to the output of the script
+								$(".boxContainer").fadeIn(fadeSpeedShort);
+								
+								$.jqDialog.close(); //all done. close the notify dialog  
+							});
+						},		
+						null
 					);
 					break;
 			}
@@ -269,7 +256,7 @@ $(document).ready(function(){
 		$(document).on("click",".note",function(){
 			$.jqDialog.notify(waitText);
 			var noteID = $(this).attr("boxID");//custom attribute
-			var folderID = $("#folder").attr("folderID");//custom attribute
+			var folderID = $(this).attr("otherID");//custom attribute
 			
 			$(".boxContainer").fadeOut(fadeSpeedShort);
 			$.post("ajax.php",{loadNote: true,folderID:folderID, noteID: noteID}, function(response){
