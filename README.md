@@ -78,8 +78,9 @@ License
 	CKEditor - Distributed under the MPL License
 
 	OpenNote Code - Distributed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-
+	
 	Other OpenNote licenses are available for purchase from the author
+	© Jacob Liscom 2013
 	
 Credits
 -------
