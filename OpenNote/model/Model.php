@@ -62,7 +62,7 @@
 				$note->folderID=$folderID;
 				$note->id=$id;
 				$note->title=$result[0]["title"];
-				$note->note=$result[0]["note"];
+				$note->note=html_entity_decode($result[0]["note"]);//de-scape note
 				$note->originNoteID=$result[0]["originNoteID"];
 				
 				return $note;

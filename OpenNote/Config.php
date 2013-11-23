@@ -11,11 +11,35 @@
 		/**
 		 * Data base details
 		 */
-			public static $dbUserName = "notebook";
-			public static $dbPassword = "password";
-			public static $dbServer = "localhost";
-			public static $dbName = "notebook";
-			
+			public static function dbConfig(){
+				//Un-comment desired database type
+				return self::mysqlConfig();
+				//return self::sqliteConfig();
+			}
+
+				/**
+				 * sql lite
+				 */
+				private static function sqliteConfig(){			
+					//pdo
+						//Path to DB. Do not put in webdirectory! If you do anyone can download your database!
+						$dbName = "../phplite/OpenNote"; //relative path to sqllite db
+						return new PDO(sprintf("sqlite:%s\%s",dirname(__FILE__),$dbName));
+				}
+				
+				/**
+				 * mysql
+				 */
+				private static function mysqlConfig(){			
+					//mysql
+						$dbUserName = "notebook";
+						$dbPassword = "password";
+						$dbServer = "127.0.0.1";
+						$dbName = "notebook";
+						
+						return new PDO(sprintf("mysql:host=%s;dbname=%s",$dbServer,$dbName), $dbUserName, $dbPassword);
+				}
+		
 		/**
 		 * Upload
 		 */

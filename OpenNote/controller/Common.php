@@ -9,7 +9,7 @@ ob_start (); //buffer output
 	include_once dirname(__FILE__)."/modules/login/Authenticater.php";//this must be first due to security concerns
 	
 	//which db type do you want to use
-		include_once dirname(__FILE__)."/modules/core/Mysql.php";
+		include_once dirname(__FILE__)."/modules/core/PDO.php";
 
 	//common includes 
 		include_once dirname(__FILE__)."/../upload/Download.php";
@@ -22,12 +22,12 @@ ob_start (); //buffer output
 			
 			
 	//clean inputs to prevent sql injection
-		/*foreach($_POST as $key => $val) {
+		foreach($_POST as $key => $val) {
 			if(isset($_POST[$key])&&is_String($_POST[$key])){
-				$_POST[$key] = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
-				$key = stripslashes(strip_tags(htmlspecialchars($val, ENT_QUOTES)));
+				$_POST[$key] =   htmlentities($val);
+				$key =   htmlentities($val);//escape characters
 			}
-		};*/ //in this app we allow html code to sent back
+		}; //in this app we allow html code to sent back
 		
 		foreach($_GET as $key => $val) {
 			if(isset($_GET[$key]) && is_String($_GET[$key])){
