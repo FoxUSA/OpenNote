@@ -11,11 +11,14 @@ Features
 - Multi user support
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
 - Search
-
+- PDO Connector/(MySql and SQLite Database Support)
 
 Upcoming Features
 -----------------
-- Multiple DB Cores
+- Email to note
+- Move notes
+- Implement history
+- Install script
 
 Demo
 ----
