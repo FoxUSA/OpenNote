@@ -12,15 +12,15 @@ Features
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
 - Search
 - PDO Connector/(MySql and SQLite Database Support)
-- Move Folders( Drag one folder into another in the list view.
+- Move Folders and Notes(Drag into another folder in the list view.)
+- Rename/Delete Folders(Click on folder title to get menu.)
 
 Upcoming Features
 -----------------
 - Email to note
-- Move notes
 - Implement history diff viewer
 - Install script
-- Rename folders
+
 
 Demo
 ----
