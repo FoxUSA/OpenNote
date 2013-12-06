@@ -6,9 +6,9 @@ ob_start (); //buffer output
  *	Version: 13.3.0
 **/
 	include_once dirname(__FILE__)."/../Config.php";
-	include_once dirname(__FILE__)."/modules/login/Authenticater.php";//this must be first due to security concerns
+	include_once dirname(__FILE__).Config::$loginModulePath;//this must be first after config due to security concerns
 	
-	//which db type do you want to use
+	//Core module
 		include_once dirname(__FILE__)."/modules/core/PDO.php";
 
 	//common includes 

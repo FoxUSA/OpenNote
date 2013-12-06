@@ -17,7 +17,7 @@
 		
 		 //extensive suitability check before doing anything with the file...
 		    if (($_FILES["upload"] == "none") OR (empty($_FILES["upload"]["name"])))
-		       $message = "No file uploaded.";
+		       $message = "No file uploaded. Try checking the php upload and post limit.";
 				
 		    else 
 		    	if ($_FILES["upload"]["size"] == 0)

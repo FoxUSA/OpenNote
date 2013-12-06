@@ -54,6 +54,8 @@
 		 * Security
 		 */
 		 	public static $secAlwaysUseSSL = false; //Default: false. Script will automatically send people to ssl if it is enabled
+		 	public static $loginModulePath = "/modules/login/Authenticater.php"; //path from common
+		 
 	}
 
 ?>

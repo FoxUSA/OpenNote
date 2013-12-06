@@ -17,6 +17,9 @@
 		if(!isset($_POST["folderID"]))
 			$_POST["folderID"]=null;
 			
+		if(!isset($_POST["newParrentID"]))
+			$_POST["newParrentID"]=null;
+		
 	//save Note
 		if(isset($_POST["saveNote"],$_POST["folderID"],$_POST["title"],$_POST["note"])){
 			$note = new Note();
@@ -39,8 +42,12 @@
 	//load a note
 		if(isset($_POST["loadNote"],$_POST["folderID"],$_POST["noteID"]))
 			new NoteEditor($_POST["folderID"],$_POST["noteID"]);
+		
+	//Move Note
+		if(isset($_POST["moveNote"],$_POST["noteID"],$_POST["newParrentID"]))
+			NoteEditor::moveNote($_POST["noteID"],$_POST["newParrentID"]);
 	
-	//load a folder
+	//Load a folder
 		if(isset($_POST["loadFolder"]))
 			new NoteBook($_POST["folderID"]);
 		
@@ -51,9 +58,13 @@
 	//Remove folder
 		if(isset($_POST["removeFolder"],$_POST["folderID"]))
 			NoteBook::removeFolder($_POST["folderID"]);
+		
+	//Rename folder
+		if(isset($_POST["renameFolder"],$_POST["folderID"],$_POST["name"]))
+			NoteBook::renameFolder($_POST["folderID"],$_POST["name"]);
 	
 	//Move folder
-		if(isset($_POST["moveFolder"],$_POST["folderID"],$_POST["newParrentID"]))
+		if(isset($_POST["moveFolder"],$_POST["folderID"]))
 			NoteBook::moveFolder($_POST["folderID"],$_POST["newParrentID"]);
 		
 	//Get folder List

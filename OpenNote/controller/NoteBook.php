@@ -51,7 +51,7 @@ class NoteBook{
 			return;
 		
 		//echo this foldersID for future reference
-			echo sprintf("<folder id=\"folder\" folderID=\"%d\"></list>",$query[0]["id"]);
+			echo sprintf("<folder id=\"folder\" folderID=\"%d\"></folder>",$query[0]["id"]);
 			
 		
 		echo sprintf("	<script type=\"text/javascript\">
@@ -149,6 +149,20 @@ class NoteBook{
 	}
 	
 	/**
+	 * Rename Folder
+	 * @param $id - the id of the folder to rename.
+	 * @param title - the new title
+	 */
+	public static function renameFolder($id, $title){
+		Model::renameFolder($id,$title);		
+			//update the view
+				echo "	<script type=\"text/javascript\">
+							getFolderList();
+				   		</script>";
+				new NoteBook($id);
+	}
+	
+	/**
 	 * @param id - the id of the box
 	 * @param color/class - the color/class code to format the box
 	 * @param title - the title string
@@ -160,7 +174,7 @@ class NoteBook{
 	 */
 	private static function boxFactory($id=null, $color=null, $title=null,$desc=null,$left=null,$right=null, $otherID = null){	
 		return "
-				<div class=\"box $color startHidden\" boxID=\"$id\" otherID=\"$otherID\">
+				<div class=\"box $color startHidden jstree-draggable\" boxID=\"$id\" otherID=\"$otherID\">
 					<h2>
 						$title
 					</h2>
@@ -218,15 +232,19 @@ class NoteBook{
 	 * echos the title block
 	 */
 	private static function folderTitle($title, $remove){
-		$button="";
-		if($remove)
-			$button="<button id=\"removeFolder\" class=\"customButton\">X</button>";
+		$renameButton="";
+		$removeButton="";
+		if($remove){
+			$renameButton="<button id=\"renameFolder\" class=\"customButton startHidden\">Rename</button>";
+			$removeButton="<button id=\"removeFolder\" class=\"customButton startHidden\">Delete</button>";
+		}
 		
 		echo sprintf(
 			"<div id=\"folderTitleBar\">
 				<div id=\"folderTitle\">%s</div>
 				%s
-			</div>",$title,$button);
+				%s
+			</div>",$title,$renameButton,$removeButton);
 	}
 	
 	

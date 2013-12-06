@@ -33,6 +33,15 @@ var fadeSpeedLong = 2000;
 	window.onpopstate = function(){
 		//window.location.reload();
 	};
+	
+//reload folder content
+	function loadFolder(folderID){
+		$(".boxContainer").fadeOut(fadeSpeedShort);
+		$.post("ajax.php",{loadFolder: true, folderID: folderID}, function(response){
+			$(".boxContainer").html(response); //set the contents to the output of the script
+			$(".boxContainer").fadeIn(fadeSpeedShort);
+		});
+	}
 
 $(document).ready(function(){	
 //get the folder list
@@ -58,6 +67,63 @@ $(document).ready(function(){
 			            "dots" : false,
 			            "icons" : false
 			        },
+					"dnd" : {//Drag box's into list
+						"drag_finish" : function (data) {
+							var oldParrentID;
+							var newParrentID;
+							
+							if($(data.o).closest(".box").hasClass("note")){//is note
+								var noteID = $(data.o).closest(".box").attr("boxID"); //object dropped
+								oldParrentID = $(data.o).closest(".box").attr("otherID"); //object dropped
+								newParrentID = data.r.children(".folder").attr("folderID"); //object dropped on 
+								
+								if(newParrentID==oldParrentID)//do nothing if nothing changed
+									return;
+									
+								$(".boxContainer").fadeOut(fadeSpeedShort);	
+								
+								$.jqDialog.confirm(	
+									"Are You Sure You Want To Move This Note?",
+									function(){	//yes							
+										$.post("ajax.php",{moveNote: true, noteID: noteID, newParrentID: newParrentID}, function(){
+											loadFolder(oldParrentID);
+												
+											$.jqDialog.notify("Note Moved",5); //all done. close the notify dialog 
+										});	
+									},
+									function(){//no
+										$(".boxContainer").fadeIn(fadeSpeedShort);
+									}
+								);
+							}
+							else{//is folder
+								var folderID = $(data.o).closest(".box").attr("boxID"); //get the folders id
+								
+								oldParrentID = $("#folder").attr("folderID");//get current folder //TODO DRY in a function or global variable
+								newParrentID = data.r.children(".folder").attr("folderID"); //object dropped on 
+								
+								if(newParrentID==oldParrentID || newParrentID==folderID)//do nothing if nothing changed
+									return;
+									
+								$(".boxContainer").fadeOut(fadeSpeedShort);		
+									
+								$.jqDialog.confirm(	
+									"Are You Sure You Want To Move This Folder?",
+									function(){	//yes							
+										$.post("ajax.php",{moveFolder: true, folderID: folderID, newParrentID: newParrentID}, function(){
+											getFolderList();
+											loadFolder(oldParrentID);
+	
+											$.jqDialog.notify("Folder Moved",5); //all done. close the notify dialog 
+										});	
+									},
+									function(){//no
+										$(".boxContainer").fadeIn(fadeSpeedShort);
+									}
+								); 
+							}
+						}
+					},
 					"plugins" : [ "themes", "html_data", "crrm","dnd"]
 				}).bind("move_node.jstree rename_node.jstree create_node.jstree", function(event, data) {
 			        if (event.type === "move_node") {
@@ -68,17 +134,21 @@ $(document).ready(function(){
 						if(newParrentID==oldParrentID)//do nothing if nothing changed
 							return;
 						
+						$(".boxContainer").fadeOut(fadeSpeedShort);	
+						
 						//send message to backend
-						$.jqDialog.confirm(	
+							$.jqDialog.confirm(	
 								"Are You Sure You Want To Move This Folder?",
 								function(){	//yes							
 									$.post("ajax.php",{moveFolder: true, folderID: folderID, newParrentID: newParrentID}, function(){
 										$.jqDialog.notify("Folder Moved",5); //all done. close the notify dialog 
+										loadFolder(oldParrentID);
 									});	
 								},
 								function(){//no
+									$(".boxContainer").fadeIn(fadeSpeedShort);
 									getFolderList();
-								}); 
+							}); 
 			        } 
 		         });
 				
@@ -86,20 +156,6 @@ $(document).ready(function(){
 		});
 	}
 	
-	//Home button
-		$(document).on("click","#home",function(){//click for both touch and click support
-			$.jqDialog.notify(waitText);
-					
-			$(".boxContainer").fadeOut(fadeSpeedShort, function(){
-				$.post("ajax.php",{loadFolder: true}, function(response){
-					$(".boxContainer").html(response); //set the contents to the output of the script
-					$(".boxContainer").fadeIn(fadeSpeedShort);
-					
-					$.jqDialog.close(); 
-				});
-			});
-		});
-		
 	//Button 0 handler
 		$(document).on("click","#button0",function(){//click for both touch and click support
 			switch($(this).text()){										
@@ -267,6 +323,27 @@ $(document).ready(function(){
 			});
 		});
 		
+	//Home button
+		$(document).on("click","#home",function(){//click for both touch and click support
+			$.jqDialog.notify(waitText);
+					
+			$(".boxContainer").fadeOut(fadeSpeedShort, function(){
+				$.post("ajax.php",{loadFolder: true}, function(response){
+					$(".boxContainer").html(response); //set the contents to the output of the script
+					$(".boxContainer").fadeIn(fadeSpeedShort);
+					
+					$.jqDialog.close(); 
+				});
+			});
+		});
+		
+	//Title is clicked
+		$(document).on("click","#folderTitle",function(){
+			$("#renameFolder").fadeIn(fadeSpeedShort);
+			$("#removeFolder").fadeIn(fadeSpeedShort);
+		});
+		
+	
 	//folder is clicked
 		$(document).on("click",".folder",function(){
 			$.jqDialog.notify(waitText);
@@ -274,18 +351,14 @@ $(document).ready(function(){
 			if(folderID == null)
 				folderID = $(this).attr("boxId");
 			
-			$(".boxContainer").fadeOut(fadeSpeedShort);
-			$.post("ajax.php",{loadFolder: true, folderID: folderID}, function(response){
-				$(".boxContainer").html(response); //set the contents to the output of the script
-				$(".boxContainer").fadeIn(fadeSpeedShort);
-				
-				$.jqDialog.close(); //all done. close the notify dialog  
-			});
+			loadFolder(folderID);
+			
+			$.jqDialog.close(); //all done. close the notify dialog
 		});
 		
 	//remove folder is clicked
 		$(document).on("click","#removeFolder",function(){
-		$.jqDialog.confirm("Are You Sure You Want To Delete This Folder?",
+			$.jqDialog.confirm("Are You Sure You Want To Delete This Folder?",
 				function() {	
 					$.jqDialog.notify(waitText);
 					var folderID = $("#folder").attr("folderID");//custom attribute
@@ -299,6 +372,26 @@ $(document).ready(function(){
 					});
 				},		// callback function for 'YES' button
 				null	//call back for no
+			);
+		});
+	
+	//Rename folder
+		$(document).on("click","#renameFolder",function(){
+			$.jqDialog.prompt("New Folder Name:",
+				"",
+				function(data) { 
+					$.jqDialog.notify(waitText);
+					var folderID = $("#folder").attr("folderID");//custom attribute
+					
+					$(".boxContainer").fadeOut(fadeSpeedShort);
+					$.post("ajax.php",{renameFolder: true, folderID: folderID, name: data}, function(response){
+						$(".boxContainer").html(response); //set the contents to the output of the script
+						$(".boxContainer").fadeIn(fadeSpeedShort);
+						
+						$.jqDialog.close(); //all done. close the notify dialog  
+					});
+				},		
+				null
 			);
 		});
 		

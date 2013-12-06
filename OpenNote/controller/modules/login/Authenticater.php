@@ -1,5 +1,6 @@
 <?php
-include_once dirname(__FILE__).'/../../Common.php';
+include_once dirname(__FILE__)."/Config.php";
+include_once dirname(__FILE__).LoginConfig::$commonPath;
 Authenticater::sessionHeader(); //this page gets included as part of the include tree. This method will be called for every page
 
 	abstract class Authenticater{

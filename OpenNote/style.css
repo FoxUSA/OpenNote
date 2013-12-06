@@ -62,8 +62,8 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 	#folderTitle{
 		float:left;
-		
-	}
+		padding-right:15px;
+	}	
 
 .customButton{ /*custom button class that removes all browser formating*/
 	border: none;

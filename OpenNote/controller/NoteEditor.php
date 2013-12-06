@@ -98,6 +98,15 @@
 				new NoteBook(Model::removeNote($noteID));
 			}
 			
+				/**
+				 * change a notes parent
+				 * @param noteID - the note id to change the folder of
+				 * @param newParrentID - the new parent of the folder
+				 */
+				public static function moveNote($noteID, $newParrentID){
+					Model::moveNote($noteID, $newParrentID);
+				}
+			
 			/**
 			 * generate a note div header
 			 * @param folderID - the id of the folder the note is in
