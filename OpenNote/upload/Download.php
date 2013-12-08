@@ -4,7 +4,7 @@
  * 	Author: Jacob Liscom
  *	Version: 13.11.0
 **/
-include_once dirname(__FILE__)."/../controller/Common.php";
+include_once dirname(__FILE__)."/../controller/common.php";
 
 	class Download{
 		public function Download(){

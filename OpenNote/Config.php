@@ -4,7 +4,7 @@
  * 	Author: Jacob Liscom
  *	Version: 13.10.0
 **/
-	include_once dirname(__FILE__)."/controller/Common.php";
+	include_once dirname(__FILE__)."/controller/common.php";
 	
 	abstract class Config{
 		
@@ -55,7 +55,13 @@
 		 */
 		 	public static $secAlwaysUseSSL = false; //Default: false. Script will automatically send people to ssl if it is enabled
 		 	public static $loginModulePath = "/modules/login/Authenticater.php"; //path from common
-		 
+		 	
+		/**
+		 * Update
+		 */
+		 	public static $checkForUpdates = true; //Default: true; Check for updates
+		 	public static $updateServicePath = "http://stardrive.us/UpdateService/index.php?appName=OpenNote"; //Path to version service
+		 	public static $version = "13.12.0";
+			public static $releaseChannel = "dev"; //Default: prod; Release channel. Prod is production level release. Dev is current deployment release.
 	}
-
 ?>

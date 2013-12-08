@@ -1,5 +1,5 @@
 <?php
-	include_once dirname(__FILE__)."/../controller/Common.php";
+	include_once dirname(__FILE__)."/../controller/common.php";
 	
 	abstract class Model{
 		

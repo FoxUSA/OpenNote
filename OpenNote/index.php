@@ -6,7 +6,7 @@
  *	Version: 13.6.0
 **/
 
-	include_once dirname(__FILE__)."/controller/Common.php";
+	include_once dirname(__FILE__)."/controller/common.php";
 	
 	$folderID = null;
 	$noteID = null;
@@ -47,6 +47,7 @@
 	<div id="header">
 		<div class="left">
 			<button type="button" class="customButton" id="home">Notes</button> 
+			<?php NoteBook::checkForOpenNoteUpdate(); ?>
 		</div>
 		<div class="right">
 			<button type="button" class="customButton" id="button0"></button> 

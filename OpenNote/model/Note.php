@@ -1,5 +1,5 @@
 <?php
-	include_once dirname(__FILE__)."s/../controller/Common.php";
+	include_once dirname(__FILE__)."s/../controller/common.php";
 
 	class Note{
 		public $id;

@@ -5,7 +5,7 @@
 	 *	Version: 13.6.0
 	**/
 
-include_once dirname(__FILE__)."/../../Common.php";
+include_once dirname(__FILE__)."/../../common.php";
 ?>
 <html>
 	<head>

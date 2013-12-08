@@ -7,7 +7,7 @@
  * Handles the java script to php calls
 **/
 
-	include_once dirname(__FILE__).'/../../Common.php';
+	include_once dirname(__FILE__).'/../../common.php';
 			
 	//check username availability 
 		if(isset($_POST["checkAvailability"],$_POST["userName"]))

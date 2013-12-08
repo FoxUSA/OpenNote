@@ -11,7 +11,7 @@
 		 * 
 		 * common script will need to reference this 
 		 */
-		 public static $commonPath = "/../../Common.php";
+		 public static $commonPath = "/../../common.php";
 	}
 
 ?>

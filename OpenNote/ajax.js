@@ -353,7 +353,7 @@ $(document).ready(function(){
 			
 			loadFolder(folderID);
 			
-			$.jqDialog.close(); //all done. close the notify dialog
+			$.jqDialog.close(); //all done. close the notify dialog//FIXME this gets called before everything is visible
 		});
 		
 	//remove folder is clicked

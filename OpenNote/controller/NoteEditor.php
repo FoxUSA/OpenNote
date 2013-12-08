@@ -5,7 +5,7 @@
  *	Version: 13.2.0
 **/
 
-	include_once dirname(__FILE__)."/./Common.php";
+	include_once dirname(__FILE__)."/common.php";
 	//OO code
 		class NoteEditor{
 			private static $NOTE_FOOT =	"</div>";

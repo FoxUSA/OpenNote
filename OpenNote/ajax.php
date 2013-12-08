@@ -7,7 +7,7 @@
  * Handles the java script to php calls
 **/
 
-	include_once dirname(__FILE__)."/controller/Common.php";
+	include_once dirname(__FILE__)."/controller/common.php";
 	
 	
 	//some default values for optional parameters

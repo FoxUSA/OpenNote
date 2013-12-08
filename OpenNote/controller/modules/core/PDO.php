@@ -4,8 +4,8 @@
  * 	Author: Jacob Liscom
  *	Version: 13.3.0
 **/
-	include_once dirname(__FILE__)."/./interfaces/ICore.php";
-	include_once dirname(__FILE__).'/../../Common.php';
+	include_once dirname(__FILE__)."/interfaces/ICore.php";
+	include_once dirname(__FILE__).'/../../common.php';
 	
 	class Core implements ICore{
 		//PDO object

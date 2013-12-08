@@ -4,7 +4,7 @@
  * 	Author: Jacob Liscom
  *	Version: 13.11.0
 **/
-	include_once dirname(__FILE__)."/Common.php";
+	include_once dirname(__FILE__)."/common.php";
 	 
 	if(Config::$uploadEnabled){
 		$diskName = sprintf("%s_%d",time(),rand());//the name we are going to store it under

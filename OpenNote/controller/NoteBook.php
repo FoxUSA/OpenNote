@@ -5,7 +5,7 @@
  *	Version: 13.2.0
 **/
 
-include_once dirname(__FILE__)."/./Common.php";
+include_once dirname(__FILE__)."/common.php";
 //OO code
 class NoteBook{	
 	/**
@@ -272,6 +272,28 @@ class NoteBook{
 			$folders = Model::searchNotes($searchString);
 			foreach($folders as $row)
 				echo self::boxFactory($row["id"], "note", $row["title"], null,null,"Note",$row["folderID"]);
+	}
+	
+	/**
+	 * Check to see if there is an update
+	 * @return - returns
+	 */
+	public static function checkForOpenNoteUpdate(){
+		if(Config::$checkForUpdates){
+			$json=file_get_contents(sprintf("%s-%s&version=%s",Config::$updateServicePath,Config::$releaseChannel,Config::$version));
+			
+			if(sizeof($json)!=0){
+				try{
+					$update=json_decode($json);
+					
+					if($update!=null && Config::$version!=$update->version)
+						echo sprintf("<a id=\"update\" href=\"%s\">%s</a>", $update->updateURL, $update->updateText);
+				}
+				catch(Exception $e){
+				}
+			}
+		}
+		
 	}
 }
 ?>

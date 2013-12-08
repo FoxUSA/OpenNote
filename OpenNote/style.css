@@ -10,6 +10,10 @@ body{
 	cursor: pointer; /* fix for IOS */
 }
 
+#update{/*Update span style*/
+	color: #CC0000;
+}
+
 .jstree-default.jstree-focused{ /* yellowish background color from jstree*/
     background-color:transparent !important; 
 }
