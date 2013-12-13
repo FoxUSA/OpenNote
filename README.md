@@ -1,6 +1,6 @@
 OpenNote
 =============
-OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
+OpenNote was built to be an open web-based alternative to Microsoft OneNote (T) and EverNote.
 
 Features
 --------
