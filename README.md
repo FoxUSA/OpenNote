@@ -2,7 +2,8 @@ OpenNote
 =============
 OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
 
-Please donate to the project
+Please support this project by:
+
 Using bitcoins, please send coins to:`15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB`
 and/or like us at http://alternativeto.net/software/opennote/
 
