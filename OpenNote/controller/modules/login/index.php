@@ -5,7 +5,9 @@
 	 *	Version: 13.6.0
 	**/
 
-include_once dirname(__FILE__)."/../../common.php";
+include_once dirname(__FILE__)."/Config.php";
+	
+include_once dirname(__FILE__).LoginConfig::getCommonPath();
 ?>
 <html>
 	<head>
@@ -14,15 +16,15 @@ include_once dirname(__FILE__)."/../../common.php";
 		 
 		<title>OpenNote Login</title>
 		 
-		<link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+		<link rel="stylesheet" type="text/css" media="screen" href=<?php echo sprintf("\"%s\"",LoginConfig::getStyleSheetPath());?>/>
 		 
 		<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		
-		<script src="../../js/jquery.js" type="text/javascript"></script>
-		<script src="../../js/jqueryPlugins/jqdialog/jqdialog.min.js" type="text/javascript"></script>
-				<link rel="stylesheet" type="text/css" media="screen" href="../../js/jqueryPlugins/jqdialog/jqdialog.min.css">
+		<script src=<?php echo sprintf("\"%s\"",LoginConfig::getJQueryPath());?> type="text/javascript"></script>
+		<script src=<?php echo sprintf("\"%s\"",LoginConfig::getJSDialogPath());?> type="text/javascript"></script>
+				<link rel="stylesheet" type="text/css" media="screen" href=<?php echo sprintf("\"%s\"",LoginConfig::getJSDialogCSSPath());?>>
 		<script src="./ajax.js" type="text/javascript"></script><!--JS event code and ajax client code-->
 	 
 	</head>

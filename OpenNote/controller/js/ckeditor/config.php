@@ -1,3 +1,6 @@
+<?php 
+	include_once dirname(__FILE__)."/../../../Config.php";
+?>
 /**
  * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.html or http://ckeditor.com/license
@@ -17,8 +20,16 @@ CKEDITOR.editorConfig = function( config ) {
 	<?php
 		if(file_exists("plugins/imagepaste/plugin.js"))
 			echo "config.extraPlugins	=	\"imagepaste\";";
-	?>
 		
+		if(Config::$theme=="dark"){ //figure out which theme if not the default and which note.css to use
+			echo "config.skin = \"moono.dark\";";
+			echo sprintf("config.contentsCss = \"%s/style/dark/note.dark.css\";", Config::getWebroot());
+		}
+		else {
+			echo sprintf("config.contentsCss = \"%s/style/dark/note.css\";",Config::getWebroot());
+		}
+	?>
+	
 	config.height 						= 	"500px";
 	config.disableNativeSpellChecker 	= 	false; 
 	

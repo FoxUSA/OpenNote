@@ -4,7 +4,7 @@
  * 	Author: Jacob Liscom
  *	Version: 13.10.0
 **/
-	include_once dirname(__FILE__)."/controller/common.php";
+	//include_once dirname(__FILE__)."/controller/common.php";//Dont need this here because we want to include this without the rest of the include tree
 	
 	abstract class Config{
 		
@@ -61,7 +61,70 @@
 		 */
 		 	public static $checkForUpdates = true; //Default: true; Check for updates
 		 	public static $updateServicePath = "http://stardrive.us/UpdateService/index.php?appName=OpenNote"; //Path to version service
-		 	public static $version = "13.12.0";
+		 	public static $version = "13.12.0-1";
 			public static $releaseChannel = "dev"; //Default: prod; Release channel. Prod is production level release. Dev is current deployment release.
+			
+		/**
+		 * Look and feel
+		 */
+		 	public static $theme = "dark"; //Default: light; //"dark" also available
+		 	
+		 	 /**
+			  * JS dependencies
+			  */
+			 	public static function getJQueryPath(){
+			 		return "./controller/js/jquery.js";
+			 	}
+				
+				public static function getJSDialogPath(){
+					 return "./controller/js/jqueryPlugins/jqdialog/jqdialog.min.js";
+				}
+				
+				public static function getJSEditorPath(){
+					 return "./controller/js/ckeditor/ckeditor.js";
+				}
+				
+				public static function getJSTreeListPath(){
+					 return "./controller/js/jqueryPlugins/jstree/jquery.jstree.js";
+				}
+				
+				/**
+				 * All java scripts you want to be included add the the array below
+				 */
+				public static function getAllJSIncludes(){
+					return array(	Config::getJQueryPath(), 
+									Config::getJSDialogPath(), 
+									Config::getJSEditorPath(), 
+									Config::getJSTreeListPath());
+				}
+			/**
+			 * Style
+			 */
+			 	public static function getStyleSheetPath(){
+			 		if(Config::$theme=="dark") 
+						return "./style/dark/style.dark.css";
+					return "./style/light/style.css";
+				}
+				
+				public static function getJSDialogCSSPath(){
+					if(Config::$theme=="dark") 
+						return "./controller/js/jqueryPlugins/jqdialog/jqdialog.min.dark.css";
+					return "./controller/js/jqueryPlugins/jqdialog/jqdialog.min.css";
+				}
+				
+				/**
+				 * All style sheets you want to be included add the the array below
+				 */
+				public static function getAllCSSIncludes(){
+					return array(	Config::getStyleSheetPath(),
+									Config::getJSDialogCSSPath());
+				}
+				
+			/**
+			 * get web root
+			 */
+				 public static function getWebRoot(){
+				 	return str_replace("\\", "/",str_replace(realpath($_SERVER["DOCUMENT_ROOT"]),"",realpath(dirname(__FILE__))))."/";
+				 }
 	}
 ?>

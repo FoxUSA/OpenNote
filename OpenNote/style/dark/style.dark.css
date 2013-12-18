@@ -1,0 +1,240 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: Helvetica Neue, Helvetica, Arial;
+	font-size: 12px;
+	line-height: 22px;
+	background: #111;
+	background-attachment: fixed;
+	color: #CCC;
+	cursor: pointer; /* fix for IOS */
+}
+
+#update{/*Update span style*/
+	color: #CC0000;
+}
+
+.jstree-default.jstree-focused{ /* yellowish background color from jstree*/
+    background-color:transparent !important; 
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none; /* dont outline text boxes and buttons when they are selected*/
+}
+
+.startHidden{/*used to initialy hide element so jquery can fade it in*/
+	display: none;
+}
+
+
+/* dont color hyperlinks*/
+	a:link,a:hover,a:visited,a:active {
+	  	color:inherit; 
+	  	text-decoration:inherit;
+	}
+
+#header{
+	background: #000;
+	padding: 15px 30px;
+	overflow: hidden;
+	font-size: 18px;
+	
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
+	
+	box-shadow: 0 0 10px #444;
+	border-radius:4px;/*round the corners*/
+}
+
+#noteTitle{
+	background: #000;
+	padding: 15px 30px;
+	overflow: hidden;
+	font-size: 18px;
+	
+	box-shadow: 0 0 10px #444;
+	border-radius:4px;/*round the corners*/
+}
+
+#folderTitleBar{
+	padding: 15px 0px;
+	overflow: hidden;
+	font-size: 18px;
+	
+}
+
+	#folderTitle{
+		float:left;
+		padding-right:15px;
+	}	
+
+.customButton{ /*custom button class that removes all browser formating*/
+	border: none;
+	background:transparent;
+	overflow: hidden;
+	
+	background-color: transparent;
+	color: inherit;
+	
+	font-family: inherit; 
+	font-size: inherit;
+	line-height: inherit;
+}
+
+a.customButton, a.customButton.folder{/* override for list js*/
+	line-height: 3ex !important;
+	display: inline !important;
+	color: #fff;
+}
+
+	.customButton:hover,a.customButton.folder:hover {
+		color: #000;
+		background: #fff;
+		border-radius:4px;/*round the corners*/
+	}
+
+img {
+ border: none; /*stupid IE*/
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+div.sideBar{
+	position: absolute;
+	width: 200px;
+	background: #000;
+	box-shadow: 0 0 10px #444;
+	margin-left: 25px;
+	margin-top: 10px;
+	
+	/*round the corners*/
+	padding:4px;
+	border-radius:4px ;
+}
+
+div.boxContainer{
+	padding: 0px;
+	border-radius: 0px;
+	
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: 250px;
+	margin-right: 25px;
+}
+
+
+	div.box{
+		width: 250px;
+		height: 150px;
+		padding: 10px;
+		float: left;
+		margin: 0 10px 10px 0;
+
+		background-color: #F06D29;
+		color: #000;
+		position: relative;
+		
+		overflow: hidden;
+		border-radius:4px;/*round the corners*/
+	}
+	
+		div.box:hover {
+			box-shadow: 0px 1px 10px #444;
+		}
+
+		.box_description{
+			height: 80px;
+			overflow: hidden;
+		}
+		
+			#itemClass_description{
+				border: none;
+				background:transparent;
+				height: 80px;
+				width: 100%;
+				overflow: auto;
+				resize:none;
+				
+				/* copied from div.event */
+				color: inherit; /*inherit from parrent*/
+				
+				/*coped from body to prevent glitch*/
+				font-family: inherit; 
+				font-size: inherit;
+				line-height: inherit;
+			}
+		
+		.boxContainer .big {
+			width: auto;
+			height: 100%;
+			margin: 0px 0px 0px 0px;/*reset from box*/
+			
+			box-shadow: 0 5px 10px #444;
+			overflow: hidden;
+			float: none; 
+		}
+		
+			div.big:hover {
+				box-shadow: 0 5px 10px #444;
+			}
+		
+		.boxContainer .ready,.boxContainer .green {/*overiding .boxContainer css when up class is present*/
+			background: #8D40CC; /*green*/
+		}
+		
+		.boxContainer .need,.boxContainer .orange {
+			background: #0099CC; /*orange*/
+		}
+		
+		.boxContainer .red {
+			background: #CC0000; /*Rollyo Red*/
+		}
+		
+		h1,h2,h3 {
+			margin: 0 0 10px 0;
+			font-weight: normal;
+		}
+			
+			.inputField{
+				border: none;
+				background:transparent;
+				overflow: hidden;
+				resize:none;
+
+				/* copied from div.event */
+				color: inherit; /*inherit from parrent*/
+				
+				/*coped from body to prevent glitch*/
+				font-family: inherit; 
+				font-size: inherit;
+				line-height: inherit;
+				
+				width: 80%;
+			}
+			
+			.smallInputField{ width: 35px;}/*override*/
+			
+			.options {
+				position: absolute;/*Always putting the option on the bottom*/
+				width: 93%;
+				bottom: 0px;
+			}
+			
+		
+		.boxContainer .bar .options{ /*override*/
+			width: 98%;
+		}
+			
+			.center{
+				margin-left:113px;/*FIXME*/
+			}
+			
+
+

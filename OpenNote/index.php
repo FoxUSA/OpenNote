@@ -25,22 +25,23 @@
 	 
 	<title>OpenNote</title>
 	 
-	<link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
-	 
 	<!--[if IE]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+
+<?php
 	
-	<!-- JQuery -->
-		<script src="./controller/js/jquery.js" type="text/javascript"></script>
-			<script src="./controller/js/jqueryPlugins/jqdialog/jqdialog.min.js" type="text/javascript"></script>
-				<link rel="stylesheet" type="text/css" media="screen" href="./controller/js/jqueryPlugins/jqdialog/jqdialog.min.css"><!--Style sheet for jqdialog.min-->
-			<script src="./controller/js/jqueryPlugins/jstree/jquery.jstree.js" type="text/javascript"></script>
-			
+	//styles
+		foreach(Config::getAllCSSIncludes() as $cssInclude)
+			echo sprintf("<link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"%s\"/>\n", $cssInclude);
 		
-	<script src="./controller/js/ckeditor/ckeditor.js"></script>
-	
-	<script src="./ajax.js" type="text/javascript"></script><!--JS event code and ajax client code-->
+	//js
+		foreach(Config::getAllJSIncludes() as $jsInclude)
+			echo sprintf("<script src=\"%s\" type=\"text/javascript\"></script>\n", $jsInclude);
+
+?>
+
+	<script src="./ajax.js.php" type="text/javascript"></script><!--JS event code and ajax client code-->
  
 </head>
 <body> 

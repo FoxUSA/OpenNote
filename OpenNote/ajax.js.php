@@ -5,6 +5,9 @@
  * 
  * This script requires jquery and jqdialog.
 **/
+<?php 
+	include_once dirname(__FILE__)."/Config.php";
+?>
 
 var waitText = "Please Wait";
 
@@ -63,7 +66,7 @@ $(document).ready(function(){
 			//convert to list
 				$("#folderList").jstree({ 
 					"themes" : {
-			            "theme" : "default",
+			           	"theme" : "default",
 			            "dots" : false,
 			            "icons" : false
 			        },

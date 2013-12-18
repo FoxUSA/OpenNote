@@ -27,7 +27,7 @@ ob_start (); //buffer output
 				$_POST[$key] =   htmlentities($val);
 				$key =   htmlentities($val);//escape characters
 			}
-		}; //in this app we allow html code to sent back
+		}; //in this app were we allow html code to sent to the back end
 		
 		foreach($_GET as $key => $val) {
 			if(isset($_GET[$key]) && is_String($_GET[$key])){
