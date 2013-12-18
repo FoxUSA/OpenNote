@@ -67,7 +67,7 @@
 		/**
 		 * Look and feel
 		 */
-		 	public static $theme = "dark"; //Default: light; //"dark" also available
+		 	public static $theme = "light"; //Default: light; //"dark" also available
 		 	
 		 	 /**
 			  * JS dependencies
