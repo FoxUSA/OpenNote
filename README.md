@@ -65,6 +65,6 @@ Credits
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
 
-[Install]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/Install.md
-[Dependencies]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/Dependencies.md
-[Themes]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/Themes.md
+[Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
+[Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
+[Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
