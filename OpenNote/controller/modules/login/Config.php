@@ -12,7 +12,7 @@
 		 * common script will need to reference this 
 		 */
 		 	public static function getCommonPath(){
-		 		return "/../../Common.php";
+		 		return "/../../common.php";
 		 	} 
 		 
 		 /**
