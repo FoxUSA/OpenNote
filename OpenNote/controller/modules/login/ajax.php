@@ -6,7 +6,7 @@
  * 
  * Handles the java script to php calls
 **/
-
+	include_once dirname(__FILE__)."/Config.php";
 	include_once dirname(__FILE__).LoginConfig::getCommonPath();
 			
 	//check username availability 
