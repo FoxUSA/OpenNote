@@ -1,4 +1,4 @@
-OpenNote
+OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
 OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
 
