@@ -28,50 +28,50 @@
 			$note->title=$_POST["title"];
 			$note->note=$_POST["note"];
 			
-			NoteEditor::save($note);
+			NoteEditor::save(Config::getModel(), $note);
 		}
 		
 	//New note
 		if(isset($_POST["newNote"],$_POST["folderID"]))
-			new NoteEditor($_POST["folderID"]);
+			new NoteEditor(Config::getModel(), $_POST["folderID"]);
 		
 	//Remove Note
 		if(isset($_POST["removeNote"],$_POST["noteID"]))
-			NoteEditor::remove($_POST["noteID"]);
+			NoteEditor::remove(Config::getModel(), $_POST["noteID"]);
 		
 	//load a note
 		if(isset($_POST["loadNote"],$_POST["folderID"],$_POST["noteID"]))
-			new NoteEditor($_POST["folderID"],$_POST["noteID"]);
+			new NoteEditor(Config::getModel(), $_POST["folderID"],$_POST["noteID"]);
 		
 	//Move Note
 		if(isset($_POST["moveNote"],$_POST["noteID"],$_POST["newParrentID"]))
-			NoteEditor::moveNote($_POST["noteID"],$_POST["newParrentID"]);
+			NoteEditor::moveNote(Config::getModel(), $_POST["noteID"],$_POST["newParrentID"]);
 	
 	//Load a folder
 		if(isset($_POST["loadFolder"]))
-			new NoteBook($_POST["folderID"]);
+			new NoteBook(Config::getModel(), $_POST["folderID"]);
 		
 	//New folder
 		if(isset($_POST["newFolder"],$_POST["name"]))
-			NoteBook::newFolder($_POST["folderID"],$_POST["name"]);
+			NoteBook::newFolder(Config::getModel(), $_POST["folderID"],$_POST["name"]);
 		
 	//Remove folder
 		if(isset($_POST["removeFolder"],$_POST["folderID"]))
-			NoteBook::removeFolder($_POST["folderID"]);
+			NoteBook::removeFolder(Config::getModel(), $_POST["folderID"]);
 		
 	//Rename folder
 		if(isset($_POST["renameFolder"],$_POST["folderID"],$_POST["name"]))
-			NoteBook::renameFolder($_POST["folderID"],$_POST["name"]);
+			NoteBook::renameFolder(Config::getModel(), $_POST["folderID"],$_POST["name"]);
 	
 	//Move folder
 		if(isset($_POST["moveFolder"],$_POST["folderID"]))
-			NoteBook::moveFolder($_POST["folderID"],$_POST["newParrentID"]);
+			NoteBook::moveFolder(Config::getModel(), $_POST["folderID"],$_POST["newParrentID"]);
 		
 	//Get folder List
 		if(isset($_POST["getFolderList"]))
-			NoteBook::getFolderList();
+			NoteBook::getFolderList(Config::getModel());
 		
 	//Search
 		if(isset($_POST["search"],$_POST["searchString"]))
-			NoteBook::search($_POST["searchString"]);
+			NoteBook::search(Config::getModel(), $_POST["searchString"]);
 ?>	

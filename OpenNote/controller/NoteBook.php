@@ -13,17 +13,17 @@ class NoteBook{
 	 * @param mode - the mode for the reviewer
 	 * @param id - the id of and existing class if a subFolder. Default value is null
 	 */
-	public function NoteBook($id = NULL){
+	public function NoteBook(IModel $model,$id = NULL){
 		if($id!=NULL)
-			$this->subFolder($id);//TODO
+			$this->subFolder($model, $id);//TODO
 		else
-			$this->root();
+			$this->root($model);
 	}
 	
 	/**
 	 * Displays the root folder contents
 	 */
-	private function root(){
+	private function root(IModel $model){
 		echo "	<script type=\"text/javascript\">
 					setButton0(\"\");
 				   	setButton1(\"New Folder\");
@@ -34,7 +34,7 @@ class NoteBook{
 		//echo the label for the page
 			self::folderTitle("Home",false);
 		
-		$result = Model::getRootFolder();
+		$result = $model->getRootFolder();
 		foreach($result as $row)
 			echo self::boxFactory($row["id"], "folder green", $row["name"], null,"Folder");
 	}
@@ -43,9 +43,8 @@ class NoteBook{
 	 * Display sub folder
 	 * @param id - the id of the sub folder
 	 */
-	public function subFolder($id){
-		
-		$query = Model::getFolder($id);
+	public function subFolder(IModel $model, $id){
+		$query = $model->getFolder($id);
 		
 		if(!count($query))
 			return;
@@ -65,12 +64,12 @@ class NoteBook{
 			self::folderTitle($query[0]["name"],true);
 		
 		//get all the folders
-			$folders = Model::getSubFolders($id);
+			$folders = $model->getSubFolders($id);
 			foreach($folders as $row)
 				echo self::boxFactory($row["id"], "folder green", $row["name"], null,"Folder");
 		
 		//get all the notes
-			$folders = Model::getNotesInFolder($id);
+			$folders = $model->getNotesInFolder($id);
 			foreach($folders as $row)
 				echo self::boxFactory($row["id"], "note", $row["title"], null,null,"Note", $id);
 	}
@@ -79,14 +78,14 @@ class NoteBook{
 	 * echos the folder list
 	 * @param folderList - a array of all the folders 
 	 */
-	public static function getFolderList(){
-		$root = Model::getRootFolder();
+	public static function getFolderList(IModel $model){
+		$root = $model->getRootFolder();
 		if(count($root)==0)
 			return;
 		
 		self::startSubTree();
 		foreach ($root as $rootFolder)
-			self::getChildren($rootFolder["id"],$rootFolder["name"]);
+			self::getChildren($model,$rootFolder["id"],$rootFolder["name"]);
 		self::endSubTree();
 	}
 	
@@ -95,16 +94,16 @@ class NoteBook{
 	 * @param folderID - the folder to find children for
 	 * @param name - the name of the folder to find children for
 	 */
-	private static function getChildren($folderID, $name){
+	private static function getChildren(IModel $model, $folderID, $name){
 		self::startTreeEntry();
 		self::treeEntryFactory($folderID, $name); //print self
 			
-		$result =  Model::getSubFolders($folderID);
+		$result =  $model->getSubFolders($folderID);
 		if(count($result)>0){//do I have any children
 			self::startSubTree();//great line them up
 			
 			foreach($result as $child)
-				self::getChildren($child["id"],$child["name"]);
+				self::getChildren($model,$child["id"],$child["name"]);
 			
 			self::endSubTree();
 		}
@@ -117,26 +116,26 @@ class NoteBook{
 	 * @param parrentID - the id of the parent folder.
 	 * @param name - the title of folder
 	 */
-	public static function newFolder($parentID =null,$name){
-		Model::newFolder($parentID, $name);
+	public static function newFolder(IModel $model, $parentID =null,$name){
+		$model->newFolder($parentID, $name);
 		
 		//update the view
 			echo "	<script type=\"text/javascript\">
 						getFolderList();
 			   		</script>";
-		new NoteBook($parentID);
+		new NoteBook($model, $parentID);
 	}
 	
 	/**
 	 * delete a new folder
 	 * @param $id - the id of the folder to delete.
 	 */
-	public static function removeFolder($id){		
+	public static function removeFolder(IModel $model, $id){		
 		//update the view
 			echo "	<script type=\"text/javascript\">
 						getFolderList();
 			   		</script>";
-		new NoteBook(Model::removeFolder($id));
+		new NoteBook($model, $model->removeFolder($id));
 	}
 	
 	/**
@@ -144,8 +143,8 @@ class NoteBook{
 	 * @param folderID - the folder id to change the parrent of
 	 * @param newParrentID - the new parrent of the folder
 	 */
-	public static function moveFolder($folderID, $newParrentID){
-		Model::moveFolder($newParrentID, $folderID);
+	public static function moveFolder(IModel $model, $folderID, $newParrentID){
+		$model->moveFolder($newParrentID, $folderID);
 	}
 	
 	/**
@@ -153,13 +152,13 @@ class NoteBook{
 	 * @param $id - the id of the folder to rename.
 	 * @param title - the new title
 	 */
-	public static function renameFolder($id, $title){
-		Model::renameFolder($id,$title);		
+	public static function renameFolder(IModel $model, $id, $title){
+		$model->renameFolder($id,$title);		
 			//update the view
 				echo "	<script type=\"text/javascript\">
 							getFolderList();
 				   		</script>";
-				new NoteBook($id);
+				new NoteBook($model, $id);
 	}
 	
 	/**
@@ -252,7 +251,7 @@ class NoteBook{
 	 * @param searchString - the string to search 
 	 * @return - the results of the search
 	 */
-	public static function search($searchString){	
+	public static function search(IModel $model,$searchString){	
 		echo sprintf("	<script type=\"text/javascript\">
 							setButton0(\"\");
 						   	setButton1(\"\");
@@ -264,12 +263,12 @@ class NoteBook{
 			self::folderTitle(sprintf("Search Results For: %s",$searchString),false);
 		
 		//get all the folders
-			$folders = Model::searchFolders($searchString);
+			$folders = $model->searchFolders($searchString);
 			foreach($folders as $row)
 				echo self::boxFactory($row["id"], "folder green", $row["name"], null,"Folder");
 		
 		//get all the notes
-			$folders = Model::searchNotes($searchString);
+			$folders = $model->searchNotes($searchString);
 			foreach($folders as $row)
 				echo self::boxFactory($row["id"], "note", $row["title"], null,null,"Note",$row["folderID"]);
 	}

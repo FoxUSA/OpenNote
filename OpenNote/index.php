@@ -65,12 +65,12 @@
 		<div class="boxContainer">
 			<?php 
 				if($folderID ==null)
-					new NoteBook();
+					new NoteBook(new Model());
 				else
 					if($noteID==null)
-						new NoteBook($folderID);
+						new NoteBook(Config::getModel(),$folderID);
 					else
-						new NoteEditor($folderID, $noteID);
+						new NoteEditor(Config::getModel(),$folderID, $noteID);
 			?>
 		</div>		
 	</div>

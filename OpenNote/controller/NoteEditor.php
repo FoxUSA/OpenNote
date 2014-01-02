@@ -13,9 +13,9 @@
 			 * Constructor 
 			 * @param id - optional - the id of the note to open
 			 */
-			public function NoteEditor($folderID,$id=null){
+			public function NoteEditor(IModel $model, $folderID, $id=null){
 				if($id!=null)
-					$this->existingNote($folderID,$id);
+					$this->existingNote($model, $folderID, $id);
 				else
 					$this->newNote($folderID);
 			}
@@ -45,9 +45,9 @@
 			 * get a current note
 			 * @param id - the not to get
 			 */
-			private function existingNote($folderID, $id){
+			private function existingNote(IModel $model, $folderID, $id){
 				try{
-					$note = Model::getNote($folderID, $id);
+					$note = $model->getNote($folderID, $id);
 	
 					echo sprintf("	
 						<div id=\"noteTitle\" class=\"startHidden\">
@@ -86,26 +86,26 @@
 			 * @param title - the title of the note
 			 * @param note - the note body
 			 */
-			public static function save(Note $note){
-				new NoteEditor($note->folderID,Model::saveNote($note)); //display what we just saved
+			public static function save(IModel $model,Note $note){
+				new NoteEditor($model, $note->folderID,$model->saveNote($note)); //display what we just saved
 			}
 			
 			/**
 			 * Permanently deletes the note from the db
  			 * @param noteID- the note ID to delete
 			 */
-			public static function remove($noteID){
-				new NoteBook(Model::removeNote($noteID));
+			public static function remove(IModel $model,$noteID){
+				new NoteBook($model, $model->removeNote($noteID));
 			}
 			
-				/**
-				 * change a notes parent
-				 * @param noteID - the note id to change the folder of
-				 * @param newParrentID - the new parent of the folder
-				 */
-				public static function moveNote($noteID, $newParrentID){
-					Model::moveNote($noteID, $newParrentID);
-				}
+			/**
+			 * change a notes parent
+			 * @param noteID - the note id to change the folder of
+			 * @param newParrentID - the new parent of the folder
+			 */
+			public static function moveNote(IModel $model,$noteID, $newParrentID){
+				$model->moveNote($noteID, $newParrentID);
+			}
 			
 			/**
 			 * generate a note div header
