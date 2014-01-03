@@ -9,8 +9,8 @@
     </testsuites>
 	
 	<filter><!--Tell php unit where the code is-->
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./</directory><!--Cover only php files-->
+        <whitelist>
+            <directory suffix=".php">./OpenNote</directory><!--Cover only php files-->
             <exclude>
                 <directory>./OpenNote.Test</directory>
                 <directory>./Doc</directory>
