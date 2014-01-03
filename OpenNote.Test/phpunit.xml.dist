@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true">
+
+    <testsuites>
+        <testsuite name="OpenNote Test">
+            <directory suffix=".test.php">./OpenNote.Test</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
