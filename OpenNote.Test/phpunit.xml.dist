@@ -4,16 +4,16 @@
 
     <testsuites><!--Tell Phpunit where the test are-->
         <testsuite name="OpenNote Test">
-            <directory suffix=".test.php">./OpenNote.Test</directory>
+            <directory suffix=".test.php">../OpenNote.Test</directory>
         </testsuite>
     </testsuites>
 	
 	<filter><!--Tell php unit where the code is-->
         <whitelist>
-            <directory suffix=".php">./OpenNote</directory><!--Cover only php files-->
+            <directory suffix=".php">../OpenNote</directory><!--Cover only php files-->
             <exclude>
-                <directory>./OpenNote.Test</directory>
-                <directory>./Doc</directory>
+                <directory>../OpenNote.Test</directory>
+                <directory>../Doc</directory>
             </exclude>
         </whitelist>
     </filter>
