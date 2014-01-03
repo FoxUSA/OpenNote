@@ -2,9 +2,19 @@
 
 <phpunit colors="true">
 
-    <testsuites>
+    <testsuites><!--Tell Phpunit where the test are-->
         <testsuite name="OpenNote Test">
             <directory suffix=".test.php">./OpenNote.Test</directory>
         </testsuite>
     </testsuites>
+	
+	<filter><!--Tell php unit where the code is-->
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./OpenNote.Test</directory>
+                <directory>./Doc</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
