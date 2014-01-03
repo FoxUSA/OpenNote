@@ -10,10 +10,10 @@
 	
 	<filter><!--Tell php unit where the code is-->
         <whitelist>
-            <directory suffix=".php">./</directory><!--Cover only php files-->
+            <directory suffix=".php">../</directory><!--Cover only php files-->
             <exclude>
-                <directory>./OpenNote.Test</directory>
-                <directory>./Doc</directory>
+                <directory>../OpenNote.Test</directory>
+                <directory>../Doc</directory>
             </exclude>
         </whitelist>
     </filter>
