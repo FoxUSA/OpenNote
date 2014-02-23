@@ -13,8 +13,8 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.removePlugins 				=	"newpage,save,templates,about,liststyle,tabletools,scayt,menubutton,contextmenu"; //remove some icons
 	
-    config.filebrowserUploadUrl 		=  	"/OpenNote/controller/upload.php";
-	config.filebrowserImageUploadUrl 	=  	"/OpenNote/controller/upload.php";
+    config.filebrowserUploadUrl 		=  	"<?php echo Config::getUploadPath()?>";
+	config.filebrowserImageUploadUrl 	=  	"<?php echo Config::getUploadPath()?>";
 	
 	//include imagepaste plugin if present
 	<?php
