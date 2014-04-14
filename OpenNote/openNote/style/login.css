@@ -1,0 +1,93 @@
+form label {
+	display: block;
+}
+
+input {
+	padding: 8px;
+	font-size: 16px;
+	width: 250px;
+	border: 1px solid #bbb;
+	border-radius: 0px;
+}
+
+.button {
+	padding: 8px;
+	background-color: #0F92D6;
+	width: auto !important;
+	border: 0;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+	border-radius: 0px;
+	border-radius:4px;/*round the corners*/
+}
+
+.button:hover {
+	background: #000;
+}
+
+a.button {
+	text-decoration: none;
+}
+
+#login{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#register{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#userAvailability{
+	font-size: 12px;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+div.loginContainer{
+	margin-left: 10%;
+	margin-top: 10%;
+}
+
+div.homeBox{
+	background-color: #fff;
+	padding: 30px 50px;
+	margin-right: 15px;
+	font-size: 25px;
+	overflow: hidden;
+	float: left;
+	color: #0F92D6;
+	
+	border-radius:4px;/*round the corners*/
+}
+
+div.homeBox:hover{
+	background-color: #0F92D6;
+	color: #fff;
+	cursor: pointer;
+}
+
+span.homeBoxText:hover{
+	cursor: pointer;
+}
+
+a{
+	color: #0F92D6;
+}
+
+h1,h2,h3 {
+	margin: 0 0 10px 0;
+	font-weight: normal;
+}
+
+.clear{
+	clear: both;
+}
+
+#copyRight{
+	color: #9A9A9A;
+}

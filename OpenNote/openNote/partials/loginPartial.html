@@ -1,0 +1,46 @@
+<div class="loginContainer startHidden">
+	<h1 ng-click="resetButtons();">OpenNote</h1>
+	<div class="homeButtons">
+		<div class="homeBox" id="loginBox" ng-click="loginButton();">Login</div>
+		<div class="homeBox" id="regBox" ng-click="registerButton();">Register</div>
+		<div class="clear"> </div>
+	</div>
+	<div id="login" class="startHidden">
+		<form>
+				<p>
+					<label>Username</label>
+					<input type="text" ng-model="userName"/>
+				</p>
+
+				<p>
+					<label>Password</label>
+					<input type="password" ng-model="password"/>
+				</p>
+	
+				<p>
+					<input type="submit" value="Login" class="button" ng-click="login();"/>
+				</p>
+		</form>
+	</div>
+
+	<div id="register" class="startHidden">
+		<form>
+			<p>
+				<label>Choose a Username</label>
+				<input type="text" ng-model="userName" ng-keyup="checkAvailability();"/> <span id="availability">{{isAvailable}}</span>
+			</p>
+
+			<p>
+				<label>Choose a Password</label>
+				<label><input type="password" ng-model="password"/></label>
+			</p>
+
+			<p>
+				<input type="submit"  value="Register" class="button" />
+			</p>
+		</form>
+	</div>
+	<div class="clear"> </div>
+	<div id="copyRight">&#169; 2013 Jacob Liscom</div>
+</div>
+		
