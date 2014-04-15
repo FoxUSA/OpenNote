@@ -1,18 +1,18 @@
 /**
  * Connects the the rest service to get user details 
  */
-openNote.service("userService", function ($http, $q) {
+openNote.service("userService", function ($http, $q, config) {
 
 	/**
 	 *Local apiToken 
 	 */
-	this.apiToken = "";
+	//var apiToken = "";
 	
 	/**
-	 *@return - the apiToken 
+	 * @return - the apiToken 
 	 */
 	this.getAPIToken = function(){
-		return this.apiToken;
+		return sessionStorage.apiToken;
 	};
 	
 	/**
@@ -46,7 +46,7 @@ openNote.service("userService", function ($http, $q) {
 		function(response){//Successful
 			if(response.status==200){
 				var temp = angular.fromJson(response.data);
-				this.apiToken=temp.token;
+				sessionStorage.apiToken=temp.token;
 				return true;	
 			}
 			

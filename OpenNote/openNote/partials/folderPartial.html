@@ -1,5 +1,5 @@
 <div ng-Repeat="folder in folders">
-	<div class="box folder startHidden jstree-draggable randomFadeInDirective" folderID="{{folder.id}}">
+	<div class="box folder startHidden jstree-draggable randomFadeInDirective" folderID="{{folder.id}}" ng-click="loadFolder(folder);">
 		<h2>
 			{{folder.name}}
 		</h2>

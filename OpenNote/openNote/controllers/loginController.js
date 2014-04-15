@@ -2,7 +2,7 @@
  * @param $scope - Angular scope injected automatically  
  * @param userService - the user service to use for rest calls
  */
-openNote.controller("loginController", function($scope, userService, $location) {
+openNote.controller("loginController", function($scope, userService, $location, config) {
 	$scope.userName = "";//this is automaticly created in view binding Here for clarity
 	$scope.password = "";
 	$scope.isAvailable = "";
@@ -71,8 +71,13 @@ openNote.controller("loginController", function($scope, userService, $location) 
 	$scope.login = function(){
 		try{
 			userService.login($scope.userName,$scope.password).then(function(data){
-				if(data)
-					$location.path("/folder/");//TODO transiton
+				if(data){
+					$(".loginContainer").fadeOut(config.fadeSpeedShort(),function(){
+						$scope.$apply(function(){
+							$location.path("/folder/");
+						});
+					});
+				}
 				else
 					$.jqDialog.notify("Invalid credentials", 5);
 			});
