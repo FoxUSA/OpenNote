@@ -7,7 +7,7 @@ openNote.controller("loginController", function($scope, userService, $location, 
 	$scope.password = "";
 	$scope.isAvailable = "";
 	$scope.clicked = 0,
-	$(".loginContainer").fadeIn(config.fadeSpeedLong);
+	$(".loginPartial").fadeIn(config.fadeSpeedLong);
 	
 	/**
 	 *check to see if the user is available 
@@ -72,7 +72,7 @@ openNote.controller("loginController", function($scope, userService, $location, 
 		try{
 			userService.login($scope.userName,$scope.password).then(function(data){
 				if(data){
-					$(".loginContainer").fadeOut(config.fadeSpeedShort(),function(){
+					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
 							$location.path("/folder/");
 						});

@@ -1,0 +1,14 @@
+<div class="notePartial">
+	<div id="noteTitle" class="startHidden">
+		<input type="text" class="inputField" id="noteName" value="{{note.title}}" readonly>
+		<button id="removeNote" type="button" class="right customButton" noteID="{{note.id}}" hidden>
+			X
+		</button>
+	</div>
+	
+	<div class="box big startHidden">
+		<div id="note" noteID="{{note.id}}" folderID="{{note.folderID}}">
+			{{note.note}}
+		</div>
+	</div>
+</div>

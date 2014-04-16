@@ -48,12 +48,12 @@ a.button {
 	font-weight: bold;
 }
 
-div.loginContainer{
+div.loginPartial{
 	margin-left: 10%;
 	margin-top: 10%;
 }
 
-div.homeBox{
+.homeBox{
 	background-color: #fff;
 	padding: 30px 50px;
 	margin-right: 15px;
@@ -65,13 +65,13 @@ div.homeBox{
 	border-radius:4px;/*round the corners*/
 }
 
-div.homeBox:hover{
+homeBox:hover{
 	background-color: #0F92D6;
 	color: #fff;
 	cursor: pointer;
 }
 
-span.homeBoxText:hover{
+.homeBoxText:hover{
 	cursor: pointer;
 }
 

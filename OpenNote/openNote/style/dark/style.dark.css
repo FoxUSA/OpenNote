@@ -116,7 +116,7 @@ img {
 	border-radius:4px ;
 }
 
-div.boxContainer{
+.wrap{
 	padding: 0px;
 	border-radius: 0px;
 	
@@ -127,7 +127,7 @@ div.boxContainer{
 }
 
 
-	div.box{
+	.box{
 		width: 250px;
 		height: 150px;
 		padding: 10px;
@@ -142,7 +142,7 @@ div.boxContainer{
 		border-radius:4px;/*round the corners*/
 	}
 	
-		div.box:hover {
+		.box:hover {
 			/*Highlight*/
 		}
 
@@ -168,7 +168,7 @@ div.boxContainer{
 				line-height: inherit;
 			}
 		
-		.boxContainer .big {
+		.big {
 			width: auto;
 			height: 100%;
 			margin: 0px 0px 0px 0px;/*reset from box*/
@@ -177,19 +177,19 @@ div.boxContainer{
 			float: none; 
 		}
 		
-			div.big:hover {
+			.big:hover {
 				/*Highlight*/
 			}
 		
-		.boxContainer .ready,.boxContainer .green {/*overiding .boxContainer css when up class is present*/
+		.green {/*overiding css when up class is present*/
 			background: #8D40CC; /*green*/
 		}
 		
-		.boxContainer .need,.boxContainer .orange {
+		.orange {
 			background: #0099CC; /*orange*/
 		}
 		
-		.boxContainer .red {
+		.red {
 			background: #CC0000; /*Rollyo Red*/
 		}
 		
@@ -224,7 +224,7 @@ div.boxContainer{
 			}
 			
 		
-		.boxContainer .bar .options{ /*override*/
+		.bar .options{ /*override*/
 			width: 98%;
 		}
 			

@@ -115,7 +115,7 @@ img {
 	border-radius:4px ;
 }
 
-div.boxContainer{
+.wrap{
 	padding: 0px;
 	border-radius: 0px;
 	
@@ -126,7 +126,7 @@ div.boxContainer{
 }
 
 
-	div.box{
+	.box{
 		width: 250px;
 		height: 150px;
 		padding: 10px;
@@ -141,7 +141,7 @@ div.boxContainer{
 		border-radius:4px;/*round the corners*/
 	}
 	
-		div.box:hover {
+		.box:hover {
 			/*Highlight*/
 		}
 
@@ -158,7 +158,7 @@ div.boxContainer{
 				overflow: auto;
 				resize:none;
 				
-				/* copied from div.event */
+				/* copied from .event */
 				color: inherit; /*inherit from parrent*/
 				
 				/*coped from body to prevent glitch*/
@@ -167,7 +167,7 @@ div.boxContainer{
 				line-height: inherit;
 			}
 		
-		.boxContainer .big {
+		.big {
 			width: auto;
 			height: 100%;
 			margin: 0px 0px 0px 0px;/*reset from box*/
@@ -176,19 +176,19 @@ div.boxContainer{
 			float: none; 
 		}
 		
-			div.big:hover {
+			.big:hover {
 				/*Highlight*/
 			}
 		
-		.boxContainer .ready,.boxContainer .green {/*overiding .boxContainer css when up class is present*/
+		.ready,.green {/*overiding css when up class is present*/
 			background: #72BF33; /*green*/
 		}
 		
-		.boxContainer .need,.boxContainer .orange {
+		.need,.orange {
 			background: #FF6633; /*orange*/
 		}
 		
-		.boxContainer .red {
+		.red {
 			background: #CC0000; /*Rollyo Red*/
 		}
 		
@@ -203,7 +203,7 @@ div.boxContainer{
 				overflow: hidden;
 				resize:none;
 
-				/* copied from div.event */
+				/* copied from .event */
 				color: inherit; /*inherit from parrent*/
 				
 				/*coped from body to prevent glitch*/
@@ -223,7 +223,7 @@ div.boxContainer{
 			}
 			
 		
-		.boxContainer .bar .options{ /*override*/
+		.bar .options{ /*override*/
 			width: 98%;
 		}
 			
