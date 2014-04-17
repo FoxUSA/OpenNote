@@ -6,9 +6,17 @@ openNote.controller("loginController", function($scope, userService, $location, 
 	$scope.userName = "";//this is automaticly created in view binding Here for clarity
 	$scope.password = "";
 	$scope.isAvailable = "";
-	$scope.clicked = 0,
-	$(".loginPartial").fadeIn(config.fadeSpeedLong);
+	$scope.clicked = 0;
 	
+	/**
+	 * Redirect user if they are already logged in
+	 */
+	$scope.init = function(){
+		if(!userService.hasValidToken())
+			$(".loginPartial").fadeIn(config.fadeSpeedLong);
+		else
+			$location.path("/folder/");
+	};
 	/**
 	 *check to see if the user is available 
 	 */
@@ -68,12 +76,16 @@ openNote.controller("loginController", function($scope, userService, $location, 
 		};
 	};
 	
+	/**
+	 * Log user in with given credentials
+	 */
 	$scope.login = function(){
 		try{
 			userService.login($scope.userName,$scope.password).then(function(data){
 				if(data){
 					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
+							$.jqDialog.notify("Credentials Accepted", 3);
 							$location.path("/folder/");
 						});
 					});
@@ -86,4 +98,6 @@ openNote.controller("loginController", function($scope, userService, $location, 
 			$scope.isAvailable = "Error";
 		}
 	};
+	
+	$scope.init();
 });

@@ -2,17 +2,37 @@
  * Connects the the rest service to get user details 
  */
 openNote.service("userService", function ($http, $q, config) {
-
+	
+	var test = "";
 	/**
-	 *Local apiToken 
+	 * @return - raw token object
 	 */
-	//var apiToken = "";
+	this.getAPITokenObject = function(){
+		return angular.fromJson(sessionStorage.apiToken);
+	};
+	
+	/**
+	 * Is token vald?
+	 * @return - true if token is still valid
+	 */
+	this.hasValidToken = function(){
+		var tokenObject = this.getAPITokenObject();
+		if(tokenObject!=null){
+			var tokenTime = tokenObject.expires.replace(" ","T");//convert to ISO-8601 date and time
+			return new Date().getTime()< Date.parse(tokenTime);
+		}
+	
+		return false;
+	};
 	
 	/**
 	 * @return - the apiToken 
 	 */
 	this.getAPIToken = function(){
-		return sessionStorage.apiToken;
+		var tokenObject = this.getAPITokenObject();
+		if(tokenObject!=null)
+			return tokenObject.token;
+		return null;
 	};
 	
 	/**
@@ -45,8 +65,7 @@ openNote.service("userService", function ($http, $q, config) {
 		return $http.post(config.servicePath() +"/token/"+userName+"&"+password).then(
 		function(response){//Successful
 			if(response.status==200){
-				var temp = angular.fromJson(response.data);
-				sessionStorage.apiToken=temp.token;
+				sessionStorage.apiToken=angular.toJson(response.data);
 				return true;	
 			}
 			
