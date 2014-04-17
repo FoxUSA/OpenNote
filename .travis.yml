@@ -1,7 +1,5 @@
-language: php
-php:
-  - "5.5"
-  - "5.4"
-  - "5.3"
-  
-#script: phpunit --configuration ./OpenNote.Test
+language: node_js
+
+before_script:
+  - sudo npm install -g grunt
+

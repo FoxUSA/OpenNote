@@ -3,11 +3,10 @@
 		<div id="folderTitle">{{title}}</div>
 		<button id="renameFolder" class="customButton startHidden">Rename</button>
 		<button id="removeFolder" class="customButton startHidden">Delete</button>
-		</div>
 	</div>
 	
 	<div ng-Repeat="folder in folders">
-		<div class="box folder green startHidden jstree-draggable randomFadeInDirective" folderID="{{folder.id}}" ng-click="loadFolder(folder);">
+		<div class="box folder green startHidden jstree-draggable randomFadeInDirective" ng-click="loadFolder(folder);">
 			<h2>
 				{{folder.name}}
 			</h2>
@@ -16,14 +15,10 @@
 				Folder
 			</p>
 		</div>
-		
-		<script type="text/javascript">
-			//$("[folderID={{folder.id}}]").fadeIn(fadeSpeedLong*Math.random()+200);
-		</script>
 	</div>
 	
 	<div ng-Repeat="note in notes">
-		<div class="box note startHidden jstree-draggable randomFadeInDirective" noteID="{{note.id}}">
+		<div class="box note startHidden jstree-draggable randomFadeInDirective" ng-click="loadNote(note);">
 			<h2>
 				{{note.title}}
 			</h2>
@@ -31,11 +26,6 @@
 			<p class="options">
 				<span class="right">Note</span>
 			</p>
-			
-			
 		</div>
-		<script type="text/javascript">
-			//$("[noteID={{note.id}}]").fadeIn(config.fadeSpeedLong*Math.random()+200);
-		</script>
 	</div>
 </div>

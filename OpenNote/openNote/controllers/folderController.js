@@ -6,37 +6,45 @@ openNote.controller("folderController", function($scope, userService, $location,
 	$scope.notes=[];
 	$scope.folders=[];
 	$scope.title="";
-	
-	$("#menu").fadeIn(config.fadeSpeedLong());
-	$("#sideBar").fadeIn(config.fadeSpeedLong());
 
-	
+	/**
+	 * Load folder contents
+	 */
 	var temp = new folderFactory();
-	temp.$get().then(function(folder){
+	temp.$get({id:$routeParams.id}).then(function(folder){
 		$scope.title  	=folder.name;
 		$scope.folders = folder.foldersInside;
+		$scope.notes=folder.notesInside;
 	});
+	
+	/**
+	 * fade out all folders
+	 */
+	$scope.fadeOutFolders = function(callback){
+		$(".folder").fadeOut(config.fadeSpeedShort(),function(){
+			$scope.$apply(function(){
+				callback();
+			});
+		});
+	};
 	
 	/**
 	 * Load a folder
 	 * @param folder- the folder to load
 	 */
 	$scope.loadFolder = function(folder){
-		$(".folder").fadeOut(config.fadeSpeedShort(),function(){
-			$scope.$apply(function(){
-				//$location.hash(folder.id);
-				$scope.title=folder.name;
-				$scope.folders=folder.foldersInside;
-				$scope.notes=folder.notesInside;
-			});
+		$scope.fadeOutFolders(function(){
+				$location.url("/folder/"+folder.id);
 		});
-	}
+	};
 	
 	/**
 	 * Load a note
 	 * @param note - load a note
 	 */
 	$scope.loadNote = function(note){
-		
-	}
+		$scope.fadeOutFolders(function(){
+			$location.url("/note/"+note.id);
+		});
+	};
 });

@@ -2,7 +2,7 @@
  *Note factory 
  */
 openNote.factory("noteFactory", function($resource, userService, config) {
-	return $resource(config.servicePath()+"/note/1000/:id", { }, {
+	return $resource(config.servicePath()+"/note/:id", { }, {
         get: {
             method: "GET",
             headers: { "token": userService.getAPIToken()}

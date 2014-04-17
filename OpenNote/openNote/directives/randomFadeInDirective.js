@@ -7,7 +7,7 @@ openNote.directive("randomFadeInDirective", function($timeout,config) {
 		link: function(scope, element, attrs) {
 			$timeout(function(){
 				element.fadeIn(config.fadeSpeedLong());
-			},10);
+			},500);//give everything time to load
 		}
 	};
 });
