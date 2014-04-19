@@ -25,9 +25,12 @@ Features
 
 Upcoming Features
 -----------------
+- REST service and Angular JS Based front end
+- Tags (You win)
 - Email to note
 - Implement history diff viewer
 - Install script
+- Native Apps?????
 
 
 Demo
