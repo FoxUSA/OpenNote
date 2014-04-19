@@ -25,7 +25,7 @@ Features
 
 Upcoming Features
 -----------------
-- REST service and Angular JS Based front end
+- REST service and Angular JS Based front end. Working on in working branch.
 - Tags (You win)
 - Email to note
 - Implement history diff viewer
@@ -34,8 +34,8 @@ Upcoming Features
 
 User Wish List
 --------------
-List of things users are wishing for that havent made it into the pipeline.
-Please do not resubmit issues for these features. Instead, how about a donation with the feature in the comment?
+List of things users are wishing for that have not made it into the pipeline.
+Please do not re-submit issues for these features. Instead, how about a donation with the feature in the comment?
 
 - Out of box PostgreSQL support. PDO connector support PostgreSQL.
 
