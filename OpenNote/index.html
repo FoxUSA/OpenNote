@@ -12,13 +12,13 @@
 	<![endif]-->
 	
 	<!-- Dark Theme -->
-	<link rel="stylesheet" type="text/css" href="resources/js/jqueryPlugins/jqdialog/jqdialog.min.dark.css">
-	<link rel="stylesheet" type="text/css" href="openNote/style/dark/style.dark.css">
+		<link rel="stylesheet" type="text/css" href="resources/js/jqueryPlugins/jqdialog/jqdialog.min.dark.css">
+		<link rel="stylesheet" type="text/css" href="openNote/style/dark/style.dark.css">
 	<!-- Light Theme -->
-	<!-- 
-	<link rel="stylesheet" type="text/css" href="style/light/style.css">
-	<link rel="stylesheet" type="text/css" href="js/jqueryPlugins/jqdialog/jqdialog.min.css">
-	-->
+		<!-- 
+		<link rel="stylesheet" type="text/css" href="style/light/style.css">
+		<link rel="stylesheet" type="text/css" href="js/jqueryPlugins/jqdialog/jqdialog.min.css">
+		-->
 	<link rel="stylesheet" type="text/css" href="openNote/style/login.css">
 	
 	<script src="bower_components/jquery/jquery.js" type="text/javascript"></script>
@@ -60,9 +60,7 @@
 			<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';">Notes</button> 
 		</div>
 		<div class="right">	 
-			<button type="button" class="customButton" id="button0"></button> 
-			<button type="button" class="customButton" id="button1"></button> 
-			<button type="button" class="customButton" id="button2"></button> 
+			<button ng-repeat="button in buttons" type="button" class="customButton" ng-click="button.action();">{{button.text}}</button> 
 		</div>
 	</div>
 	<div id="sideBar" class="startHidden">

@@ -2,7 +2,7 @@
  *Folder factory 
  */
 openNote.factory("folderFactory", function($resource, userService, config) {
-	return $resource(config.servicePath()+"/folder/1000/:id", { }, {
+	return $resource(config.servicePath()+"/folder/1/:id", { }, {
         get: {
             method: "GET",
             headers: { "token": userService.getAPIToken()}

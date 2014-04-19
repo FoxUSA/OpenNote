@@ -10,7 +10,6 @@ openNote.config(function($routeProvider){
             {
                 controller: "folderController",
                 templateUrl: "openNote/partials/folderPartial.html",
-                reloadOnSearch: false
             })
         .when("/note/:id?",
             {

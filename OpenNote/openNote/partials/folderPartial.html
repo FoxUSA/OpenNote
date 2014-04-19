@@ -1,11 +1,11 @@
 <div class="folderPartial">
-	<div id="folderTitleBar">
-		<div id="folderTitle">{{title}}</div>
+	<div id="folderTitleBar" class="startHidden randomFadeInDirective">
+		<div id="folderTitle">{{currentFolder.name}}</div>
 		<button id="renameFolder" class="customButton startHidden">Rename</button>
 		<button id="removeFolder" class="customButton startHidden">Delete</button>
 	</div>
 	
-	<div ng-Repeat="folder in folders">
+	<div ng-Repeat="folder in currentFolder.foldersInside">
 		<div class="box folder green startHidden jstree-draggable randomFadeInDirective" ng-click="loadFolder(folder);">
 			<h2>
 				{{folder.name}}
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	
-	<div ng-Repeat="note in notes">
+	<div ng-Repeat="note in currentFolder.notesInside">
 		<div class="box note startHidden jstree-draggable randomFadeInDirective" ng-click="loadNote(note);">
 			<h2>
 				{{note.title}}

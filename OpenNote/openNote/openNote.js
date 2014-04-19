@@ -12,8 +12,10 @@ openNote.run(function ($rootScope, $location, userService, config){
             $location.path("/");
         }
         else{
-        	$("#menu").fadeIn(config.fadeSpeedLong());
-        	$("#sideBar").fadeIn(config.fadeSpeedLong());
+        	if($location.path()!="/" && !$("#menu").is(':visible') && !$("#sideBar").is(':visible')){//make sure we only fade in once
+	        	$("#menu").fadeIn(config.fadeSpeedLong());
+	        	$("#sideBar").fadeIn(config.fadeSpeedLong());
+    		}
         }
     });
 });
