@@ -32,6 +32,10 @@ Upcoming Features
 - Install script
 - Native Apps?????
 
+Wish List
+---------
+- PostgreSQL Support
+
 
 Demo
 -------
