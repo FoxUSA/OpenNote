@@ -34,7 +34,7 @@ openNote.constant("config", {
 			// config.language : 'fr',
 			//config.uiColor : '#000000',
 			
-			removePlugins 				:	"newpage,save,templates,about,liststyle,tabletools,scayt,menubutton,contextmenu", //remove some icons
+			removePlugins 				:	"newpage,save,templates,about,liststyle,tabletools,scayt,contextmenu", //remove some icons menubutton
 			
 		    //filebrowserUploadUrl 		:  	"<?php echo Config::getUploadPath()?>",
 			//filebrowserImageUploadUrl :  	"<?php echo Config::getUploadPath()?>",
@@ -45,8 +45,8 @@ openNote.constant("config", {
 			disableNativeSpellChecker 	: 	false
 		}
 		if(dark){
-			temp.skin = "moono.dark";
 			temp.contentsCss = "openNote/style/dark/note.dark.css";
+			temp.skin = "moono.dark,../../openNote/style/dark/ckeditor/moono.dark/";
 		}
 		else{
 			temp.contentsCss = "openNote/style/dark/note.css";

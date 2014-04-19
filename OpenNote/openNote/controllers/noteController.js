@@ -27,7 +27,7 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 		return {
 			text: "Clear",
 			action: function(){
-				$.jqDialog.confirm("Are You Sure You Want To Clear Your Changes?",
+				$.jqDialog.confirm("Are you sure you want to clear your changes?",
 					function() { 
 						$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
 							$scope.$apply(function(){
