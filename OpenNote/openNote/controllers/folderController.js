@@ -3,8 +3,9 @@
  * @param userService - the user service to use for rest calls
  */
 openNote.controller("folderController", function($scope, $rootScope, userService, $location, $routeParams,folderFactory, config) {
-	$scope.currentFolder=null;
-	$rootScope.buttons=[];
+	$scope.currentFolder = null;
+	$rootScope.buttons = [];
+	$scope.folderEditMode = false;
 	
 	//add buttons
 		if($routeParams.id!=null)
@@ -38,6 +39,14 @@ openNote.controller("folderController", function($scope, $rootScope, userService
 	temp.$get({id:$routeParams.id}).then(function(folder){
 		$scope.currentFolder = folder;
 	});
+	
+	/**
+	 * Activate folder edit mode if we are not in the home folder
+	 */
+	$scope.activateFolderEditMode = function(){
+		if($scope.currentFolder.id != null)
+			$scope.folderEditMode = true;
+	};
 	
 	/**
 	 * fade out all folders
