@@ -32,9 +32,12 @@ Upcoming Features
 - Install script
 - Native Apps?????
 
-Wish List
----------
-- PostgreSQL Support
+User Wish List
+--------------
+List of things users are wishing for that havent made it into the pipeline.
+Please do not resubmit issues for these features. Instead, how about a donation with the feature in the comment?
+
+- Out of box PostgreSQL support. PDO connector support PostgreSQL.
 
 
 Demo
