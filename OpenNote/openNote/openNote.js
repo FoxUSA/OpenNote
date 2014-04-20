@@ -1,5 +1,5 @@
 //Module Declaration
-var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize", "ngAnimate"]);
+var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize", "ngAnimate", "ui.tree"]);
 
 /**
  * Used to redirect users to login if their token has expired

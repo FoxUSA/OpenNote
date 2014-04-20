@@ -7,9 +7,9 @@
 	
 	<div ng-Repeat="folder in currentFolder.foldersInside">
 		<div class="box folder green startHidden jstree-draggable randomFadeInDirective" ng-click="loadFolder(folder);">
-			<h2>
+			<h4>
 				{{folder.name}}
-			</h2>
+			</h4>
 			<p class="box_description"></p>
 			<p class="options">
 				Folder
@@ -19,9 +19,9 @@
 	
 	<div ng-Repeat="note in currentFolder.notesInside">
 		<div class="box note startHidden jstree-draggable randomFadeInDirective" ng-click="loadNote(note);">
-			<h2>
+			<h4>
 				{{note.title}}
-			</h2>
+			</h4>
 			<p class="box_description"></p>
 			<p class="options">
 				<span class="right">Note</span>

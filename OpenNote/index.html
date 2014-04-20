@@ -11,6 +11,8 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	
 	<!-- Dark Theme -->
 		<link rel="stylesheet" type="text/css" href="openNote/style/dark/jqdialog.min.dark.css">
 		<link rel="stylesheet" type="text/css" href="openNote/style/dark/style.dark.css">
@@ -20,6 +22,7 @@
 		<link rel="stylesheet" type="text/css" href="style/light/jqdialog.min.css">
 		-->
 		<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
+		
 		
 	<link rel="stylesheet" type="text/css" href="openNote/style/login.css">
 	
@@ -45,6 +48,7 @@
 			<script src="openNote/controllers/loginController.js" type="text/javascript"></script>
 			<script src="openNote/controllers/folderController.js" type="text/javascript"></script>
 			<script src="openNote/controllers/noteController.js" type="text/javascript"></script>
+			<script src="openNote/controllers/listController.js" type="text/javascript"></script>
 			
 		<!-- Services -->
 			<script src="openNote/services/userService.js" type="text/javascript"></script>
@@ -66,12 +70,27 @@
 			<button ng-repeat="button in buttons" type="button" class="customButton" ng-click="button.action();">{{button.text}}</button> 
 		</div>
 	</div>
-	<div id="sideBar" class="startHidden">
+	
+	<div id="sideBar" class="startHidden col-md-3 col-sm-4 col-lg-2" ng-controller="listController">
 		<div id="folderList">
+			<script type="text/ng-template" id="nodes_renderer.html">
+				<div ui-tree-handle>
+            		<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span></a>
+        	    		{{folder.name}}
+          		</div>
+          		<ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: !collapsed}">
+            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+				</ol>
+        	</script>
+        	<div ui-tree id="tree-root">
+         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
+            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+          		</ol>
+        	</div>
 		</div>
 	</div>
 	
-	<div class="wrap" ng-view>	
+	<div class="col-lg-10 col-md-9 col-sm-8" ng-view>	
 	</div>
 </body>
 </html>

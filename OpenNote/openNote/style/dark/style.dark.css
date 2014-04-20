@@ -8,14 +8,14 @@ body{
 	background-attachment: fixed;
 	color: #CCC;
 	cursor: pointer; /* fix for IOS */
+	
+	margin-top: 25px;
+	margin-left: 25px;
+	margin-right: 25px;
 }
 
 #update{/*Update span style*/
 	color: #CC0000;
-}
-
-.jstree-default.jstree-focused{ /* yellowish background color from jstree*/
-    background-color:transparent !important; 
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -25,7 +25,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 .startHidden{/*used to initialy hide element so jquery can fade it in*/
 	display: none;
 }
-
 
 /* dont color hyperlinks*/
 	a:link,a:hover,a:visited,a:active {
@@ -39,11 +38,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 	overflow: hidden;
 	font-size: 18px;
 	
-	margin-top: 25px;
-	margin-left: 25px;
-	margin-right: 25px;
-	
 	border-radius:4px;/*round the corners*/
+	
+	margin-bottom: 15px;
 }
 
 #noteTitle{
@@ -59,12 +56,12 @@ input:focus, select:focus, textarea:focus, button:focus {
 	padding: 15px 0px;
 	overflow: hidden;
 	font-size: 18px;
-	
 }
 
 	#folderTitle{
 		float:left;
 		padding-right:15px;
+		font-size: 20px;
 	}	
 
 .customButton{ /*custom button class that removes all browser formating*/
@@ -93,7 +90,7 @@ a.customButton, a.customButton.folder{/* override for list js*/
 	}
 
 img {
- border: none; /*stupid IE*/
+	border: none; /*stupid IE*/
 }
 
 .left{
@@ -105,25 +102,11 @@ img {
 }
 
 #sideBar{
-	position: absolute;
-	width: 200px;
 	background: #000;
-	margin-left: 25px;
-	margin-top: 10px;
 	
 	/*round the corners*/
 	padding:4px;
 	border-radius:4px ;
-}
-
-.wrap{
-	padding: 0px;
-	border-radius: 0px;
-	
-	margin-top: 10px;
-	margin-bottom: 20px;
-	margin-left: 250px;
-	margin-right: 25px;
 }
 
 
@@ -141,10 +124,6 @@ img {
 		overflow: hidden;
 		border-radius:4px;/*round the corners*/
 	}
-	
-		.box:hover {
-			/*Highlight*/
-		}
 
 		.box_description{
 			height: 80px;
@@ -177,10 +156,6 @@ img {
 			float: none; 
 		}
 		
-			.big:hover {
-				/*Highlight*/
-			}
-		
 		.green {/*overiding css when up class is present*/
 			background: #8D40CC; /*green*/
 		}
@@ -193,7 +168,7 @@ img {
 			background: #CC0000; /*Rollyo Red*/
 		}
 		
-		h1,h2,h3 {
+		h1,h2,h3,h4,h5,h6 {
 			margin: 0 0 10px 0;
 			font-weight: normal;
 		}
@@ -227,10 +202,3 @@ img {
 		.bar .options{ /*override*/
 			width: 98%;
 		}
-			
-			.center{
-				margin-left:113px;/*FIXME*/
-			}
-			
-
-
