@@ -88,7 +88,7 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
 							$.jqDialog.notify("Credentials Accepted", 3);
-							$scope.$emit("reloadListView", {});
+							$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
 							$location.path("/folder/");
 						});
 					});

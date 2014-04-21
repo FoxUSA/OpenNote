@@ -11,6 +11,13 @@ openNote.service("userService", function ($http, $q, config) {
 	};
 	
 	/**
+	 * tell httpd to use our token in requests
+	 */
+	this.useAPITokenHeader = function(){
+		$http.defaults.headers.common["token"] = this.getAPITokenString();//used by the resources implicitly
+	}
+	
+	/**
 	 * Is token vald?
 	 * @return - true if token is still valid
 	 */
@@ -27,7 +34,7 @@ openNote.service("userService", function ($http, $q, config) {
 	/**
 	 * @return - the apiToken 
 	 */
-	this.getAPIToken = function(){
+	this.getAPITokenString = function(){
 		var tokenObject = this.getAPITokenObject();
 		if(tokenObject!=null)
 			return tokenObject.token;
@@ -66,7 +73,7 @@ openNote.service("userService", function ($http, $q, config) {
 		function(response){//Successful
 			if(response.status==200){
 				sessionStorage.apiToken=angular.toJson(response.data);
-				$http.defaults.headers.common["token"] = self.getAPIToken();//used by the resources implicitly
+				self.useAPITokenHeader();//used by the resources implicitly
 				return true;	
 			}
 		},

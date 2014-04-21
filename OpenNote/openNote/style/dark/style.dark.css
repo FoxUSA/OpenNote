@@ -9,9 +9,7 @@ body{
 	color: #CCC;
 	cursor: pointer; /* fix for IOS */
 	
-	margin-top: 25px;
-	margin-left: 25px;
-	margin-right: 25px;
+	margin-top: 15px;
 }
 
 #update{/*Update span style*/
@@ -40,6 +38,8 @@ input:focus, select:focus, textarea:focus, button:focus {
 	
 	border-radius:4px;/*round the corners*/
 	
+	margin-left: 15px;
+	margin-right: 15px;
 	margin-bottom: 15px;
 }
 
@@ -105,8 +105,8 @@ img {
 	background: #000;
 	
 	/*round the corners*/
-	padding:4px;
 	border-radius:4px ;
+	margin-bottom: 15px;
 }
 
 
@@ -202,3 +202,53 @@ img {
 		.bar .options{ /*override*/
 			width: 98%;
 		}
+
+	.noPadding{
+		padding: 0;
+	}
+	
+	.noMargin{
+		margin: 0;
+		
+	}
+	
+	.noShadow{
+		box-shadow: none;
+	}
+	
+	/*Tree styles*/
+	
+	.btn {
+	    margin-right: 8px;
+	}
+	
+	.angular-ui-tree-handle {
+	    color: #FFF;
+	    padding: 10px 10px;
+	}
+	
+	.angular-ui-tree-handle:hover {
+	    color: #bc7146;
+	    background: #0b0908;
+	    border-color: #231d17;
+	}
+	
+	.angular-ui-tree-placeholder {
+	    background: #0f0600;
+	    border: 2px dashed #412d24;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	
+	.angular-ui-tree-handle:hover {
+	}
+	
+	.angular-ui-tree-placeholder {
+	    background: #0f0600;
+	    border: 2px dashed #412d24;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+}

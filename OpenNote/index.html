@@ -38,6 +38,7 @@
 	
 	<script src="bower_components/jqdialog/jqdialog.min.js" type="text/javascript"></script>
 	<script src="bower_components/ckeditor/ckeditor.js" type="text/javascript"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 	
 	<!-- Main Open Note Scripts -->
 		<script src="openNote/openNote.js" type="text/javascript"></script>
@@ -63,30 +64,43 @@
 </head>
 <body> 
 	<div id="menu" class="startHidden">
-		<div class="left">
-			<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';">Notes</button> 
+		<div class="navbar-header">
+			<div class="left">
+				<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';">Notes</button> 
+			</div>
+			<div class="right">
+				<button type="button" class="navbar-toggle noPadding noMargin" data-toggle="collapse" data-target=".navbar-collapse">
+	              Options
+	            </button>
+			</div>
 		</div>
-		<div class="right">	 
-			<button ng-repeat="button in buttons" type="button" class="customButton" ng-click="button.action();">{{button.text}}</button> 
+		<div class="navbar-collapse collapse noShadow">	 
+			<ul class="nav navbar-nav navbar-right">
+            	<li ng-repeat="button in buttons">
+              		<button  type="button" class="customButton" ng-click="button.action();">{{button.text}}</button>
+            	</li>
+			</ul>
 		</div>
 	</div>
 	
-	<div id="sideBar" class="startHidden col-md-3 col-sm-4 col-lg-2" ng-controller="listController">
-		<div id="folderList">
-			<script type="text/ng-template" id="nodes_renderer.html">
-				<div ui-tree-handle>
-            		<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span></a>
-        	    		{{folder.name}}
-          		</div>
-          		<ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: !collapsed}">
-            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-				</ol>
-        	</script>
-        	<div ui-tree id="tree-root">
-         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-          		</ol>
-        	</div>
+	<div class="col-lg-2 col-md-3 col-sm-4">
+		<div id="sideBar" class="startHidden noPadding" ng-controller="listController">
+			<div id="folderList">
+				<script type="text/ng-template" id="nodes_renderer.html">
+					<div ui-tree-handle>
+	            		<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': !collapsed, 'glyphicon-chevron-down': collapsed}"></span></a>
+	        	    		{{folder.name}}
+	          		</div>
+	          		<ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: !collapsed}">
+	            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+					</ol>
+	        	</script>
+	        	<div ui-tree id="tree-root">
+	         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
+	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+	          		</ol>
+	        	</div>
+			</div>
 		</div>
 	</div>
 	
