@@ -2,7 +2,7 @@
  * @param $scope - Angular scope injected automatically  
  * @param userService - the user service to use for rest calls
  */
-openNote.controller("noteController", function($scope,$rootScope, $routeParams, userService, $location, $routeParams,noteFactory, config) {
+openNote.controller("noteController", function($scope,$rootScope, $routeParams, $location, $routeParams,noteFactory, config) {
 	$rootScope.buttons=[];
 	$scope.note = new noteFactory();
 	$scope.editMode = false;

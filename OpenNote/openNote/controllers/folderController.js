@@ -1,8 +1,5 @@
-/**
- * @param $scope - Angular scope injected automatically  
- * @param userService - the user service to use for rest calls
- */
-openNote.controller("folderController", function($scope, $rootScope, userService, $location, $routeParams,folderFactory, config) {
+
+openNote.controller("folderController", function($scope, $rootScope, $location, $routeParams,folderFactory, config) {
 	$scope.currentFolder = null;
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;

@@ -2,8 +2,8 @@
  * @param $scope - Angular scope injected automatically  
  * @param userService - the user service to use for rest calls
  */
-openNote.controller("loginController", function($scope, userService, $location, config) {
-	$scope.userName = "";//this is automaticly created in view binding Here for clarity
+openNote.controller("loginController", function($scope, $rootScope, userService, $location, config) {
+	$scope.userName = "";//this is automatically created in view binding Here for clarity
 	$scope.password = "";
 	$scope.isAvailable = "";
 	$scope.clicked = 0;
@@ -14,8 +14,10 @@ openNote.controller("loginController", function($scope, userService, $location, 
 	$scope.init = function(){
 		if(!userService.hasValidToken())
 			$(".loginPartial").fadeIn(config.fadeSpeedLong);
-		else
+		else{
 			$location.path("/folder/");
+			$rootScope.$emit("reloadListView", {});
+		}
 	};
 	/**
 	 *check to see if the user is available 
@@ -86,6 +88,7 @@ openNote.controller("loginController", function($scope, userService, $location, 
 					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
 							$.jqDialog.notify("Credentials Accepted", 3);
+							$scope.$emit("reloadListView", {});
 							$location.path("/folder/");
 						});
 					});

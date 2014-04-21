@@ -1,9 +1,13 @@
 /**
  * Control 
  */
-openNote.controller("listController", function($scope, folderFactory) {	
+openNote.controller("listController", function($scope, $rootScope, folderFactory) {	
+	
+	/**
+	 * Toggle collapse
+	 */
     $scope.toggle = function(scope) {
-      scope.toggle();
+    	scope.toggle();
     };
     
     /**
@@ -32,9 +36,11 @@ openNote.controller("listController", function($scope, folderFactory) {
     /**
      * Load list view
      */
-    $scope.data = new folderFactory();
-    $scope.data.$get({levels:100}).then(function(data){
-    	getRootNodesScope().collapseAll();
+    $rootScope.$on("reloadListView", function(event, args) {
+	    $scope.data = new folderFactory();
+	    $scope.data.$get({levels:100}).then(function(data){
+	    	getRootNodesScope().collapseAll();
+	    });
     });
-
+    
 });

@@ -4,20 +4,16 @@
 openNote.factory("folderFactory", function($resource, userService, config) {
 	return $resource(config.servicePath()+"/folder/:levels/:id", {levels: 1}, {
         get: {
-            method: "GET",
-            headers: { "token": userService.getAPIToken()}
+            method: "GET"
         },
         save: {
-            method: "POST",
-            headers: { "token": userService.getAPIToken()}
+            method: "POST"
         },
         update: {
-            method: "PUT",
-            headers: { "token": userService.getAPIToken()}
+            method: "PUT"
         },
         remove: {
-            method: "DELETE",
-            headers: { "token": userService.getAPIToken()}
+            method: "DELETE"
         }
     });
  });

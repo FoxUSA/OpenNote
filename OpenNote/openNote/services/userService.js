@@ -3,7 +3,6 @@
  */
 openNote.service("userService", function ($http, $q, config) {
 	
-	var test = "";
 	/**
 	 * @return - raw token object
 	 */
@@ -62,13 +61,14 @@ openNote.service("userService", function ($http, $q, config) {
 	 * @return - true if successful, false if not
 	 */
 	this.login = function(userName, password){ 	
+		var self = this;
 		return $http.post(config.servicePath() +"/token/"+userName+"&"+password).then(
 		function(response){//Successful
 			if(response.status==200){
 				sessionStorage.apiToken=angular.toJson(response.data);
+				$http.defaults.headers.common["token"] = self.getAPIToken();//used by the resources implicitly
 				return true;	
 			}
-			
 		},
 		function(response){
 			return false;
