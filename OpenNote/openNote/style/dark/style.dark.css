@@ -244,11 +244,6 @@ img {
 	.angular-ui-tree-handle:hover {
 	}
 	
-	.angular-ui-tree-placeholder {
-	    background: #0f0600;
-	    border: 2px dashed #412d24;
-	    -webkit-box-sizing: border-box;
-	    -moz-box-sizing: border-box;
-	    box-sizing: border-box;
+	.tree-node-content {
+	    margin: 10px;
 	}
-}
