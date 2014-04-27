@@ -1,31 +1,27 @@
 <div class="folderPartial">
-	<div id="folderTitleBar" class="startHidden randomFadeInDirective">
+	<div id="folderTitleBar" class="">
 		<div id="folderTitle" ng-click="activateFolderEditMode();">{{currentFolder.name}}</div>
 		<button id="renameFolder" class="customButton" ng-animate="{ show: 'animation-enter', hide 'animation-leave'}" ng-show="folderEditMode">Rename</button>
 		<button id="removeFolder" class="customButton" ng-animate="{ show 'animation-enter', hide: 'animation-leave'}" ng-show="folderEditMode">Delete</button>
 	</div>
 	
-	<div ng-Repeat="folder in currentFolder.foldersInside">
-		<div class="box folder green startHidden jstree-draggable randomFadeInDirective" ng-click="loadFolder(folder);">
-			<h4>
-				{{folder.name}}
-			</h4>
-			<p class="box_description"></p>
-			<p class="options">
-				Folder
-			</p>
-		</div>
+	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden waveAnimation box folder green jstree-draggable" ng-click="loadFolder(folder);">
+		<h4>
+			{{folder.name}}
+		</h4>
+		<p class="box_description"></p>
+		<p class="options">
+			Folder
+		</p>
 	</div>
 	
-	<div ng-Repeat="note in currentFolder.notesInside">
-		<div class="box note startHidden jstree-draggable randomFadeInDirective" ng-click="loadNote(note);">
-			<h4>
-				{{note.title}}
-			</h4>
-			<p class="box_description"></p>
-			<p class="options">
-				<span class="right">Note</span>
-			</p>
-		</div>
+	<div ng-Repeat="note in currentFolder.notesInside" class="box waveAnimation note startHidden jstree-draggable" ng-click="loadNote(note);">
+		<h4>
+			{{note.title}}
+		</h4>
+		<p class="box_description"></p>
+		<p class="options">
+			<span class="right">Note</span>
+		</p>
 	</div>
 </div>

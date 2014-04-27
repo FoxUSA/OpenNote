@@ -64,9 +64,9 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	 * @param folder- the folder to load
 	 */
 	$scope.loadFolder = function(folder){
-		$scope.fadeOutFolders(function(){
+		//$scope.fadeOutFolders(function(){
 			$location.url("/folder/"+folder.id);
-		});
+		//});
 	};
 	
 	/**
@@ -74,8 +74,8 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	 * @param note - load a note
 	 */
 	$scope.loadNote = function(note){
-		$scope.fadeOutFolders(function(){
+		//$scope.fadeOutFolders(function(){
 			$location.url("/note/"+note.id);
-		});
+		//});
 	};
 });

@@ -23,7 +23,7 @@
 		-->
 		<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
 		
-		
+	<link rel="stylesheet" type="text/css" href="openNote/style/animations.css">		
 	<link rel="stylesheet" type="text/css" href="openNote/style/login.css">
 	
 	<script src="bower_components/jquery/jquery.js" type="text/javascript"></script>
@@ -60,10 +60,13 @@
 		<!-- Factories -->
 			<script src="openNote/factories/folderFactory.js" type="text/javascript"></script>
 			<script src="openNote/factories/noteFactory.js" type="text/javascript"></script>
+			
+		<!-- Animations -->
+			<script src="openNote/animations/waveAnimation.js" type="text/javascript"></script>
 	
 </head>
 <body> 
-	<div id="menu" class="startHidden">
+	<div id="menu" class="ng-hide fadeIn" ng-show="showMenu">
 		<div class="navbar-header">
 			<div class="left">
 				<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';">Notes</button> 
@@ -84,7 +87,7 @@
 	</div>
 	
 	<div class="col-lg-2 col-md-3 col-sm-4">
-		<div id="sideBar" class="startHidden noPadding" ng-controller="listController">
+		<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar">
 			<div id="folderList">
 				<script type="text/ng-template" id="nodes_renderer.html">
 					<div ui-tree-handle class="tree-node-content">
@@ -92,12 +95,12 @@
 	        	    		<a data-nodrag href="#/folder/{{folder.id}}">{{folder.name}}</a>
 	          		</div>
 	          		<ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: collapsed}">
-	            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+	            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'" class="startHidden"></li>
 					</ol>
 	        	</script>
 	        	<div ui-tree id="tree-root">
 	         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'" class="waveAnimation startHidden"></li>
 	          		</ol>
 	        	</div>
 			</div>

@@ -22,8 +22,10 @@ openNote.run(function ($rootScope, $location, userService, config){
         	if($location.path()!="/" && !$("#menu").is(":visible") && !$("#sideBar").is(":visible")){//make sure we only fade in once
 	        	userService.useAPITokenHeader();//use token
 	        	$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
-	        	$("#menu").fadeIn(config.fadeSpeedLong());
-	        	$("#sideBar").fadeIn(config.fadeSpeedLong());
+	        	$rootScope.showMenu=true;
+	        	$rootScope.showSideBar=true;
+	        	//$("#menu").fadeIn(config.fadeSpeedLong());
+	        	//$("#sideBar").fadeIn(config.fadeSpeedLong());
     		}
         }
     });
