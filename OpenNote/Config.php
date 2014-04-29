@@ -24,7 +24,9 @@
 					//pdo
 						//Path to DB. Do not put in webdirectory! If you do anyone can download your database!
 						$dbName = "../phplite/OpenNote"; //relative path to sqllite db
-						return new PDO(sprintf("sqlite:%s\%s",dirname(__FILE__),$dbName));
+						//Un-comment based on your file architecture (Operating System)
+						return new PDO(sprintf("sqlite:%s\%s",dirname(__FILE__),$dbName));	// Windows or \ delimiter
+						// return new PDO(sprintf("sqlite:%s/%s",dirname(__FILE__),$dbName));	// Unix or / delimiter
 				}
 				
 				/**
