@@ -2,7 +2,7 @@
 	.fadeIn.ng-hide-add, 
 	.fadeIn.ng-hide-remove {
 		transition:all linear 2s;
-		display:block !important;
+		display: block !important;
 	}
 	 
 	.fadeIn.ng-hide-add.ng-hide-add-active,

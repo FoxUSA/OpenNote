@@ -1,8 +1,8 @@
 
 openNote.controller("folderController", function($scope, $rootScope, $location, $routeParams,folderFactory, config) {
-	$scope.currentFolder = null;
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;
+	$scope.currentFolder = new folderFactory();
 	
 	//add buttons
 		if($routeParams.id!=null)
@@ -18,7 +18,18 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		$rootScope.buttons.push({
 			text: "New Folder",
 			action: function(){
-				alert("Kendra");
+				$.jqDialog.prompt(	
+					"Please enter a name for the new folder that will be created in "+$scope.currentFolder.name,
+					"",
+					function(data){
+						var folder = new folderFactory();
+						folder.name=data;
+						folder.parrentFolderID=$scope.currentFolder.id;
+						folder.$save({levels: null}).then(function(data){
+							$location.url("/folder/"+folder.id);
+						});
+					},
+					null);
 			}
 		});
 		
@@ -29,20 +40,17 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 			}
 		});
 		
-	/**
+	/**	
 	 * Load folder contents
 	 */
-	var temp = new folderFactory();
-	temp.$get({id:$routeParams.id}).then(function(folder){
-		$scope.currentFolder = folder;
-	});
+	$scope.currentFolder.$get({id:$routeParams.id});
 	
 	/**
 	 * Activate folder edit mode if we are not in the home folder
 	 */
 	$scope.activateFolderEditMode = function(){
 		if($scope.currentFolder.id != null)
-			$scope.folderEditMode = true;
+			$scope.folderEditMode = !$scope.folderEditMode;
 	};
 	
 	/**
@@ -78,4 +86,37 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 			$location.url("/note/"+note.id);
 		//});
 	};
+	
+	/**
+	 * Rename the current folder
+	 */
+	$scope.renameFolder = function(){
+		$.jqDialog.prompt("Rename "+$scope.currentFolder.name+" to:",
+			$scope.currentFolder.name,//show the current folder name
+			function(data){
+				$scope.currentFolder.name=data;
+				$scope.currentFolder.$update({levels: null});
+			},		
+			null
+		);
+	};
+	
+	/**
+	 * Remove this folder and all sub items
+	 */
+	$scope.removeFolder = function(){
+		$.jqDialog.confirm("Are you sure you want to delete "+$scope.currentFolder.name+" and all subfolders and notes it contains?",
+			function() {
+				var parrentFolderID = $scope.currentFolder.parrentFolderID;
+				$scope.currentFolder.$remove({levels: null, id: $scope.currentFolder.id});
+				$rootScope.$emit("reloadListView", {});
+				
+				if(parrentFolderID==null)
+					$location.url("/folder/");
+				else
+					$location.url("/folder/"+parrentFolderID);
+			},		// callback function for 'YES' button
+			null	//call back for no
+		);
+	}
 });

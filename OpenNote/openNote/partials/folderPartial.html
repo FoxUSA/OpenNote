@@ -1,8 +1,10 @@
 <div class="folderPartial">
 	<div id="folderTitleBar" class="">
 		<div id="folderTitle" ng-click="activateFolderEditMode();">{{currentFolder.name}}</div>
-		<button id="renameFolder" class="customButton" ng-animate="{ show: 'animation-enter', hide 'animation-leave'}" ng-show="folderEditMode">Rename</button>
-		<button id="removeFolder" class="customButton" ng-animate="{ show 'animation-enter', hide: 'animation-leave'}" ng-show="folderEditMode">Delete</button>
+		<div ng-show="folderEditMode" class="ng-hide fadeIn">
+			<button id="renameFolder" class="customButton" ng-click="renameFolder();">Rename</button>
+			<button id="removeFolder" class="customButton" ng-click="removeFolder();">Delete</button>
+		</div>
 	</div>
 	
 	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden waveAnimation box folder green jstree-draggable" ng-click="loadFolder(folder);">
