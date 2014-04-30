@@ -26,6 +26,7 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 						folder.name=data;
 						folder.parrentFolderID=$scope.currentFolder.id;
 						folder.$save({levels: null}).then(function(data){
+							$rootScope.$emit("reloadListView", {});
 							$location.url("/folder/"+folder.id);
 						});
 					},
@@ -36,7 +37,7 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		$rootScope.buttons.push({
 			text: "Find",
 			action: function(){
-				alert("I love you.");
+				alert("TODO");
 			}
 		});
 		
@@ -95,7 +96,9 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 			$scope.currentFolder.name,//show the current folder name
 			function(data){
 				$scope.currentFolder.name=data;
-				$scope.currentFolder.$update({levels: null});
+				$scope.currentFolder.$update({levels: null}).then(function(data){
+					$rootScope.$emit("reloadListView", {});
+				});
 			},		
 			null
 		);
@@ -108,13 +111,14 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		$.jqDialog.confirm("Are you sure you want to delete "+$scope.currentFolder.name+" and all subfolders and notes it contains?",
 			function() {
 				var parrentFolderID = $scope.currentFolder.parrentFolderID;
-				$scope.currentFolder.$remove({levels: null, id: $scope.currentFolder.id});
-				$rootScope.$emit("reloadListView", {});
-				
-				if(parrentFolderID==null)
-					$location.url("/folder/");
-				else
-					$location.url("/folder/"+parrentFolderID);
+				$scope.currentFolder.$remove({levels: null, id: $scope.currentFolder.id}).then(function(data){
+					$rootScope.$emit("reloadListView", {});
+					
+					if(parrentFolderID==null)
+						$location.url("/folder/");
+					else
+						$location.url("/folder/"+parrentFolderID);
+				});
 			},		// callback function for 'YES' button
 			null	//call back for no
 		);
