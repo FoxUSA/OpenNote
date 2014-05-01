@@ -15,23 +15,23 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
      * get the root node scope
      */
     var getRootNodesScope = function() {
-      return angular.element(document.getElementById("tree-root")).scope();
+    	return angular.element(document.getElementById("tree-root")).scope();
     };
     
     /**
      * Collapse All
      */
     $scope.collapseAll = function() {
-      var scope = getRootNodesScope();
-      scope.collapseAll();
+    	var scope = getRootNodesScope();
+    	scope.collapseAll();
     };
 
     /**
      * expand all
      */
     $scope.expandAll = function() {
-      var scope = getRootNodesScope();
-      scope.expandAll();
+    	var scope = getRootNodesScope();
+    	scope.expandAll();
     };
 
     /**

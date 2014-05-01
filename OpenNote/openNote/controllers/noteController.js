@@ -27,15 +27,17 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 		return {
 			text: "Clear",
 			action: function(){
-				$.jqDialog.confirm("Are you sure you want to clear your changes?",
-					function() { 
+				alertify.confirm("Are you sure you want to clear your changes?",
+					function(confirm) {
+						if(!confirm)
+							return;
+						
 						$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
 							$scope.$apply(function(){
 								$location.url("/folder/"+$scope.note.folderID);
 							});
 						});
-					},		// callback function for 'YES' button
-					null	//callback function for 'NO' button
+					}
 				);
 			}
 		};
@@ -98,7 +100,7 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 		$(".notePartial").fadeOut(config.fadeSpeedShort());
 		$scope.note.$save().then(function(){
 			$location.url("/note/"+$scope.note.id)
-			$.jqDialog.notify("Note Saved",5); //all done. close the notify dialog 
+			alertify.success("Note Saved",5); //all done. close the notify dialog 
 		});
 		
 	}
@@ -112,7 +114,7 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 				var folderID = $scope.note.folderID;//need to keep track of this because we are about to delete it
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
 				$scope.note.$remove({id: $scope.note.id}).then(function(){
-					$.jqDialog.notify("Note Deleted",5); //all done. close the notify dialog 
+					alertify.success("Note Deleted",5); //all done. close the notify dialog 
 					$location.url("/folder/"+folderID);
 				});
 			},		// callback function for 'YES' button
