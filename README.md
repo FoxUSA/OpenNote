@@ -45,9 +45,10 @@ Documentation
 License
 -------
 	JQuery - Distributed under the MIT License
-	JSTree - "Same as JQuery"
-
+	Angular - Distributed under the MIT License
+	Bootstrap - Distributed under the MIT License
 	CKEditor - Distributed under the MPL License
+	Angular UI Tree - Distributed under the MIT License
 
 	OpenNote Code - Distributed under the MIT License
 	
@@ -59,9 +60,6 @@ Credits
 	J. Liscom - Supreme Programmer
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
-
-	Microsoft - For making terrible products
-	Evernote - For making better products in a slightly evil way
 
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
