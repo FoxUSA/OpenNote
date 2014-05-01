@@ -90,18 +90,9 @@
 	<div class="col-lg-2 col-md-3 col-sm-4">
 		<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar">
 			<div id="folderList">
-				<script type="text/ng-template" id="nodes_renderer.html">
-					<div ui-tree-handle class="tree-node-content">
-	            		<a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
-	        	    		<a data-nodrag href="#/folder/{{folder.id}}">{{folder.name}}</a>
-	          		</div>
-	          		<ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: collapsed}">
-	            		<li ng-repeat="folder in folder.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'" class="startHidden"></li>
-					</ol>
-	        	</script>
 	        	<div ui-tree id="tree-root">
 	         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'nodes_renderer.html'" class="waveAnimation startHidden"></li>
+	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'openNote/partials/treePartial.html'" class="fadeIn" data-collapsed="!node.collapsed"></li>
 	          		</ol>
 	        	</div>
 			</div>

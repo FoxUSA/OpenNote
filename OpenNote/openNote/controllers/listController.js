@@ -2,6 +2,7 @@
  * Control 
  */
 openNote.controller("listController", function($scope, $rootScope, folderFactory) {	
+	$scope.data = new folderFactory();
 	
 	/**
 	 * Toggle collapse
@@ -37,8 +38,8 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {
-	    $scope.data = new folderFactory();
 	    $scope.data.$get({levels:100});
     });
+    
     
 });

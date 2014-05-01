@@ -15,6 +15,6 @@
     "angular-animate": "~1.2.16",
     "ckeditor": "ckeditor/ckeditor-releases#full/latest",
     "jqdialog": "knadh/jqdialog",
-    "angular-ui-tree": "~2.0.10"
+    "angular-ui-tree": "~2.0.11"
   }
 }

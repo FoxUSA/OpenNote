@@ -220,6 +220,16 @@ img {
 	
 	.btn {
 	    margin-right: 8px;
+	    border: none;
+	    height: 20px;
+	    width: 15px;
+	}
+	
+	.btn.collapsed{
+		background: none;
+		border-style: solid;
+		border-color: #8D40CC;
+		border-width: 1px;
 	}
 	
 	.angular-ui-tree-handle {
