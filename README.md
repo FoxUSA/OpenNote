@@ -3,7 +3,7 @@ OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=maste
 OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
 
 Please support this project by:
-- [Using Git Tip][GitTip], 
+- [Using GitTip][GitTip], 
 - [donating bitcoins][Bitcoins], 
 - and/or like on [Alternative To][Alternative].
 
