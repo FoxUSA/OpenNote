@@ -49,6 +49,7 @@ License
 	Bootstrap - Distributed under the MIT License
 	CKEditor - Distributed under the MPL License
 	Angular UI Tree - Distributed under the MIT License
+	Alertify.js - Distributed under the MIT License
 
 	OpenNote Code - Distributed under the MIT License
 	
