@@ -1,0 +1,16 @@
+{
+  "name": "OpenNote",
+  "version": "14.05.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jacob Liscom",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-less": "^0.11.0",
+    "bower": "^1.3.3"
+  }
+}

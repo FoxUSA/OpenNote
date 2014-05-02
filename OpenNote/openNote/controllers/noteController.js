@@ -100,7 +100,7 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 		$(".notePartial").fadeOut(config.fadeSpeedShort());
 		$scope.note.$save().then(function(){
 			$location.url("/note/"+$scope.note.id)
-			alertify.success("Note Saved",5); //all done. close the notify dialog 
+			alertify.success("Note Saved"); //all done. close the notify dialog 
 		});
 		
 	}
@@ -109,16 +109,18 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 	 * Delete a note
 	 */
 	$scope.delete = function(){
-		$.jqDialog.confirm("Are you sure you want to delete this note?",
-			function() {	
+		alertify.confirm("Are you sure you want to delete this note?",
+			function(confirm) {	
+				if(!confirm)
+					return;
+				
 				var folderID = $scope.note.folderID;//need to keep track of this because we are about to delete it
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
 				$scope.note.$remove({id: $scope.note.id}).then(function(){
 					alertify.success("Note Deleted",5); //all done. close the notify dialog 
 					$location.url("/folder/"+folderID);
 				});
-			},		// callback function for 'YES' button
-			null	//call back for no
+			}
 		);
 	}
 });

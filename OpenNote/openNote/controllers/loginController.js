@@ -87,14 +87,14 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 				if(data){
 					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
-							$.jqDialog.notify("Credentials Accepted", 3);
+							alertify.success("Credentials Accepted");
 							$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
 							$location.path("/folder/");
 						});
 					});
 				}
 				else
-					$.jqDialog.notify("Invalid credentials", 5);
+					alertify.error("Invalid credentials");
 			});
 		}
 		catch(e){
