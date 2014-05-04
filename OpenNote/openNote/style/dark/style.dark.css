@@ -75,9 +75,10 @@ input:focus, select:focus, textarea:focus, button:focus {
 	font-family: inherit; 
 	font-size: inherit;
 	line-height: inherit;
+	border-radius:4px;/*round the corners*/
 }
 
-a.customButton, a.customButton.folder{/* override for list js*/
+a.customButton, a.customButton.folder{
 	line-height: 3ex !important;
 	display: inline !important;
 	color: #fff;
@@ -86,8 +87,7 @@ a.customButton, a.customButton.folder{/* override for list js*/
 	.customButton:hover,a.customButton.folder:hover {
 		color: #000;
 		background: #fff;
-		border-radius:4px;/*round the corners*/
-	}
+	}	
 
 img {
 	border: none; /*stupid IE*/

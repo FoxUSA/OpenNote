@@ -94,9 +94,9 @@
 	<div class="col-lg-2 col-md-3 col-sm-4">
 		<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar">
 			<div id="folderList">
-	        	<div ui-tree id="tree-root">
+	        	<div ui-tree="options" id="tree-root">
 	         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'openNote/partials/treePartial.html'" class="fadeIn" data-collapsed="!node.collapsed"></li>
+	            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'openNote/partials/treePartial.html'" data-collapsed="!node.collapsed"></li>
 	          		</ol>
 	        	</div>
 			</div>

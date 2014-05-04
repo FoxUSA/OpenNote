@@ -75,9 +75,9 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	 * @param folder- the folder to load
 	 */
 	$scope.loadFolder = function(folder){
-		//$scope.fadeOutFolders(function(){
+		$scope.fadeOutFolders(function(){
 			$location.url("/folder/"+folder.id);
-		//});
+		});
 	};
 	
 	/**
@@ -85,9 +85,9 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	 * @param note - load a note
 	 */
 	$scope.loadNote = function(note){
-		//$scope.fadeOutFolders(function(){
+		$scope.fadeOutFolders(function(){
 			$location.url("/note/"+note.id);
-		//});
+		});
 	};
 	
 	/**
@@ -129,4 +129,13 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 				});
 			});
 	}
+	
+	/**
+	 * Listen to changed folder events to see if its the current open folder
+	 */
+	$rootScope.$on("changedFolder", function(event, request) {
+	    if(request.folder.parrentFolderID==$scope.currentFolder.id || $scope.currentFolder.id==request.oldParrentFolderID){//does the change effect us?
+	    	$scope.currentFolder.$get({id:$scope.currentFolder.id});//reload
+	    }
+    });
 });
