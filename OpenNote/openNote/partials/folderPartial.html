@@ -1,7 +1,7 @@
-<div class="folderPartial">
-	<div id="folderTitleBar" class="">
+<div class="folderPartial" data-intro="{{helpContent.folderArea}}">
+	<div id="folderTitleBar">
 		<div id="folderTitle" ng-click="activateFolderEditMode();">{{currentFolder.name}}</div>
-		<div ng-show="folderEditMode" class="ng-hide fadeIn">
+		<div ng-show="folderEditMode" class="ng-hide fadeIn" data-intro="{{helpContent.folderEditModeButton}}">
 			<button id="renameFolder" class="customButton" ng-click="renameFolder();">Rename</button>
 			<button id="removeFolder" class="customButton" ng-click="removeFolder();">Delete</button>
 		</div>

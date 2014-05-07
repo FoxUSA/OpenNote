@@ -7,19 +7,25 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	//add buttons
 		if($routeParams.id!=null)
 			$rootScope.buttons.push({
-				text: "New Note",
+				text: "New note",
 				action: function(){
 					$scope.fadeOutFolders(function(){
 						$location.url("/note/").search("folderID",$scope.currentFolder.id);
 					});
-				}
+				},
+				helpText: $rootScope.helpContent.newNoteButton
 			});
 		
 		$rootScope.buttons.push({
-			text: "New Folder",
+			text: "New folder",
 			action: function(){
+				var prompt = "Please enter a name for the new folder";
+				
+				if($scope.currentFolder.name!=null)
+					prompt += "that will be created in "+$scope.currentFolder.name;
+				
 				alertify.prompt(	
-					"Please enter a name for the new folder that will be created in "+$scope.currentFolder.name,
+					prompt,
 					function(confirm,data){
 						if(!confirm)
 							return;
@@ -33,20 +39,44 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 						});
 					},
 					"");
-			}
+			},
+			helpText: $rootScope.helpContent.newFolderButton
 		});
 		
 		$rootScope.buttons.push({
 			text: "Find",
 			action: function(){
-				alert("TODO");
-			}
+				/*
+				 	$.jqDialog.prompt("Search:",
+						"",
+						function(data) { 
+							$.jqDialog.notify(waitText);
+							
+							$(".boxContainer").fadeOut(fadeSpeedShort);
+							$.post("ajax.php",{search: true, searchString: data}, function(response){
+								$(".boxContainer").html(response); //set the contents to the output of the script
+								$(".boxContainer").fadeIn(fadeSpeedShort);
+								
+								$.jqDialog.close(); //all done. close the notify dialog  
+							});
+						},		
+						null
+					);
+				 */
+			},
+			helpText: $rootScope.helpContent.findButton
 		});
 		
 	/**	
 	 * Load folder contents
 	 */
-	$scope.currentFolder.$get({id:$routeParams.id});
+	$scope.currentFolder.$get({id:$routeParams.id}).then(function(data){
+		//Do they have anything to display?
+			if($scope.currentFolder.id==null && $scope.currentFolder.foldersInside.length==0){
+				$scope.currentFolder.name=null;//resets title
+				alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page.");
+			}
+	});
 	
 	/**
 	 * Activate folder edit mode if we are not in the home folder

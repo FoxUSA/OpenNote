@@ -19,11 +19,27 @@ openNote.run(function ($rootScope, $location, userService, config){
         	/**
         	 * Initial entry after if logged in
         	 */
-        	if($location.path()!="/" && !$("#menu").is(":visible") && !$("#sideBar").is(":visible")){//make sure we only fade in once
+        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar){//make sure we only fade in once
 	        	userService.useAPITokenHeader();//use token
 	        	$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
 	        	$rootScope.showMenu=true;
 	        	$rootScope.showSideBar=true;
+	        	
+	        	//options for humans
+		        	$rootScope.helpContent=config.getHelpContent();
+		        	
+		        	$rootScope.showHelpButton = config.showHelpButton();
+		        	$rootScope.showLogOutButton = config.showLogOutButton();
+		        	
+		        	/**
+		        	 * Log out function
+		        	 */
+		        	$rootScope.logOut = function(){
+		        		sessionStorage.apiToken=null; 
+		        		window.location.href='#/';
+		        		$rootScope.showMenu=false;
+			        	$rootScope.showSideBar=false;
+		        	}
 	        	//$("#menu").fadeIn(config.fadeSpeedLong());
 	        	//$("#sideBar").fadeIn(config.fadeSpeedLong());
     		}

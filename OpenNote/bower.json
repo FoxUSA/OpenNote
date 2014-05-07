@@ -16,6 +16,7 @@
     "ckeditor": "ckeditor/ckeditor-releases#full/latest",
     "jqdialog": "knadh/jqdialog",
     "angular-ui-tree": "~2.0.11",
-    "alertify": "~0.3.10"
+    "alertify": "~0.3.10",
+    "intro.js": "~0.8.0"
   }
 }

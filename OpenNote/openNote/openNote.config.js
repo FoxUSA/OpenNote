@@ -53,5 +53,35 @@ openNote.constant("config", {
 		}
 		
 		return temp;
+	},
+	
+	/**
+	 * returns help contents
+	 */
+	getHelpContent: function(){
+		return {
+			homeButton: "Click here to return to home page",
+			listArea:"",
+			newNoteButton:"",
+			newFolderButton:"",
+			findButton:"",
+			folderEditModeButton:"",
+			folderArea:""
+		}
+	},
+	
+	/**
+	 * Do we want to show the help button
+	 */
+	showHelpButton: function(){
+		return true;
+	},
+	
+	/**
+	 * Do we want to show the log Out button
+	 */
+	showLogOutButton: function(){
+		return true;
 	}
+	
 });

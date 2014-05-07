@@ -259,8 +259,5 @@ img {
 	}
 	
 	.angular-ui-tree-empty {
-		min-height: 50px;
-		border: none;
-		background-color: inherit;
-		background-image: none;
+		display: none;
 	}
