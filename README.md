@@ -3,9 +3,9 @@ OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=maste
 OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
 
 Please support this project by:
-
-Using bitcoins, please send coins to:`15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB`
-and/or like us at http://alternativeto.net/software/opennote/
+- [Using GitTip][GitTip], 
+- [donating bitcoins][Bitcoins], 
+- and/or like on [Alternative To][Alternative].
 
 Thank you!
 
@@ -45,9 +45,11 @@ Documentation
 License
 -------
 	JQuery - Distributed under the MIT License
-	JSTree - "Same as JQuery"
-
+	Angular - Distributed under the MIT License
+	Bootstrap - Distributed under the MIT License
 	CKEditor - Distributed under the MPL License
+	Angular UI Tree - Distributed under the MIT License
+	Alertify.js - Distributed under the MIT License
 
 	OpenNote Code - Distributed under the MIT License
 	
@@ -60,12 +62,12 @@ Credits
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
-	Microsoft - For making terrible products
-	Evernote - For making better products in a slightly evil way
-
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
+[GitTip]: https://www.gittip.com/FoxUSA/
+[Bitcoins]: http://blockchain.info/address/15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB
+[Alternative]: http://alternativeto.net/software/opennote/
