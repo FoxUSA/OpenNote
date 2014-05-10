@@ -1,5 +1,5 @@
 
-openNote.controller("folderController", function($scope, $rootScope, $location, $routeParams,folderFactory, config) {
+openNote.controller("folderController", function($scope, $rootScope, $location, $routeParams, folderFactory, config) {
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;
 	$scope.currentFolder = new folderFactory();
