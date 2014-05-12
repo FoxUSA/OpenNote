@@ -7,7 +7,7 @@ openNote.constant("config", {
 	 * http path to backend rest service
 	 */
 	servicePath: function(){
-		return "/OpenNoteService-PHP";
+		return "/OpenNoteService-PHP/Service";
 	},
 	
 	/**

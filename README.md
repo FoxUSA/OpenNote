@@ -26,7 +26,7 @@ Features
 Upcoming Features
 -----------------
 - Email to note
-- Implement history diff viewer
+- Implement history viewer
 - Install script
 
 

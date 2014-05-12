@@ -65,4 +65,15 @@ describe("folderController", function() {
 		$scope.activateFolderEditMode();//simulate title click
 		expect($scope.folderEditMode).toEqual(true);		
     }));
+	
+	it("should push new folder and find no mater folder level and new note only if not at home level", inject(function(folderFactory,$location, config) {//inject location and config
+		var folderController = createController($scope, $rootScope, $location, [], folderFactory, config);
+		
+		$scope.currentFolder = createFolder(null,null,"Home",null,null,null,null);//home folder
+		expect($rootScope.buttons.length).toEqual(2);//New folder and find
+		
+		$scope.currentFolder = createFolder(123,null,"Not Home",null,[],[],321);//child of home
+		expect($rootScope.buttons.length).toEqual(3);//Same as above pluss new note
+	
+    }));
 });
