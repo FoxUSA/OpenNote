@@ -2,9 +2,11 @@
  *Folder factory 
  */
 openNote.factory("folderFactory", function($resource, userService, config) {
-	return $resource(config.servicePath()+"/folder/:levels/:id", {levels: 1}, {
+	return $resource(config.servicePath()+"/folder/:id", {}, {//{} default params
         get: {
-            method: "GET"
+            method: "GET",
+            params:{levels: 1, includeNotes: true},//override default params
+            url: config.servicePath()+"/folder/"//override
         },
         save: {
             method: "POST"

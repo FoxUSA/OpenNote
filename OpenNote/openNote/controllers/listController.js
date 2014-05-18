@@ -38,7 +38,7 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {
-	    $scope.data.$get({levels:100});
+	    $scope.data.$get({levels:100, includeNotes: false});
     });
     
     /**

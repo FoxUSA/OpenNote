@@ -149,7 +149,7 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 					return;
 					
 				var parrentFolderID = $scope.currentFolder.parrentFolderID;
-				$scope.currentFolder.$remove({levels: null, id: $scope.currentFolder.id}).then(function(data){
+				$scope.currentFolder.$remove({id: $scope.currentFolder.id}).then(function(data){
 					$rootScope.$emit("reloadListView", {});
 					
 					if(parrentFolderID==null)
