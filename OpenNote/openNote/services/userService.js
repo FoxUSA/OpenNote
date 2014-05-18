@@ -82,4 +82,25 @@ openNote.service("userService", function ($http, $q, config) {
 		});
 	};
 	
+	/**
+	 * Registers the user
+	 * @param userName - the username to register with 
+	 * @param password - the password to register with
+	 * @return - true if successful, false if not
+	 */
+	this.register = function(userName, password){ 	
+		var self = this;
+		return $http.post(config.servicePath() +"/user/"+userName+"&"+password).then(
+		function(response){//Successful
+			if(response.status==200){
+				sessionStorage.apiToken=angular.toJson(response.data);
+				self.useAPITokenHeader();//used by the resources implicitly
+				return true;	
+			}
+		},
+		function(response){//non 200 responces
+			return false;
+		});
+	};
+	
 });

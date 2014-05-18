@@ -23,7 +23,7 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 	 *check to see if the user is available 
 	 */
 	$scope.checkAvailability = function(){
-		if($scope.userName.length >= 3){//comp sci counting
+		if($scope.userName.length >= 4){
 			try{
 				userService.isAvailable($scope.userName).then(function(data){
 					if(data)
@@ -88,6 +88,30 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
 						$scope.$apply(function(){
 							alertify.success("Credentials Accepted");
+							$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
+							$location.path("/folder/");
+						});
+					});
+				}
+				else
+					alertify.error("Invalid credentials");
+			});
+		}
+		catch(e){
+			$scope.isAvailable = "Error";
+		}
+	};
+	
+	/**
+	 * Register user in with given credentials
+	 */
+	$scope.register = function(){
+		try{
+			userService.register($scope.userName,$scope.password).then(function(data){
+				if(data){
+					$(".loginPartial").fadeOut(config.fadeSpeedShort(),function(){
+						$scope.$apply(function(){
+							alertify.success("Registration Accepted");
 							$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
 							$location.path("/folder/");
 						});
