@@ -1,4 +1,9 @@
 /**
+ * @author - Jake Liscom 
+ * @project - OpenNote
+ */
+
+/**
  * Control 
  */
 openNote.controller("listController", function($scope, $rootScope, folderFactory) {	
@@ -48,7 +53,7 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
     	/**
     	 * Drag event logic
     	 */
-		dropped: function(event) {
+		beforeDrop: function(event) {
 	    	var sourceFolder = event.source.nodeScope.$modelValue;
 	    	
 	    	var destFolder=null;
@@ -82,6 +87,7 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 		        	    	});
 	        	    }
 	        	    $rootScope.$emit("reloadListView", {}); //refresh either way
+	        	    //event.source.nodeScope.$$apply = false;
 	        	    //TODO if they cancel reset list instead of re pulling it
 	        	    
 	        	});

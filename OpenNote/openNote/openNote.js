@@ -1,3 +1,8 @@
+/**
+ * @author - Jake Liscom 
+ * @project - OpenNote
+ */
+
 //Module Declaration
 var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize", "ngAnimate", "ui.tree"]);
 
@@ -5,9 +10,15 @@ var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize",
  * Used to redirect users to login if their token has expired
  * Runs on every route
  */
-openNote.run(function ($rootScope, $location, userService, config){
+openNote.run(function ($rootScope, $location, userService, config, serverConfigService){
     $rootScope.$on("$routeChangeStart", function (event) {
     	//TODO fade in for every view here?
+    	
+    	//server config values
+    		serverConfigService.getConfig().then(function(serverConfig){
+    			$rootScope.serverConfig = serverConfig;
+    		});
+    		
     	/**
     	 * Initial entry if not logged in
     	 */
@@ -39,7 +50,8 @@ openNote.run(function ($rootScope, $location, userService, config){
 		        		window.location.href='#/';
 		        		$rootScope.showMenu=false;
 			        	$rootScope.showSideBar=false;
-		        	}
+		        	}		        	
+		        	
 	        	//$("#menu").fadeIn(config.fadeSpeedLong());
 	        	//$("#sideBar").fadeIn(config.fadeSpeedLong());
     		}

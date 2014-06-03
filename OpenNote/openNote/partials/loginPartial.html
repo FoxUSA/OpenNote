@@ -2,7 +2,7 @@
 	<h1 ng-click="resetButtons();">OpenNote</h1>
 	<div class="homeButtons">
 		<div class="homeBox" id="loginBox" ng-click="loginButton();">Login</div>
-		<div class="homeBox" id="regBox" ng-click="registerButton();">Register</div>
+		<div class="homeBox" id="regBox" ng-click="registerButton();" ng-show="serverConfig.registrationEnabled">Register</div>
 		<div class="clear"> </div>
 	</div>
 	<div id="login" class="startHidden">

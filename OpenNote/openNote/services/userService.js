@@ -18,7 +18,7 @@ openNote.service("userService", function ($http, $q, config) {
 	}
 	
 	/**
-	 * Is token vald?
+	 * Is token valid?
 	 * @return - true if token is still valid
 	 */
 	this.hasValidToken = function(){
@@ -98,7 +98,7 @@ openNote.service("userService", function ($http, $q, config) {
 				return true;	
 			}
 		},
-		function(response){//non 200 responces
+		function(response){//non 200 response
 			return false;
 		});
 	};

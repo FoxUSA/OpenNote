@@ -1,7 +1,7 @@
 /**
  * Angular js config file
  */
-openNote.constant("config", {
+openNote.value("config", {
 	
 	/**
 	 * http path to backend rest service
@@ -74,14 +74,26 @@ openNote.constant("config", {
 	 * Do we want to show the help button
 	 */
 	showHelpButton: function(){
-		return true;
+		return false;
 	},
 	
 	/**
 	 * Do we want to show the log Out button
 	 */
 	showLogOutButton: function(){
-		return true;
+		return false;
+	},
+	
+	/**
+	 * Get server config
+	 * return - 
+	 */
+	getServerConfig: function(){
+		return $resource(config.servicePath()+"/config/", {}, {//{} default params
+	        get: {
+	            method: "GET"
+	        }
+	    }).$get();
 	}
 	
 });

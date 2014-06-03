@@ -1,8 +1,12 @@
 /**
- * @param $scope - Angular scope injected automatically  
- * @param userService - the user service to use for rest calls
+ * @author - Jake Liscom 
+ * @project - OpenNote
  */
-openNote.controller("loginController", function($scope, $rootScope, userService, $location, config) {
+
+/**
+ * Login controller
+ */
+openNote.controller("loginController", function($scope, $rootScope, userService, $location, config, serverConfigService) {
 	$scope.userName = "";//this is automatically created in view binding Here for clarity
 	$scope.password = "";
 	$scope.isAvailable = "";
@@ -10,8 +14,9 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 	
 	/**
 	 * Redirect user if they are already logged in
+	 * Or display login page
 	 */
-	$scope.init = function(){
+	$scope.init = function(){		
 		if(!userService.hasValidToken())
 			$(".loginPartial").fadeIn(config.fadeSpeedLong);
 		else{
@@ -44,12 +49,12 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 	 * login button is clicked
 	 */
 	$scope.loginButton = function(){
-			if( $scope.clicked == 0 ){
-				$scope.clicked = 1;
-				$(".homeButtons").fadeOut(config.fadeSpeedShort, function(){
-					$("#login").fadeIn(config.fadeSpeedShort);
-				});
-			};
+		if( $scope.clicked == 0 ){
+			$scope.clicked = 1;
+			$(".homeButtons").fadeOut(config.fadeSpeedShort, function(){
+				$("#login").fadeIn(config.fadeSpeedShort);
+			});
+		};
 	};
 	
 	/**
