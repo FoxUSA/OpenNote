@@ -47,8 +47,8 @@ describe("folderController", function() {
 		//{$scope: scope }, $rootScope, $location, {$routeParams: []}, folderFactory, config
 	}));
 	
-	it("should not show folder edit buttons if current folder is home", inject(function(folderFactory,$location, config) {//inject location and config
-		var folderController = createController($scope, $rootScope, $location, [], folderFactory, config);
+	it("should not show folder edit buttons if current folder is home", inject(function($location, config) {//inject location and config
+		var folderController = createController($scope, $rootScope, $location, [], null, config);
 		$scope.currentFolder = createFolder(null,null,null,null,null,null,null);
 		
 		expect($scope.folderEditMode).toEqual(false);
@@ -57,8 +57,8 @@ describe("folderController", function() {
 		
     }));
 	
-	it("should show folder edit buttons if current folder is not home", inject(function(folderFactory,$location, config) {//inject location and config
-		var folderController = createController($scope, $rootScope, $location, [], folderFactory, config);
+	it("should show folder edit buttons if current folder is not home", inject(function($location, config) {//inject location and config
+		var folderController = createController($scope, $rootScope, $location, [], null, config);
 		$scope.currentFolder = createFolder(123,null,"Not Home",null,[],[],321);
 		
 		expect($scope.folderEditMode).toEqual(false);
@@ -66,6 +66,8 @@ describe("folderController", function() {
 		expect($scope.folderEditMode).toEqual(true);		
     }));
 	
+	/*
+	//Todo need to set current folder via like
 	it("should push new folder and find no mater folder level and new note only if not at home level", inject(function(folderFactory,$location, config) {//inject location and config
 		var folderController = createController($scope, $rootScope, $location, [], folderFactory, config);
 		
@@ -76,4 +78,6 @@ describe("folderController", function() {
 		expect($rootScope.buttons.length).toEqual(3);//Same as above pluss new note
 	
     }));
+    */
+    
 });
