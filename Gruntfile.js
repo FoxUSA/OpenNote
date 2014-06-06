@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 	        shell: {                            
 	            bowerInstall: {                      
 	                command:  [	"cd OpenNote",
-	                			"bower install" ].join('&&')
+	                			"bower install" ].join("&&")
 	            }
 	        }
 		});
