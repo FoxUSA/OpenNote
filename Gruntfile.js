@@ -41,6 +41,12 @@ module.exports = function(grunt) {
 	                files: ["src/**/*.js", "test/unit/**/*.js"],
 	                tasks: ["karma:unit:run"]
 	            }
+	        },
+	        shell: {                            
+	            bowerInstall: {                      
+	                command:  [	"cd OpenNote",
+	                			"bower install" ].join('&&')
+	            }
 	        }
 		});
 
@@ -48,10 +54,13 @@ module.exports = function(grunt) {
 		grunt.loadNpmTasks("grunt-contrib-less");
 		grunt.loadNpmTasks("grunt-contrib-watch");
 	    grunt.loadNpmTasks("grunt-karma");
+	    grunt.loadNpmTasks("grunt-shell");
 	
 	//Task definition
+	    grunt.registerTask("build", ["shell:bowerInstall"]);
 		grunt.registerTask("default", ["less:development"]);
 		grunt.registerTask("deploy", ["less:production"]);
 		grunt.registerTask("devmode", ["karma:unit", "watch"]);
 		grunt.registerTask("test", ["karma:travis"])
+		grunt.registerTask("ci", ["shell:bowerInstall","karma:travis"])
 };
