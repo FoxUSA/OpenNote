@@ -16,5 +16,8 @@
     "phantomjs": "^1.9.7-5",
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-firefox-launcher": "^0.1.3"
+  },
+  "scripts": {
+  	"test": "grunt test"
   }
 }
