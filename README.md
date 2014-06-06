@@ -1,6 +1,12 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
-OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
+In post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
+In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
+
+The fix is to take personal responsability and host sensative data yourself.
+
+OpenNote was built to be a open source, web based alternative to Microsoft OneNote (T) or EverNote.
+It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
 - [Using GitTip][GitTip], 
@@ -20,7 +26,7 @@ Features
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
 - Search
 - PDO Connector/(MySql and SQLite Database Support)
-- Move Folders and Notes(Drag into another folder in the list view.)
+- Move Folders(Drag into another folder in the list view.)
 - Rename/Delete Folders(Click on folder title to get menu.)
 
 Upcoming Features
@@ -28,7 +34,7 @@ Upcoming Features
 - Email to note
 - Implement history viewer
 - Install script
-
+- Move Notes (Feature lost when migrating to Angular based list)
 
 Demo
 -------

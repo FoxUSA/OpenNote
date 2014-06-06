@@ -1,8 +1,12 @@
 /**
- * @param $scope - Angular scope injected automatically  
- * @param userService - the user service to use for rest calls
+ * @author - Jake Liscom 
+ * @project - OpenNote
  */
-openNote.controller("noteController", function($scope,$rootScope, $routeParams, $location, $routeParams,noteFactory, config) {
+
+/**
+ * controller for note creation, editing and maintance
+ */
+openNote.controller("noteController", function($scope, $rootScope, $routeParams, $location, $routeParams,noteFactory, config, serverConfigService, $sce) {
 	$rootScope.buttons=[];
 	$scope.note = new noteFactory();
 	$scope.editMode = false;
@@ -46,19 +50,21 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 	/**
 	 * Take us into edit mode
 	 */
-	var activateEditMode = function(){
-		$scope.editMode=true;
-		
-		if($scope.note.id !=null)
-			$scope.showDeleteButton = true;
-		
-		CKEDITOR.replace("note", config.editorConfig(true));
-		$rootScope.buttons=[];
-		
-		//Add new buttons
-			$rootScope.buttons.push(saveButton());
-			$rootScope.buttons.push(clearButton());
-	}
+	var activateEditMode = function(){		
+		serverConfigService.getEditorConfig(true).then(function(config){//TODO use current theme
+			$scope.editMode=true;
+			
+			if($scope.note.id !=null)
+				$scope.showDeleteButton = true;
+			
+			CKEDITOR.replace("note", config);
+			$rootScope.buttons=[];
+			
+			//Add new buttons
+				$rootScope.buttons.push(saveButton());
+				$rootScope.buttons.push(clearButton());
+		});	
+	};
 	
 	//Load or new
 		if($routeParams.id==null){//new
@@ -122,5 +128,12 @@ openNote.controller("noteController", function($scope,$rootScope, $routeParams, 
 				});
 			}
 		);
+	}
+	
+	/**
+	 * Mark html as trusted
+	 */
+	$scope.trustHTML = function(html) {
+	    return $sce.trustAsHtml(html);
 	}
 });

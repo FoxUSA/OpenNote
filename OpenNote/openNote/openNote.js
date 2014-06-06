@@ -15,9 +15,9 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
     	//TODO fade in for every view here?
     	
     	//server config values
-    		serverConfigService.getConfig().then(function(serverConfig){
-    			$rootScope.serverConfig = serverConfig;
-    		});
+    		serverConfigService.getConfig().then(function(config){
+    			$rootScope.serverConfig=config;
+    		}); //atach server config to root scope
     		
     	/**
     	 * Initial entry if not logged in
