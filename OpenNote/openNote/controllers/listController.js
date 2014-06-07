@@ -78,15 +78,16 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        	    	
 	        	    	
 	        	    	sourceFolder.parrentFolderID=destID;
-	        	    	sourceFolder.$update({levels: null});
-	        	    	
-	        	    	//fire off an event to tell everyone we just modified a folder
-		        	    	$rootScope.$emit("changedFolder", {
-		        	    		folder: sourceFolder, 
-		        	    		oldParrentFolderID: origParrentFolderID
-		        	    	});
+	        	    	sourceFolder.$update().then(function(){//wait for a response
+	        	    		//fire off an event to tell everyone we just modified a folder
+			        	    	$rootScope.$emit("changedFolder", {
+			        	    		folder: sourceFolder, 
+			        	    		oldParrentFolderID: origParrentFolderID
+			        	    	});
+	        	    	});
 	        	    }
-	        	    $rootScope.$emit("reloadListView", {}); //refresh either way
+	        	    else
+	        	    	$rootScope.$emit("reloadListView", {}); //refresh either way
 	        	    //event.source.nodeScope.$$apply = false;
 	        	    //TODO if they cancel reset list instead of re pulling it
 	        	    

@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 	        }
 		});
 
-	 //Plugin loading
+	//Plugin loading
 		grunt.loadNpmTasks("grunt-contrib-less");
 		grunt.loadNpmTasks("grunt-contrib-watch");
 	    grunt.loadNpmTasks("grunt-karma");
