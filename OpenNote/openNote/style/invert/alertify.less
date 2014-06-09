@@ -2,12 +2,16 @@
  * Twitter Bootstrap Look and Feel
  * Based on http://twitter.github.com/bootstrap/
  */
+ 
+ /** offset all the other colors */
+	@offset: #000000;
+ 
 .alertify,
 .alertify-log {
 	font-family: inherit;
 }
 .alertify {
-	background: #000;
+	background: negation(#000, @offset);
 	border-radius: 6px;
 	top: 100px; /*how far down to appear*/
 	-webkit-background-clip: padding;     /* Safari 4? Chrome 6? */
@@ -28,10 +32,10 @@
 			padding: 0 15px;
 		}
 			.alertify-text {
-				color: #CCC;
+				color: negation(#CCC, @offset);
 				
 				padding: 8px;
-				border: 1px solid #CCC;
+				border: 1px solid negation(#CCC, @offset);
 			}
 			.alertify-text:focus {
 				outline: 0;
@@ -61,37 +65,37 @@
 				.alertify-button-cancel:hover,
 				.alertify-button-cancel:focus,
 				.alertify-button-cancel:active {
-					color: #CCC;
+					color: negation(#CCC, @offset);
 				}
 				.alertify-button-cancel:hover,
 				.alertify-button-cancel:focus,
 				.alertify-button-cancel:active {
-					color: #000;
-					background: #fff;
+					color: negation(#000, @offset);
+					background: negation(#fff, @offset);
 				}
 				.alertify-button-ok,
 				.alertify-button-ok:hover,
 				.alertify-button-ok:focus,
 				.alertify-button-ok:active {
-					color: #CCC;
+					color: negation(#CCC, @offset);
 				}
 				.alertify-button-ok:hover,
 				.alertify-button-ok:focus,
 				.alertify-button-ok:active {
-					color: #000;
-					background: #fff;
+					color: negation(#000, @offset);
+					background: negation(#fff, @offset);
 				}
 
 .alertify-log {
-	background: #000;
+	background: negation(#000, @offset);
 	padding: 8px 14px;
 	border-radius: 4px;
-	color: #CCC;
+	color: negation(#CCC, @offset);
 	border: none;
 }
 	.alertify-log-error {
-		color: #CC0000;
+		color: negation(#CC0000, @offset);
 	}
 	.alertify-log-success {
-		color: #CCC;
+		color: negation(#CCC, @offset);
 	}

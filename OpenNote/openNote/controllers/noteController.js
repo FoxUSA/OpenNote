@@ -6,7 +6,7 @@
 /**
  * controller for note creation, editing and maintance
  */
-openNote.controller("noteController", function($scope, $rootScope, $routeParams, $location, $routeParams,noteFactory, config, serverConfigService, $sce) {
+openNote.controller("noteController", function($scope, $rootScope, $routeParams, $location, $routeParams, noteFactory, config, serverConfigService, $sce) {
 	$rootScope.buttons=[];
 	$scope.note = new noteFactory();
 	$scope.editMode = false;
@@ -51,7 +51,7 @@ openNote.controller("noteController", function($scope, $rootScope, $routeParams,
 	 * Take us into edit mode
 	 */
 	var activateEditMode = function(){		
-		serverConfigService.getEditorConfig(true).then(function(config){//TODO use current theme
+		serverConfigService.getEditorConfig().then(function(config){
 			$scope.editMode=true;
 			
 			if($scope.note.id !=null)

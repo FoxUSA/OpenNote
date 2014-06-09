@@ -4,7 +4,7 @@
     "Jacob Liscom <https://github.com/FoxUSA>"
   ],
   "description": "A note taking software",
-  "version": "14.05.0",
+  "version": "14.07.0",
   "dependencies": {
     "jquery": "2.0.3",
     "bootstrap": "3.1.1",
@@ -15,7 +15,6 @@
     "angular-animate": "1.2.16",
     "angular-mocks": "1.2.16",
     "ckeditor": "ckeditor/ckeditor-releases#full/4.4.x",
-    "jqdialog": "knadh/jqdialog",
     "angular-ui-tree": "2.1.2",
     "alertify": "0.3.10",
     "intro.js": "0.8.0"

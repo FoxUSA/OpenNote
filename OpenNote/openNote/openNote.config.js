@@ -43,14 +43,14 @@ openNote.value("config", {
 	 * Do we want to show the help button
 	 */
 	showHelpButton: function(){
-		return false;
+		return true;
 	},
 	
 	/**
 	 * Do we want to show the log Out button
 	 */
 	showLogOutButton: function(){
-		return false;
+		return true;
 	},
 	
 	/**
@@ -63,6 +63,12 @@ openNote.value("config", {
 	            method: "GET"
 	        }
 	    }).$get();
-	}
+	},
 	
+	/**
+	 * See if we are dark or light
+	 */
+	isDarkTheme: function(){
+		return false;
+	}	
 });

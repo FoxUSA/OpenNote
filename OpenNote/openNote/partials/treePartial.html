@@ -1,5 +1,5 @@
 <div ui-tree-handle class="tree-node-content">
-	<a class="btn btn-xs green" data-nodrag ng-click="toggle(this)" ng-class="{'collapsed': collapsed}"></a>
+	<a class="btn btn-xs" data-nodrag ng-click="toggle(this)" ng-class="{'collapsed': collapsed}"></a>
 	<a data-nodrag href="#/folder/{{folder.id}}">{{folder.name}}</a>
 </div>
 <ol ui-tree-nodes="" ng-model="folder.foldersInside" ng-class="{hidden: collapsed}">

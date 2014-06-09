@@ -1,7 +1,12 @@
 /*
 Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
+
+Used to format ckeditor content html
 */
+
+/** offset all the other colors */
+	@offset: #000000;
 
 body{
 	/* Font */
@@ -9,10 +14,10 @@ body{
 	font-size: 12px;
 
 	/* Text color */
-	color: #eee;
+	color: negation(#eee, @offset);
 
 	/* Remove the background color to make it transparent */
-	background-color: #000;
+	background-color: negation(#000, @offset);
 
 	margin: 20px;
 }
@@ -27,7 +32,7 @@ blockquote{
 	font-family: Georgia, Times, "Times New Roman", serif;
 	padding: 2px 0;
 	border-style: solid;
-	border-color: #ccc;
+	border-color: negation(#ccc, @offset);
 	border-width: 0;
 }
 
@@ -44,7 +49,7 @@ blockquote{
 }
 
 a{
-	color: #0782C1;
+	color: negation(#0782C1, @offset);
 }
 
 ol,ul,dl{
@@ -61,18 +66,18 @@ h1,h2,h3,h4,h5,h6{
 
 hr{
 	border: 0px;
-	border-top: 1px solid #ccc;
+	border-top: 1px solid negation(#ccc, @offset);
 }
 
 img.right {
-    border: 1px solid #ccc;
+    border: 1px solid negation(#ccc, @offset);
     float: right;
     margin-left: 15px;
     padding: 5px;
 }
 
 img.left {
-    border: 1px solid #ccc;
+    border: 1px solid negation(#ccc, @offset);
     float: left;
     margin-right: 15px;
     padding: 5px;
@@ -80,7 +85,6 @@ img.left {
 
 img:hover {
 	opacity: .9;
-	filter: alpha(opacity = 90);
 }
 
 pre{
@@ -89,5 +93,5 @@ pre{
 }
 
 .marker {
-    background-color: Yellow;
+    background-color: negation(Yellow, @offset);
 }

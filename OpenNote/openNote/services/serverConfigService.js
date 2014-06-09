@@ -45,7 +45,8 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 	 * @param dark - true if dark theme
 	 * @return - ckeditor config object
 	 */
-	this.getEditorConfig = function(dark){
+	this.getEditorConfig = function(){
+		var dark = config.isDarkTheme();
 		return this.getConfig().then(function(data){
 			var temp = {
 					// Define changes to default configuration here. For example,
@@ -62,11 +63,11 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 				
 				//style sheet
 					if(dark){
-						temp.contentsCss = "openNote/style/dark/note.dark.css";
+						temp.contentsCss = "openNote/style/invert/dark/note.css";
 						temp.skin = "moono.dark,../../openNote/style/dark/ckeditor/moono.dark/";
 					}
 					else{
-						temp.contentsCss = "openNote/style/dark/note.css";
+						temp.contentsCss = "openNote/style/invert/light/note.css";
 					};
 				
 				//configure the upload path if uploads are enabled

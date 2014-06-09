@@ -11,9 +11,7 @@ var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize",
  * Runs on every route
  */
 openNote.run(function ($rootScope, $location, userService, config, serverConfigService){
-    $rootScope.$on("$routeChangeStart", function (event) {
-    	//TODO fade in for every view here?
-    	
+    $rootScope.$on("$routeChangeStart", function (event) {    	
     	//server config values
     		serverConfigService.getConfig().then(function(config){
     			$rootScope.serverConfig=config;

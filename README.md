@@ -1,6 +1,6 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
-In post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
+In a post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
 In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
 
 The fix is to take personal responsability and host sensative data yourself.
@@ -43,6 +43,8 @@ http://stardrive.us/OpenNote/
 Documentation
 -----------------
 [How to install][Install]
+
+[How to build][Build]
 
 [Themes][Themes]
 
