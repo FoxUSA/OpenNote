@@ -13,7 +13,9 @@ module.exports = function(grunt) {
 					    files: {
 					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
+					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
+					    		
 					    }
 				 	},
 				 	devLight: {
@@ -26,7 +28,8 @@ module.exports = function(grunt) {
 					    files: {
 					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
+					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
 					    }
 				 	},
 				 	prodDark: {
@@ -40,7 +43,8 @@ module.exports = function(grunt) {
 					    files: {
 					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
+					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
 					    }
 				 	},
 				 	prodLight: {
@@ -54,7 +58,8 @@ module.exports = function(grunt) {
 					    files: {
 					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
+					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
 					    }
 				 	}
 				},
@@ -105,11 +110,11 @@ module.exports = function(grunt) {
 		//deployment
 		    grunt.registerTask("clean", ["shell:clean"]);
 		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS"]);
-			grunt.registerTask("default", [""]);
+			grunt.registerTask("default", ["build"]);
 			grunt.registerTask("deploy", ["clean", "buildProdCSS"]);
 		
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
 			grunt.registerTask("test", ["karma:travis"])
-			grunt.registerTask("ci", ["shell:bowerInstall","karma:travis"])
+			grunt.registerTask("ci", ["build","karma:travis"])
 };

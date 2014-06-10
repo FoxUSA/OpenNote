@@ -16,10 +16,10 @@
 		<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
 		<link rel="stylesheet" href="bower_components/alertify/themes/alertify.core.css">
 		
-		<!-- Dark Theme -->
-			<link rel="stylesheet" type="text/css" href="openNote/style/dark/introjs.css">
-			<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/alertify.css">
-			<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/style.css">
+		<!-- Theme -->
+			<link rel="stylesheet" type="text/css" href="openNote/style/invert/dark/intojs.css">
+			<link rel="stylesheet" type="text/css" href="openNote/style/invert/dark/alertify.css">
+			<link rel="stylesheet" type="text/css" href="openNote/style/invert/dark/style.css">
 			
 		<link rel="stylesheet" type="text/css" href="openNote/style/animations.css">
 
@@ -93,7 +93,7 @@
 	</div>
 	
 	<div class="col-lg-2 col-md-3 col-sm-4">
-		<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar" data-intro="{{helpContent.listArea}}>
+		<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar" data-intro="{{helpContent.listArea}}">
 			<div id="folderList">
 	        	<div ui-tree="options" id="tree-root">
 	         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
@@ -104,7 +104,7 @@
 		</div>
 	</div>
 	
-	<div class="col-lg-10 col-md-9 col-sm-8" ng-view>	
+	<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	
 	</div>
 </body>
 </html>

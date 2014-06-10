@@ -20,7 +20,8 @@ openNote.controller("noteController", function($scope, $rootScope, $routeParams,
 			text: "Save",
 			action: function(){
 				$scope.save();
-			}
+			},
+			helpText: $rootScope.helpContent.saveButton
 		};
 	};
 	
@@ -43,7 +44,8 @@ openNote.controller("noteController", function($scope, $rootScope, $routeParams,
 						});
 					}
 				);
-			}
+			},
+			helpText: $rootScope.helpContent.clearButton
 		};
 	};
 	
@@ -88,7 +90,8 @@ openNote.controller("noteController", function($scope, $rootScope, $routeParams,
 					text: "Edit",
 					action: function(){
 						activateEditMode();
-					}
+					},
+					helpText: $rootScope.helpContent.editButton
 				});
 		}
 		

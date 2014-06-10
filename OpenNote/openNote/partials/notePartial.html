@@ -1,11 +1,11 @@
 <div class="notePartial startHidden">
 	<div id="noteTitle">
-		<input type="text" class="inputField" id="noteName" ng-model="note.title" ng-readonly="!editMode">
+		<input type="text" class="inputField" id="noteName" ng-model="note.title" ng-readonly="!editMode" data-intro="{{helpContent.folderEditModeButton}}">
 		<button id="removeNote" type="button" class="right customButton" ng-click="delete();" ng-show="showDeleteButton">
 			Delete
 		</button>
 	</div>
 	
-	<div id="note" class="box big" ng-bind-html="trustHTML(note.note)">
+	<div id="note" class="box big" ng-bind-html="trustHTML(note.note)" data-intro="{{helpContent.noteBody}}">
 	</div>
 </div>
