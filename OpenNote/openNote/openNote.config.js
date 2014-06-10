@@ -39,7 +39,8 @@ openNote.value("config", {
 			noteBody: "This is the main note body. If edit mode is enabled this becomes the editor.",
 			clearButton: "Press this button to revert current changes.",
 			saveButton: "Click this to save this note. Old version are kept.",
-			editButton: "Click this to change the note into edit mode."
+			editButton: "Click this to change the note into edit mode.",
+			noteTitle: "This the note title field. In edit mode, you can use it to edit the notes title."
 		}
 	},
 	
