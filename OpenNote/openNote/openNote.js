@@ -10,7 +10,7 @@ var openNote = angular.module("openNote", ["ngRoute","ngResource", "ngSanitize",
  * Used to redirect users to login if their token has expired
  * Runs on every route
  */
-openNote.run(function ($rootScope, $location, userService, config, serverConfigService){
+openNote.run(function ($rootScope, $location, userService, config, serverConfigService, $http){
     $rootScope.$on("$routeChangeStart", function (event) {    	
     	//server config values
     		serverConfigService.getConfig().then(function(config){
@@ -28,7 +28,7 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
         	/**
         	 * Initial entry after if logged in
         	 */
-        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar){//make sure we only fade in once
+        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar){//make sure we only fade in/run once
 	        	userService.useAPITokenHeader();//use token
 	        	$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
 	        	$rootScope.showMenu=true;
@@ -49,9 +49,14 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
 		        		$rootScope.showMenu=false;
 			        	$rootScope.showSideBar=false;
 		        	}		        	
-		        	
-	        	//$("#menu").fadeIn(config.fadeSpeedLong());
-	        	//$("#sideBar").fadeIn(config.fadeSpeedLong());
+		        
+	        	//Check for updates
+		        	$http.get(config.getUpdateURL()).then(
+	        			function(response){//Successful
+	        				if(response.data.version!=config.getVersion())
+	        					alertify.log("<a href=\""+response.data.updateURL+"\">"+response.data.updateText+"</a>", "", 0);
+	        			}
+	        		);
     		}
         }
     });

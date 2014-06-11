@@ -4,6 +4,20 @@
 openNote.value("config", {
 	
 	/**
+	 * Get current version
+	 */
+	getVersion: function(){
+		return "14.07.00";
+	},
+	
+	/**
+	 * Get udate URL 
+	 */
+	getUpdateURL: function(){
+		return "http://stardrive.us/UpdateService/?appName=OpenNote-prod";
+	},
+	
+	/**
 	 * http path to backend rest service
 	 */
 	servicePath: function(){

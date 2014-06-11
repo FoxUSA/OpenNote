@@ -87,11 +87,18 @@ module.exports = function(grunt) {
 		                			"bower install" ].join("&&")
 		            },
 		            clean:{
-		            	command:  [	"cd OpenNote",
-		                			"rm -rf bower_components",
+		            	command:  [	"rm -rf build",
+		            	           	"cd OpenNote",
+		                			"rm -rf bower_components",               			
 		                			"cd openNote/style/invert/",
 		                			"rm -rf dark",
 		                			"rm -rf light"].join("&&")
+		            },
+		            phpPackage:{
+		            	command:  [	"mkdir build",
+		            	           	"cd build",
+		                			"cp -r ../OpenNote/* ./",
+		            	           	"cp -r ../../OpenNoteService-PHP/Service ./"].join("&&")
 		            }
 		        }
 		});
@@ -111,7 +118,7 @@ module.exports = function(grunt) {
 		    grunt.registerTask("clean", ["shell:clean"]);
 		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS"]);
 			grunt.registerTask("default", ["build"]);
-			grunt.registerTask("deploy", ["clean", "buildProdCSS"]);
+			grunt.registerTask("deploy", ["clean", "shell:bowerInstall", "buildProdCSS", "shell:phpPackage"]);
 		
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
