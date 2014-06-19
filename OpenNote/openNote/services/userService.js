@@ -49,7 +49,9 @@ openNote.service("userService", function ($http, $q, config) {
 	 * @return - true if available, false if not
 	 */
 	this.isAvailable = function(userName){ 	
-		return $http.get(config.servicePath() +"/user/"+userName).then(null,function(response){
+		return $http.get(config.servicePath() +"/user/"+userName).then(function(responce){
+			throw "Error"; // Weirdly if we get a 2xx value its a failure
+		},function(response){
 			switch(response.status){
 	  			case 302://we found it so its not available
 	  				return false;
@@ -74,6 +76,10 @@ openNote.service("userService", function ($http, $q, config) {
 		return $http.post(config.servicePath() +"/token/"+userName+"&"+password).then(
 		function(response){//Successful
 			if(response.status==200){
+				
+				if(response.data.token==null)
+					throw "Invalid responce from server";
+				
 				sessionStorage.apiToken=angular.toJson(response.data);
 				self.useAPITokenHeader();//used by the resources implicitly
 				return true;	
@@ -95,6 +101,10 @@ openNote.service("userService", function ($http, $q, config) {
 		return $http.post(config.servicePath() +"/user/"+userName+"&"+password).then(
 		function(response){//Successful
 			if(response.status==200){
+				
+				if(response.data.token==null)
+					throw "Invalid responce from server";
+				
 				sessionStorage.apiToken=angular.toJson(response.data);
 				self.useAPITokenHeader();//used by the resources implicitly
 				return true;	

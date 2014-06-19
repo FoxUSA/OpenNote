@@ -48,7 +48,7 @@ openNote.value("config", {
 			newNoteButton: "Allows you to create a new note in the the current folder.",
 			newFolderButton: "Allows you to create a sub folder in the current folder.",
 			findButton: "Launches the folder/note find utility.",
-			folderEditModeButton: "Click this button to reveal edit mode buttons.",
+			folderEditModeButton: "Click this button to reveal edit mode buttons. You cannot edit the Home folder.",
 			viewArea: "This is the main area. Folder browser and note editor are displayed here.",
 			noteBody: "This is the main note body. If edit mode is enabled this becomes the editor.",
 			clearButton: "Press this button to revert current changes.",

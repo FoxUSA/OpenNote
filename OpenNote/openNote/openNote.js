@@ -54,7 +54,7 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
 		        	$http.get(config.getUpdateURL()).then(
 	        			function(response){//Successful
 	        				if(response.data.version!=config.getVersion())
-	        					alertify.log("<a href=\""+response.data.updateURL+"\">"+response.data.updateText+"</a>", "", 0);
+	        					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
 	        			}
 	        		);
     		}
