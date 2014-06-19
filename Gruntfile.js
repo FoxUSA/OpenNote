@@ -98,7 +98,7 @@ module.exports = function(grunt) {
 		            	command:  [	"mkdir build",
 		            	           	"cd build",
 		                			"cp -r ../OpenNote/* ./",
-		            	           	"cp -r ../../OpenNoteService-PHP/Service ./"
+		            	           	"cp -r ../../OpenNoteService-PHP/Service ./",
 									"cp -r ../../OpenNoteService-PHP/vendor ./"].join("&&")
 		            }
 		        }
