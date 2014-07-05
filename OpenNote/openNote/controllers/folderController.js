@@ -46,8 +46,11 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		$rootScope.buttons.push({
 			text: "Find",
 			action: function(){
-				alertify.alert('Message: <select ng-model="selectedValue"><option>note</option><option></option></select>', function(){
-					console.log($scope.selectedValue);
+				console.log("test");
+				alertify.prompt("Enter a search term. You can prefix the term with <strong>title:</strong> to only seach in the title or <strong>note:</strong> to search in note.", function (e, str) {
+					if(e){
+						console.log(str);
+					}
 				});
 				
 				/*
