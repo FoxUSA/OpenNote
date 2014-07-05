@@ -14,14 +14,14 @@ openNote.value("config", {
 	 * Get udate URL 
 	 */
 	getUpdateURL: function(){
-		return "http://stardrive.us/UpdateService/?appName=OpenNote-prod";
+		return "//stardrive.us/UpdateService/?appName=OpenNote-prod";
 	},
 	
 	/**
 	 * http path to backend rest service
 	 */
 	servicePath: function(){
-		return "http://127.0.0.1/OpenNoteService-PHP/Service";
+		return "//127.0.0.1/OpenNoteService-PHP/Service";
 	},
 	
 	/**

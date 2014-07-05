@@ -46,6 +46,10 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		$rootScope.buttons.push({
 			text: "Find",
 			action: function(){
+				alertify.alert('Message: <select ng-model="selectedValue"><option>note</option><option></option></select>', function(){
+					console.log($scope.selectedValue);
+				});
+				
 				/*
 				 	$.jqDialog.prompt("Search:",
 						"",
