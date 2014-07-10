@@ -35,6 +35,14 @@ body{
 	margin-top: 15px;
 }
 
+select{
+	background-color: transparent;
+	border-width: 1px;
+	border-radius: 4px;
+	border-style: solid;
+	border-color: @loginInputColor;
+}
+
 #update{/*Update span style*/
 	color: @updateColor;
 }
@@ -66,7 +74,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 	margin-bottom: 15px;
 }
 
-#noteTitle{
+.titleBar{
 	background: @navBackground;
 	padding: 15px 30px;
 	overflow: hidden;
@@ -148,6 +156,9 @@ img {
 		overflow: hidden;
 		border-radius:4px;/*round the corners*/
 	}
+		.box:hover {/*overiding css when up class is present*/
+				background: lighten(@blankBoxColor, 10%); 
+			}
 
 		.box_description{
 			height: 80px;
@@ -171,19 +182,30 @@ img {
 				line-height: inherit;
 			}
 		
-		.big {
+		.big, .big:hover  {
 			width: auto;
 			height: 100%;
 			margin: 0px 0px 0px 0px;/*reset from box*/
+			background-color: @blankBoxColor;
 			
 			overflow: hidden;
 			float: none; 
 		}
-		
+
+			
 		.folder {/*overiding css when up class is present*/
 			background: @folderColor; /*green*/
 		}
 		
+			.folder:hover {/*overiding css when up class is present*/
+				background: lighten(@folderColor, 10%); 
+			}
+			
+		.search, .search:hover{
+			background-color: negation(@folderColor, #FFFFFF);
+		}
+
+					
 		h1,h2,h3,h4,h5,h6 {
 			margin: 0 0 10px 0;
 			font-weight: normal;
@@ -348,7 +370,7 @@ img {
 		border-radius:4px;/*round the corners*/
 	}
 
-	homeBox:hover{
+	.homeBox:hover{
 		background-color: @blankBoxColor;
 		color: @navBackground;
 		cursor: pointer;
@@ -369,3 +391,5 @@ img {
 	#copyRight{
 		color: @copyRightColor;
 	}
+	
+	

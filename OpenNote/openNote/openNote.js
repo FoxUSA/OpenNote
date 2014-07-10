@@ -15,7 +15,7 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
     	//server config values
     		serverConfigService.getConfig().then(function(config){
     			$rootScope.serverConfig=config;
-    		}); //atach server config to root scope
+    		}); //attach server config to root scope
     		
     	/**
     	 * Initial entry if not logged in

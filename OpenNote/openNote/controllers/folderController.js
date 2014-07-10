@@ -44,32 +44,9 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 		});
 		
 		$rootScope.buttons.push({
-			text: "Find",
+			text: "Search",
 			action: function(){
-				console.log("test");
-				alertify.prompt("Enter a search term. You can prefix the term with <strong>title:</strong> to only seach in the title or <strong>note:</strong> to search in note.", function (e, str) {
-					if(e){
-						console.log(str);
-					}
-				});
-				
-				/*
-				 	$.jqDialog.prompt("Search:",
-						"",
-						function(data) { 
-							$.jqDialog.notify(waitText);
-							
-							$(".boxContainer").fadeOut(fadeSpeedShort);
-							$.post("ajax.php",{search: true, searchString: data}, function(response){
-								$(".boxContainer").html(response); //set the contents to the output of the script
-								$(".boxContainer").fadeIn(fadeSpeedShort);
-								
-								$.jqDialog.close(); //all done. close the notify dialog  
-							});
-						},		
-						null
-					);
-				 */
+				$location.url("/search/"+$scope.currentFolder.id);
 			},
 			helpText: $rootScope.helpContent.findButton
 		});
