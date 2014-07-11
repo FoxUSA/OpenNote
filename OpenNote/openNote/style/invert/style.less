@@ -35,12 +35,18 @@ body{
 	margin-top: 15px;
 }
 
-select{
+.form-control, .form-control:focus, select{
 	background-color: transparent;
 	border-width: 1px;
 	border-radius: 4px;
 	border-style: solid;
 	border-color: @loginInputColor;
+	box-shadow:none;
+	color: inherit;
+}
+
+.form-control.customButton{
+	font-weight: bold;
 }
 
 #update{/*Update span style*/
@@ -110,7 +116,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 	border-radius:4px;/*round the corners*/
 }
 
-a.customButton, a.customButton.folder{
+a.customButton, a.customButton.folder {
 	line-height: 3ex !important;
 	display: inline !important;
 	color: @primaryTextColor;
