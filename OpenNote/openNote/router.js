@@ -18,6 +18,7 @@ openNote.config(function($routeProvider){
             })
         .when("/search/:id?",
             {
+        		controller: "searchController",
                 templateUrl: "openNote/partials/searchPartial.html"
             })
 		.otherwise({ redirectTo: "/" });

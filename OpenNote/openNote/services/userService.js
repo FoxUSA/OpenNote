@@ -99,20 +99,20 @@ openNote.service("userService", function ($http, $q, config) {
 	this.register = function(userName, password){ 	
 		var self = this;
 		return $http.post(config.servicePath() +"/user/"+userName+"&"+password).then(
-		function(response){//Successful
-			if(response.status==200){
-				
-				if(response.data.token==null)
-					throw "Invalid responce from server";
-				
-				sessionStorage.apiToken=angular.toJson(response.data);
-				self.useAPITokenHeader();//used by the resources implicitly
-				return true;	
-			}
-		},
-		function(response){//non 200 response
-			return false;
-		});
+			function(response){//Successful
+				if(response.status==200){
+					
+					if(response.data.token==null)
+						throw "Invalid responce from server";
+					
+					sessionStorage.apiToken=angular.toJson(response.data);
+					self.useAPITokenHeader();//used by the resources implicitly
+					return true;	
+				}
+			},
+			function(response){//non 200 response
+				return false;
+			});
 	};
 	
 });
