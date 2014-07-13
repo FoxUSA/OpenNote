@@ -1,10 +1,14 @@
 # How To Install
+# Automatic(Wizard Based Install)
+To run the installer open
+`<install path>/Service/install.php`
 
+## Manual
 ###MYSql
 - Create a MYSQL database named "OpenNote"
 - Download and extract OpenNote into a folder on your php web-server called "OpenNote"
-- Open up the `model/sql` folder and run `notebook.sql` in your OpenNote database
-- Change the database connection settings inside of `web-server path/OpenNote/Config.php` to match your db settings.
+- Open up the `Service/model/sql` folder and run `notebook.sql` in your OpenNote database
+- Change the database connection settings inside of `Service/Config.php` to match your db settings.
 These are stored in the following lines of code in `/OpenNote/Config.php`:
 ```php
 	public static $dbUserName = "notebook";
@@ -17,8 +21,8 @@ These are stored in the following lines of code in `/OpenNote/Config.php`:
 
 ###SQLite
 - Download and extract OpenNote into a folder on your php web-server called "OpenNote"
-- Move the SQLite database file from `model/sql` folder to a folder not in the web server www directory.
-- Change the database connection settings inside of `web-server path/OpenNote/Config.php` to match your db settings.
+- Create a SQLite database file and execute the SQL DDL from `Service/model/sql` and run `notebook.sqlite.sql`.
+- Change the database connection settings inside of `Service/Config.php` to match your db settings.
 - These are stored in the following lines of code in `/OpenNote/Config.php`:
 
 Uncomment the following lines in the dbConfig function:
