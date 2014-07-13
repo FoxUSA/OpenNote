@@ -3,7 +3,7 @@
 To run the installer open
 `<install path>/Service/install.php`
 
-Make sure you delete the install script and Config.template.
+Make sure you delete `install.php` script and `Config.template`.
 
 ### Security Note
 Be default we put the sqlite databse in the web folder. This is not a good idea. We solved this by putting in a htaccess file to not allow the database to be downloaded.
