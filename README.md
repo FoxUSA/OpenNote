@@ -3,7 +3,7 @@ OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=maste
 In a post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
 In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
 
-The fix is to take personal responsability and host apps data yourself.
+The fix is to take personal responsability and host applications ourself.
 
 OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
 It is designed to be self hosted and gives you ownership of your data.
