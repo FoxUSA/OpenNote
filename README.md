@@ -15,6 +15,9 @@ Please support this project by:
 
 Thank you!
 
+[Download most resent release from here.][Download]
+
+
 ![][topLevel]
 Features
 --------
@@ -97,3 +100,5 @@ Credits
 [GitTip]: https://www.gittip.com/FoxUSA/
 [Bitcoins]: http://blockchain.info/address/15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB
 [Alternative]: http://alternativeto.net/software/opennote/
+[Download]: https://github.com/FoxUSA/OpenNote/releases
+
