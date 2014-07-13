@@ -1,4 +1,4 @@
-# How To Install
+# How to install
 # Automatic(Wizard Based Install)
 To run the installer open
 `<install path>/Service/install.php`

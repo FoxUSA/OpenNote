@@ -1,4 +1,4 @@
-# How To Upgrade
+# How to upgrade
 ###MYSql
 - Make sure you make a copy of you database and the OpenNote directory
 - Run `Service/model/sql/updateScript/` scripts to roll the database up to current specs.

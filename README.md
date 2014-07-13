@@ -3,9 +3,9 @@ OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=maste
 In a post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
 In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
 
-The fix is to take personal responsability and host sensative data yourself.
+The fix is to take personal responsability and host apps data yourself.
 
-OpenNote was built to be a open source, web based alternative to Microsoft OneNote (T) or EverNote.
+OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
 It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
@@ -37,7 +37,7 @@ Upcoming Features
 - Implement history viewer
 - Install script
 - Move Notes (Feature lost when migrating to Angular based list)
-- Native Apps?????
+- Mobile App
 
 User Wish List
 --------------
@@ -59,6 +59,8 @@ Documentation
 [How to build][Build]
 
 [Themes][Themes]
+
+[PHP backend][php]
 
 
 ![][dark]
@@ -88,6 +90,7 @@ Credits
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
 [Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md
 [Build]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Build.md
+[PHP]: https://github.com/FoxUSA/OpenNoteService-PHP
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
 [GitTip]: https://www.gittip.com/FoxUSA/
