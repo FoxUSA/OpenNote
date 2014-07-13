@@ -1,7 +1,7 @@
-language: php
-php:
-  - "5.5"
-  - "5.4"
-  - "5.3"
-  
-script: phpunit --configuration ./OpenNote.Test
+language: node_js
+node_js:
+  - '0.10'
+before_script:
+  - 'npm install -g grunt-cli' 
+
+

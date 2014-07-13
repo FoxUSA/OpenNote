@@ -5,7 +5,14 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>tern.eclipse.ide.core.ternBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.eclipse.angularjs.core.angularnature</nature>
+		<nature>tern.eclipse.ide.core.ternnature</nature>
 	</natures>
 </projectDescription>

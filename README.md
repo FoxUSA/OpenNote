@@ -1,11 +1,17 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
-OpenNote was built to be a open web based alternative to Microsoft OneNote (T) and EverNote.
+In a post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
+In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
+
+The fix is to take personal responsability and host apps data yourself.
+
+OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
+It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
-
-Using bitcoins, please send coins to:`15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB`
-and/or like us at http://alternativeto.net/software/opennote/
+- [Using GitTip][GitTip], 
+- [donating bitcoins][Bitcoins], 
+- and/or like on [Alternative To][Alternative].
 
 Thank you!
 
@@ -20,7 +26,7 @@ Features
 - Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
 - Search
 - PDO Connector/(MySql and SQLite Database Support)
-- Move Folders and Notes(Drag into another folder in the list view.)
+- Move Folders(Drag into another folder in the list view.)
 - Rename/Delete Folders(Click on folder title to get menu.)
 
 Upcoming Features
@@ -28,9 +34,10 @@ Upcoming Features
 - REST service and Angular JS Based front end. Working on in working branch.
 - Tags (You win)
 - Email to note
-- Implement history diff viewer
+- Implement history viewer
 - Install script
-- Native Apps?????
+- Move Notes (Feature lost when migrating to Angular based list)
+- Mobile App
 
 User Wish List
 --------------
@@ -38,7 +45,6 @@ List of things users are wishing for that have not made it into the pipeline.
 Please do not re-submit issues for these features. Instead, how about a donation with the feature in the comment?
 
 - Out of box PostgreSQL support. PDO connector support PostgreSQL.
-
 
 Demo
 -------
@@ -48,21 +54,29 @@ Documentation
 -----------------
 [How to install][Install]
 
+[How to upgrade][Upgrade]
+
+[How to build][Build]
+
 [Themes][Themes]
+
+[PHP backend][php]
 
 
 ![][dark]
 License
 -------
-	JQuery - Distributed under a MIT License
-	JSTree - "Same as JQuery"
-
+	JQuery - Distributed under the MIT License
+	Angular - Distributed under the MIT License
+	Bootstrap - Distributed under the MIT License
 	CKEditor - Distributed under the MPL License
+	Angular UI Tree - Distributed under the MIT License
+	Alertify.js - Distributed under the MIT License
 
-	OpenNote Code - Distributed under a MIT License
+	OpenNote Code - Distributed under the MIT License
 	
 	Other OpenNote licenses are available for purchase from the author
-	© Jacob Liscom 2013
+	© Jacob Liscom 2014
 	
 Credits
 -------
@@ -70,12 +84,15 @@ Credits
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
-	Microsoft - For making terrible products
-	Evernote - For making better products in a slightly evil way
-
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
+[Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md
+[Build]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Build.md
+[PHP]: https://github.com/FoxUSA/OpenNoteService-PHP
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
+[GitTip]: https://www.gittip.com/FoxUSA/
+[Bitcoins]: http://blockchain.info/address/15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB
+[Alternative]: http://alternativeto.net/software/opennote/

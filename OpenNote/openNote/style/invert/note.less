@@ -1,0 +1,97 @@
+/*
+Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+
+Used to format ckeditor content html
+*/
+
+/** offset all the other colors */
+	@offset: #000000;
+
+body{
+	/* Font */
+	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
+	font-size: 12px;
+
+	/* Text color */
+	color: negation(#eee, @offset);
+
+	/* Remove the background color to make it transparent */
+	background-color: negation(#000, @offset);
+
+	margin: 20px;
+}
+
+.cke_editable{
+	font-size: 13px;
+	line-height: 1.6em;
+}
+
+blockquote{
+	font-style: italic;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	padding: 2px 0;
+	border-style: solid;
+	border-color: negation(#ccc, @offset);
+	border-width: 0;
+}
+
+.cke_contents_ltr blockquote{
+	padding-left: 20px;
+	padding-right: 8px;
+	border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote{
+	padding-left: 8px;
+	padding-right: 20px;
+	border-right-width: 5px;
+}
+
+a{
+	color: negation(#0782C1, @offset);
+}
+
+ol,ul,dl{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right: 0px;
+	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+	padding: 0 40px;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-weight: normal;
+	line-height: 1.2em;
+}
+
+hr{
+	border: 0px;
+	border-top: 1px solid negation(#ccc, @offset);
+}
+
+img.right {
+    border: 1px solid negation(#ccc, @offset);
+    float: right;
+    margin-left: 15px;
+    padding: 5px;
+}
+
+img.left {
+    border: 1px solid negation(#ccc, @offset);
+    float: left;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+img:hover {
+	opacity: .9;
+}
+
+pre{
+	white-space: pre-wrap; /* CSS 2.1 */
+	word-wrap: break-word; /* IE7 */
+}
+
+.marker {
+    background-color: negation(Yellow, @offset);
+}

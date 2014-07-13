@@ -1,0 +1,20 @@
+/*Fade In*/
+	.fadeIn.ng-hide-add, 
+	.fadeIn.ng-hide-remove,
+	.fadeIn.ng-enter,
+	.fadeIn.ng-leave{
+		transition:all linear 2s;
+		display: block !important;
+	}
+	 
+	.fadeIn.ng-hide-add.ng-hide-add-active,
+	.fadeIn.ng-hide-remove,
+	.fadeIn.ng-leave-active {
+		opacity:0;
+	}
+	 
+	.fadeIn.ng-hide-add,
+	.fadeIn.ng-hide-remove.ng-hide-remove-active,
+	.fadeIn.ng-enter-active{
+		opacity:1;
+	}
