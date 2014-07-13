@@ -44,6 +44,8 @@ Documentation
 -----------------
 [How to install][Install]
 
+[How to upgrade][Upgrade]
+
 [How to build][Build]
 
 [Themes][Themes]
@@ -74,6 +76,8 @@ Credits
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
+[Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md
+[Build]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Build.md
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
 [GitTip]: https://www.gittip.com/FoxUSA/

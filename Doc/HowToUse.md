@@ -1,4 +1,4 @@
-How To Use
+How to use
 --------------
 OpenNote uses a touch to open scheme.
 If you want to open something just click it.
