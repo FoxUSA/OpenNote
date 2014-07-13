@@ -31,3 +31,25 @@
 		</form>
 	</div>
 </div>
+
+<div class="folderPartial">	
+	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden waveAnimation box folder jstree-draggable" ng-click="loadFolder(folder);">
+		<h4>
+			{{folder.name}}
+		</h4>
+		<p class="box_description"></p>
+		<p class="options">
+			Folder
+		</p>
+	</div>
+	
+	<div ng-Repeat="note in currentFolder.notesInside" class="box waveAnimation note startHidden jstree-draggable" ng-click="loadNote(note);">
+		<h4>
+			{{note.title}}
+		</h4>
+		<p class="box_description"></p>
+		<p class="options">
+			<span class="right">Note</span>
+		</p>
+	</div>
+</div>

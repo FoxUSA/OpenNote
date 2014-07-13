@@ -35,7 +35,7 @@ body{
 	margin-top: 15px;
 }
 
-.form-control, .form-control:focus, select{
+.form-control, select{
 	background-color: transparent;
 	border-width: 1px;
 	border-radius: 4px;
@@ -43,6 +43,10 @@ body{
 	border-color: @loginInputColor;
 	box-shadow:none;
 	color: inherit;
+}
+
+.form-control:focus{
+		box-shadow:none;
 }
 
 .form-control.customButton{
@@ -209,6 +213,10 @@ img {
 			
 		.search, .search:hover{
 			background-color: negation(@folderColor, #FFFFFF);
+		}
+		
+		.searchPartial{
+			margin-bottom: 30px;
 		}
 
 					
