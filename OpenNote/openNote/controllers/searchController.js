@@ -48,7 +48,7 @@ openNote.controller("searchController", function(	$scope,
 	 * fade out all folders
 	 */
 	$scope.fadeOutFolders = function(callback){
-		if($scope.currentFolder.foldersInside.length>0)
+		if($scope.currentFolder.foldersInside !=null && $scope.currentFolder.foldersInside.length>0)
 			$(".folder").fadeOut(config.fadeSpeedShort(),function(){
 				$scope.$apply(function(){
 					callback();
