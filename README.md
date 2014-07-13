@@ -18,6 +18,11 @@ Thank you!
 [Download most resent release from here.][Download]
 
 
+Demo
+-------
+http://stardrive.us/OpenNote/
+
+
 ![][topLevel]
 Features
 --------
@@ -48,10 +53,6 @@ List of things users are wishing for that have not made it into the pipeline.
 Please do not re-submit issues for these features. Instead, how about a donation with the feature in the comment?
 
 - Out of box PostgreSQL support. PDO connector support PostgreSQL.
-
-Demo
--------
-http://stardrive.us/OpenNote/
 
 Documentation
 -----------------
