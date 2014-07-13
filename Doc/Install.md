@@ -11,10 +11,10 @@ To run the installer open
 - Change the database connection settings inside of `Service/Config.php` to match your db settings.
 These are stored in the following lines of code in `/OpenNote/Config.php`:
 ```php
-	public static $dbUserName = "notebook";
-	public static $dbPassword = "password";
-	public static $dbServer = "localhost";
-	public static $dbName = "notebook";
+	$dbUserName = "notebook";
+	$dbPassword = "password";
+	$dbServer = "127.0.0.1";
+	$dbName = "notebook";
 ```
 			
 - Now the site install is complete. You can now open the site by going to your webserver url +/OpenNote
