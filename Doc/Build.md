@@ -1,20 +1,18 @@
-# How To Build
+# How to build
 
-Installing Build Enviorment
----------------------------
+## Clone
+You will need to clone the front end and the backend
+https://github.com/FoxUSA/OpenNote
+https://github.com/FoxUSA/OpenNoteService-PHP
 
-git clone this repositiory
+Most of the buid tasks require the OpenNote and OpenNoteService-PHP to be in the same folder 
 
-thern run 
-```
-npm install
-```
+## Build Requirments
+- Bower
+- Grunt
+- Composer
 
-this will install everything fron bower to grunt.
+## Build
+Run from OpenNote project
+`grunt build`
 
-Then run 
-```
-grunt build
-```
-
-This is pull all the bower components and build things like css
