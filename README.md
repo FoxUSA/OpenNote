@@ -28,6 +28,7 @@ Features
 - PDO Connector/(MySql and SQLite Database Support)
 - Move Folders(Drag into another folder in the list view.)
 - Rename/Delete Folders(Click on folder title to get menu.)
+- Responsive
 
 Upcoming Features
 -----------------
