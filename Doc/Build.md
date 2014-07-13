@@ -8,9 +8,9 @@ https://github.com/FoxUSA/OpenNoteService-PHP
 Most of the buid tasks require the OpenNote and OpenNoteService-PHP to be in the same folder 
 
 ## Build Requirments
-Bower
-Grunt
-Composer
+- Bower
+- Grunt
+- Composer
 
 ## Build
 Run from OpenNote project
