@@ -3,6 +3,13 @@
 To run the installer open
 `<install path>/Service/install.php`
 
+Make sure you delete the install script and Config.template.
+
+### Security Note
+Be default we put the sqlite databse in the web folder. This is not a good idea. We solved this by putting in a htaccess file to not allow the database to be downloaded.
+
+Still, you should move this file out of the webserver directory and change the location in `Config.php`
+
 ## Manual
 ###MYSql
 - Create a MYSQL database named "OpenNote"
