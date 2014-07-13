@@ -1,4 +1,7 @@
 # How to install
+[Download most resent release from here.][Download]
+
+
 # Automatic(Wizard Based Install)
 To run the installer open
 `<install path>/Service/install.php`
@@ -45,3 +48,5 @@ Comment the following lines in the dbConfig function:
 ```
 			
 - Now the site install is complete. You can now open the site by going to your webserver url +/OpenNote
+
+[Download]: https://github.com/FoxUSA/OpenNote/releases
