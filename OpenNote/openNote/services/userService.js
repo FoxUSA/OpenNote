@@ -16,7 +16,15 @@ openNote.service("userService", function ($http, $q, config) {
 	this.useAPITokenHeader = function(){
 		$http.defaults.headers.common["token"] = this.getAPITokenString();//used by the resources implicitly
 		
-		document.cookie="token="+this.getAPITokenString()+"; path=/"; //This is the download token, it is used for pulling files
+		document.cookie="token="+this.getAPITokenString()+"; path=/;"; //This is the download token, it is used for pulling files
+	}
+	
+	/**
+	 * Stop using a token
+	 */
+	this.destroyTokenHeader = function(){
+		delete sessionStorage.apiToken; 
+		document.cookie = "token=;  path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 	
 	/**

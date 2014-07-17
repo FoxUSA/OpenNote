@@ -44,7 +44,7 @@ openNote.run(function ($rootScope, $location, userService, config, serverConfigS
 		        	 * Log out function
 		        	 */
 		        	$rootScope.logOut = function(){
-		        		sessionStorage.apiToken=null; 
+		        		userService.destroyTokenHeader();
 		        		window.location.href='#/';
 		        		$rootScope.showMenu=false;
 			        	$rootScope.showSideBar=false;
