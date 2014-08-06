@@ -33,18 +33,7 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 		return {
 			text: "Clear",
 			action: function(){
-				alertify.confirm("Are you sure you want to clear your changes?",
-					function(confirm) {
-						if(!confirm)
-							return;
-						
-						$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
-							$scope.$apply(function(){
-								$location.url("/folder/"+$scope.note.folderID);
-							});
-						});
-					}
-				);
+				$scope.clear();
 			},
 			helpText: $rootScope.helpContent.clearButton
 		};
@@ -62,6 +51,8 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 			
 			CKEDITOR.replace("note", config);
 			$rootScope.buttons=[];
+			
+			attachWindowUnload();
 			
 			//Add new buttons
 				$rootScope.buttons.push(saveButton());
@@ -100,7 +91,6 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 	 * Save a note
 	 */
 	$scope.save = function(){
-		
 		$scope.note.note = CKEDITOR.instances["note"].getData();
 		
 		//Insert only logic
@@ -109,6 +99,7 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 		
 		$(".notePartial").fadeOut(config.fadeSpeedShort());
 		$scope.note.$save().then(function(){
+			detachWindowUnload();
 			$location.url("/note/"+$scope.note.id)
 			alertify.success("Note Saved"); //all done. close the notify dialog 
 		});
@@ -127,6 +118,7 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 				var folderID = $scope.note.folderID;//need to keep track of this because we are about to delete it
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
 				$scope.note.$remove({id: $scope.note.id}).then(function(){
+					detachWindowUnload();
 					alertify.success("Note Deleted",5); //all done. close the notify dialog 
 					$location.url("/folder/"+folderID);
 				});
@@ -135,9 +127,43 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 	}
 	
 	/**
+	 * Reset changes
+	 */
+	$scope.clear = function(){
+		alertify.confirm("Are you sure you want to clear your changes?",
+			function(confirm) {
+				if(!confirm)
+					return;
+				
+				$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
+					$scope.$apply(function(){
+						detachWindowUnload();
+						$location.url("/folder/"+$scope.note.folderID);
+					});
+				});
+			});
+	};
+	
+	/**
 	 * Mark html as trusted
 	 */
 	$scope.trustHTML = function(html) {
 	    return $sce.trustAsHtml(html);
+	}
+	
+	/**
+	 * Attach window on-load listener 
+	 */
+	var attachWindowUnload = function(){
+		window.onbeforeunload = function() {
+            return "Are you sure you want to navigate away?";//Keep the page from closing
+		};
+	}
+	
+	/**
+	 * Remove window on-load listener 
+	 */
+	var detachWindowUnload = function(){
+		window.onbeforeunload = null;
 	}
 });
