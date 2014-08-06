@@ -6,7 +6,7 @@
 /**
  * Control 
  */
-openNote.controller("listController", function($scope, $rootScope, folderFactory) {	
+openNote.controller("listController", function($scope, $rootScope, folderFactory, $timeout) {	
 	$scope.data = new folderFactory();
 	
 	/**
@@ -43,7 +43,11 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {
-	    $scope.data.$get({levels:100, includeNotes: false});
+	    $scope.data.$get({levels:100, includeNotes: false}).then(function(result){
+	    	$scope.treeBuffer = 0;
+	    	$scope.data=result;
+	    	increaseTreeBuffer();
+	    });
     });
     
     /**
@@ -95,4 +99,16 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        }	
 	    }
     };
+    
+    /**
+    * Render list slowly
+    */
+    var increaseTreeBuffer = function(){
+        if($scope.treeBuffer<=100) {
+            $scope.treeBuffer++;
+            $timeout(increaseTreeBuffer, 100);
+        }
+        else
+            $rootScope.$emit("listLoaded", {});//Tell the world we are done
+    }
 });

@@ -1,5 +1,11 @@
 
-openNote.controller("folderController", function($scope, $rootScope, $location, $routeParams, folderFactory, config) {
+openNote.controller("folderController", function(	$scope, 
+													$rootScope, 
+													$location, 
+													$routeParams, 
+													folderFactory, 
+													config,
+													$timeout) {
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;
 	$scope.currentFolder = new folderFactory();
@@ -54,12 +60,14 @@ openNote.controller("folderController", function($scope, $rootScope, $location, 
 	/**	
 	 * Load folder contents
 	 */
-	$scope.currentFolder.$get({id:$routeParams.id}).then(function(data){
-		//Do they have anything to display?
-			if($scope.currentFolder.id==null && $scope.currentFolder.foldersInside.length==0){
-				$scope.currentFolder.name=null;//resets title
-				alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page.");
-			}
+	$timeout(function(){
+		$scope.currentFolder.$get({id:$routeParams.id}).then(function(data){
+			//Do they have anything to display?
+				if($scope.currentFolder.id==null && $scope.currentFolder.foldersInside.length==0){
+					$scope.currentFolder.name=null;//resets title
+					alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page.");
+				}
+		});
 	});
 	
 	/**
