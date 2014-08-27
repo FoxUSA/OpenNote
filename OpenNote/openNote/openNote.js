@@ -29,11 +29,12 @@ openNote.run(function (	$rootScope,
     				$rootScope.serverConfig=config;
     		}); //attach server config to root scope
     		
-        if (isLoggedInOrIsOnLoginScreen())//Initial entry if not logged in
-        	forceLogin();
-        else//Initial entry after if logged in 
-        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
-        		$rootScope.$emit("init");
+    	//Authentication and authorization enforcer
+	        if (isLoggedInOrIsOnLoginScreen())//Initial entry if not logged in
+	        	forceLogin(event);
+	        else//Initial entry after if logged in 
+	        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
+	        		$rootScope.$emit("init");
         
     });
     
@@ -47,8 +48,10 @@ openNote.run(function (	$rootScope,
     /**
      * Force user to login 
      */
-    var forceLogin = function(){
-    	event.preventDefault();
+    var forceLogin = function(event){
+    	if(event!=null)
+    		event.preventDefault();
+    	
         $location.path("/");
     }
     
@@ -58,9 +61,9 @@ openNote.run(function (	$rootScope,
     $rootScope.$on("init",function(){
     	userService.useAPITokenHeader();//use token
     	
-    	$rootScope.$on("$viewContentLoaded",function(){//wait for page to load before requesting list view
+    	/*$rootScope.$on("$viewContentLoaded",function(){//wait for page to load before requesting list view
     		$rootScope.$emit("reloadListView"); //send an event to tell the list view to reload
-    	});
+    	});*/
     	
     	$rootScope.showMenu=true;
     	$rootScope.showSideBar=true;
@@ -75,18 +78,24 @@ openNote.run(function (	$rootScope,
         	 * Log out function
         	 */
         	$rootScope.logOut = function(){
-        		userService.destroyTokenHeader();
-        		window.location.href='#/';
-        		$rootScope.showMenu=false;
-	        	$rootScope.showSideBar=false;
-        	}		        	
+        		$rootScope.$emit("logOut");
+        	};		        	
         
     	//Check for updates
         	$http.get(config.getUpdateURL()).then(
     			function(response){//Successful
     				if(response.data.version!=config.getVersion())
     					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
-    			}
-    		);
+    			});
+    });
+    
+    /**
+     * Handle logOut event
+     */
+    $rootScope.$on("logOut",function(){
+    	userService.destroyTokenHeader();
+		window.location.href='#/';
+		$rootScope.showMenu=false;
+    	$rootScope.showSideBar=false;
     })
 });

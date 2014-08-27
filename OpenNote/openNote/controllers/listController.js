@@ -6,7 +6,10 @@
 /**
  * Control 
  */
-openNote.controller("listController", function($scope, $rootScope, folderFactory, $timeout) {	
+openNote.controller("listController", function(	$scope, 
+												$rootScope, 
+												folderFactory, 
+												$timeout) {	
 	$scope.data = new folderFactory();
 	
 	/**
@@ -80,7 +83,6 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        	    	
 	        	    	sourceFolder.__proto__=folderType.__proto__;//Cast this object as a resources
 	        	    	
-	        	    	
 	        	    	sourceFolder.parrentFolderID=destID;
 	        	    	sourceFolder.$update().then(function(){//wait for a response
 	        	    		//fire off an event to tell everyone we just modified a folder
@@ -94,7 +96,6 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        	    	$rootScope.$emit("reloadListView", {}); //refresh either way
 	        	    //event.source.nodeScope.$$apply = false;
 	        	    //TODO if they cancel reset list instead of re pulling it
-	        	    
 	        	});
 	        }	
 	    }
@@ -105,7 +106,8 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
     */
     var increaseTreeBuffer = function(){
         if($scope.treeBuffer<=100) {
-            $scope.treeBuffer++;
+            //console.log(
+        	$scope.treeBuffer++;//);
             $timeout(increaseTreeBuffer, 100);
         }
         else
