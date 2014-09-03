@@ -60,11 +60,7 @@ openNote.run(function (	$rootScope,
      */
     $rootScope.$on("init",function(){
     	userService.useAPITokenHeader();//use token
-    	
-    	/*$rootScope.$on("$viewContentLoaded",function(){//wait for page to load before requesting list view
-    		$rootScope.$emit("reloadListView"); //send an event to tell the list view to reload
-    	});*/
-    	
+    	    	
     	$rootScope.showMenu=true;
     	$rootScope.showSideBar=true;
     	

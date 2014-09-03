@@ -8,8 +8,9 @@
  */
 openNote.controller("listController", function(	$scope, 
 												$rootScope, 
-												folderFactory, 
-												$timeout) {	
+												folderFactory,
+												$timeout,
+												userService) {	
 	$scope.data = new folderFactory();
 	
 	/**
@@ -106,11 +107,14 @@ openNote.controller("listController", function(	$scope,
     */
     var increaseTreeBuffer = function(){
         if($scope.treeBuffer<=100) {
-            //console.log(
-        	$scope.treeBuffer++;//);
-            $timeout(increaseTreeBuffer, 100);
+        	$scope.treeBuffer++;
+            $timeout(increaseTreeBuffer, 500);
         }
         else
             $rootScope.$emit("listLoaded", {});//Tell the world we are done
     }
+    
+    //Load the lists initially
+    if(userService.hasValidToken())
+    	$rootScope.$emit("reloadListView");
 });

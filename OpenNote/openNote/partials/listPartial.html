@@ -2,7 +2,10 @@
 	<div id="folderList">
        	<div ui-tree="options" id="tree-root">
        		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-          		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'openNote/partials/treePartial.html'" data-collapsed="!node.collapsed"></li>
+          		<li ng-repeat="folder in data.foldersInside" 
+          			ui-tree-node 
+          			ng-include="'openNote/partials/treePartial.html'" 
+          			data-collapsed="!node.collapsed"></li>
        		</ol>
        	</div>
 	</div>
