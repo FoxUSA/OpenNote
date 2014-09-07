@@ -7,7 +7,7 @@ openNote.value("config", {
 	 * Get current version
 	 */
 	getVersion: function(){
-		return "14.07.00";
+		return "14.07.01";
 	},
 	
 	/**
