@@ -1,9 +1,9 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
-In a post 9/11 world of mass digital survailence, there is only one way to keep yor digital information safe.
-In the United States, you do not have have 5th admentment rights if you entrust you information to a third party.
+In a post 9/11 world of mass digital survailence, there is only one way to keep your digital information safe.
+In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
 
-The fix is to take personal responsability and host apps data yourself.
+The fix is to take personal responsibility and host applications yourself.
 
 OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
 It is designed to be self hosted and gives you ownership of your data.
@@ -16,6 +16,11 @@ Please support this project by:
 Thank you!
 
 [Download most resent release from here.][Download]
+
+
+Demo
+-------
+http://stardrive.us/OpenNote/
 
 
 ![][topLevel]
@@ -49,10 +54,6 @@ List of things users are wishing for that have not made it into the pipeline.
 Please do not re-submit issues for these features. Instead, how about a donation with the feature in the comment?
 
 - Out of box PostgreSQL support. PDO connector support PostgreSQL.
-
-Demo
--------
-http://stardrive.us/OpenNote/
 
 Documentation
 -----------------
