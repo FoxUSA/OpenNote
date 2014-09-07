@@ -99,3 +99,20 @@
 	.alertify-log-success {
 		color: negation(#CCC, @offset);
 	}
+	
+.alertify-cover {
+	transition: opacity 1s;
+	background: negation(#CCC, @offset);;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	opacity: 0.8;
+	right:0;
+}
+
+.alertify-cover.alertify-cover-hidden{/*For animation*/	
+	display: block;
+	opacity: 0;
+	width:0;
+}
