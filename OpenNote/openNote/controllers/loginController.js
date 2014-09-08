@@ -92,7 +92,11 @@ openNote.controller("loginController", function($scope, $rootScope, userService,
 					$scope.$apply(function(){
 						alertify.success("Credentials Accepted");
 						$rootScope.$emit("reloadListView", {}); //send and event to tell the list view to reload
-						$location.path("/folder/");
+						
+						if($rootScope.entryURL==null)//send them to the page if they requested
+							$location.path("/folder/");
+						else
+							$location.path($rootScope.entryURL)
 					});
 				});
 			}

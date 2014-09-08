@@ -31,7 +31,7 @@ openNote.run(function (	$rootScope,
     		
     	//Authentication and authorization enforcer
 	        if (isLoggedInOrIsOnLoginScreen())//Initial entry if not logged in
-	        	forceLogin(event);
+	        	forceLogin(event, $location.url());
 	        else//Initial entry after if logged in 
 	        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
 	        		$rootScope.$emit("init");
@@ -47,11 +47,14 @@ openNote.run(function (	$rootScope,
     
     /**
      * Force user to login 
+     * @param event - the event this was called
+     * @param url - the url the user tried to get
      */
-    var forceLogin = function(event){
+    var forceLogin = function(event, url){
     	if(event!=null)
-    		event.preventDefault();
+    		event.preventDefault(); 
     	
+    	$rootScope.entryURL=url;
         $location.path("/");
     }
     
