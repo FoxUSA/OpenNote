@@ -54,7 +54,11 @@ openNote.run(function (	$rootScope,
     	if(event!=null)
     		event.preventDefault(); 
     	
-    	$rootScope.entryURL=url;
+    	if(entryURL!=null && (entryURL.trim()=="" || entryURL.trim()=="/"))
+    		$rootScope.entryURL=url;
+    	else
+    		$rootScope.entryURL=null;
+    	
         $location.path("/");
     }
     
