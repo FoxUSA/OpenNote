@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="description" content="description">
+		
+		<!-- Disable scrolling and zooming to make app feed more native -->	
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		 
 		<title>OpenNote</title>
 		 
@@ -42,13 +45,6 @@
 				<script src="openNote/openNote.js" type="text/javascript"></script>
 				<script src="openNote/openNote.config.js" type="text/javascript"></script>
 				<script src="openNote/router.js" type="text/javascript"></script>
-				
-				<!-- Controllers -->
-					<script src="openNote/controllers/loginController.js" type="text/javascript"></script>
-					<script src="openNote/controllers/folderController.js" type="text/javascript"></script>
-					<script src="openNote/controllers/noteController.js" type="text/javascript"></script>
-					<script src="openNote/controllers/listController.js" type="text/javascript"></script>
-					<script src="openNote/controllers/searchController.js" type="text/javascript"></script>
 					
 				<!-- Services -->
 					<script src="openNote/services/userService.js" type="text/javascript"></script>
@@ -62,50 +58,19 @@
 					<script src="openNote/factories/folderFactory.js" type="text/javascript"></script>
 					<script src="openNote/factories/noteFactory.js" type="text/javascript"></script>
 					
-				<!-- Animations -->
-					<script src="openNote/animations/waveAnimation.js" type="text/javascript"></script>
+				<!-- Controllers -->
+					<script src="openNote/controllers/loginController.js" type="text/javascript"></script>
+					<script src="openNote/controllers/folderController.js" type="text/javascript"></script>
+					<script src="openNote/controllers/noteController.js" type="text/javascript"></script>
+					<script src="openNote/controllers/listController.js" type="text/javascript"></script>
+					<script src="openNote/controllers/searchController.js" type="text/javascript"></script>
 		
 	</head>
 	<body> 
-		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu">
-			<div class="navbar-header">
-				<div class="left">
-					<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';" data-intro="{{helpContent.homeButton}}">Notes</button> 
-				</div>
-				<div class="right">
-					<button type="button" class="navbar-toggle noPadding noMargin" data-toggle="collapse" data-target=".navbar-collapse">
-		              Options
-		            </button>
-				</div>
-			</div>
-			<div class="navbar-collapse collapse noShadow">	 
-				<ul class="nav navbar-nav navbar-right">
-	            	<li ng-repeat="button in buttons">
-	              		<button  type="button" class="customButton" ng-click="button.action();" data-intro="{{button.helpText}}">{{button.text}}</button>
-	            	</li>
-	            	<li ng-show="showHelpButton">
-	              		<button  type="button" class="customButton" onclick="introJs().start();">Help</button>
-	            	</li>
-	            	<li ng-show="showLogOutButton">
-	              		<button  type="button" class="customButton" ng-click="logOut();">Log out</button>
-	            	</li>
-				</ul>
-			</div>
-		</div>
+		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 		
-		<div class="col-lg-2 col-md-3 col-sm-4">
-			<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar" data-intro="{{helpContent.listArea}}">
-				<div id="folderList">
-		        	<div ui-tree="options" id="tree-root">
-		         		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-		            		<li ng-repeat="folder in data.foldersInside" ui-tree-node ng-include="'openNote/partials/treePartial.html'" data-collapsed="!node.collapsed"></li>
-		          		</ol>
-		        	</div>
-				</div>
-			</div>
-		</div>
+		<div class="col-lg-2 col-md-3 col-sm-4" ng-include="'openNote/partials/listPartial.html'"></div>
 		
-		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	
-		</div>
+		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	</div>
 	</body>
 </html>

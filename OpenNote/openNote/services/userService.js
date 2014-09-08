@@ -16,7 +16,17 @@ openNote.service("userService", function ($http, $q, config) {
 	this.useAPITokenHeader = function(){
 		$http.defaults.headers.common["token"] = this.getAPITokenString();//used by the resources implicitly
 		
-		document.cookie="token="+this.getAPITokenString()+"; path=/"; //This is the download token, it is used for pulling files
+		document.cookie="token="+this.getAPITokenString()+"; path=/;"; //This is the download token, it is used for pulling files
+	}
+	
+	/**
+	 * Stop using a token
+	 */
+	this.destroyTokenHeader = function(){
+		$http.delete(config.servicePath() +"/token/");//have the server delete it
+		
+		delete sessionStorage.apiToken; 
+		document.cookie = "token=;  path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 	
 	/**
@@ -27,7 +37,7 @@ openNote.service("userService", function ($http, $q, config) {
 		var tokenObject = this.getAPITokenObject();
 		if(tokenObject!=null){
 			var tokenTime = tokenObject.expires.replace(" ","T");//convert to ISO-8601 date and time
-			return new Date().getTime()< Date.parse(tokenTime);
+			return new Date().getTime()< Date.parse(tokenTime);//UTC time
 		}
 	
 		return false;
@@ -49,20 +59,20 @@ openNote.service("userService", function ($http, $q, config) {
 	 * @return - true if available, false if not
 	 */
 	this.isAvailable = function(userName){ 	
-		return $http.get(config.servicePath() +"/user/"+userName).then(function(responce){
-			throw "Error"; // Weirdly if we get a 2xx value its a failure
-		},function(response){
-			switch(response.status){
-	  			case 302://we found it so its not available
-	  				return false;
-	  				
-	  			case 404://could not find it so its available
-	  				return true; 
-	  				
-	  			default://there was a error
-	  				throw "Error";
-			};
-		});
+		return $http.get(config.servicePath() +"/user/"+userName).then(function(response){
+					throw "Error"; // Weirdly if we get a 2xx value its a failure
+				},function(response){
+					switch(response.status){
+			  			case 302://we found it so its not available
+			  				return false;
+			  				
+			  			case 404://could not find it so its available
+			  				return true; 
+			  				
+			  			default://there was a error
+			  				throw "Error";
+					};
+				});
 	};
 	
 	/**
@@ -78,7 +88,7 @@ openNote.service("userService", function ($http, $q, config) {
 			if(response.status==200){
 				
 				if(response.data.token==null)
-					throw "Invalid responce from server";
+					throw "Invalid response from server";
 				
 				sessionStorage.apiToken=angular.toJson(response.data);
 				self.useAPITokenHeader();//used by the resources implicitly
@@ -103,7 +113,7 @@ openNote.service("userService", function ($http, $q, config) {
 				if(response.status==200){
 					
 					if(response.data.token==null)
-						throw "Invalid responce from server";
+						throw "Invalid response from server";
 					
 					sessionStorage.apiToken=angular.toJson(response.data);
 					self.useAPITokenHeader();//used by the resources implicitly

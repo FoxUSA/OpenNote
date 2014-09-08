@@ -33,7 +33,7 @@
 </div>
 
 <div class="folderPartial">	
-	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden waveAnimation box folder jstree-draggable" ng-click="loadFolder(folder);">
+	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden randomFadeInDirective box folder jstree-draggable" ng-click="loadFolder(folder);">
 		<h4>
 			{{folder.name}}
 		</h4>
@@ -43,7 +43,7 @@
 		</p>
 	</div>
 	
-	<div ng-Repeat="note in currentFolder.notesInside" class="box waveAnimation note startHidden jstree-draggable" ng-click="loadNote(note);">
+	<div ng-Repeat="note in currentFolder.notesInside" class="box randomFadeInDirective note startHidden jstree-draggable" ng-click="loadNote(note);">
 		<h4>
 			{{note.title}}
 		</h4>

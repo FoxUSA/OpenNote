@@ -6,7 +6,11 @@
 /**
  * Control 
  */
-openNote.controller("listController", function($scope, $rootScope, folderFactory) {	
+openNote.controller("listController", function(	$scope, 
+												$rootScope, 
+												folderFactory,
+												$timeout,
+												userService) {	
 	$scope.data = new folderFactory();
 	
 	/**
@@ -43,7 +47,11 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {
-	    $scope.data.$get({levels:100, includeNotes: false});
+	    $scope.data.$get({levels:100, includeNotes: false}).then(function(result){
+	    	$scope.treeBuffer = 0;
+	    	$scope.data=result;
+	    	increaseTreeBuffer();
+	    });
     });
     
     /**
@@ -76,7 +84,6 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        	    	
 	        	    	sourceFolder.__proto__=folderType.__proto__;//Cast this object as a resources
 	        	    	
-	        	    	
 	        	    	sourceFolder.parrentFolderID=destID;
 	        	    	sourceFolder.$update().then(function(){//wait for a response
 	        	    		//fire off an event to tell everyone we just modified a folder
@@ -90,9 +97,24 @@ openNote.controller("listController", function($scope, $rootScope, folderFactory
 	        	    	$rootScope.$emit("reloadListView", {}); //refresh either way
 	        	    //event.source.nodeScope.$$apply = false;
 	        	    //TODO if they cancel reset list instead of re pulling it
-	        	    
 	        	});
 	        }	
 	    }
     };
+    
+    /**
+    * Render list slowly
+    */
+    var increaseTreeBuffer = function(){
+        if($scope.treeBuffer<=100) {
+        	$scope.treeBuffer++;
+            $timeout(increaseTreeBuffer, 500);
+        }
+        else
+            $rootScope.$emit("listLoaded", {});//Tell the world we are done
+    }
+    
+    //Load the lists initially
+    if(userService.hasValidToken())
+    	$rootScope.$emit("reloadListView");
 });

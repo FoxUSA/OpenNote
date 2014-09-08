@@ -7,7 +7,7 @@ openNote.value("config", {
 	 * Get current version
 	 */
 	getVersion: function(){
-		return "14.07.00";
+		return "14.07.01";
 	},
 	
 	/**
@@ -21,7 +21,7 @@ openNote.value("config", {
 	 * http path to backend rest service
 	 */
 	servicePath: function(){
-		return "//127.0.0.1/OpenNoteService-PHP/Service";
+		return "./Service";
 	},
 	
 	/**
