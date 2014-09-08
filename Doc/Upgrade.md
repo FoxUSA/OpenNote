@@ -1,4 +1,8 @@
 # How to upgrade
+
+##Upgrading from 14.07(Locomotive) to 14.07.01(Steam Locomotive). 
+All you need to do is merge your existing deployment with the release folder while keeping your config files (`openNote\openNote.config.js` and `\Service\Config.php`). 
+
 ###MySQL(Recomended)
 - Make sure you make a copy of you database and the OpenNote directory
 - Run `Service/model/sql/updateScript/` scripts to roll the database up to current specs.
