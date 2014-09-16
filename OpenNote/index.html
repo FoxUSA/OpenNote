@@ -19,9 +19,9 @@
 			<link rel="stylesheet" href="bower_components/alertify/themes/alertify.core.css">
 			
 			<!-- Theme -->
-				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/intojs.css">
-				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/alertify.css">
-				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/style.css">
+				<link rel="stylesheet" type="text/css" href="openNote/style/simplicity/dark/intojs.css">
+				<link rel="stylesheet" type="text/css" href="openNote/style/simplicity/dark/alertify.css">
+				<link rel="stylesheet" type="text/css" href="openNote/style/simplicity/dark/style.css">
 				
 			<link rel="stylesheet" type="text/css" href="openNote/style/animations.css">
 	
@@ -69,7 +69,7 @@
 	<body> 
 		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 		
-		<div class="col-lg-2 col-md-3 col-sm-4" ng-include="'openNote/partials/listPartial.html'"></div>
+		<div class="col-lg-2 col-md-3 col-sm-4 hidden-xs" ng-include="'openNote/partials/listPartial.html'"></div>
 		
 		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	</div>
 	</body>

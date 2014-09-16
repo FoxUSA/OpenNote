@@ -15,7 +15,7 @@ openNote.controller("folderController", function(	$scope,
 			$rootScope.buttons.push({
 				text: "New note",
 				action: function(){
-					$scope.fadeOutFolders(function(){
+					$scope.fadeOutFoldersAndNotes(function(){
 						$location.url("/note/").search("folderID",$scope.currentFolder.id);
 					});
 				},
@@ -81,13 +81,24 @@ openNote.controller("folderController", function(	$scope,
 	/**
 	 * fade out all folders
 	 */
-	$scope.fadeOutFolders = function(callback){
-		if($scope.currentFolder.foldersInside !=null && $scope.currentFolder.foldersInside.length>0)
-			$(".folder").fadeOut(config.fadeSpeedShort(),function(){
+	$scope.fadeOutFoldersAndNotes = function(callback){
+		if(		(	$scope.currentFolder.foldersInside !=null 
+				&& 	$scope.currentFolder.foldersInside.length>0)
+			||	(	$scope.currentFolder.notesInside !=null 
+				&& 	$scope.currentFolder.notesInside.length>0)){
+			
+			$(".note").fadeTo(config.fadeSpeedShort(),0,function(){
 				$scope.$apply(function(){
 					callback();
 				});
 			});
+			
+			$(".folder").fadeTo(config.fadeSpeedShort(),0,function(){
+				$scope.$apply(function(){
+					callback();
+				});
+			});
+		}
 		else
 			callback();
 	};
@@ -97,7 +108,7 @@ openNote.controller("folderController", function(	$scope,
 	 * @param folder- the folder to load
 	 */
 	$scope.loadFolder = function(folder){
-		$scope.fadeOutFolders(function(){
+		$scope.fadeOutFoldersAndNotes(function(){
 			$location.url("/folder/"+folder.id);
 		});
 	};
@@ -107,7 +118,7 @@ openNote.controller("folderController", function(	$scope,
 	 * @param note - load a note
 	 */
 	$scope.loadNote = function(note){
-		$scope.fadeOutFolders(function(){
+		$scope.fadeOutFoldersAndNotes(function(){
 			$location.url("/note/"+note.id);
 		});
 	};
