@@ -21,7 +21,7 @@ openNote.value("config", {
 	 * http path to backend rest service
 	 */
 	servicePath: function(){
-		return "./Service";
+		return "./Service/service.php";
 	},
 	
 	/**
