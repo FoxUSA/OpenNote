@@ -16,6 +16,7 @@ Please support this project by:
 Thank you!
 
 [Download using Docker][Docker]
+
 [Download manually from here.][Download]
 
 
