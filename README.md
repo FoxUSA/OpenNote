@@ -17,7 +17,7 @@ Thank you!
 
 [Download using Docker][Docker]
 
-[Download manually from here.][Download]
+[or download manually from here.][Download]
 
 
 Demo
