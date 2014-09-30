@@ -1,6 +1,15 @@
-# How to install
+# How To Install
 [Download most resent release from here.][Download]
 
+# Using Docker
+Pull the current docker image 
+`docker pull foxusa/opennote`
+
+and run it on port 80
+`sudo docker run -d -p 80:80 -p 443:443 opennote`
+
+or if port 80 is in use
+`sudo docker run -d -p 8080:80 -p 8443:443 opennote`
 
 # Automatic(Wizard Based Install)
 To run the installer open
