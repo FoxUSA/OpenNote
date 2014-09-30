@@ -1,7 +1,7 @@
 # How To Install
 [Download most resent release from here.][Download]
 
-# Using Docker
+# Using Docker(Full Stack)
 Make sure docker in running in daemon mode with restart previously running containers on
 `docker -d -r` or you could louse your notes if you do not know what your doing
 
