@@ -15,7 +15,8 @@ Please support this project by:
 
 Thank you!
 
-[Download most resent release from here.][Download]
+[Download using Docker][Docker]
+[Download manually from here.][Download]
 
 
 Demo
@@ -102,4 +103,4 @@ Credits
 [Bitcoins]: http://blockchain.info/address/15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB
 [Alternative]: http://alternativeto.net/software/opennote/
 [Download]: https://github.com/FoxUSA/OpenNote/releases
-
+[Docker]: https://registry.hub.docker.com/u/foxusa/opennote/
