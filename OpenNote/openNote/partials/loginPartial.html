@@ -9,12 +9,12 @@
 		<form>
 			<p>
 				<label>Username</label>
-				<input type="text" ng-model="userName"/>
+				<input class="form-control" type="text" ng-model="userName"/>
 			</p>
 
 			<p>
 				<label>Password</label>
-				<input type="password" ng-model="password"/>
+				<input class="form-control" type="password" ng-model="password"/>
 			</p>
 
 			<p>
@@ -27,12 +27,12 @@
 		<form>
 			<p>
 				<label>Choose a username</label>
-				<input type="text" ng-model="userName" ng-keyup="checkAvailability();"/> <span id="availability">{{isAvailable}}</span>
+				<input class="form-control" type="text" ng-model="userName" ng-keyup="checkAvailability();"/> <span id="availability">{{isAvailable}}</span>
 			</p>
 
 			<p>
 				<label>Choose a password</label>
-				<label><input type="password" ng-model="password"/></label>
+				<input class="form-control"type="password" ng-model="password"/>
 			</p>
 
 			<p>

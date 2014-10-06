@@ -14,7 +14,12 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
+					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
+					    	
+					    	"OpenNote/openNote/style/simplicity/dark/style.css": "OpenNote/openNote/style/simplicity/style.less",
+					    	"OpenNote/openNote/style/simplicity/dark/note.css": "OpenNote/openNote/style/simplicity/note.less",
+					    	"OpenNote/openNote/style/simplicity/dark/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
+					    	"OpenNote/openNote/style/simplicity/dark/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
 					    		
 					    }
 				 	},
@@ -29,7 +34,12 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
+					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
+					    	
+					    	"OpenNote/openNote/style/simplicity/light/style.css": "OpenNote/openNote/style/simplicity/style.less",
+					    	"OpenNote/openNote/style/simplicity/light/note.css": "OpenNote/openNote/style/simplicity/note.less",
+					    	"OpenNote/openNote/style/simplicity/light/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
+					    	"OpenNote/openNote/style/simplicity/light/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
 					    }
 				 	},
 				 	prodDark: {
@@ -44,7 +54,13 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
+					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
+					    	
+					    	"OpenNote/openNote/style/simplicity/dark/style.css": "OpenNote/openNote/style/simplicity/style.less",
+					    	"OpenNote/openNote/style/simplicity/dark/note.css": "OpenNote/openNote/style/simplicity/note.less",
+					    	"OpenNote/openNote/style/simplicity/dark/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
+					    	"OpenNote/openNote/style/simplicity/dark/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
+					    	
 					    }
 				 	},
 				 	prodLight: {
@@ -59,7 +75,12 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
 					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
+					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
+
+					    	"OpenNote/openNote/style/simplicity/light/style.css": "OpenNote/openNote/style/simplicity/style.less",
+					    	"OpenNote/openNote/style/simplicity/light/note.css": "OpenNote/openNote/style/simplicity/note.less",
+					    	"OpenNote/openNote/style/simplicity/light/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
+					    	"OpenNote/openNote/style/simplicity/light/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
 					    }
 				 	}
 				},

@@ -5,7 +5,7 @@ openNote.directive("randomFadeInDirective", function($timeout,config) {
 	return {
 		restrict: "C",//class
 		link: function(scope, element, attrs) {
-			element.hide().fadeIn(config.fadeSpeedLong());
+			element.hide().stop().fadeTo(config.fadeSpeedLong(),1);
 		}
 	};
 });
