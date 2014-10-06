@@ -88,6 +88,6 @@ openNote.value("config", {
 	 * See if we are dark or light
 	 */
 	isDarkTheme: function(){
-		return true;
+		return false;
 	}	
 });
