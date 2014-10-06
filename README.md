@@ -43,7 +43,6 @@ Features
 
 Upcoming Features
 -----------------
-- REST service and Angular JS Based front end. Working on in working branch.
 - Tags (You win)
 - Email to note
 - Implement history viewer
