@@ -1,5 +1,6 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
+![][responsive]
 In a post 9/11 world of mass digital survailence, there is only one way to keep your digital information safe.
 In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
 
@@ -93,6 +94,7 @@ Credits
 
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
+[responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/Doc/screenShots/OpenNote.png
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
 [Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md
