@@ -34,7 +34,7 @@ Features
 - Upload manager (not enabled in demo :) )
 - Light weight
 - Multi user support
-- Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
+- Note History ***(Revisions are currently being stored. However, there is not a view to see the revision tree)
 - Search
 - PDO Connector/(MySql and SQLite Database Support)
 - Move Folders(Drag into another folder in the list view.)
