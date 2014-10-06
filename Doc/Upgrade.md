@@ -40,12 +40,12 @@ Commit it
 Get another new long containerID
 `cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
 
-and run it with the same command you started `opennote` with
-`sudo docker run -d -p 80:80 -p 443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
+and run that with published ports 
+`sudo docker run -d -p 80:80 -p 443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb /run.sh`
 
 or if port 80 is in use
 
-`sudo docker run -d -p 8080:80 -p 8443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
+`sudo docker run -d -p 8080:80 -p 8443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb /run.sh`
 
 All done
 
