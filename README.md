@@ -6,7 +6,7 @@ In the United States, you do not have have 5th amendment rights if you entrust y
 
 The fix is to take personal responsibility and host applications yourself.
 
-OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
+OpenNote was built to be a open source(MIT License), web based note taking software.
 It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
