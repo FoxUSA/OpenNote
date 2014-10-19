@@ -20,6 +20,9 @@ openNote.run(function (	$rootScope,
 						config, 
 						serverConfigService, 
 						$http){
+	
+	$rootScope.helpContent=config.getHelpContent();
+	
     $rootScope.$on("$routeChangeStart", function (event) {    	
     	//server config values
     		serverConfigService.getConfig().then(function(config){
@@ -72,8 +75,6 @@ openNote.run(function (	$rootScope,
     	$rootScope.showSideBar=true;
     	
     	//options for humans
-        	$rootScope.helpContent=config.getHelpContent();
-        	
         	$rootScope.showHelpButton = config.showHelpButton();
         	$rootScope.showLogOutButton = config.showLogOutButton();
         	
@@ -89,8 +90,9 @@ openNote.run(function (	$rootScope,
     			function(response){//Successful
     				if(response.data.version!=config.getVersion())
     					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
-    			});
-    });
+    			}
+			);
+    	});
     
     /**
      * Handle logOut event
