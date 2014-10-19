@@ -20,11 +20,14 @@ You should now get a really long new container id
 Run that new container
 `docker run -it  c523f0fd9efdf0e9d640467d02d118dd02fa61ac14d8296e9e4e3a220cb8058e bash`
 This should open up a bash prompt
+
 Run the following commands
 `wget https://raw.githubusercontent.com/FoxUSA/OpenNote-Docker/master/UpgradeScripts/14.07.02.sh -P /app/~upgrade;sh /app/~upgrade/14.07.02.sh`
 
 After that run `exit` to stop the container
-run `docker ps -l`
+
+Now we have a upgraded container we can use
+Run `docker ps -l` to find the container ID we just upgraded
 ```
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
 b648919c634e        c523f0fd9efd        bash                3 minutes ago       Exited (0) 2 seconds ago                       thirsty_mcclintock
@@ -37,12 +40,14 @@ Commit it
 Get another new long containerID
 `cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
 
-and run it with the same command you started `opennote` with
-`sudo docker run -d -p 80:80 -p 443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
+and run that with published ports 
+`sudo docker run -d -p 80:80 -p 443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb /run.sh`
 
 or if port 80 is in use
 
-`sudo docker run -d -p 8080:80 -p 8443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb`
+`sudo docker run -d -p 8080:80 -p 8443:443 cf77323ed72659b3462073763e9115ff16bb4ae64ce406176703bbc781011ccb /run.sh`
+
+All done
 
 ##Manual installs
 
