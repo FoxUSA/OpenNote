@@ -36,8 +36,8 @@ openNote.service("userService", function ($http, $q, config) {
 	this.hasValidToken = function(){
 		var tokenObject = this.getAPITokenObject();
 		if(tokenObject!=null){
-			var tokenTime = tokenObject.expires.replace(" ","T");//convert to ISO-8601 date and time
-			return new Date().getTime()< Date.parse(tokenTime);//UTC time
+			var tokenTime = tokenObject.expires.replace(" ","T")+"Z";//convert to ISO-8601 date and time in UTC
+			return new Date().getTime()< new Date(tokenTime);//UTC time
 		}
 	
 		return false;
