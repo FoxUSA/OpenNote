@@ -82,7 +82,6 @@ License
 
 	OpenNote Code - Distributed under the MIT License
 	
-	Other OpenNote licenses are available for purchase from the author
 	© Jacob Liscom 2014
 	
 Credits
