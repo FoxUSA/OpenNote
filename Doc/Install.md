@@ -46,6 +46,7 @@ These are stored in the following lines of code in `/OpenNote/Config.php`:
 - Create a SQLite database file and execute the SQL DDL from `Service/model/sql` and run `notebook.sqlite.sql`.
 - Change the database connection settings inside of `Service/Config.php` to match your db settings.
 - These are stored in the following lines of code in `/OpenNote/Config.php`:
+- Also make sure you have php5-sqlite driver installed and have group write access to SQLite database file, or you cannot register or login and you can't see any useful error messages.
 
 Uncomment the following lines in the dbConfig function:
 
