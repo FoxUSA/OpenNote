@@ -102,5 +102,5 @@ openNote.run(function (	$rootScope,
 		window.location.href='#/';
 		$rootScope.showMenu=false;
     	$rootScope.showSideBar=false;
-    })
+    });
 });
