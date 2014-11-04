@@ -9,10 +9,10 @@ Pull the current docker image
 `docker pull foxusa/opennote`
 
 and run it on port 80
-`sudo docker run -d -p 80:80 -p 443:443 opennote`
+`sudo docker run -d -p 80:80 -p 443:443 foxusa/opennote`
 
 or if port 80 is in use
-`sudo docker run -d -p 8080:80 -p 8443:443 opennote`
+`sudo docker run -d -p 8080:80 -p 8443:443 foxusa/opennote`
 
 # Automatic(Wizard Based Install)
 To run the installer open
