@@ -14,16 +14,16 @@ I normally have `Service` folder as a symbolic link to `OpenNoteService-PHP/Serv
 
 Once the `OpenNote` and `OpenNoteService-PHP` project have been cloned you need to build the projects
 To do so for the front end project
-- Run `npm install` to install all the needed development dependencies.
-- Then, you need to run `grunt build` in `OpenNote/`(This runs bower install and builds the less css)
+- Run `npm install` to get the dev dependencies 
+- Then, you need to run `grunt build` in `OpenNote/`(This runs bower install and builds the less CSS)
 
 In the PHP service you will need too
-- You need to run `php ./composer.phar install -v` to install all the php dependencies and build the projects autoloading structure 
+- You need to run `php ./composer.phar install -v` to install all the PHP dependencies and build the projects autoloading structure 
 
-## Build Requirments
+## Build Requirements
 - npm
-- Bower
-- Grunt
+- Bower `npm install -g bower`
+- Grunt `npm install -g grunt-cli`
 - Composer
 
 ## Build
