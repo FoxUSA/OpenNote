@@ -1,11 +1,12 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
+![][responsive]
 In a post 9/11 world of mass digital survailence, there is only one way to keep your digital information safe.
 In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
 
 The fix is to take personal responsibility and host applications yourself.
 
-OpenNote was built to be a open source(MIT License), web based alternative to Microsoft OneNote (T) or EverNote.
+OpenNote was built to be a open source(MIT License), web based note taking software.
 It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
@@ -33,7 +34,7 @@ Features
 - Upload manager (not enabled in demo :) )
 - Light weight
 - Multi user support
-- Note History ***(Revisions are currently being stored. However, there is not view to see revision tree)
+- Note History ***(Revisions are currently being stored. However, there is not a view to see the revision tree)
 - Search
 - PDO Connector/(MySql and SQLite Database Support)
 - Move Folders(Drag into another folder in the list view.)
@@ -42,7 +43,6 @@ Features
 
 Upcoming Features
 -----------------
-- REST service and Angular JS Based front end. Working on in working branch.
 - Tags (You win)
 - Email to note
 - Implement history viewer
@@ -82,7 +82,6 @@ License
 
 	OpenNote Code - Distributed under the MIT License
 	
-	Other OpenNote licenses are available for purchase from the author
 	© Jacob Liscom 2014
 	
 Credits
@@ -93,6 +92,7 @@ Credits
 
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
 [dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
+[responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/Doc/screenShots/OpenNote.png
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
 [Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md

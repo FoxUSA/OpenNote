@@ -9,10 +9,10 @@ Pull the current docker image
 `docker pull foxusa/opennote`
 
 and run it on port 80
-`sudo docker run -d -p 80:80 -p 443:443 opennote`
+`sudo docker run -d -p 80:80 -p 443:443 foxusa/opennote`
 
 or if port 80 is in use
-`sudo docker run -d -p 8080:80 -p 8443:443 opennote`
+`sudo docker run -d -p 8080:80 -p 8443:443 foxusa/opennote`
 
 # Automatic(Wizard Based Install)
 To run the installer open
@@ -46,6 +46,7 @@ These are stored in the following lines of code in `/OpenNote/Config.php`:
 - Create a SQLite database file and execute the SQL DDL from `Service/model/sql` and run `notebook.sqlite.sql`.
 - Change the database connection settings inside of `Service/Config.php` to match your db settings.
 - These are stored in the following lines of code in `/OpenNote/Config.php`:
+- Also make sure you have php5-sqlite driver installed and have group write access to SQLite database file, or you cannot register or login and you can't see any useful error messages.
 
 Uncomment the following lines in the dbConfig function:
 
