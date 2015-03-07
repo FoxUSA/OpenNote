@@ -29,6 +29,7 @@ http://stardrive.us/OpenNote/
 ![][topLevel]
 Features
 --------
+- BYOS(Bring Your Own Server)
 - Full WYSIWYG editor
 - Touch friendly and mouse friendly ui
 - Upload manager (not enabled in demo :) )

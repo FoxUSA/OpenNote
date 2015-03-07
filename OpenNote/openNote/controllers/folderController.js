@@ -114,6 +114,18 @@ openNote.controller("folderController", function(	$scope,
 	};
 	
 	/**
+	 * Load parent folder
+	 */
+	$scope.loadParentFolder = function(){
+		$scope.fadeOutFoldersAndNotes(function(){
+			if($scope.currentFolder.parrentFolderID!=null)
+				$location.url("/folder/"+$scope.currentFolder.parrentFolderID);
+			else
+				$location.url("/folder/");
+		});
+	};
+	
+	/**
 	 * Load a note
 	 * @param note - load a note
 	 */

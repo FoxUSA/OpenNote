@@ -4,10 +4,17 @@
  */
 
 /**
- * controller for note creation, editing and maintance
+ * controller for note creation, editing and maintenance
  */
-openNote.controller("noteController", function(	$scope, $rootScope, $routeParams, $location, $routeParams, 
-												noteFactory, config, serverConfigService, $sce) {
+openNote.controller("noteController", function(	$scope, 
+												$rootScope, 
+												$routeParams, 
+												$location, 
+												$routeParams, 
+												noteFactory, 
+												config, 
+												serverConfigService, 
+												$sce) {
 	$rootScope.buttons=[];
 	$scope.note = new noteFactory();
 	$scope.editMode = false;
@@ -78,6 +85,14 @@ openNote.controller("noteController", function(	$scope, $rootScope, $routeParams
 			});
 			
 			//Add buttons
+				$rootScope.buttons.push({
+					text: "Go up a folder",
+					action: function(){
+						$location.url("/folder/"+$scope.note.folderID);
+					},
+					helpText: $rootScope.helpContent.editButton
+				});
+			
 				$rootScope.buttons.push({
 					text: "Edit",
 					action: function(){
