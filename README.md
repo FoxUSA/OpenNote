@@ -2,7 +2,7 @@ OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=maste
 =============
 ![][responsive]
 In a post 9/11 world of mass digital survailence, there is only one way to keep your digital information safe.
-In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
+In the United States, you do not have have 4th amendment rights if you entrust you information to a third party.
 
 The fix is to take personal responsibility and host applications yourself.
 
