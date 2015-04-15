@@ -97,13 +97,27 @@ input:focus, select:focus, textarea:focus, button:focus {
 	padding: 15px 0px;
 	overflow: hidden;
 	font-size: 18px;
+	
+	.breadcrumb{
+		margin-bottom:0;
+		padding: 0 15px 0 0;
+		background: none;
+		
+		>.active{
+			color:inherit;
+		}
+		
+		li{
+			font-size: 20px;
+		}
+	}
 }
 
 	#folderTitle{
 		float:left;
 		padding-right:15px;
 		font-size: 20px;
-	}	
+	}
 
 .customButton{ /*custom button class that removes all browser formating*/
 	border: none;

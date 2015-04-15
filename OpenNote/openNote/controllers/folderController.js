@@ -9,6 +9,7 @@ openNote.controller("folderController", function(	$scope,
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;
 	$scope.currentFolder = {};
+	$scope.parentFolder = null
 	
 	//add buttons
 		if($routeParams.id!=null)
@@ -72,6 +73,14 @@ openNote.controller("folderController", function(	$scope,
 			storageService.database().get($routeParams.id).then(function(doc){
 				$scope.currentFolder=doc;
 				loadCurrentFolderContents();
+				
+				if($scope.currentFolder.parentFolderID==null)
+					$scope.parentFolder={name:"Home"};
+				else
+					storageService.database().get($scope.currentFolder.parentFolderID).then(function(doc){
+						$scope.parentFolder=doc;
+						$scope.$apply();
+					});
 			});	
 		}
 	});
@@ -116,18 +125,6 @@ openNote.controller("folderController", function(	$scope,
 	$scope.loadFolder = function(folder){
 		$scope.fadeOutFoldersAndNotes(function(){
 			$location.url("/folder/"+folder.doc._id);
-		});
-	};
-	
-	/**
-	 * Load parent folder
-	 */
-	$scope.loadParentFolder = function(){//FIXME
-		$scope.fadeOutFoldersAndNotes(function(){
-			if($scope.currentFolder.parentFolderID!=null)
-				$location.url("/folder/"+$scope.currentFolder.parentFolderID);
-			else
-				$location.url("/folder/");
 		});
 	};
 	
