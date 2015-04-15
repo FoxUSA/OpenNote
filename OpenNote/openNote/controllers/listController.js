@@ -8,10 +8,10 @@
  */
 openNote.controller("listController", function(	$scope, 
 												$rootScope, 
-												folderFactory,
 												$timeout,
+												storageService,
 												userService) {	
-	$scope.data = new folderFactory();
+	$scope.data = {};
 	
 	/**
 	 * Toggle collapse
@@ -46,7 +46,7 @@ openNote.controller("listController", function(	$scope,
     /**
      * Load list view
      */
-    $rootScope.$on("reloadListView", function(event, args) {
+    $rootScope.$on("reloadListView//FIXME", function(event, args) {//FIXME
 	    $scope.data.$get({levels:100, includeNotes: false}).then(function(result){
 	    	$scope.treeBuffer = 0;
 	    	$scope.data=result;

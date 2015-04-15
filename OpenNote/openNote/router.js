@@ -1,11 +1,6 @@
 //Router
 openNote.config(function($routeProvider){
 	$routeProvider
-		.when("/",
-			{
-				controller: "loginController",
-				templateUrl: "openNote/partials/loginPartial.html"
-			})
         .when("/folder/:id?",
             {
                 controller: "folderController",
@@ -21,5 +16,5 @@ openNote.config(function($routeProvider){
         		controller: "searchController",
                 templateUrl: "openNote/partials/searchPartial.html"
             })
-		.otherwise({ redirectTo: "/" });
+		.otherwise({ redirectTo: "/folder" });
 });

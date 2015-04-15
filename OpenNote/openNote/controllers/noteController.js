@@ -11,12 +11,12 @@ openNote.controller("noteController", function(	$scope,
 												$routeParams, 
 												$location, 
 												$routeParams, 
-												noteFactory, 
+												storageService, 
 												config, 
 												serverConfigService, 
 												$sce) {
 	$rootScope.buttons=[];
-	$scope.note = new noteFactory();
+	$scope.note = {};
 	$scope.editMode = false;
 	$scope.showDeleteButton = false;
 	
@@ -53,7 +53,7 @@ openNote.controller("noteController", function(	$scope,
 		serverConfigService.getEditorConfig().then(function(config){
 			$scope.editMode=true;
 			
-			if($scope.note.id !=null)
+			if($scope.note._id !=null)
 				$scope.showDeleteButton = true;
 			
 			CKEDITOR.replace("note", config);
@@ -69,8 +69,8 @@ openNote.controller("noteController", function(	$scope,
 	
 	//Load or new
 		if($routeParams.id==null){//new
-			$scope.note.id = null;
-			$scope.note.folderID = $location.search().folderID;
+			$scope.note._id = null;
+			$scope.note.parentFolderID = $location.search().folderID;
 			$scope.note.title = "Note Title";
 			
 			activateEditMode();
@@ -78,11 +78,13 @@ openNote.controller("noteController", function(	$scope,
 		}
 		else{
 			/**
-			 * Load folder contents
+			 * Load note
 			 */
-			$scope.note.$get({id:$routeParams.id}).then(function(note){
+			storageService.database().get($routeParams.id).then(function(doc){
+				$scope.note=doc;
 				$(".notePartial").fadeIn(config.fadeSpeedLong());
-			});
+				$scope.$apply();
+			});	
 			
 			//Add buttons
 				$rootScope.buttons.push({
@@ -108,16 +110,8 @@ openNote.controller("noteController", function(	$scope,
 	$scope.save = function(){
 		$scope.note.note = CKEDITOR.instances["note"].getData();
 		
-		//Insert only logic
-			if($scope.note.originNoteID == null)
-				$scope.note.originNoteID=$scope.note.id;//Make this not a child of the one we opened
-		
 		$(".notePartial").fadeOut(config.fadeSpeedShort());
-		$scope.note.$save().then(function(){
-			detachWindowUnload();
-			$location.url("/note/"+$scope.note.id)
-			alertify.success("Note Saved"); //all done. close the notify dialog 
-		});
+		createNote($scope.note);
 		
 	}
 	
@@ -130,12 +124,13 @@ openNote.controller("noteController", function(	$scope,
 				if(!confirm)
 					return;
 				
-				var folderID = $scope.note.folderID;//need to keep track of this because we are about to delete it
+				var folderID = $scope.note.parentFolderID;//need to keep track of this because we are about to delete it
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
-				$scope.note.$remove({id: $scope.note.id}).then(function(){
+				storageService.database().remove($scope.note).then(function(){
 					detachWindowUnload();
 					alertify.success("Note Deleted",5); //all done. close the notify dialog 
 					$location.url("/folder/"+folderID);
+					$scope.$apply();
 				});
 			}
 		);
@@ -164,7 +159,7 @@ openNote.controller("noteController", function(	$scope,
 	 */
 	$scope.trustHTML = function(html) {
 	    return $sce.trustAsHtml(html);
-	}
+	};
 	
 	/**
 	 * Attach window on-load listener 
@@ -173,12 +168,42 @@ openNote.controller("noteController", function(	$scope,
 		window.onbeforeunload = function() {
             return "Are you sure you want to navigate away?";//Keep the page from closing
 		};
-	}
+	};
 	
 	/**
 	 * Remove window on-load listener 
 	 */
 	var detachWindowUnload = function(){
 		window.onbeforeunload = null;
-	}
+	};
+	
+	/**
+	 * Create a note object
+	 */
+	var createNote = function(note){
+		note.type="note";
+		
+		/**
+		 * Callback after successful save to reload note
+		 */
+		var saveCallback = function(response){
+			if(!response.ok)	
+				throw "//FIXME";
+			$rootScope.$emit("reloadListView", {});
+			detachWindowUnload();
+			$location.url("/note/"+response.id+"?reload");
+			alertify.success("Note Saved"); //all done. close the notify dialog
+			$scope.$apply();
+		}
+		
+		//Upsert
+			if(note._id==null)
+				storageService.database().post(note).then(saveCallback).catch(function(error){
+					console.log(error);//FIXME
+				});
+			else
+				storageService.database().put(note).then(saveCallback).catch(function(error){
+					console.log(error);//FIXME
+				});
+	};
 });

@@ -32,38 +32,12 @@ openNote.run(function (	$rootScope,
     				$rootScope.serverConfig=config;
     		}); //attach server config to root scope
     		
-    	//Authentication and authorization enforcer
-	        if (isLoggedInOrIsOnLoginScreen())//Initial entry if not logged in
-	        	forceLogin(event, $location.url());
-	        else//Initial entry after if logged in 
-	        	if($location.path()!="/" && !$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
-	        		$rootScope.$emit("init");
+    	//Initial entry after if logged in 
+        	if(!$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
+        		$rootScope.$emit("init");
         
     });
     
-    /**
-     * Check to see if user is logged in or on the login screen
-     */
-    var isLoggedInOrIsOnLoginScreen = function(){
-    	return !userService.hasValidToken()&&$location.path()!="/";
-    }
-    
-    /**
-     * Force user to login 
-     * @param event - the event this was called
-     * @param url - the url the user tried to get
-     */
-    var forceLogin = function(event, url){
-    	if(event!=null)
-    		event.preventDefault(); 
-    	
-    	if(url!=null && url.trim()!="" && url.trim()!="/"&& url.trim()!="#/")
-    		$rootScope.entryURL=url;
-    	else
-    		$rootScope.entryURL=null;
-    	
-        $location.path("/");
-    }
     
     /**
      * Initialize app and start fade in
