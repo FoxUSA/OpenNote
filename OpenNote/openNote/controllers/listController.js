@@ -10,7 +10,9 @@ openNote.controller("listController", function(	$scope,
 												$rootScope, 
 												$timeout,
 												storageService,
-												userService) {	
+												userService,
+												$timeout,
+												config) {	
 	$scope.data = {};
 	
 	/**
@@ -46,13 +48,39 @@ openNote.controller("listController", function(	$scope,
     /**
      * Load list view
      */
-    $rootScope.$on("reloadListView//FIXME", function(event, args) {//FIXME
-	    $scope.data.$get({levels:100, includeNotes: false}).then(function(result){
-	    	$scope.treeBuffer = 0;
-	    	$scope.data=result;
-	    	increaseTreeBuffer();
-	    });
+    $rootScope.$on("reloadListView", function(event, args) {//FIXME
+    	storageService.database().query("folder/parentFolderID", {key: null, include_docs: true}).then(function (results) {
+			$scope.data=results.rows.filter(folderFilter);		
+			$scope.data.forEach(loadFolderContents);
+			
+			$scope.treeBuffer = 0;
+			$timeout(increaseTreeBuffer,config.fadeSpeedLong());
+			$scope.$apply();
+		}).catch(function (err) {
+			console.log(err);
+		});
     });
+    
+    /**
+     * @param item - the item the filter
+     */
+    var folderFilter = function(item){
+    	return item.doc.type=="folder";
+    }
+    
+	/**
+	 * Load the current folders contents
+	 * @param folder - the folder to pull the content from
+	 */
+	var loadFolderContents = function(folder){
+		storageService.database().query("folder/parentFolderID", {key: folder.doc._id, include_docs: true}).then(function (results) {
+			folder.foldersInside=results.rows.filter(folderFilter);		
+			folder.foldersInside.forEach(loadFolderContents);
+			$scope.$apply();
+		}).catch(function (err) {
+			console.log(err);
+		});
+	}
     
     /**
      * List Config object
@@ -71,27 +99,25 @@ openNote.controller("listController", function(	$scope,
 	        var destName="Home";
         	var destID = null
         	if(destFolder!=null){//is dest the home folder?
-        		destName=destFolder.name;//Set defaults
-        		destID = destFolder.id;
+        		destName=destFolder.doc.name;//Set defaults
+        		destID = destFolder.doc._id;
         	}
 	        
-	        if(sourceFolder.parrentFolderID!=destID){
+	        if(sourceFolder.doc.parentFolderID!=destID){
 	        	//Confirm action
-	        	alertify.confirm("Are you sure you want to move "+sourceFolder.name+" into "+ destName+"?" , function (confirm) {
+	        	alertify.confirm("Are you sure you want to move "+sourceFolder.doc.name+" into "+ destName+"?" , function (confirm) {
 	        	    if (confirm) {
-	        	    	var folderType = new folderFactory();
-	        	    	var origParrentFolderID=sourceFolder.parrentFolderID;
+	        	    	var origParrentFolderID=sourceFolder.parentFolderID;
 	        	    	
-	        	    	sourceFolder.__proto__=folderType.__proto__;//Cast this object as a resources
-	        	    	
-	        	    	sourceFolder.parrentFolderID=destID;
-	        	    	sourceFolder.$update().then(function(){//wait for a response
-	        	    		//fire off an event to tell everyone we just modified a folder
-			        	    	$rootScope.$emit("changedFolder", {
-			        	    		folder: sourceFolder, 
-			        	    		oldParrentFolderID: origParrentFolderID
-			        	    	});
-	        	    	});
+	        	    	sourceFolder.doc.parentFolderID=destID;
+	        	    	storageService.database().put(sourceFolder.doc).then(function(result){
+	        	    		$rootScope.$emit("changedFolder", {//fire off an event to tell everyone we just modified a folder
+		        	    		folder: sourceFolder, 
+		        	    		oldParrentFolderID: origParrentFolderID
+		        	    	});
+	        	    	}).catch(function(error){
+	        	    		console.log(error);//FIXME
+	    				});
 	        	    }
 	        	    else
 	        	    	$rootScope.$emit("reloadListView", {}); //refresh either way
@@ -115,6 +141,5 @@ openNote.controller("listController", function(	$scope,
     }
     
     //Load the lists initially
-    if(userService.hasValidToken())
     	$rootScope.$emit("reloadListView");
 });

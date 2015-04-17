@@ -35,7 +35,6 @@ openNote.run(function (	$rootScope,
     	//Initial entry after if logged in 
         	if(!$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
         		$rootScope.$emit("init");
-        
     });
     
     

@@ -216,9 +216,7 @@ openNote.controller("folderController", function(	$scope,
 	 * Load the current folders contents
 	 */
 	var loadCurrentFolderContents = function(){
-		storageService.database().query(function (doc, emit) {
-			  emit(doc.parentFolderID);
-		}, {key: $scope.currentFolder._id, include_docs: true}).then(function (results) {
+		storageService.database().query("folder/parentFolderID", {key: $scope.currentFolder._id, include_docs: true}).then(function (results) {
 			$scope.currentFolderContents=results.rows;
 			
 			//Do they have anything to display?
@@ -228,7 +226,7 @@ openNote.controller("folderController", function(	$scope,
 				
 			$scope.$apply();
 		}).catch(function (err) {
-			console.log(err);
+			console.log(err);//FIXME
 		});
 	}
 	
