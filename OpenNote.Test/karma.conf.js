@@ -9,6 +9,7 @@ module.exports = function(config){
 		         "OpenNote/bower_components/angular-sanitize/angular-sanitize.js",
 		         "OpenNote/bower_components/angular-animate/angular-animate.js",
 		         "OpenNote/bower_components/angular-ui-tree/dist/angular-ui-tree.js",
+		         "OpenNote/bower_components/pouchdb/dist/pouchdb.min.js",
 		         "OpenNote/bower_components/jquery/jquery.js",
 		         "OpenNote/openNote/openNote.js",
 		         "OpenNote/openNote/**/*.js",
