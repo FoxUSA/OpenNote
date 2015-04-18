@@ -49,15 +49,13 @@ openNote.controller("listController", function(	$scope,
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {//FIXME
-    	storageService.database().query("folder/parentFolderID", {key: null, include_docs: true}).then(function (results) {
+    	storageService.loadFolderContents(null, function (results) {
 			$scope.data=results.rows.filter(folderFilter);		
 			$scope.data.forEach(loadFolderContents);
 			
 			$scope.treeBuffer = 0;
 			$timeout(increaseTreeBuffer,config.fadeSpeedLong());
 			$scope.$apply();
-		}).catch(function (err) {
-			console.log(err);
 		});
     });
     
@@ -73,14 +71,12 @@ openNote.controller("listController", function(	$scope,
 	 * @param folder - the folder to pull the content from
 	 */
 	var loadFolderContents = function(folder){
-		storageService.database().query("folder/parentFolderID", {key: folder.doc._id, include_docs: true}).then(function (results) {
+		storageService.loadFolderContents(folder.doc._id,function (results) {
 			folder.foldersInside=results.rows.filter(folderFilter);		
 			folder.foldersInside.forEach(loadFolderContents);
 			$scope.$apply();
-		}).catch(function (err) {
-			console.log(err);
 		});
-	}
+	};
     
     /**
      * List Config object

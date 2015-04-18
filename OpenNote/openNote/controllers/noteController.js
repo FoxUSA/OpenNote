@@ -90,7 +90,7 @@ openNote.controller("noteController", function(	$scope,
 				$rootScope.buttons.push({
 					text: "Go up a folder",
 					action: function(){
-						$location.url("/folder/"+$scope.note.folderID);
+						$location.url("/folder/"+$scope.note.parentFolderID);
 					},
 					helpText: $rootScope.helpContent.editButton
 				});
@@ -148,7 +148,7 @@ openNote.controller("noteController", function(	$scope,
 				$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
 					$scope.$apply(function(){
 						detachWindowUnload();
-						$location.url("/folder/"+$scope.note.folderID);
+						$location.url("/folder/"+$scope.note.parentFolderID);
 					});
 				});
 			});

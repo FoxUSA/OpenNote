@@ -64,7 +64,7 @@ openNote.controller("folderController", function(	$scope,
 	$timeout(function(){
 		//Load the folder
 		if($routeParams.id==null){
-			$scope.currentFolder={
+			$scope.currentFolder={//FIXME config special root
 					_id:null,
 					name:"Home"};
 			loadCurrentFolderContents();
@@ -216,7 +216,7 @@ openNote.controller("folderController", function(	$scope,
 	 * Load the current folders contents
 	 */
 	var loadCurrentFolderContents = function(){
-		storageService.database().query("folder/parentFolderID", {key: $scope.currentFolder._id, include_docs: true}).then(function (results) {
+		storageService.loadFolderContents($scope.currentFolder._id, function (results) {
 			$scope.currentFolderContents=results.rows;
 			
 			//Do they have anything to display?
@@ -225,8 +225,6 @@ openNote.controller("folderController", function(	$scope,
 				};
 				
 			$scope.$apply();
-		}).catch(function (err) {
-			console.log(err);//FIXME
 		});
 	}
 	

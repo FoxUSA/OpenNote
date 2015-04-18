@@ -1,0 +1,24 @@
+<div class="searchPartial">
+	<div class="titleBar">Database</div>
+	<div id="search" class="box big search">
+		<form>
+			<div class="form-group">
+				<label>Backup file</label>
+				<button class="form-control customButton fadeIn" ng-click="generateBackup()" ng-hide="downloadFile">
+					Generate backup file
+				</button>
+				<a href="{{downloadFile}}" class="text-center col-xs-12 ng-hide fadeIn"  ng-show="downloadFile">Download file</a>
+			</div>
+			<div class="form-group">
+				<label>Replication url</label>
+				<input ng-model = "url" type="text" class="form-control"/>
+			</div>
+
+			<div class="form-group">
+				<button class="form-control customButton" ng-click="save()">
+					Save
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

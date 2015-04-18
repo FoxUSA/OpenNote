@@ -91,3 +91,11 @@ openNote.value("config", {
 		return false;
 	}	
 });
+
+/**
+ * Change link behavior to not be stupid an allow all href links
+ * @param $compileProvider
+ */
+openNote.config(function($compileProvider) {
+	$compileProvider.aHrefSanitizationWhitelist("[\s\S]*");
+});

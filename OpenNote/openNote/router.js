@@ -16,5 +16,10 @@ openNote.config(function($routeProvider){
         		controller: "searchController",
                 templateUrl: "openNote/partials/searchPartial.html"
             })
+        .when("/settings/database/",
+            {
+        		controller: "databaseController",
+                templateUrl: "openNote/partials/settings/databasePartial.html"
+            })
 		.otherwise({ redirectTo: "/folder" });
 });
