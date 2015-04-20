@@ -16,6 +16,11 @@ openNote.config(function($routeProvider){
         		controller: "searchController",
                 templateUrl: "openNote/partials/searchPartial.html"
             })
+        .when("/settings/",
+            {
+        		controller: "settingsController",
+                templateUrl: "openNote/partials/settings/settingsPartial.html"
+            })
         .when("/settings/database/",
             {
         		controller: "databaseController",

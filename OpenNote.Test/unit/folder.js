@@ -1,12 +1,8 @@
 var createFolder = function(id,parrentFolderID, name,userID,foldersInside,notesInside,uerID){
 	return {
        "id": id,
-       "parrentFolderID": parrentFolderID,
-       "name": name,
-       "userID": userID,
-       "foldersInside": foldersInside,
-       "notesInside": notesInside,
-       "uerID": uerID
+       "parentFolderID": parrentFolderID,
+       "name": name
     }
 };
 
@@ -49,7 +45,7 @@ describe("folderController", function() {
 	
 	it("should not show folder edit buttons if current folder is home", inject(function($location, config) {//inject location and config
 		var folderController = createController($scope, $rootScope, $location, [], null, config);
-		$scope.currentFolder = createFolder(null,null,null,null,null,null,null);
+		$scope.currentFolder = createFolder(null,null,null);
 		
 		expect($scope.folderEditMode).toEqual(false);
 		$scope.activateFolderEditMode();//simulate title click
@@ -59,7 +55,7 @@ describe("folderController", function() {
 	
 	it("should show folder edit buttons if current folder is not home", inject(function($location, config) {//inject location and config
 		var folderController = createController($scope, $rootScope, $location, [], null, config);
-		$scope.currentFolder = createFolder(123,null,"Not Home",null,[],[],321);
+		$scope.currentFolder = createFolder(123,null,"Not Home");
 		
 		expect($scope.folderEditMode).toEqual(false);
 		$scope.activateFolderEditMode();//simulate title click

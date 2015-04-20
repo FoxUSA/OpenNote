@@ -7,6 +7,7 @@
 
 	@updateColor: negation(#CC0000, @offset); 
 	@folderColor: negation(#8D40CC, @offset);
+	@settingColor: negation(#bbb, @offset);
 	@blankBoxColor: negation(#F06D29, @offset);
 	@primaryTextColor: negation(#DDD, @offset);
 
@@ -42,14 +43,14 @@ body{
 	border-color: @loginInputColor;
 	box-shadow:none;
 	color: inherit;
-}
-
-.form-control:focus{
+	
+	&:focus{
 		box-shadow:none;
-}
-
-.form-control.customButton{
-	font-weight: bold;
+	}
+	
+	.customButton{
+		font-weight: bold;
+	}
 }
 
 #update{/*Update span style*/
@@ -102,6 +103,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 		margin-bottom:0;
 		padding: 0 15px 0 0;
 		background: none;
+		float:left;
 		
 		>.active{
 			color:inherit;
@@ -217,6 +219,7 @@ img {
 			margin: 0px 0px 0px 0px;/*reset from box*/
 			border-color: @blankBoxColor;
 			background-color: transparent;
+			padding:10px 30px;
 			
 			overflow: hidden;
 			float: none; 
@@ -225,11 +228,27 @@ img {
 			
 		.folder {/*overiding css when up class is present*/
 			border-color: @folderColor; /*green*/
-		}
-		
-			.folder:hover {/*overiding css when up class is present*/
+			
+			:hover {
 				background-color: @folderColor; 
 			}
+		}
+			
+		div.box.settings {
+			background: @settingColor; 
+			
+			&:hover {
+				background: lighten(@settingColor, 10%); 
+			}
+		}
+		
+		div.box.big.settings {
+			background: @settingColor; 
+			
+			&:hover {
+				background: @settingColor;; 
+			}
+		}
 			
 		.search, .search:hover{
 			border-color: negation(@folderColor, #FFFFFF);
@@ -239,7 +258,8 @@ img {
 			background-color: @pageBackground;
 		}
 		
-		.searchPartial{
+		.searchPartia,
+		.settingsPartialsl{
 			margin-bottom: 30px;
 		}
 

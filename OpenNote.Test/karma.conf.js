@@ -2,6 +2,7 @@ module.exports = function(config){
 	config.set({
 		basePath : "../",
 		files : [
+		         "node_modules/es5-shim/es5-shim.min.js",
 		         "OpenNote/bower_components/angular/angular.js",
 		         "OpenNote/bower_components/angular-mocks/angular-mocks.js",
 		         "OpenNote/bower_components/angular-route/angular-route.js",

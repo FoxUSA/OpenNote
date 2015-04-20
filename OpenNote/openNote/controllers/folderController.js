@@ -9,7 +9,7 @@ openNote.controller("folderController", function(	$scope,
 	$rootScope.buttons = [];
 	$scope.folderEditMode = false;
 	$scope.currentFolder = {};
-	$scope.parentFolder = null
+	$scope.parentFolder = null;
 	
 	//add buttons
 		if($routeParams.id!=null)

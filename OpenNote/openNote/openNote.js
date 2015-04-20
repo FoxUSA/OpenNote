@@ -19,6 +19,7 @@ openNote.run(function (	$rootScope,
 						userService, 
 						config, 
 						serverConfigService, 
+						storageService,
 						$http){
 	
 	$rootScope.helpContent=config.getHelpContent();
@@ -70,10 +71,12 @@ openNote.run(function (	$rootScope,
     /**
      * Handle logOut event
      */
-    $rootScope.$on("logOut",function(){
-    	userService.destroyTokenHeader();
-		window.location.href='#/';
-		$rootScope.showMenu=false;
-    	$rootScope.showSideBar=false;
+    $rootScope.$on("logOut",function(){//FIXME
+		storageService.destroyDatabase(function(){
+			userService.destroyTokenHeader();
+			$rootScope.$emit("reloadListView", {});
+			window.location.href='#/';
+			$rootScope.$apply();
+		});
     });
 });
