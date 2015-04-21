@@ -13,6 +13,9 @@
 		<li ng-repeat="button in buttons">
         	<button  type="button" class="customButton" ng-click="button.action();" data-intro="{{button.helpText}}">{{button.text}}</button>
         </li>
+        <li>
+        	<button  type="button" class="customButton" onclick="window.location='#/settings'">Settings</button>
+        </li>
         <li ng-show="showHelpButton">
         	<button  type="button" class="customButton" onclick="introJs().start();">Help</button>
         </li>

@@ -57,6 +57,13 @@ openNote.service("storageService", function ($rootScope) {
 	};
 	
 	/**
+	 * @return - The remote URL to use in replication
+	 */
+	this.getRemoteURL = function(url){
+		return localStorage.getItem("remoteURL");
+	};
+	
+	/**
 	 * Get the local database
 	 */
 	this.database = function(){
@@ -124,10 +131,94 @@ openNote.service("storageService", function ($rootScope) {
 	};
 	
 	/**
-	 *
+	 * Find an clean the orphans
+	 * That is delete docs whose parent id is not null and does not exist in the database
 	 */
-	this.cleanOrphans = function(){//FIXME
+	this.cleanOrphans = function(){
 		
+		/**
+		 * the results doc
+		 * @param result - the result object as returned by allDocs
+		 */
+		var orphanHunter = function(result){
+			if(!result.doc.parentFolderID)//nulls are root and cannot be orphans
+				return;
+			
+			localDatabase.get(result.doc.parentFolderID).catch(function(err){
+				if(err.status=404)
+					localDatabase.remove(result.doc);
+				else
+					throw err
+			});
+		};
+		
+		localDatabase.allDocs({
+		  include_docs: true
+		}).then(function (result) {
+			result.rows.forEach(orphanHunter);
+		});
+	};
+	
+	/**
+	 * Search folder names
+	 * @param searchString - the search string to use
+	 * @param callback - the callback to return the data to
+	 */
+	this.searchFolderNames = function(searchString, callback){
+		localDatabase.query(function (doc, emit) {
+			emit(doc.name);
+		}, {key: searchString, include_docs: true}).then(function (results) {
+			callback(results.filter(this.folderFilter));
+		});
+	};
+	
+	/**
+	 * Search note titles
+	 * @param searchString - the search string to use
+	 * @param callback - the callback to return the data to
+	 */
+	this.searchNoteTitles = function(searchString, callback){
+		localDatabase.query(function (doc, emit) {
+			emit(doc.title);
+		}, {key: searchString, include_docs: true}).then(function (results) {
+			callback(results.filter(this.noteFilter));
+		});
+	};
+	
+	/**
+	 * Search note body
+	 * @param searchString - the search string to use
+	 * @param callback - the callback to return the data to
+	 */
+	this.searchNoteBody = function(searchString, callback){
+		localDatabase.query(function (doc, emit) {
+			emit(doc.note);
+		}, {key: searchString, include_docs: true}).then(function (results) {
+			callback(results.filter(this.noteFilter));
+		});
+	};
+	
+	/**
+	 * Filter out everything but a given type
+	 * @param object - the object to filter
+	 * @param type - the type to filter in
+	 */
+	this.typeFilter = function(object,type){
+		return object.doc.type==type;
+	};
+	
+	/**
+	 * Filter out everything but type folder
+	 */
+	this.folderFilter=function(object){
+		return this.typeFilter(object,"folder");
+	};
+	
+	/**
+	 * Filter out everything but type note
+	 */
+	this.noteFilter=function(object){
+		return this.typeFilter(object,"note");
 	};
 	
 	//First time create database

@@ -180,11 +180,8 @@ openNote.controller("folderController", function(	$scope,
 						$location.url("/folder/"+parrentFolderID);
 					
 					$scope.$apply();
-				}).catch(function(error){
-					console.log(error);
-					//FIXME
 				});
-			});
+		});
 	}
 	
 	/**
@@ -227,28 +224,21 @@ openNote.controller("folderController", function(	$scope,
 				
 			$scope.$apply();
 		});
-	}
-	
-	/**
-	 * Filter out everything but a given type
-	 */
-	var typeFilter = function(object,type){
-		return object.doc.type==type;
-	}
+	};
 	
 	/**
 	 * Filter out everything but type folder
 	 */
 	$scope.folderFilter=function(object){
-		return typeFilter(object,"folder");
+		return storageService.typeFilter(object,"folder");
 	};
 	
 	/**
 	 * Filter out everything but type note
 	 */
 	$scope.noteFilter=function(object){
-		return typeFilter(object,"note");
-	}
+		return storageService.typeFilter(object,"note");
+	};
 	
 	//Load current folder
 	$timeout($scope.loadCurrentFolder);

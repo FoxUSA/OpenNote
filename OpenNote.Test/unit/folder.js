@@ -6,6 +6,8 @@ var createFolder = function(id,parrentFolderID, name,userID,foldersInside,notesI
     }
 };
 
+//TODO save folder twice
+
 describe("folderController", function() {
 	var $scope;
 	var createController;
