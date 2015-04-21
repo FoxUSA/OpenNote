@@ -10,6 +10,7 @@ openNote.service("storageService", function () {
 	
 	var localDatabase = null;
 	var remoteDatabase = null;
+	var replicationTimeout = null;
 	
 	/**
 	 * Initialize the PouchDB database and create indexes
@@ -40,8 +41,11 @@ openNote.service("storageService", function () {
 				});
 				
 		//Re-init sync		
-			if(localStorage.getItem("remoteURL"))
+			var url = localStorage.getItem("remoteURL");
+			if(url){
+				remoteDatabase = new PouchDB(url);
 				this.setupSync();
+			};
 	};
 	
 	/**
@@ -70,16 +74,19 @@ openNote.service("storageService", function () {
 	 * Setup live sync
 	 */
 	this.setupSync = function(){
-		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function () {
+		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function (info) {
 			alertify.success("Replication complete");
 		}).on("error", function (err) {
 			alertify.error("Replication error");
-		}).on("change", function (change) {//FIXME
-			//alertify.log("Database changed");
-		}).on("paused", function (info) {
-			//alertify.log("Replication paused");
-		}).on("active", function (info) {
-			//alertify.log("Replication active");
+		}).on("paused", function () {
+			if(!replicationTimeout)
+				replicationTimeout = setTimeout(function(){
+					alertify.log("Replication complete");
+					replicationTimeout = null;
+					
+					$rootScope.$emit("replicationComplete", {});
+					$scope.apply()
+				}, 1000);
 		});
 	};
 	
@@ -96,8 +103,10 @@ openNote.service("storageService", function () {
 	 * Delete the database
 	 */
 	this.destroyDatabase = function(callback){
+		var self = this;
 		localDatabase.destroy().then(function(){
-			this.init();
+			localStorage.removeItem("remoteURL")
+			self.init();
 			callback();
 		});
 	};

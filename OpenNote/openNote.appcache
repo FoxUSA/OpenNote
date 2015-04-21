@@ -1,0 +1,70 @@
+CACHE MANIFEST
+# 15.04.01
+
+openNote/style/OpenNote.png
+index.html
+
+# Style
+	bower_components/bootstrap/dist/css/bootstrap.min.css
+	bower_components/angular-ui-tree/dist/angular-ui-tree.min.css
+	bower_components/alertify/themes/alertify.core.css
+	
+	# Theme
+		openNote/style/invert/light/intojs.css
+		openNote/style/invert/light/alertify.css
+		openNote/style/invert/light/style.css
+		
+		openNote/style/animations.css
+
+# Scripts
+	bower_components/jquery/jquery.min.js
+	bower_components/pouchdb/dist/pouchdb.min.js
+	
+	# Angular and the gang
+		bower_components/angular/angular.js
+		bower_components/angular-animate/angular-animate.min.js
+		bower_components/angular-resource/angular-resource.min.js
+		bower_components/angular-route/angular-route.min.js
+		bower_components/angular-sanitize/angular-sanitize.min.js
+		bower_components/angular-ui-tree/dist/angular-ui-tree.min.js
+		
+		bower_components/intro.js/minified/intro.min.js
+		bower_components/alertify/alertify.min.js
+		bower_components/ckeditor/ckeditor.js
+		bower_components/bootstrap/dist/js/bootstrap.min.js
+				
+	# Main Open Note Scripts
+		openNote/openNote.js
+		openNote/openNote.config.js
+		openNote/router.js
+						
+		# Services 
+			openNote/services/userService.js
+			openNote/services/serverConfigService.js
+			openNote/services/searchService.js
+			openNote/services/storageService.js
+							
+		# Directives 
+			openNote/directives/randomFadeInDirective.js
+							
+		# Controllers
+			openNote/controllers/loginController.js
+			openNote/controllers/folderController.js
+			openNote/controllers/noteController.js
+			openNote/controllers/listController.js
+			openNote/controllers/searchController.js
+			openNote/controllers/settings/settingsController.js
+			openNote/controllers/settings/databaseController.js
+		
+		# Partials
+			openNote/partials/settings/databasePartial.html
+			openNote/partials/settings/settingsPartial.html
+			openNote/partials/folderPartial.html
+			openNote/partials/listPartial.html
+			openNote/partials/navBarPartial.html
+			openNote/partials/notePartial.html
+			openNote/partials/searchPartial.html
+			openNote/partials/treePartial.html
+
+
+
