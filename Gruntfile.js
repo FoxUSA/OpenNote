@@ -122,7 +122,28 @@ module.exports = function(grunt) {
 		            	           	"cp -r ../../OpenNoteService-PHP/Service ./",
 									"cp -r ../../OpenNoteService-PHP/vendor ./"].join("&&")
 		            }
-		        }
+		        },
+	        //HTML 5 
+		        manifest: {
+		            generate: {
+						options: {
+							basePath: "OpenNote/",            
+							exclude: ["openNote.appcache", "Service", "bower_components/intro.js"],
+							verbose: true,
+							timestamp: true,
+							hash: true,
+							master: ["index.html"]
+						},
+		              src: [
+		                  "**/*.js",
+		                  "**/*.css",
+		                  "**/*.html",
+		                  "**/*.png",
+		                  "**/*.jpg"		                  
+		              ],
+		              dest: "openNote/openNote.appcache"
+		            }
+		          }
 		});
 
 	//Plugin loading
@@ -130,6 +151,7 @@ module.exports = function(grunt) {
 		grunt.loadNpmTasks("grunt-contrib-watch");
 	    grunt.loadNpmTasks("grunt-karma");
 	    grunt.loadNpmTasks("grunt-shell");
+	    grunt.loadNpmTasks("grunt-manifest");
 	
 	//Task definition
 	    //css
@@ -137,8 +159,9 @@ module.exports = function(grunt) {
 		    grunt.registerTask("buildProdCSS", ["less:prodDark","less:prodLight"]);
 		    
 		//deployment
+		    grunt.registerTask("buildManifest", ["manifest:generate"]);
 		    grunt.registerTask("clean", ["shell:clean"]);
-		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS"]);
+		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS", "buildManifest"]);
 			grunt.registerTask("default", ["build"]);
 			grunt.registerTask("deploy", ["clean", "shell:bowerInstall", "buildProdCSS", "shell:phpPackage"]);
 		

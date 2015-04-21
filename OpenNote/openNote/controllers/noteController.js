@@ -112,7 +112,6 @@ openNote.controller("noteController", function(	$scope,
 		
 		$(".notePartial").fadeOut(config.fadeSpeedShort());
 		createNote($scope.note);
-		
 	}
 	
 	/**
@@ -188,10 +187,9 @@ openNote.controller("noteController", function(	$scope,
 		 */
 		var saveCallback = function(response){
 			if(!response.ok)	
-				throw "//FIXME";
-			$rootScope.$emit("reloadListView", {});
+				throw "//FIXME";//FIXME
 			detachWindowUnload();
-			$location.url("/note/"+response.id+"?reload");
+			$location.url("/note/"+response.id+"?rev="+response.rev);//revision number is here only to force angular to reload
 			alertify.success("Note Saved"); //all done. close the notify dialog
 			$scope.$apply();
 		}
@@ -199,11 +197,11 @@ openNote.controller("noteController", function(	$scope,
 		//Upsert
 			if(note._id==null)
 				storageService.database().post(note).then(saveCallback).catch(function(error){
-					console.log(error);//FIXME
+					alertify.error("Error saving note")
 				});
 			else
 				storageService.database().put(note).then(saveCallback).catch(function(error){
-					console.log(error);//FIXME
+					alertify.error("Error saving note")
 				});
 	};
 });

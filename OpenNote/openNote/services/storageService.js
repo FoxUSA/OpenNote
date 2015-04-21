@@ -6,7 +6,7 @@
 /**
  * Storage service
  */
-openNote.service("storageService", function () {	
+openNote.service("storageService", function ($rootScope) {	
 	
 	var localDatabase = null;
 	var remoteDatabase = null;
@@ -85,7 +85,7 @@ openNote.service("storageService", function () {
 					replicationTimeout = null;
 					
 					$rootScope.$emit("replicationComplete", {});
-					$scope.apply()
+					$rootScope.$apply()
 				}, 1000);
 		});
 	};

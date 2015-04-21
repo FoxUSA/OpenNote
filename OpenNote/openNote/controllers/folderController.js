@@ -61,7 +61,7 @@ openNote.controller("folderController", function(	$scope,
 	/**	
 	 * Load current folder contents
 	 */
-	$timeout(function(){
+	$scope.loadCurrentFolder = function(){
 		//Load the folder
 		if($routeParams.id==null){
 			$scope.currentFolder={//FIXME config special root
@@ -83,7 +83,7 @@ openNote.controller("folderController", function(	$scope,
 					});
 			});	
 		}
-	});
+	};
 	
 	/**
 	 * Activate folder edit mode if we are not in the home folder
@@ -149,11 +149,12 @@ openNote.controller("folderController", function(	$scope,
 			
 				$scope.currentFolder.name=data;
 				storageService.database().put($scope.currentFolder).then(function(result){
+					$scope.currentFolder._rev=result.rev
 					$rootScope.$emit("reloadListView", {});
 					$scope.$apply();
 				}).catch(function(error){
-					console.log(error);
-					//FIXME
+					throw error
+					//FIXME conflict resolution
 				});
 			},		
 			$scope.currentFolder.name//show the current folder name
@@ -191,7 +192,7 @@ openNote.controller("folderController", function(	$scope,
 	 */
 	$rootScope.$on("changedFolder", function(event, request) {
 	    if(request.folder.parrentFolderID==$scope.currentFolder.id || $scope.currentFolder.id==request.oldParrentFolderID){//does the change effect us?
-	    	$scope.currentFolder.$get({id:$scope.currentFolder.id});//reload
+	    	$scope.loadCurrentFolder();//reload
 	    }
     });
 	
@@ -248,4 +249,7 @@ openNote.controller("folderController", function(	$scope,
 	$scope.noteFilter=function(object){
 		return typeFilter(object,"note");
 	}
+	
+	//Load current folder
+	$timeout($scope.loadCurrentFolder);
 });
