@@ -11,6 +11,7 @@ openNote.service("storageService", function ($rootScope) {
 	var localDatabase = null;
 	var remoteDatabase = null;
 	var replicationTimeout = null;
+	var self=this;
 	
 	/**
 	 * Initialize the PouchDB database and create indexes
@@ -110,7 +111,6 @@ openNote.service("storageService", function ($rootScope) {
 	 * Delete the database
 	 */
 	this.destroyDatabase = function(callback){
-		var self = this;
 		localDatabase.destroy().then(function(){
 			localStorage.removeItem("remoteURL")
 			self.init();
@@ -160,15 +160,27 @@ openNote.service("storageService", function ($rootScope) {
 	};
 	
 	/**
+	 * @param doc - the doc we are looping through
+	 * @param property - the property of the doc we want to compare
+	 * @param searchString - the searchString to look for
+	 */
+	var searchFilter = function(doc,property,searchString){
+		if(doc[property])
+			return doc[property].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+		else
+			return false
+	}
+	
+	/**
 	 * Search folder names
 	 * @param searchString - the search string to use
 	 * @param callback - the callback to return the data to
 	 */
 	this.searchFolderNames = function(searchString, callback){
 		localDatabase.query(function (doc, emit) {
-			emit(doc.name);
-		}, {key: searchString, include_docs: true}).then(function (results) {
-			callback(results.filter(this.folderFilter));
+			emit(searchFilter(doc,"name",searchString));
+		}, {key: true, include_docs: true}).then(function (results) {
+			callback(results.rows.filter(self.folderFilter));
 		});
 	};
 	
@@ -179,9 +191,9 @@ openNote.service("storageService", function ($rootScope) {
 	 */
 	this.searchNoteTitles = function(searchString, callback){
 		localDatabase.query(function (doc, emit) {
-			emit(doc.title);
-		}, {key: searchString, include_docs: true}).then(function (results) {
-			callback(results.filter(this.noteFilter));
+			emit(searchFilter(doc,"title",searchString));
+		}, {key: true, include_docs: true}).then(function (results) {
+			callback(results.rows.filter(self.noteFilter));
 		});
 	};
 	
@@ -192,9 +204,9 @@ openNote.service("storageService", function ($rootScope) {
 	 */
 	this.searchNoteBody = function(searchString, callback){
 		localDatabase.query(function (doc, emit) {
-			emit(doc.note);
-		}, {key: searchString, include_docs: true}).then(function (results) {
-			callback(results.filter(this.noteFilter));
+			emit(searchFilter(doc,"note",searchString));
+		}, {key: true, include_docs: true}).then(function (results) {
+			callback(results.rows.filter(self.noteFilter));
 		});
 	};
 	
@@ -211,14 +223,14 @@ openNote.service("storageService", function ($rootScope) {
 	 * Filter out everything but type folder
 	 */
 	this.folderFilter=function(object){
-		return this.typeFilter(object,"folder");
+		return self.typeFilter(object,"folder");
 	};
 	
 	/**
 	 * Filter out everything but type note
 	 */
 	this.noteFilter=function(object){
-		return this.typeFilter(object,"note");
+		return self.typeFilter(object,"note");
 	};
 	
 	//First time create database
