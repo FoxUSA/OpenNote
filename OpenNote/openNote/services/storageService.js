@@ -122,11 +122,27 @@ openNote.service("storageService", function ($rootScope) {
 	 * Dump database to a file
 	 * @param callback - callback where data is returned to
 	 */
-	this.databaseToFile = function(callback){
+	this.exportToFile = function(callback){
 		localDatabase.allDocs({
 		  include_docs: true
 		}).then(function (result) {
 			callback("data:application/octet-stream;charset=utf8," + encodeURIComponent(JSON.stringify({ data:result.rows})));
+		});
+	};
+	
+	/**
+	 * Import database from a file
+	 */
+	this.importFile = function(backup){
+		backup.data.forEach(function(document){
+			localDatabase.put(document.doc).catch(function(error){
+				if(error.status == 409){
+					var errorMSG=document.doc._id+" was in conflict and was not imported";
+					alertify.error(errorMSG);
+					console.error(errorMSG);
+				}
+				else throw error;
+			});
 		});
 	};
 	

@@ -8,7 +8,8 @@ var openNote = angular.module("openNote", [	"ngRoute",
                                            	"ngResource", 
                                            	"ngSanitize", 
                                            	"ngAnimate", 
-                                           	"ui.tree"]);
+                                           	"ui.tree",
+                                           	"ngFileUpload"]);
 
 /**
  * Used to redirect users to login if their token has expired
@@ -18,8 +19,7 @@ openNote.run(function (	$rootScope,
 						$location, 
 						userService, 
 						config, 
-						serverConfigService, 
-						storageService,
+						serverConfigService,
 						$http){
 	
 	$rootScope.helpContent=config.getHelpContent();
@@ -49,15 +49,7 @@ openNote.run(function (	$rootScope,
     	$rootScope.showSideBar=true;
     	
     	//options for humans
-        	$rootScope.showHelpButton = config.showHelpButton();
-        	$rootScope.showLogOutButton = config.showLogOutButton();
-        	
-        	/**
-        	 * Log out function
-        	 */
-        	$rootScope.logOut = function(){
-        		$rootScope.$emit("logOut");
-        	};		        	
+        	$rootScope.showHelpButton = config.showHelpButton(); 	
         
     	//Check for updates
         	$http.get(config.getUpdateURL()).then(
@@ -66,17 +58,7 @@ openNote.run(function (	$rootScope,
     					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
     			}
 			);
-    	});
+	});
     
-    /**
-     * Handle logOut event
-     */
-    $rootScope.$on("logOut",function(){//FIXME
-		storageService.destroyDatabase(function(){
-			userService.destroyTokenHeader();
-			$rootScope.$emit("reloadListView", {});
-			window.location.href='#/';
-			$rootScope.$apply();
-		});
-    });
+  
 });

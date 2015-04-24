@@ -4,8 +4,10 @@
 openNote.controller("databaseController", function(	$scope, 
 													$rootScope, 
 													storageService,
+													userService,
 													config,
-													$location) {
+													$location,
+													Upload) {
 	$scope.downloadFile = null;
 	$scope.url = storageService.getRemoteURL();
 	
@@ -13,7 +15,7 @@ openNote.controller("databaseController", function(	$scope,
 	 * Generate a backup
 	 */
 	$scope.generateBackup = function(){
-		storageService.databaseToFile(function(data){
+		storageService.exportToFile(function(data){
 			$scope.downloadFile=data;
 		});
 	};
@@ -32,22 +34,18 @@ openNote.controller("databaseController", function(	$scope,
 	/**
 	 * Delete the database
 	 */
-	$scope.deleteDatabase = function(){//FIXME TODO
-		alertify.confirm("Are you sure you want to delete "+$scope.currentFolder.name+" and all subfolders and notes it contains?",
+	$scope.deleteDatabase = function(){
+		alertify.confirm("Are you sure you want to delete the database?",
 			function(confirm) {
 				if(!confirm)
 					return;
 					
-				var parrentFolderID = $scope.currentFolder.parrentFolderID;
-				storageService.database().remove($scope.currentFolder).then(function(result){
+				storageService.destroyDatabase(function(){
+					userService.destroyTokenHeader();
 					$rootScope.$emit("reloadListView", {});
-					
-					if(!parrentFolderID)
-						$location.url("/folder/");
-					else
-						$location.url("/folder/"+parrentFolderID);
-					
-					$scope.$apply();
+					window.location.href='#/';
+					$rootScope.$apply();
+					alertify.success("Database deleted");
 				});
 		});
 	};
@@ -59,4 +57,27 @@ openNote.controller("databaseController", function(	$scope,
 		storageService.cleanOrphans();
 		alertify.log("Finding and removing orphans");
 	};
+	
+	/**
+	 * Watch for file change
+	 */
+	$scope.upload = function(file){
+		if(!file || !file.length)
+			return;
+		
+		var file = file[0];
+        var fileReader = new FileReader();
+		
+		alertify.confirm("Are you sure you want import the backup? If there are any conflicts, they will be ignored. You might want to take a backup first.",
+			function(confirm) {
+				if(!confirm)
+					return;
+
+		        fileReader.addEventListener("load", function(event) {
+		            storageService.importFile(JSON.parse(event.target.result));
+		        });
+		        
+		        fileReader.readAsText(file);
+		});
+    };
 });

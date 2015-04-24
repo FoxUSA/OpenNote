@@ -219,7 +219,7 @@ openNote.controller("folderController", function(	$scope,
 			
 			//Do they have anything to display?
 				if($scope.currentFolder._id==null && $scope.currentFolderContents.length==0){
-					alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page.");
+					alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page. If you need to pull your remote notes <a href='#/settings/database'>click here</a>.");
 				};
 				
 			$scope.$apply();

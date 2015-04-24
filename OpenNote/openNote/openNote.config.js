@@ -7,7 +7,7 @@ openNote.value("config", {
 	 * Get current version
 	 */
 	getVersion: function(){
-		return "14.07.02";
+		return "15.05.00";
 	},
 	
 	/**
@@ -62,13 +62,6 @@ openNote.value("config", {
 	 * Do we want to show the help button
 	 */
 	showHelpButton: function(){
-		return true;
-	},
-	
-	/**
-	 * Do we want to show the log Out button
-	 */
-	showLogOutButton: function(){
 		return true;
 	},
 	

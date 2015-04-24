@@ -8,10 +8,18 @@
 				<button class="form-control customButton fadeIn" ng-click="generateBackup()" ng-hide="downloadFile">
 					Generate backup file
 				</button>
-				<a href="{{downloadFile}}" class="text-center col-xs-12 ng-hide fadeIn"  ng-show="downloadFile">Download file</a>
+				<a 	href="{{downloadFile}}" 
+					download="OpenNote.json" 
+					class="form-control customButton ng-hide fadeIn text-center" 
+					ng-show="downloadFile">Download file</a>
 			</div>
 			<div class="form-group">
-				<button class="form-control customButton fadeIn" ng-click="" >
+				<button class="form-control customButton fadeIn" ngf-select ngf-change="upload($files)">
+					Restore backup file
+				</button>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton fadeIn" ng-click="deleteDatabase();" >
 					Delete database
 				</button>
 			</div>
