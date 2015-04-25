@@ -37,7 +37,6 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 			}
 		);
 		
-		
 		return promise;
 	};
 	
@@ -48,15 +47,9 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 	this.getEditorConfig = function(){
 		var dark = config.isDarkTheme();
 		return this.getConfig().then(function(data){
-			var temp = {
-					// Define changes to default configuration here. For example,
-					// config.language : 'fr',
-					//config.uiColor : '#000000',
-					
+			var temp = {					
 					removePlugins 				:	"newpage,save,templates,about,liststyle,tabletools,scayt,contextmenu", //remove some icons menu button
-					
 					//extraPlugins				:	"imagepaste",
-					
 					height 						: 	"400px",
 					disableNativeSpellChecker 	: 	false
 				};
