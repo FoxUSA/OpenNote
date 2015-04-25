@@ -54,26 +54,47 @@ openNote.service("userService", function ($http, $q, config) {
 	};
 	
 	/**
+	 * Get the username
+	 */
+	this.getUsername = function(){
+		var apiCredentials = JSON.parse(localStorage.getItem("apiCredentials"));
+		if(apiCredentials)
+			return apiCredentials.username;
+		else
+			return "";
+	}
+	
+	/**
 	 * Checks is a user is available
 	 * @param userName - the username to check 
 	 * @return - true if available, false if not
 	 */
 	this.isAvailable = function(userName){ 	
 		return $http.get(config.servicePath() +"/user/"+userName).then(function(response){
-					throw "Error"; // Weirdly if we get a 2xx value its a failure
-				},function(response){
-					switch(response.status){
-			  			case 302://we found it so its not available
-			  				return false;
-			  				
-			  			case 404://could not find it so its available
-			  				return true; 
-			  				
-			  			default://there was a error
-			  				throw "Error";
-					};
-				});
+			throw "Error"; // Weirdly if we get a 2xx value its a failure
+		},function(response){
+			switch(response.status){
+	  			case 302://we found it so its not available
+	  				return false;
+	  				
+	  			case 404://could not find it so its available
+	  				return true; 
+	  				
+	  			default://there was a error
+	  				throw "Error";
+			};
+		});
 	};
+	
+	/**
+	 * Get api credentals object
+	 */
+	var getApiCredentials = function(){
+		var cred = localStorage.getItem("apiCredentials");
+		if(cred)
+			return JSON.parse(cred)
+		return {};
+	}
 	
 	/**
 	 * Logs the user in
@@ -81,23 +102,32 @@ openNote.service("userService", function ($http, $q, config) {
 	 * @param password - the password to login with
 	 * @return - true if successful, false if not
 	 */
-	this.login = function(userName, password){ 	
+	this.login = function(username, password){ 	
+		var apiCredentials = getApiCredentials();
+
+		if(username && password){
+			apiCredentials.username = username;
+			apiCredentials.password = password;
+		}
+			
 		var self = this;
-		return $http.post(config.servicePath() +"/token/"+userName+"&"+password).then(
-		function(response){//Successful
-			if(response.status==200){
-				
-				if(response.data.token==null)
-					throw "Invalid response from server";
-				
-				sessionStorage.apiToken=angular.toJson(response.data);
-				self.useAPITokenHeader();//used by the resources implicitly
-				return true;	
+		return $http.post(config.servicePath() +"/token/"+apiCredentials.username+"&"+apiCredentials.password).then(
+			function(response){//Successful
+				if(response.status==200){
+					localStorage.setItem("apiCredentials", JSON.stringify(apiCredentials));
+					
+					if(response.data.token==null)
+						throw "Invalid response from server";
+					
+					sessionStorage.apiToken=angular.toJson(response.data);
+					self.useAPITokenHeader();//used by the resources implicitly
+					return true;	
+				}
+			},
+			function(response){
+				return false;
 			}
-		},
-		function(response){
-			return false;
-		});
+		);
 	};
 	
 	/**
@@ -106,11 +136,20 @@ openNote.service("userService", function ($http, $q, config) {
 	 * @param password - the password to register with
 	 * @return - true if successful, false if not
 	 */
-	this.register = function(userName, password){ 	
+	this.register = function(username, password){
+		var apiCredentials = getApiCredentials();
+		
+		if(username && password){
+			apiCredentials.username = username;
+			apiCredentials.password = password;
+		}
+		
+		
 		var self = this;
-		return $http.post(config.servicePath() +"/user/"+userName+"&"+password).then(
+		return $http.post(config.servicePath() +"/user/"+apiCredentials.username+"&"+apiCredentials.password).then(
 			function(response){//Successful
 				if(response.status==200){
+					localStorage.setItem("apiCredentials", JSON.stringify(apiCredentials));
 					
 					if(response.data.token==null)
 						throw "Invalid response from server";

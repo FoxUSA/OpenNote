@@ -35,8 +35,23 @@ openNote.run(function (	$rootScope,
     		
     	//Initial entry after if logged in 
         	if(!$rootScope.showMenu && !$rootScope.showSideBar)//make sure we only fade in/run once
-        		$rootScope.$emit("init");
+        		$rootScope.$emit("init");        		
     });
+    
+    /**
+     * Refresh token
+     */
+    var tokenRefresh = function(){
+		userService.login().then(function(response){
+			if(response)
+				alertify.success("Token refreshed");
+			else
+				alertify.error("Refreshed token failed");
+		}).catch(function(error){
+			alertify.error("Refreshed token failed");
+		});
+		
+	};
     
     
     /**
@@ -58,6 +73,12 @@ openNote.run(function (	$rootScope,
     					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
     			}
 			);
+        	
+        //Setup auto login interval
+        	if(userService.getUsername() && !$rootScope.autoLogInInterval){
+        		tokenRefresh();
+        		$rootScope.autoLogInInterval=setInterval(tokenRefresh, 1800000);
+        	};
 	});
     
   

@@ -8,7 +8,7 @@
  */
 openNote.service("serverConfigService", function ($http, $q, config, userService) {	
 	/**
-	 * @return - config object prmoise
+	 * @return - config object promise
 	 */
 	this.getConfig = function(){
 		if(sessionStorage.serverConfig==null)//if we do not have it yet, request it
@@ -36,15 +36,15 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 				return false;
 			}
 		);
-		
-		return promise;
 	};
+	
+	//FIXME pull register again
 	
 	/**
 	 * @param dark - true if dark theme
 	 * @return - ckeditor config object
 	 */
-	this.getEditorConfig = function(){
+	this.getEditorConfig = function(){		
 		var dark = config.isDarkTheme();
 		return this.getConfig().then(function(data){
 			var temp = {					
@@ -59,13 +59,12 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 						temp.contentsCss = "openNote/style/invert/dark/note.css";
 						temp.skin = "moono.dark,../../openNote/style/dark/ckeditor/moono.dark/";
 					}
-					else{
+					else
 						temp.contentsCss = "openNote/style/invert/light/note.css";
-					};
 				
 				//configure the upload path if uploads are enabled
-					if(data.uploadEnabled){
-						//temp.filebrowserUploadUrl = config.servicePath()+"/file/"+"?token="+userService.getAPITokenObject().token;//FIXME
+					if(data.uploadEnabled && userService.hasValidToken()){
+						temp.filebrowserUploadUrl = config.servicePath()+"/file/"+"?token="+userService.getAPITokenObject().token;//FIXME
 						temp.filebrowserImageUploadUrl = temp.filebrowserUploadUrl;
 					};
 				return temp;
