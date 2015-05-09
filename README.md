@@ -10,8 +10,8 @@ OpenNote was built to be a open source(MIT License), web based note taking softw
 It is designed to be self hosted and gives you ownership of your data.
 
 Please support this project by:
-- [Using GitTip][GitTip], 
-- [donating bitcoins][Bitcoins], 
+- [Using GitTip][GitTip],
+- [donating bitcoins][Bitcoins],
 - and/or like on [Alternative To][Alternative].
 
 Thank you!
@@ -35,9 +35,9 @@ Features
 - Upload manager (not enabled in demo :) )
 - Light weight
 - Multi user support
-- Note History ***(Revisions are currently being stored. However, there is not a view to see the revision tree)
 - Search
-- PDO Connector/(MySql and SQLite Database Support)
+- Offline App
+- CouchDB Sync via PouchDB
 - Move Folders(Drag into another folder in the list view.)
 - Rename/Delete Folders(Click on folder title to get menu.)
 - Responsive
@@ -74,17 +74,20 @@ Documentation
 ![][dark]
 License
 -------
-	JQuery - Distributed under the MIT License
-	Angular - Distributed under the MIT License
-	Bootstrap - Distributed under the MIT License
-	CKEditor - Distributed under the MPL License
-	Angular UI Tree - Distributed under the MIT License
-	Alertify.js - Distributed under the MIT License
+	[JQuery](https://github.com/jquery/jquery) - Distributed under the MIT License
+	[Angular](https://github.com/angular) - Distributed under the MIT License
+	[Bootstrap](https://github.com/twbs/bootstrap) - Distributed under the MIT License
+	[CKEditor](https://github.com/ckeditor/ckeditor-releases) - Distributed under the MPL License
+	[Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tree) - Distributed under the MIT License
+	[Alertify.js](https://github.com/fabien-d/alertify.js) - Distributed under the MIT License
+	[PouchDB](https://github.com/pouchdb/pouchdb) - Distributed under the Apache License
+	[Dragula](https://github.com/bevacqua/dragula) - Distributed under the MIT License
+	[Into.js](https://github.com/usablica/intro.js/) - Distributed with license from Afshin Mehrabani Copyright (C) 2012
 
 	OpenNote Code - Distributed under the MIT License
-	
+
 	© Jacob Liscom 2014
-	
+
 Credits
 -------
 	J. Liscom - Supreme Programmer
@@ -92,7 +95,7 @@ Credits
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
 [topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
-[dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png 
+[dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png
 [responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/Doc/screenShots/OpenNote.png
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md

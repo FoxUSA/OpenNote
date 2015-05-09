@@ -19,6 +19,7 @@
     "alertify": "0.3.10",
     "intro.js": "0.8.0",
     "pouchdb": "3.4.0",
-    "ng-file-upload": "4.0.0"
+    "ng-file-upload": "4.0.0",
+    "dragula.js": "~1.6.0"
   }
 }
