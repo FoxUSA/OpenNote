@@ -49,7 +49,7 @@ openNote.controller("listController", function(	$scope,
      * Load list view
      */
     $rootScope.$on("reloadListView", function(event, args) {//FIXME
-		if($(window).width()<750)//Dont do anything if we cannot see it bootstrap xs
+		if(window.innerWidth<750)//Dont do anything if we are not larger than bootstrap xs
 			return;
 
     	storageService.loadFolderContents(null, function (results) {
