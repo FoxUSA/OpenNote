@@ -74,19 +74,19 @@ Documentation
 ![][dark]
 License
 -------
-	[JQuery](https://github.com/jquery/jquery) - Distributed under the MIT License
-	[Angular](https://github.com/angular) - Distributed under the MIT License
-	[Bootstrap](https://github.com/twbs/bootstrap) - Distributed under the MIT License
-	[CKEditor](https://github.com/ckeditor/ckeditor-releases) - Distributed under the MPL License
-	[Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tree) - Distributed under the MIT License
-	[Alertify.js](https://github.com/fabien-d/alertify.js) - Distributed under the MIT License
-	[PouchDB](https://github.com/pouchdb/pouchdb) - Distributed under the Apache License
-	[Dragula](https://github.com/bevacqua/dragula) - Distributed under the MIT License
-	[Into.js](https://github.com/usablica/intro.js/) - Distributed with license from Afshin Mehrabani Copyright (C) 2012
+[JQuery](https://github.com/jquery/jquery) - Distributed under the MIT License
+[Angular](https://github.com/angular) - Distributed under the MIT License
+[Bootstrap](https://github.com/twbs/bootstrap) - Distributed under the MIT License
+[CKEditor](https://github.com/ckeditor/ckeditor-releases) - Distributed under the MPL License
+[Angular UI Tree](https://github.com/angular-ui-tree/angular-ui-tree) - Distributed under the MIT License
+[Alertify.js](https://github.com/fabien-d/alertify.js) - Distributed under the MIT License
+[PouchDB](https://github.com/pouchdb/pouchdb) - Distributed under the Apache License
+[Dragula](https://github.com/bevacqua/dragula) - Distributed under the MIT License
+[Into.js](https://github.com/usablica/intro.js/) - Distributed with license from Afshin Mehrabani Copyright (C) 2012
 
-	OpenNote Code - Distributed under the MIT License
+OpenNote Code - Distributed under the MIT License
 
-	© Jacob Liscom 2014
+© Jacob Liscom 2015
 
 Credits
 -------
