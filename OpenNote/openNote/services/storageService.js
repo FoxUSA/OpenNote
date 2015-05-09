@@ -14,32 +14,34 @@ openNote.service("storageService", function ($rootScope) {
 	var self=this;
 	
 	/**
+	 * helper function to create indexes
+	 * @param name - the name of the index
+	 * @param mapFunction - the map function
+	 */
+	var createDesignDoc = function (name, mapFunction) {
+		var ddoc = {
+			_id: "_design/" + name,
+			views: {}
+		  };
+		ddoc.views[name] = { map: mapFunction.toString() };
+		return ddoc;
+	};
+	
+	/**
 	 * Initialize the PouchDB database and create indexes
 	 */
 	this.init = function(){
 		//Create or find database
 			localDatabase = new PouchDB("openNote");
 		
-		//Indexes
-			// create a design doc
-				var parentFolderDesignDoc = {
-					_id: "_design/folder",
-					views: {
-						parentFolderID: {
-							map: function (doc) {
-							  emit(doc.parentFolderID);
-							}.toString()
-						}
-					}
-				};
-		
-			// save the design doc
-				localDatabase.put(parentFolderDesignDoc).catch(function (err) {
-					if (err.status !== 409) {
-						throw err;
-					}
-					// ignore if doc already exists
-				});
+		//Indexes	
+			localDatabase.put(createDesignDoc("parentFolderID",function (doc) {
+				  emit(doc.parentFolderID);
+			})).catch(function (err) {
+				if (err.status != 409) 
+					throw err;
+				// ignore if doc already exists
+			});
 				
 		//Re-init sync		
 			var url = localStorage.getItem("remoteURL");
@@ -104,7 +106,7 @@ openNote.service("storageService", function ($rootScope) {
 	 * @param callback - query callback handler
 	 */
 	this.loadFolderContents = function(folderID, callback){
-		localDatabase.query("folder/parentFolderID", {key: folderID, include_docs: true}).then(callback);
+		localDatabase.query("parentFolderID", {key: folderID, include_docs: true}).then(callback);
 	};
 	
 	/**

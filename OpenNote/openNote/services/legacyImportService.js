@@ -13,6 +13,14 @@ openNote.service("legacyImportService", function (	$http,
 	var folderImportSuffix="importFolder";
 	
 	/**
+	 * Set service url
+	 * @param url - the url to save
+	 */
+	this.setServiceURL = function(url){
+		localStorage.setItem("serviceURL",url);
+	};
+	
+	/**
 	 * Import from legacy
 	 */
 	this.import = function(){

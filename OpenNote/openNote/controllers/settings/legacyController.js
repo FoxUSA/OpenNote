@@ -11,12 +11,14 @@ openNote.controller("legacyController", function(	$scope,
 	
 	$scope.username = userService.getUsername();
 	$scope.password = "";
-	//FIXME service url
+	$scope.url = config.servicePath();
 	
 	/**
 	 * Handle login
 	 */
 	$scope.login = function(){
+		legacyImportService.setServiceURL($scope.url);
+		
 		userService.login($scope.username, $scope.password).then(function(data){
 			if(data)
 				alertify.success("Credentials Accepted");		
@@ -29,6 +31,8 @@ openNote.controller("legacyController", function(	$scope,
 	 * Handle register
 	 */
 	$scope.register = function(){
+		legacyImportService.setServiceURL($scope.url);
+		
 		userService.register($scope.username, $scope.password).then(function(data){
 			if(data)
 				alertify.success("Credentials Accepted");		

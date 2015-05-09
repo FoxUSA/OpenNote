@@ -11,7 +11,7 @@ openNote.value("config", {
 	},
 	
 	/**
-	 * Get udate URL 
+	 * Get update URL 
 	 */
 	getUpdateURL: function(){
 		return "//stardrive.us/UpdateService/?appName=OpenNote-prod";
@@ -21,6 +21,10 @@ openNote.value("config", {
 	 * http path to backend rest service
 	 */
 	servicePath: function(){
+		var url = localStorage.getItem("serviceURL");
+		if(url)
+			return url;
+		
 		return "./Service/service.php";
 	},
 	
