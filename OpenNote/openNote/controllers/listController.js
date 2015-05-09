@@ -58,7 +58,6 @@ openNote.controller("listController", function(	$scope,
 
 				$scope.treeBuffer = 0;
 				$timeout(increaseTreeBuffer,config.fadeSpeedLong());
-				$scope.$apply();
 			});
     });
 
@@ -77,7 +76,6 @@ openNote.controller("listController", function(	$scope,
 		storageService.loadFolderContents(folder.doc._id,function (results) {
 			folder.foldersInside=results.rows.filter(folderFilter);
 			folder.foldersInside.forEach(loadFolderContents);
-			$scope.$apply();
 		});
 	};
 
@@ -131,7 +129,7 @@ openNote.controller("listController", function(	$scope,
     var increaseTreeBuffer = function(){
         if($scope.treeBuffer<=$scope.data.length) {
         	$scope.treeBuffer++;
-            $timeout(increaseTreeBuffer, 500);
+            $timeout(increaseTreeBuffer, 100);
         }
         else
             $rootScope.$emit("listLoaded", {});//Tell the world we are done
