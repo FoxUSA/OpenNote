@@ -240,16 +240,6 @@ openNote.controller("folderController", function(	$scope,
 		return storageService.typeFilter(object,"note");
 	};
 
-	//Up a folder function
-		if(parentFolder!=null)
-			dragula([document.getElementById("parentFolder"), document.getElementById(right)]).on("drag", function (el) {
-				el.className = el.className.replace(' animazing', '');
-			}).on('drop', function (el) {
-				setTimeout(function () {
-					el.className += ' animazing';
-				}, 0);
-			});
-
 	//Load current folder
 	$timeout($scope.loadCurrentFolder);
 });
