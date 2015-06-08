@@ -59,6 +59,7 @@
 
 				<!-- Directives -->
 					<script src="openNote/directives/randomFadeInDirective.js"></script>
+					<script src="openNote/directives/fadeOutDirective.js"></script>
 
 				<!-- Controllers -->
 					<script src="openNote/controllers/folderController.js"></script>
@@ -76,5 +77,7 @@
 		<div class="col-lg-2 col-md-3 col-sm-4 hidden-xs" ng-include="'openNote/partials/listPartial.html'"></div>
 
 		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	</div>
+
+		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2015 Jacob Liscom</div>
 	</body>
 </html>
