@@ -64,7 +64,7 @@ All you need to do is merge your existing deployment with the release folder whi
 
 ###MySQL(Recomended)
 - Make sure you make a copy of you database and the OpenNote directory
-- Run `Service/model/sql/updateScript/` scripts to roll the database up to current specs.
+- Run `Service/model/sql/updateScripts/` scripts to roll the database up to current specs.
 - You will copy need to copy the upload directory contents into the new upload direcory in `Service/upload`.
 - You will also need to put int you database information in the new config `Service/Config.php`
 
