@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 	//Initializing the configuration object
-	    grunt.initConfig({	
+	    grunt.initConfig({
 	    	//Style
 				less: {
 					devDark: {
@@ -15,12 +15,12 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
 					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
-					    	
+
 					    	"OpenNote/openNote/style/simplicity/dark/style.css": "OpenNote/openNote/style/simplicity/style.less",
 					    	"OpenNote/openNote/style/simplicity/dark/note.css": "OpenNote/openNote/style/simplicity/note.less",
 					    	"OpenNote/openNote/style/simplicity/dark/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
 					    	"OpenNote/openNote/style/simplicity/dark/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
-					    		
+
 					    }
 				 	},
 				 	devLight: {
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
 					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
-					    	
+
 					    	"OpenNote/openNote/style/simplicity/light/style.css": "OpenNote/openNote/style/simplicity/style.less",
 					    	"OpenNote/openNote/style/simplicity/light/note.css": "OpenNote/openNote/style/simplicity/note.less",
 					    	"OpenNote/openNote/style/simplicity/light/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
@@ -55,12 +55,12 @@ module.exports = function(grunt) {
 					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
 					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
 					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less",
-					    	
+
 					    	"OpenNote/openNote/style/simplicity/dark/style.css": "OpenNote/openNote/style/simplicity/style.less",
 					    	"OpenNote/openNote/style/simplicity/dark/note.css": "OpenNote/openNote/style/simplicity/note.less",
 					    	"OpenNote/openNote/style/simplicity/dark/alertify.css": "OpenNote/openNote/style/simplicity/alertify.less",
 					    	"OpenNote/openNote/style/simplicity/dark/intojs.css": "OpenNote/openNote/style/simplicity/introjs.less"
-					    	
+
 					    }
 				 	},
 				 	prodLight: {
@@ -102,15 +102,15 @@ module.exports = function(grunt) {
 		                tasks: ["karma:unit:run"]
 		            }
 		        },
-		        shell: {                            
-		            bowerInstall: {                      
+		        shell: {
+		            bowerInstall: {
 		                command:  [	"cd OpenNote",
 		                			"bower install" ].join("&&")
 		            },
 		            clean:{
 		            	command:  [	"rm -rf build",
 		            	           	"cd OpenNote",
-		                			"rm -rf bower_components",               			
+		                			"rm -rf bower_components",
 		                			"cd openNote/style/invert/",
 		                			"rm -rf dark",
 		                			"rm -rf light"].join("&&")
@@ -123,11 +123,11 @@ module.exports = function(grunt) {
 									"cp -r ../../OpenNoteService-PHP/vendor ./"].join("&&")
 		            }
 		        },
-	        //HTML 5 
+	        //HTML 5
 		        manifest: {
 		            generate: {
 						options: {
-							basePath: "OpenNote/",            
+							basePath: "OpenNote/",
 							exclude: ["openNote.appcache", "Service", "bower_components/intro.js"],
 							verbose: true,
 							timestamp: true,
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
 		                  "**/*.css",
 		                  "**/*.html",
 		                  "**/*.png",
-		                  "**/*.jpg"		                  
+		                  "**/*.jpg"
 		              ],
 		              dest: "openNote/openNote.appcache"
 		            }
@@ -152,19 +152,18 @@ module.exports = function(grunt) {
 	    grunt.loadNpmTasks("grunt-karma");
 	    grunt.loadNpmTasks("grunt-shell");
 	    grunt.loadNpmTasks("grunt-manifest");
-	
+
 	//Task definition
 	    //css
 		    grunt.registerTask("buildDevCSS", ["less:devDark","less:devLight"]);
 		    grunt.registerTask("buildProdCSS", ["less:prodDark","less:prodLight"]);
-		    
+
 		//deployment
-		    grunt.registerTask("buildManifest", ["manifest:generate"]);
-		    grunt.registerTask("clean", ["shell:clean"]);
-		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS", "buildManifest"]);
+		    // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
+		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS", "manifest:generate"]);
 			grunt.registerTask("default", ["build"]);
-			grunt.registerTask("deploy", ["clean", "shell:bowerInstall", "buildProdCSS", "shell:phpPackage"]);
-		
+			grunt.registerTask("deploy", ["shell:clean", "shell:bowerInstall", "buildProdCSS", "manifest:generate", "shell:phpPackage"]);
+
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
 			grunt.registerTask("test", ["karma:travis"])
