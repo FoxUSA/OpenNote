@@ -1,25 +1,34 @@
 <div class="folderPartial">
 	<div id="folderTitleBar">
-		<div id="folderTitle" ng-click="activateFolderEditMode();" data-intro="{{helpContent.folderEditModeButton}}">{{currentFolder.name}}</div>
+		<ol class="breadcrumb">
+		  	<li id="parentFolder" ng-if="parentFolder!=null">
+		  		<a href="#/folder/{{parentFolder._id}}">{{parentFolder.name}}</a>
+		  	</li>
+		  	<li class="active" data-intro="{{helpContent.folderEditModeButton}}" ng-click="activateFolderEditMode();">
+		  		{{currentFolder.name}}
+		  	</li>
+		</ol>
 		<div ng-show="folderEditMode" class="ng-hide fadeIn">
-			<button id="renameFolder" class="customButton" ng-click="renameFolder();">Rename</button>
-			<button id="removeFolder" class="customButton" ng-click="removeFolder();">Delete</button>
+			<button class="customButton ng-hide" ng-click="loadParentFolder();">Go up a folder</button>
+			<button class="customButton" ng-click="renameFolder();">Rename</button>
+			<button class="customButton" ng-click="removeFolder();">Delete</button>
 		</div>
+
 	</div>
-	
-	<div ng-Repeat="folder in currentFolder.foldersInside" class="startHidden randomFadeInDirective box folder" ng-click="loadFolder(folder);">
+
+	<div ng-Repeat="folder in currentFolderContents.filter(folderFilter)" class="startHidden randomFadeInDirective box folder" ng-click="loadFolder(folder);">
 		<h4>
-			{{folder.name}}
+			{{folder.doc.name}}
 		</h4>
 		<p class="box_description"></p>
 		<p class="options">
 			Folder
 		</p>
 	</div>
-	
-	<div ng-Repeat="note in currentFolder.notesInside" class="startHidden box randomFadeInDirective note" ng-click="loadNote(note);">
+
+	<div ng-Repeat="note in currentFolderContents.filter(noteFilter)" class="startHidden box randomFadeInDirective note" ng-click="loadNote(note);">
 		<h4>
-			{{note.title}}
+			{{note.doc.title}}
 		</h4>
 		<p class="box_description"></p>
 		<p class="options">

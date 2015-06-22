@@ -1,10 +1,14 @@
-<div id="sideBar" class="ng-hide noPadding fadeIn" ng-controller="listController" ng-show="showSideBar" data-intro="{{helpContent.listArea}}">
-	<div id="folderList">
+<div id="sideBar"
+	 ng-controller="listController"
+	 ng-show="showSideBar"
+	 data-intro="{{helpContent.listArea}}">
+	<div id="folderList"
+		 class="fadeIn">
        	<div ui-tree="options" id="tree-root">
-       		<ol ui-tree-nodes="" ng-model="data.foldersInside" >
-          		<li ng-repeat="folder in data.foldersInside" 
-          			ui-tree-node 
-          			ng-include="'openNote/partials/treePartial.html'" 
+       		<ol ui-tree-nodes="" ng-model="data" >
+          		<li ng-repeat="folder in data | limitTo: treeBuffer"
+          			ui-tree-node
+          			ng-include="'openNote/partials/treePartial.html'"
           			data-collapsed="!node.collapsed"></li>
        		</ol>
        	</div>

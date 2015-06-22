@@ -1,0 +1,45 @@
+<div class="settingsPartials">
+	<div class="titleBar">Database</div>
+	<div id="search" class="box big settings">
+		<form class="col-xs-12 col-md-6">
+			<h4>Options</h4>
+			<div class="form-group">
+				<label>Backup file</label>
+				<button class="form-control customButton fadeIn" ng-click="generateBackup()" ng-hide="downloadFile">
+					Generate backup file
+				</button>
+				<a 	href="{{downloadFile}}" 
+					download="OpenNote.json" 
+					class="form-control customButton ng-hide fadeIn text-center" 
+					ng-show="downloadFile">Download file</a>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton fadeIn" ngf-select ngf-change="upload($files)">
+					Restore backup file
+				</button>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton fadeIn" ng-click="deleteDatabase();" >
+					Delete database
+				</button>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton fadeIn" ng-click="cleanOrphans();" >
+					Clean up database orphans
+				</button>
+			</div>
+		</form>
+		<form class="col-xs-12 col-md-6">		
+			<h4>Settings</h4>	
+			<div class="form-group">
+				<label>Replication url</label>
+				<input ng-model = "url" type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton" ng-click="save()">
+					Save
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

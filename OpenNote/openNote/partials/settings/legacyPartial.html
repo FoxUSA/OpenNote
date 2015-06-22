@@ -1,0 +1,33 @@
+<div class="settingsPartials">
+	<div class="titleBar">File/Legacy Service</div>
+	<div id="search" class="box big settings">
+		<form >		
+			<h4>Settings</h4>	
+			<div class="form-group">
+				<label>Username</label>
+				<input ng-model = "username" type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input ng-model = "password" type="password" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>Service URL</label>
+				<input ng-model = "url" type="text" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton" ng-click="login();">
+					Login
+				</button>
+				<button class="form-control customButton" ng-click="register();">
+					Register
+				</button>
+			</div>
+			<div class="form-group">
+				<button class="form-control customButton" ng-click="import();">
+					Import legacy database
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

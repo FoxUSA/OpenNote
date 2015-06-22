@@ -1,32 +1,34 @@
 /**
- * @author - Jake Liscom 
+ * @author - Jake Liscom
  * @project - OpenNote
  */
 
 /**
- * Control 
+ * Control
  */
-openNote.controller("listController", function(	$scope, 
-												$rootScope, 
-												folderFactory,
+openNote.controller("listController", function(	$scope,
+												$rootScope,
 												$timeout,
-												userService) {	
-	$scope.data = new folderFactory();
-	
+												storageService,
+												userService,
+												$timeout,
+												config) {
+	$scope.data = {};
+
 	/**
 	 * Toggle collapse
 	 */
     $scope.toggle = function(scope) {
     	scope.toggle();
     };
-    
+
     /**
      * get the root node scope
      */
     var getRootNodesScope = function() {
     	return angular.element(document.getElementById("tree-root")).scope();
     };
-    
+
     /**
      * Collapse All
      */
@@ -46,14 +48,37 @@ openNote.controller("listController", function(	$scope,
     /**
      * Load list view
      */
-    $rootScope.$on("reloadListView", function(event, args) {
-	    $scope.data.$get({levels:100, includeNotes: false}).then(function(result){
-	    	$scope.treeBuffer = 0;
-	    	$scope.data=result;
-	    	increaseTreeBuffer();
-	    });
+    $rootScope.$on("reloadListView", function(event, args) {//FIXME
+		if(window.innerWidth<750)//Dont do anything if we are not larger than bootstrap xs
+			return;
+
+    	storageService.loadFolderContents(null, function (results) {
+				$scope.data=results.rows.filter(folderFilter);
+				$scope.data.forEach(loadFolderContents);
+
+				$scope.treeBuffer = 0;
+				$timeout(increaseTreeBuffer,config.fadeSpeedLong());
+			});
     });
-    
+
+    /**
+     * @param item - the item the filter
+     */
+    var folderFilter = function(item){
+    	return item.doc.type=="folder";
+    }
+
+	/**
+	 * Load the current folders contents
+	 * @param folder - the folder to pull the content from
+	 */
+	var loadFolderContents = function(folder){
+		storageService.loadFolderContents(folder.doc._id,function (results) {
+			folder.foldersInside=results.rows.filter(folderFilter);
+			folder.foldersInside.forEach(loadFolderContents);
+		});
+	};
+
     /**
      * List Config object
      */
@@ -63,58 +88,53 @@ openNote.controller("listController", function(	$scope,
     	 */
 		beforeDrop: function(event) {
 	    	var sourceFolder = event.source.nodeScope.$modelValue;
-	    	
+
 	    	var destFolder=null;
 	    	if(event.dest.nodesScope.$nodeScope != null)
 	    		destFolder = event.dest.nodesScope.$nodeScope.$modelValue;
-	        
+
 	        var destName="Home";
         	var destID = null
         	if(destFolder!=null){//is dest the home folder?
-        		destName=destFolder.name;//Set defaults
-        		destID = destFolder.id;
+        		destName=destFolder.doc.name;//Set defaults
+        		destID = destFolder.doc._id;
         	}
-	        
-	        if(sourceFolder.parrentFolderID!=destID){
+
+	        if(sourceFolder.doc.parentFolderID!=destID){
 	        	//Confirm action
-	        	alertify.confirm("Are you sure you want to move "+sourceFolder.name+" into "+ destName+"?" , function (confirm) {
+	        	alertify.confirm("Are you sure you want to move "+sourceFolder.doc.name+" into "+ destName+"?" , function (confirm) {
 	        	    if (confirm) {
-	        	    	var folderType = new folderFactory();
-	        	    	var origParrentFolderID=sourceFolder.parrentFolderID;
-	        	    	
-	        	    	sourceFolder.__proto__=folderType.__proto__;//Cast this object as a resources
-	        	    	
-	        	    	sourceFolder.parrentFolderID=destID;
-	        	    	sourceFolder.$update().then(function(){//wait for a response
-	        	    		//fire off an event to tell everyone we just modified a folder
-			        	    	$rootScope.$emit("changedFolder", {
-			        	    		folder: sourceFolder, 
-			        	    		oldParrentFolderID: origParrentFolderID
-			        	    	});
-	        	    	});
+	        	    	var origParrentFolderID=sourceFolder.parentFolderID;
+
+	        	    	sourceFolder.doc.parentFolderID=destID;
+	        	    	storageService.database().put(sourceFolder.doc).then(function(result){
+	        	    		$rootScope.$emit("changedFolder", {//fire off an event to tell everyone we just modified a folder
+		        	    		folder: sourceFolder,
+		        	    		oldParrentFolderID: origParrentFolderID
+		        	    	});
+	        	    	}).catch(function(error){
+	        	    		console.log(error);//FIXME
+	    				});
 	        	    }
 	        	    else
-	        	    	$rootScope.$emit("reloadListView", {}); //refresh either way
-	        	    //event.source.nodeScope.$$apply = false;
-	        	    //TODO if they cancel reset list instead of re pulling it
+    	    			$rootScope.$emit("reloadListView", {}); //refresh either way
 	        	});
-	        }	
+	        }
 	    }
     };
-    
+
     /**
     * Render list slowly
     */
     var increaseTreeBuffer = function(){
-        if($scope.treeBuffer<=100) {
+        if($scope.treeBuffer<=$scope.data.length) {
         	$scope.treeBuffer++;
-            $timeout(increaseTreeBuffer, 500);
+            $timeout(increaseTreeBuffer, 100);
         }
         else
             $rootScope.$emit("listLoaded", {});//Tell the world we are done
     }
-    
+
     //Load the lists initially
-    if(userService.hasValidToken())
     	$rootScope.$emit("reloadListView");
 });

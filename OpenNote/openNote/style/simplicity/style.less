@@ -5,8 +5,9 @@
 	@pageBackground: negation(#111, @offset);
 	@navBackground: negation(#000, @offset);
 
-	@updateColor: negation(#CC0000, @offset); 
+	@updateColor: negation(#CC0000, @offset);
 	@folderColor: negation(#8D40CC, @offset);
+	@settingColor: negation(#bbb, @offset);
 	@blankBoxColor: negation(#F06D29, @offset);
 	@primaryTextColor: negation(#DDD, @offset);
 
@@ -16,7 +17,7 @@
 	@treeHandleColor: negation(#bc7146, @offset);
 	@treeHandleBackgroundColor: negation(#0b0908, @offset);
 	@treeHandleBorderColor: negation(#231d17, @offset);
-	
+
 	@copyRightColor: negation(#656565, @offset);
 	@loginInputColor: negation(#444, @offset);
 
@@ -30,7 +31,7 @@ body{
 	background-attachment: fixed;
 	color: @primaryTextColor;
 	cursor: pointer; /* fix for IOS */
-	
+
 	margin-top: 15px;
 }
 
@@ -42,14 +43,14 @@ body{
 	border-color: @loginInputColor;
 	box-shadow:none;
 	color: inherit;
-}
 
-.form-control:focus{
+	&:focus{
 		box-shadow:none;
-}
+	}
 
-.form-control.customButton{
-	font-weight: bold;
+	.customButton{
+		font-weight: bold;
+	}
 }
 
 #update{/*Update span style*/
@@ -66,7 +67,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 /* dont color hyperlinks*/
 	a:link,a:hover,a:visited,a:active {
-	  	color:inherit; 
+	  	color:inherit;
 	  	text-decoration:inherit;
 	}
 
@@ -75,9 +76,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 	padding: 15px 30px;
 	overflow: hidden;
 	font-size: 18px;
-	
+
 	border-radius:4px;/*round the corners*/
-	
+
 	margin-left: 15px;
 	margin-right: 15px;
 	margin-bottom: 15px;
@@ -88,7 +89,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 	padding: 15px 30px;
 	overflow: hidden;
 	font-size: 18px;
-	
+
 	margin-top: 10px;
 	border-radius:4px;/*round the corners*/
 }
@@ -97,38 +98,42 @@ input:focus, select:focus, textarea:focus, button:focus {
 	padding: 15px 0px;
 	overflow: hidden;
 	font-size: 18px;
+
+	.breadcrumb{
+		margin-bottom:0;
+		padding: 0 15px 0 0;
+		background: none;
+		float:left;
+
+		>.active{
+			color:inherit;
+		}
+
+		li{
+			font-size: 20px;
+		}
+	}
 }
 
 	#folderTitle{
 		float:left;
 		padding-right:15px;
 		font-size: 20px;
-	}	
+	}
 
 .customButton{ /*custom button class that removes all browser formating*/
 	border: none;
 	background:transparent;
 	overflow: hidden;
-	
+
 	background-color: transparent;
 	color: inherit;
-	
-	font-family: inherit; 
+
+	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
 	border-radius:4px;/*round the corners*/
 }
-
-a.customButton, a.customButton.folder {
-	line-height: 3ex !important;
-	display: inline !important;
-	color: @primaryTextColor;
-}
-
-	.customButton:hover,a.customButton.folder:hover {
-		color: @navBackground;
-		background: @primaryTextColor;
-	}	
 
 img {
 	border: none; /*stupid IE*/
@@ -144,10 +149,11 @@ img {
 
 #sideBar{
 	background: transparent;
-	
+
 	/*round the corners*/
 	border-radius:4px ;
 	margin-bottom: 15px;
+	padding: 0 15px;
 }
 
 
@@ -160,25 +166,25 @@ img {
 
 		border-width: 1px;
 		border-style:solid;
-		
+
 		background-color: transparent;
 		border-color: @blankBoxColor;
 		color: @primaryTextColor;
 		position: relative;
-		
+
 		overflow: hidden;
 		border-radius:4px;/*round the corners*/
-		
+
 	}
 		.box:hover {/*overiding css when up class is present*/
-				background-color: @blankBoxColor; 
+				background-color: @blankBoxColor;
 			}
 
 		.box_description{
 			height: 80px;
 			overflow: hidden;
 		}
-		
+
 			#itemClass_description{
 				border: none;
 				background:transparent;
@@ -186,50 +192,72 @@ img {
 				width: 100%;
 				overflow: auto;
 				resize:none;
-				
+
 				/* copied from div.event */
 				color: inherit; /*inherit from parrent*/
-				
+
 				/*coped from body to prevent glitch*/
-				font-family: inherit; 
+				font-family: inherit;
 				font-size: inherit;
 				line-height: inherit;
 			}
-		
+
 		.big, .big:hover  {
 			width: auto;
 			height: 100%;
 			margin: 0px 0px 0px 0px;/*reset from box*/
 			border-color: @blankBoxColor;
 			background-color: transparent;
-			
+			padding:10px 30px;
+
 			overflow: hidden;
-			float: none; 
+			float: none;
 		}
 
-			
+
 		.folder {/*overiding css when up class is present*/
 			border-color: @folderColor; /*green*/
-		}
-		
-			.folder:hover {/*overiding css when up class is present*/
-				background-color: @folderColor; 
+
+			:hover {
+				background-color: @folderColor;
 			}
-			
+		}
+
+		div.box.settings {
+			background: @settingColor;
+
+			&:hover {
+				background: lighten(@settingColor, 10%);
+			}
+		}
+
+		div.box.big.settings {
+			background: @settingColor;
+
+			&:hover {
+				background: @settingColor;;
+			}
+		}
+
 		.search, .search:hover{
 			border-color: negation(@folderColor, #FFFFFF);
 		}
-		
-		.searchPartial{
+
+		.search option{
+			background-color: @pageBackground;
+		}
+
+		.searchPartia,
+		.settingsPartialsl{
 			margin-bottom: 30px;
 		}
 
-					
+
 		h1,h2,h3,h4,h5,h6 {
 			margin: 0 0 10px 0;
 			font-weight: normal;
 		}
-			
+
 			.inputField{
 				border: none;
 				background:transparent;
@@ -238,24 +266,24 @@ img {
 
 				/* copied from div.event */
 				color: inherit; /*inherit from parrent*/
-				
+
 				/*coped from body to prevent glitch*/
-				font-family: inherit; 
+				font-family: inherit;
 				font-size: inherit;
 				line-height: inherit;
-				
+
 				width: 80%;
 			}
-			
+
 			.smallInputField{ width: 35px;}/*override*/
-			
+
 			.options {
 				position: absolute;/*Always putting the option on the bottom*/
 				width: 93%;
 				bottom: 0px;
 			}
-			
-		
+
+
 		.bar .options{ /*override*/
 			width: 98%;
 		}
@@ -263,18 +291,18 @@ img {
 	.noPadding{
 		padding: 0;
 	}
-	
+
 	.noMargin{
 		margin: 0;
-		
+
 	}
-	
+
 	.noShadow{
 		box-shadow: none;
 	}
-	
+
 /*Tree styles*/
-	
+
 	.btn {
 	    margin-right: 8px;
 	    border: none;
@@ -282,25 +310,25 @@ img {
 	    width: 15px;
 		background: @folderColor;
 	}
-	
+
 	.btn.collapsed{
 		background: none;
 		border-style: solid;
 		border-color: @folderColor;
 		border-width: 1px;
 	}
-	
+
 	.angular-ui-tree-handle {
 	    color: @primaryTextColor;
 	    padding: 10px 10px;
 	}
-	
+
 	.angular-ui-tree-handle:hover {
 	    color: @treeHandleColor;
 	    background: @treeHandleBackgroundColor;
 	    border-color: @treeHandleBorderColor;
 	}
-	
+
 	.angular-ui-tree-placeholder {
 	    background: @treePlaceholderBackground;
 	    border: 2px dashed @treePlaceholderBorder;
@@ -308,110 +336,19 @@ img {
 	    -moz-box-sizing: border-box;
 	    box-sizing: border-box;
 	}
-	
+
 	.angular-ui-tree-handle:hover {
 	}
-	
+
 	.tree-node-content {
 	    margin: 10px;
 	}
-	
+
 	.angular-ui-tree-empty {
 		display: none;
-	}
-	
-/*Login*/
-	form label {
-		display: block;
-	}
-
-	input {
-		padding: 8px;
-		font-size: 16px;
-		width: 250px;
-		border: 1px solid @loginInputColor;
-		border-radius: 4px;
-		background-color: inherit;
-	}
-
-	.button {
-		padding: 8px;
-		background-color: @blankBoxColor;
-		width: auto !important;
-		border: 0;
-		color: @navBackground;
-		font-weight: bold;
-		cursor: pointer;
-		border-radius: 0px;
-		border-radius:4px;/*round the corners*/
-	}
-
-	.button:hover {
-		background: @primaryTextColor;
-	}
-
-	a.button {
-		text-decoration: none;
-	}
-
-	#login{
-		width: 100%;
-		margin: 0px;
-		padding: 0px;
-	}
-
-	#register{
-		width: 100%;
-		margin: 0px;
-		padding: 0px;
-	}
-
-	#userAvailability{
-		font-size: 12px;
-		margin-left: 10px;
-		font-weight: bold;
-	}
-
-	div.loginPartial{
-		margin-left: 10%;
-		margin-top: 10%;
-	}
-
-	.homeBox{
-		background-color: @navBackground;
-		padding: 30px 50px;
-		margin-right: 15px;
-		font-size: 25px;
-		overflow: hidden;
-		float: left;
-		color: @blankBoxColor;
-		
-		border-radius:4px;/*round the corners*/
-	}
-
-	.homeBox:hover{
-		background-color: @blankBoxColor;
-		color: @navBackground;
-		cursor: pointer;
-	}
-
-	.homeBoxText:hover{
-		cursor: pointer;
-	}
-
-	a{
-		color: @blankBoxColor;
-	}
-
-	.clear{
-		clear: both;
 	}
 
 	#copyRight{
 		color: @copyRightColor;
+		margin-left: 35px;
 	}
-	
-	.loginPartial form input{
-		width: 250px;
-	}
-	

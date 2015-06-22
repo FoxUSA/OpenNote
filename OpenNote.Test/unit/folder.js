@@ -1,14 +1,12 @@
-var createFolder = function(id,parrentFolderID, name,userID,foldersInside,notesInside,uerID){
+var createFolder = function(id,parentFolderID, name){
 	return {
-       "id": id,
-       "parrentFolderID": parrentFolderID,
-       "name": name,
-       "userID": userID,
-       "foldersInside": foldersInside,
-       "notesInside": notesInside,
-       "uerID": uerID
+       "_id": id,
+       "parentFolderID": parentFolderID,
+       "name": name
     }
 };
+
+//TODO storageService save folder twice
 
 describe("folderController", function() {
 	var $scope;
@@ -31,25 +29,27 @@ describe("folderController", function() {
 			findButton: ""
 		};
 		
+		$rootScope.buttons=[];
+		
 		/**
-		 * Factory to create controller
+		 * Factory to create mock controller
 		 */
-		createController = function(scope, rootScope, location, routeParams, folderFactory, config){
+		createController = function(scope, rootScope, location, routeParams, storageService, config, timeout){
 			return $controller("folderController", 
 				{$scope:scope}, 
 				{$rootScope:rootScope}, 
 				{$location:location}, 
 				{$routeParams: routeParams}, 
-				{folderFactory: folderFactory}, 
-				{config:config}
+				{storageService: storageService}, 
+				{config:config},
+				{$timeout:timeout}
 			);
 		}
-		//{$scope: scope }, $rootScope, $location, {$routeParams: []}, folderFactory, config
 	}));
 	
-	it("should not show folder edit buttons if current folder is home", inject(function($location, config) {//inject location and config
-		var folderController = createController($scope, $rootScope, $location, [], null, config);
-		$scope.currentFolder = createFolder(null,null,null,null,null,null,null);
+	it("should not show folder edit buttons if current folder is home", inject(function($location, config, $timeout) {//inject location and config
+		var folderController = createController($scope, $rootScope, $location, [], null, config, $timeout);
+		$scope.currentFolder = createFolder(null,null,null);
 		
 		expect($scope.folderEditMode).toEqual(false);
 		$scope.activateFolderEditMode();//simulate title click
@@ -57,27 +57,12 @@ describe("folderController", function() {
 		
     }));
 	
-	it("should show folder edit buttons if current folder is not home", inject(function($location, config) {//inject location and config
-		var folderController = createController($scope, $rootScope, $location, [], null, config);
-		$scope.currentFolder = createFolder(123,null,"Not Home",null,[],[],321);
+	it("should show folder edit buttons if current folder is not home", inject(function($location, config, $timeout) {//inject location and config
+		var folderController = createController($scope, $rootScope, $location, [], null, config, $timeout);
+		$scope.currentFolder = createFolder(123,null,"Not Home");
 		
 		expect($scope.folderEditMode).toEqual(false);
 		$scope.activateFolderEditMode();//simulate title click
 		expect($scope.folderEditMode).toEqual(true);		
-    }));
-	
-	/*
-	//Todo need to set current folder via like
-	it("should push new folder and find no mater folder level and new note only if not at home level", inject(function(folderFactory,$location, config) {//inject location and config
-		var folderController = createController($scope, $rootScope, $location, [], folderFactory, config);
-		
-		$scope.currentFolder = createFolder(null,null,"Home",null,null,null,null);//home folder
-		expect($rootScope.buttons.length).toEqual(2);//New folder and find
-		
-		$scope.currentFolder = createFolder(123,null,"Not Home",null,[],[],321);//child of home
-		expect($rootScope.buttons.length).toEqual(3);//Same as above pluss new note
-	
-    }));
-    */
-    
+    }));    
 });
