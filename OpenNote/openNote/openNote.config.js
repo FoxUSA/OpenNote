@@ -2,21 +2,21 @@
  * Angular js config file
  */
 openNote.value("config", {
-	
+
 	/**
 	 * Get current version
 	 */
 	getVersion: function(){
-		return "15.05.00";
+		return "15.07.00";
 	},
-	
+
 	/**
-	 * Get update URL 
+	 * Get update URL
 	 */
 	getUpdateURL: function(){
 		return "//stardrive.us/UpdateService/?appName=OpenNote-prod";
 	},
-	
+
 	/**
 	 * http path to backend rest service
 	 */
@@ -24,24 +24,24 @@ openNote.value("config", {
 		var url = localStorage.getItem("serviceURL");
 		if(url)
 			return url;
-		
+
 		return "./Service/service.php";
 	},
-	
+
 	/**
 	 * Used to compute random short fade speed
 	 */
-	fadeSpeedShort: function(){ 
+	fadeSpeedShort: function(){
 		return 250*Math.random()+200;
 	},
-	
+
 	/**
 	 * Used to compute random long fade speed
 	 */
 	fadeSpeedLong: function(){
 		return 2000*Math.random()+200;
 	},
-	
+
 	/**
 	 * returns help contents
 	 */
@@ -61,17 +61,17 @@ openNote.value("config", {
 			noteTitle: "This the note title field. In edit mode, you can use it to edit the notes title."
 		}
 	},
-	
+
 	/**
 	 * Do we want to show the help button
 	 */
 	showHelpButton: function(){
 		return true;
 	},
-	
+
 	/**
 	 * Get server config
-	 * return - 
+	 * return -
 	 */
 	getServerConfig: function(){
 		return $resource(config.servicePath()+"/config/", {}, {//{} default params
@@ -80,13 +80,13 @@ openNote.value("config", {
 	        }
 	    }).$get();
 	},
-	
+
 	/**
 	 * See if we are dark or light
 	 */
 	isDarkTheme: function(){
 		return false;
-	}	
+	}
 });
 
 /**
