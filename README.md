@@ -1,13 +1,8 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
 ![][responsive]
-<<<<<<< HEAD
 In a post 9/11 world of mass digital surveillance, there is only one way to keep your digital information safe.
 In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
-=======
-In a post 9/11 world of mass digital survailence, there is only one way to keep your digital information safe.
-In the United States, you do not have have 4th amendment rights if you entrust you information to a third party.
->>>>>>> 7c828d12365db60e80fc7cbaa5ed54ed186fa9ca
 
 The fix is to take personal responsibility and host applications yourself.
 
@@ -55,13 +50,6 @@ Upcoming Features
 - Install script
 - Move Notes (Feature lost when migrating to Angular based list)
 - Mobile App
-
-User Wish List
---------------
-List of things users are wishing for that have not made it into the pipeline.
-Please do not re-submit issues for these features. Instead, how about a donation with the feature in the comment?
-
-- Out of box PostgreSQL support. PDO connector support PostgreSQL.
 
 Documentation
 -----------------
