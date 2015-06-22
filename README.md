@@ -23,7 +23,7 @@ Thank you!
 
 Demo
 -------
-http://stardrive.us/OpenNote/
+https://foxusa.github.io/OpenNote/OpenNote/
 
 
 ![][topLevel]

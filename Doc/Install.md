@@ -3,7 +3,7 @@
 
 # HTML5 based new super fancy version
 ## Web app
-Just extract in a HTML5 compatible webserver public directory. Or just use the GitHub hosted version.
+Just extract in a HTML5 compatible webserver public directory. Or just use the [GitHub hosted version](https://foxusa.github.io/OpenNote/OpenNote/).
 
 ## CouchDB Install
 If you want sync your notes with a server, you will need to install CouchDB.
