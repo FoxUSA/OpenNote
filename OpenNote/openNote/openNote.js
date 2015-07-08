@@ -28,7 +28,7 @@ openNote.run(function (	$rootScope,
     	//server config values
     		serverConfigService.getConfig().then(function(config){
     			if(!config)
-    				alertify.error("Connection to service failed");
+    				console.error("Connection to service failed");
     			else
     				$rootScope.serverConfig=config;
     		}); //attach server config to root scope
