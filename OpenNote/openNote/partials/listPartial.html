@@ -6,7 +6,7 @@
 		 class="fadeIn">
        	<div ui-tree="options" id="tree-root">
        		<ol ui-tree-nodes="" ng-model="data" >
-          		<li ng-repeat="folder in data | limitTo: treeBuffer"
+          		<li ng-repeat="folder in data | orderBy: 'doc.name' | limitTo: treeBuffer"
           			ui-tree-node
           			ng-include="'openNote/partials/treePartial.html'"
           			data-collapsed="!node.collapsed"></li>
