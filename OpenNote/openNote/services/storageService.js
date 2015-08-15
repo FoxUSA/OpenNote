@@ -128,7 +128,8 @@ openNote.service("storageService", function ($rootScope) {
 		localDatabase.allDocs({
 		  include_docs: true
 		}).then(function (result) {
-			callback("data:application/octet-stream;charset=utf8," + encodeURIComponent(JSON.stringify({ data:result.rows})));
+			var file = new Blob([JSON.stringify({ data:result.rows})], {type : "application/json"}); // the blob
+			callback(URL.createObjectURL(file));
 		});
 	};
 
@@ -149,30 +150,79 @@ openNote.service("storageService", function ($rootScope) {
 	};
 
 	/**
+	 * Delete a folder tree
+	 * @param  folder - the folder doc to delete
+	 * @param callback - callback when the given folder has been removed
+	 */
+	this.deleteFolder = function(folder,callback){
+		self.loadFolderContents(folder.id, function (results) {
+			results.rows.filter(self.noteFilter).forEach(function(note){
+				localDatabase.remove(note.doc);
+			});
+
+			results.rows.filter(self.folderFilter).forEach(function(subFolder){
+				self.deleteFolder(subFolder);
+			});
+		});
+
+		localDatabase.remove(folder.doc).then(callback);
+	};
+
+
+	/**
 	 * Find an clean the orphans
 	 * That is delete docs whose parent id is not null and does not exist in the database
 	 */
-	this.cleanOrphans = function(){
+	this.cleanOrphans = function(callback){
+		var map = {};
+		var length = 0;
+		var processed = 0;
 
 		/**
-		 * the results doc
+		 * Check to see if we have processed all the records
+		 * @return {[type]} [description]
+		 */
+		var doneCheck = function(){
+			processed++;
+			console.log(processed+"/"+length)
+			if(processed>=length)
+				orphanRemover();
+		}
+
+		/**
+		 * Find orphans
 		 * @param result - the result object as returned by allDocs
 		 */
 		var orphanHunter = function(result){
 			if(!result.doc.parentFolderID)//nulls are root and cannot be orphans
-				return;
+				return doneCheck();
 
-			localDatabase.get(result.doc.parentFolderID).catch(function(err){
-				if(err.status=404)
-					localDatabase.remove(result.doc);
+			localDatabase.get(result.doc.parentFolderID).then(doneCheck).catch(function(err){
+				if(err.status==404)
+					map[result.id]=result;
 				else
 					throw err
+
+				doneCheck();
 			});
 		};
 
+		/**
+		 * Remove the orphans
+		 */
+		var orphanRemover = function(){
+			for(var orphan in map){
+				if(self.typeFilter(map[orphan],"folder"))
+					self.deleteFolder(map[orphan]);
+				else
+					localDatabase.remove(map[orphan].doc);
+			}
+		}
+
 		localDatabase.allDocs({
-		  include_docs: true
+			include_docs: true
 		}).then(function (result) {
+			length=result.rows.length;
 			result.rows.forEach(orphanHunter);
 		});
 	};

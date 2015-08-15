@@ -171,7 +171,7 @@ openNote.controller("folderController", function(	$scope,
 					return;
 
 				var parrentFolderID = $scope.currentFolder.parrentFolderID;
-				storageService.database().remove($scope.currentFolder).then(function(result){
+				storageService.deleteFolder($scope.currentFolder, function(){
 					$rootScope.$emit("reloadListView", {});
 
 					if(parrentFolderID==null)
@@ -230,14 +230,14 @@ openNote.controller("folderController", function(	$scope,
 	 * Filter out everything but type folder
 	 */
 	$scope.folderFilter=function(object){
-		return storageService.typeFilter(object,"folder");
+		return storageService.folderFilter(object);
 	};
 
 	/**
 	 * Filter out everything but type note
 	 */
 	$scope.noteFilter=function(object){
-		return storageService.typeFilter(object,"note");
+		return storageService.noteFilter(object);
 	};
 
 	//Load current folder
