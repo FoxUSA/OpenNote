@@ -184,7 +184,6 @@ openNote.service("storageService", function ($rootScope) {
 		 */
 		var doneCheck = function(){
 			processed++;
-			console.log(processed+"/"+length)
 			if(processed>=length)
 				orphanRemover();
 		}
