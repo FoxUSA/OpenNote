@@ -63,7 +63,7 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 						temp.contentsCss = "openNote/style/invert/light/note.css";
 
 				//configure the upload path if uploads are enabled
-					if(data.uploadEnabled && userService.hasValidToken()){
+					if(data && data.uploadEnabled && userService.hasValidToken()){
 						temp.filebrowserUploadUrl = config.servicePath()+"/file/"+"?token="+userService.getAPITokenObject().token;//FIXME
 						temp.filebrowserImageUploadUrl = temp.filebrowserUploadUrl;
 					}

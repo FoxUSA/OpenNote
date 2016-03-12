@@ -48,7 +48,7 @@ openNote.service("userService", function ($http, $q, config) {
 	 */
 	this.getAPITokenString = function(){
 		var tokenObject = this.getAPITokenObject();
-		if(tokenObject!==null)
+		if(tokenObject)
 			return tokenObject.token;
 		return null;
 	};
