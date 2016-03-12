@@ -148,7 +148,7 @@ module.exports = function(grunt) {
 		                  "**/*.png",
 		                  "**/*.jpg"
 		              ],
-		              dest: "openNote/openNote.appcache"
+		              dest: "OpenNote/openNote.appcache"
 		            }
 		          }
 		});
