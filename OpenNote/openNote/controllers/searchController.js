@@ -1,8 +1,8 @@
 /**
  * Search
  */
-openNote.controller("searchController", function(	$scope, 
-													$rootScope, 
+openNote.controller("searchController", function(	$scope,
+													$rootScope,
 													config,
 													storageService,
 													$location) {
@@ -14,18 +14,18 @@ openNote.controller("searchController", function(	$scope,
 			field: "Both",
 			search: ""
 	};
-	
-	$scope.notes;
-	$scope.folders
-	
+
+	$scope.notes = null;
+	$scope.folders = null;
+
 	/**
 	 * Search the database
 	 */
 	$scope.search = function(){
 		$scope.notes=[];
 		$scope.folders=[];
-		
-		var removeDuplicates = function(array, callback){
+
+		var removeDuplicates = function(array){
 			var listOfIDs = [];
 			array.forEach(function(element){//for each is synchronous
 				var index=listOfIDs.indexOf(element.id);
@@ -35,13 +35,13 @@ openNote.controller("searchController", function(	$scope,
 					array.splice(index, 1);
 			});
 			return array;
-		}
-		
+		};
+
 		var appendNotes = function(notes){
 			$scope.notes=removeDuplicates($scope.notes.concat(notes));
 			$scope.$apply();
 		};
-		
+
 		var appendFolders = function(folders){
 			$scope.folders=$scope.folders.concat(folders);
 			$scope.$apply();
@@ -50,19 +50,19 @@ openNote.controller("searchController", function(	$scope,
 		var type = $scope.searchRequest.type;
 		var search = $scope.searchRequest.search;
 		var field = $scope.searchRequest.field;
-		
+
 		if(type=="Both" || type=="Folders")
 			storageService.searchFolderNames(search,appendFolders);
-		
+
 		if(type=="Both" || type=="Notes"){
 			if(field=="Both" || type=="Title")
 				storageService.searchNoteTitles(search,appendNotes);
-				
+
 			if(field=="Both" || type=="Body")
 				storageService.searchNoteBody(search,appendNotes);
-		};
-	}
-	
+		}
+	};
+
 	/**
 	 * Load a folder
 	 * @param folder- the folder to load
@@ -72,7 +72,7 @@ openNote.controller("searchController", function(	$scope,
 			$location.url("/folder/"+folder.doc._id);
 		});
 	};
-	
+
 	/**
 	 * Load a note
 	 * @param note - load a note
@@ -82,7 +82,7 @@ openNote.controller("searchController", function(	$scope,
 			$location.url("/note/"+note.doc._id);
 		});
 	};
-	
+
 	/**
 	 * fade out all boxes
 	 */

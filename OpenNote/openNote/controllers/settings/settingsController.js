@@ -1,13 +1,12 @@
 
-openNote.controller("settingsController", function(	$scope, 
-													$rootScope, 
-													$location, 
-													$routeParams, 
-													storageService, 
-													config,
-													$timeout) {
+openNote.controller("settingsController", function(	$scope,
+													$rootScope,
+													$location,
+													$routeParams,
+													storageService,
+													config) {
 
-	
+
 	/**
 	 * fade out all folders
 	 */
@@ -18,7 +17,7 @@ openNote.controller("settingsController", function(	$scope,
 			});
 		});
 	};
-	
+
 	/**
 	 * Load a settings
 	 * @param folder- the folder to load

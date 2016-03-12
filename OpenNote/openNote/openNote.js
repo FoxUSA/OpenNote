@@ -24,7 +24,7 @@ openNote.run(function (	$rootScope,
 
 	$rootScope.helpContent=config.getHelpContent();
 
-    $rootScope.$on("$routeChangeStart", function (event) {
+    $rootScope.$on("$routeChangeStart", function () {
     	//server config values
     		serverConfigService.getConfig().then(function(config){
     			if(!config)
@@ -47,7 +47,7 @@ openNote.run(function (	$rootScope,
 				alertify.success("Token refreshed");
 			else
 				alertify.error("Refreshed token failed");
-		}).catch(function(error){
+		}).catch(function(){
 			alertify.error("Refreshed token failed");
 		});
 
@@ -78,8 +78,6 @@ openNote.run(function (	$rootScope,
         	if(userService.getUsername() && !$rootScope.autoLogInInterval){
         		tokenRefresh();
         		$rootScope.autoLogInInterval=setInterval(tokenRefresh, 1800000);
-        	};
+        	}
 	});
-
-
 });

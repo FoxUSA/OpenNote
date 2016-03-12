@@ -8,7 +8,6 @@
  */
 openNote.controller("listController", function(	$scope,
 												$rootScope,
-												$timeout,
 												storageService,
 												userService,
 												$timeout,
@@ -48,7 +47,7 @@ openNote.controller("listController", function(	$scope,
     /**
      * Load list view
      */
-    $rootScope.$on("reloadListView", function(event, args) {//FIXME
+    $rootScope.$on("reloadListView", function() {//FIXME
 		if(window.innerWidth<750)//Dont do anything if we are not larger than bootstrap xs
 			return;
 
@@ -66,7 +65,7 @@ openNote.controller("listController", function(	$scope,
      */
     var folderFilter = function(item){
     	return item.doc.type=="folder";
-    }
+    };
 
 	/**
 	 * Load the current folders contents
@@ -90,12 +89,12 @@ openNote.controller("listController", function(	$scope,
 	    	var sourceFolder = event.source.nodeScope.$modelValue;
 
 	    	var destFolder=null;
-	    	if(event.dest.nodesScope.$nodeScope != null)
+	    	if(event.dest.nodesScope.$nodeScope)
 	    		destFolder = event.dest.nodesScope.$nodeScope.$modelValue;
 
 	        var destName="Home";
-        	var destID = null
-        	if(destFolder!=null){//is dest the home folder?
+        	var destID = null;
+        	if(destFolder){//is dest the home folder?
         		destName=destFolder.doc.name;//Set defaults
         		destID = destFolder.doc._id;
         	}
@@ -107,7 +106,7 @@ openNote.controller("listController", function(	$scope,
 	        	    	var origParrentFolderID=sourceFolder.parentFolderID;
 
 	        	    	sourceFolder.doc.parentFolderID=destID;
-	        	    	storageService.database().put(sourceFolder.doc).then(function(result){
+	        	    	storageService.database().put(sourceFolder.doc).then(function(){
 	        	    		$rootScope.$emit("changedFolder", {//fire off an event to tell everyone we just modified a folder
 		        	    		folder: sourceFolder,
 		        	    		oldParrentFolderID: origParrentFolderID
@@ -133,7 +132,7 @@ openNote.controller("listController", function(	$scope,
         }
         else
             $rootScope.$emit("listLoaded", {});//Tell the world we are done
-    }
+    };
 
     //Load the lists initially
     	$rootScope.$emit("reloadListView");

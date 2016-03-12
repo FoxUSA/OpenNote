@@ -1,0 +1,12 @@
+{
+    "undef": true,
+    "unused": true,
+    "mocha": true,
+    "strict": false,
+    "browser": true,
+    "couch": true,
+    "devel":true,
+    "jquery":true,
+    "jasmine": true,
+    "predef": [ "injector","angular","alertify","openNote", "PouchDB", "CKEDITOR","inject" ]
+}

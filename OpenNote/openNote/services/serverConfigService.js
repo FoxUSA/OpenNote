@@ -1,59 +1,59 @@
 /**
- * @author - Jake Liscom 
+ * @author - Jake Liscom
  * @project - OpenNote
  */
 
 /**
  * Server configuration service
  */
-openNote.service("serverConfigService", function ($http, $q, config, userService) {	
+openNote.service("serverConfigService", function ($http, $q, config, userService) {
 	/**
 	 * @return - config object promise
 	 */
 	this.getConfig = function(){
-		if(sessionStorage.serverConfig==null)//if we do not have it yet, request it
+		if(sessionStorage.serverConfig===null)//if we do not have it yet, request it
 			return requestServerConfig();
-		
+
 		//make a quick promise
 			var deferred = $q.defer();
 			deferred.resolve(angular.fromJson(sessionStorage.serverConfig));
 			return deferred.promise;
 	};
-	
+
 	/**
 	 * Get server config list from server
 	 */
-	var requestServerConfig = function(){ 
+	var requestServerConfig = function(){
 		return $http.get(config.servicePath() +"/config/").then(
 			function(response){//Successful
 				if(response.status==200){
 					sessionStorage.serverConfig=angular.toJson(response.data);
-					return response.data;	
+					return response.data;
 				}
 				return false;
 			},
-			function(response){
+			function(){
 				return false;
 			}
 		);
 	};
-	
+
 	//FIXME pull register again
-	
+
 	/**
 	 * @param dark - true if dark theme
 	 * @return - ckeditor config object
 	 */
-	this.getEditorConfig = function(){		
+	this.getEditorConfig = function(){
 		var dark = config.isDarkTheme();
 		return this.getConfig().then(function(data){
-			var temp = {					
+			var temp = {
 					removePlugins 				:	"newpage,save,templates,about,liststyle,tabletools,scayt,contextmenu", //remove some icons menu button
 					//extraPlugins				:	"imagepaste",
 					height 						: 	"400px",
 					disableNativeSpellChecker 	: 	false
 				};
-				
+
 				//style sheet
 					if(dark){
 						temp.contentsCss = "openNote/style/invert/dark/note.css";
@@ -61,12 +61,12 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 					}
 					else
 						temp.contentsCss = "openNote/style/invert/light/note.css";
-				
+
 				//configure the upload path if uploads are enabled
 					if(data.uploadEnabled && userService.hasValidToken()){
 						temp.filebrowserUploadUrl = config.servicePath()+"/file/"+"?token="+userService.getAPITokenObject().token;//FIXME
 						temp.filebrowserImageUploadUrl = temp.filebrowserUploadUrl;
-					};
+					}
 				return temp;
 		});
 	};

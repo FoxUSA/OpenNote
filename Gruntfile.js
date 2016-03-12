@@ -1,6 +1,13 @@
 module.exports = function(grunt) {
 	//Initializing the configuration object
 	    grunt.initConfig({
+			jshint: {
+				options:{
+				},
+				all: [	"**/*.js*",//Order matters
+						"!node_modules/**",
+						"!OpenNote/bower_components/**"]
+			},
 	    	//Style
 				less: {
 					devDark: {
@@ -147,6 +154,7 @@ module.exports = function(grunt) {
 		});
 
 	//Plugin loading
+		grunt.loadNpmTasks("grunt-contrib-jshint");
 		grunt.loadNpmTasks("grunt-contrib-less");
 		grunt.loadNpmTasks("grunt-contrib-watch");
 	    grunt.loadNpmTasks("grunt-karma");
@@ -166,6 +174,6 @@ module.exports = function(grunt) {
 
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
-			grunt.registerTask("test", ["karma:travis"])
-			grunt.registerTask("ci", ["build","karma:travis"])
+			grunt.registerTask("test", ["karma:travis"]);
+			grunt.registerTask("ci", ["build","karma:travis"]);
 };

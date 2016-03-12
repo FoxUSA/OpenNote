@@ -12,7 +12,7 @@ openNote.controller("folderController", function(	$scope,
 	$scope.parentFolder = null;
 
 	//add buttons
-		if($routeParams.id!=null)
+		if($routeParams.id)
 			$rootScope.buttons.push({
 				text: "New note",
 				action: function(){
@@ -29,7 +29,7 @@ openNote.controller("folderController", function(	$scope,
 				action: function(){
 					var prompt = "Please enter a name for the new folder";
 
-					if($scope.currentFolder.name!=null)
+					if($scope.currentFolder.name)
 						prompt += "that will be created in "+$scope.currentFolder.name;
 
 					alertify.prompt(
@@ -63,7 +63,7 @@ openNote.controller("folderController", function(	$scope,
 	 */
 	$scope.loadCurrentFolder = function(){
 		//Load the folder
-		if($routeParams.id==null){
+		if(!$routeParams.id){
 			$scope.currentFolder={//FIXME config special root
 					_id:null,
 					name:"Home"};
@@ -74,7 +74,7 @@ openNote.controller("folderController", function(	$scope,
 				$scope.currentFolder=doc;
 				loadCurrentFolderContents();
 
-				if($scope.currentFolder.parentFolderID==null)
+				if(!$scope.currentFolder.parentFolderID)
 					$scope.parentFolder={name:"Home"};
 				else
 					storageService.database().get($scope.currentFolder.parentFolderID).then(function(doc){
@@ -89,7 +89,7 @@ openNote.controller("folderController", function(	$scope,
 	 * Activate folder edit mode if we are not in the home folder
 	 */
 	$scope.activateFolderEditMode = function(){
-		if($scope.currentFolder._id != null)
+		if($scope.currentFolder._id)
 			$scope.folderEditMode = !$scope.folderEditMode;
 	};
 
@@ -97,11 +97,7 @@ openNote.controller("folderController", function(	$scope,
 	 * fade out all folders
 	 */
 	$scope.fadeOutFoldersAndNotes = function(callback){
-		if(		(	$scope.currentFolder.foldersInside !=null
-				&& 	$scope.currentFolder.foldersInside.length>0)
-			||	(	$scope.currentFolder.notesInside !=null
-				&& 	$scope.currentFolder.notesInside.length>0)){
-
+		if($scope.currentFolder.foldersInside||$scope.currentFolder.notesInside){
 			$(".note").fadeTo(config.fadeSpeedShort(),0,function(){
 				$scope.$apply(function(){
 					callback();
@@ -149,11 +145,11 @@ openNote.controller("folderController", function(	$scope,
 
 				$scope.currentFolder.name=data;
 				storageService.database().put($scope.currentFolder).then(function(result){
-					$scope.currentFolder._rev=result.rev
+					$scope.currentFolder._rev=result.rev;
 					$rootScope.$emit("reloadListView", {});
 					$scope.$apply();
 				}).catch(function(error){
-					throw error
+					throw error;
 					//FIXME conflict resolution
 				});
 			},
@@ -174,7 +170,7 @@ openNote.controller("folderController", function(	$scope,
 				storageService.deleteFolder($scope.currentFolder, function(){
 					$rootScope.$emit("reloadListView", {});
 
-					if(parrentFolderID==null)
+					if(!parrentFolderID)
 						$location.url("/folder/");
 					else
 						$location.url("/folder/"+parrentFolderID);
@@ -182,7 +178,7 @@ openNote.controller("folderController", function(	$scope,
 					$scope.$apply();
 				});
 		});
-	}
+	};
 
 	/**
 	 * Listen to changed folder events to see if its the current open folder
@@ -208,7 +204,7 @@ openNote.controller("folderController", function(	$scope,
 		}).catch(function(error){
 			console.log(error);//FIXME
 		});
-	}
+	};
 
 	/**
 	 * Load the current folders contents
@@ -218,9 +214,9 @@ openNote.controller("folderController", function(	$scope,
 			$scope.currentFolderContents=results.rows;
 
 			//Do they have anything to display?
-				if($scope.currentFolder._id==null && $scope.currentFolderContents.length==0){
+				if(!$scope.currentFolder._id && !$scope.currentFolderContents){
 					alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page. If you need to pull your remote notes <a href='#/settings/database'>click here</a>.");
-				};
+				}
 
 			$scope.$apply();
 		});

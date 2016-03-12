@@ -48,7 +48,7 @@ openNote.service("storageService", function ($rootScope) {
 			if(url){
 				remoteDatabase = new PouchDB(url);
 				this.setupSync();
-			};
+			}
 	};
 
 	/**
@@ -62,7 +62,7 @@ openNote.service("storageService", function ($rootScope) {
 	/**
 	 * @return - The remote URL to use in replication
 	 */
-	this.getRemoteURL = function(url){
+	this.getRemoteURL = function(){
 		return localStorage.getItem("remoteURL");
 	};
 
@@ -84,9 +84,9 @@ openNote.service("storageService", function ($rootScope) {
 	 * Setup live sync
 	 */
 	this.setupSync = function(){
-		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function (info) {
+		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function () {
 			alertify.success("Replication complete");
-		}).on("error", function (err) {
+		}).on("error", function () {
 			alertify.error("Replication error");
 		}).on("paused", function () {
 			if(!replicationTimeout)
@@ -95,7 +95,7 @@ openNote.service("storageService", function ($rootScope) {
 					replicationTimeout = null;
 
 					$rootScope.$emit("replicationComplete", {});
-					$rootScope.$apply()
+					$rootScope.$apply();
 				}, 1000);
 		});
 	};
@@ -114,7 +114,7 @@ openNote.service("storageService", function ($rootScope) {
 	 */
 	this.destroyDatabase = function(callback){
 		localDatabase.destroy().then(function(){
-			localStorage.removeItem("remoteURL")
+			localStorage.removeItem("remoteURL");
 			self.init();
 			callback();
 		});
@@ -173,7 +173,7 @@ openNote.service("storageService", function ($rootScope) {
 	 * Find an clean the orphans
 	 * That is delete docs whose parent id is not null and does not exist in the database
 	 */
-	this.cleanOrphans = function(callback){
+	this.cleanOrphans = function(){
 		var map = {};
 		var length = 0;
 		var processed = 0;
@@ -186,7 +186,7 @@ openNote.service("storageService", function ($rootScope) {
 			processed++;
 			if(processed>=length)
 				orphanRemover();
-		}
+		};
 
 		/**
 		 * Find orphans
@@ -200,7 +200,7 @@ openNote.service("storageService", function ($rootScope) {
 				if(err.status==404)
 					map[result.id]=result;
 				else
-					throw err
+					throw err;
 
 				doneCheck();
 			});
@@ -216,7 +216,7 @@ openNote.service("storageService", function ($rootScope) {
 				else
 					localDatabase.remove(map[orphan].doc);
 			}
-		}
+		};
 
 		localDatabase.allDocs({
 			include_docs: true
@@ -235,8 +235,8 @@ openNote.service("storageService", function ($rootScope) {
 		if(doc[property])
 			return doc[property].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
 		else
-			return false
-	}
+			return false;
+	};
 
 	/**
 	 * Search folder names

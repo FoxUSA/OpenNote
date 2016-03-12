@@ -4,10 +4,7 @@
 openNote.controller("databaseController", function(	$scope,
 													$rootScope,
 													storageService,
-													userService,
-													config,
-													$location,
-													Upload) {
+													userService) {
 	$scope.downloadFile = null;
 	$scope.url = storageService.getRemoteURL();
 
@@ -25,7 +22,7 @@ openNote.controller("databaseController", function(	$scope,
 	 */
 	$scope.save = function(){
 		storageService.setRemoteURL($scope.url);
-		$rootScope.$on("replicationComplete", function(event, args) {
+		$rootScope.$on("replicationComplete", function() {
 			$rootScope.$emit("reloadListView", {});
 	    });
 		storageService.setupSync();
@@ -65,7 +62,6 @@ openNote.controller("databaseController", function(	$scope,
 		if(!file || !file.length)
 			return;
 
-		var file = file[0];
         var fileReader = new FileReader();
 
 		alertify.confirm("Are you sure you want import the backup? If there are any conflicts, they will be ignored. You might want to take a backup first.",
@@ -77,7 +73,7 @@ openNote.controller("databaseController", function(	$scope,
 		            storageService.importFile(JSON.parse(event.target.result));
 		        });
 
-		        fileReader.readAsText(file);
+		        fileReader.readAsText( file[0]);
 		});
     };
 });
