@@ -47,7 +47,8 @@ describe("folderController", function() {
 		};
 	}));
 
-	it("should not show folder edit buttons if current folder is home", inject(function() {//inject location and config
+	it("should not show folder edit buttons if current folder is home", inject(function($location, config, $timeout) {//inject location and config
+		createController($scope, $rootScope, $location, [], null, config, $timeout);
 		$scope.currentFolder = createFolder(null,null,null);
 
 		expect($scope.folderEditMode).toEqual(false);
@@ -56,7 +57,8 @@ describe("folderController", function() {
 
     }));
 
-	it("should show folder edit buttons if current folder is not home", inject(function() {//inject location and config
+	it("should show folder edit buttons if current folder is not home", inject(function($location, config, $timeout) {//inject location and config
+		createController($scope, $rootScope, $location, [], null, config, $timeout);
 		$scope.currentFolder = createFolder(123,null,"Not Home");
 
 		expect($scope.folderEditMode).toEqual(false);

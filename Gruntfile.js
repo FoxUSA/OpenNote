@@ -175,5 +175,5 @@ module.exports = function(grunt) {
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
 			grunt.registerTask("test", ["karma:travis"]);
-			grunt.registerTask("ci", ["build","karma:travis"]);
+			grunt.registerTask("ci", ["build","jshint:all","karma:travis"]);
 };
