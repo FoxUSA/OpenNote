@@ -32,6 +32,16 @@ openNote.controller("noteController", function(	$scope,
 		};
 	};
 
+	var copyButton = function(note){
+		return {
+			text: "Cut",
+			action: function(){
+				$rootScope.clipboard=note;
+				alertify.success("Note copied to clipboard");
+			}
+		};
+	};
+
 	/**
 	 * return the clear button
 	 */
@@ -42,6 +52,26 @@ openNote.controller("noteController", function(	$scope,
 				$scope.clear();
 			},
 			helpText: $rootScope.helpContent.clearButton
+		};
+	};
+
+	var editButton = function(){
+		return {
+			text: "Edit",
+			action: function(){
+				activateEditMode();
+			},
+			helpText: $rootScope.helpContent.editButton
+		};
+	};
+
+	var upButton = function(folderID){
+		return {
+			text: "Go up a folder",
+			action: function(){
+				$location.url("/folder/"+folderID);
+			},
+			helpText: $rootScope.helpContent.editButton
 		};
 	};
 
@@ -82,25 +112,14 @@ openNote.controller("noteController", function(	$scope,
 			storageService.database().get($routeParams.id).then(function(doc){
 				$scope.note=doc;
 				$(".notePartial").fadeIn(config.fadeSpeedLong());
+
+				//Add buttons
+					$rootScope.buttons.push(upButton($scope.note.parentFolderID));
+					$rootScope.buttons.push(copyButton($scope.note));
+					$rootScope.buttons.push(editButton());
+
 				$scope.$apply();
 			});
-
-			//Add buttons
-				$rootScope.buttons.push({
-					text: "Go up a folder",
-					action: function(){
-						$location.url("/folder/"+$scope.note.parentFolderID);
-					},
-					helpText: $rootScope.helpContent.editButton
-				});
-
-				$rootScope.buttons.push({
-					text: "Edit",
-					action: function(){
-						activateEditMode();
-					},
-					helpText: $rootScope.helpContent.editButton
-				});
 		}
 
 	/**
@@ -126,7 +145,7 @@ openNote.controller("noteController", function(	$scope,
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
 				storageService.database().remove($scope.note).then(function(){
 					detachWindowUnload();
-					alertify.success("Note Deleted",5); //all done. close the notify dialog
+					alertify.success("Note Deleted"); //all done. close the notify dialog
 					$location.url("/folder/"+folderID);
 					$scope.$apply();
 				});

@@ -8,6 +8,6 @@
     "devel":true,
     "jquery":true,
     "jasmine": true,
-    "predef": [ "injector","angular","alertify","", "PouchDB", "CKEDITOR","inject" ],
+    "predef": [ "angular","alertify","", "PouchDB", "CKEDITOR","inject" ],
     "globals":{"openNote":true}
 }

@@ -10,6 +10,7 @@ openNote.controller("folderController", function(	$scope,
 	$scope.folderEditMode = false;
 	$scope.currentFolder = {};
 	$scope.parentFolder = null;
+	$scope.currentFolderContents = [];
 
 	//add buttons
 		if($routeParams.id)
@@ -48,6 +49,27 @@ openNote.controller("folderController", function(	$scope,
 						"");
 				},
 				helpText: $rootScope.helpContent.newFolderButton
+			});
+
+		if($routeParams.id)
+			$rootScope.buttons.push({
+				text: "Cut",
+				action: function(){
+					$rootScope.clipboard=$scope.currentFolder;
+					alertify.success("Folder copied to clipboard");
+				}
+			});
+
+		if($rootScope.clipboard && $rootScope.clipboard!=$scope.currentFolder)
+			$rootScope.buttons.push({
+				text: "Paste",
+				action: function(){
+					$rootScope.$emit("moveKey", {//fire off an event to tell everyone we just modified a folder
+						destFolder: $scope.currentFolder,
+						moveObject: $rootScope.clipboard
+					});
+					$rootScope.clipboard=null;
+				}
 			});
 
 		$rootScope.buttons.push({
@@ -237,5 +259,5 @@ openNote.controller("folderController", function(	$scope,
 	};
 
 	//Load current folder
-	$timeout($scope.loadCurrentFolder);
+		$timeout($scope.loadCurrentFolder);
 });

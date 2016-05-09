@@ -12,7 +12,7 @@ openNote.controller("listController", function(	$scope,
 												userService,
 												$timeout,
 												config) {
-	$scope.data = {};
+	$scope.data = [];
 
 	/**
 	 * Toggle collapse
@@ -60,6 +60,33 @@ openNote.controller("listController", function(	$scope,
 			});
     });
 
+	/**
+	 *
+     * Move key
+	 * @param request.destFolder -
+	 * @param request.moveObject - object to move
+	 */
+    $rootScope.$on("moveKey", function(event, request) {
+		//Confirm action
+		alertify.confirm("Are you sure you want to move "+(request.moveObject.name || request.moveObject.title)+" into "+ request.destFolder.name+"?" , function (confirm) {
+			if (confirm){
+				var origParrentFolderID=request.moveObject.parentFolderID;
+
+				request.moveObject.parentFolderID=request.destFolder._id;
+				storageService.database().put(request.moveObject).then(function(){
+					$rootScope.$emit("changedFolder", {//fire off an event to tell everyone we just modified a folder
+						folder: request.moveObject,
+						oldParrentFolderID: origParrentFolderID
+					});
+				}).catch(function(error){
+					throw error;
+				});
+			}
+
+			return $rootScope.$emit("reloadListView", {});//Always reload
+		});
+    });
+
     /**
      * @param item - the item the filter
      */
@@ -92,32 +119,20 @@ openNote.controller("listController", function(	$scope,
 	    	if(event.dest.nodesScope.$nodeScope)
 	    		destFolder = event.dest.nodesScope.$nodeScope.$modelValue;
 
-	        var destName="Home";
-        	var destID = null;
-        	if(destFolder){//is dest the home folder?
-        		destName=destFolder.doc.name;//Set defaults
-        		destID = destFolder.doc._id;
+        	if(!destFolder){//is dest the home folder?
+				destFolder={
+					doc:{
+						name: "Home",
+						_id:null
+					}
+				};
         	}
 
-	        if(sourceFolder.doc.parentFolderID!=destID){
-	        	//Confirm action
-	        	alertify.confirm("Are you sure you want to move "+sourceFolder.doc.name+" into "+ destName+"?" , function (confirm) {
-	        	    if (confirm) {
-	        	    	var origParrentFolderID=sourceFolder.parentFolderID;
-
-	        	    	sourceFolder.doc.parentFolderID=destID;
-	        	    	storageService.database().put(sourceFolder.doc).then(function(){
-	        	    		$rootScope.$emit("changedFolder", {//fire off an event to tell everyone we just modified a folder
-		        	    		folder: sourceFolder,
-		        	    		oldParrentFolderID: origParrentFolderID
-		        	    	});
-	        	    	}).catch(function(error){
-	        	    		console.log(error);//FIXME
-	    				});
-	        	    }
-	        	    else
-    	    			$rootScope.$emit("reloadListView", {}); //refresh either way
-	        	});
+	        if(sourceFolder.doc.parentFolderID!=destFolder.doc._id){
+				$rootScope.$emit("moveKey", {//fire off an event to tell everyone we just modified a folder
+					destFolder: destFolder.doc,
+					moveObject: sourceFolder.doc
+				});
 	        }
 	    }
     };
