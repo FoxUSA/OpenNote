@@ -42,7 +42,6 @@
 			<script src="bower_components/intro.js/minified/intro.min.js"></script>
 			<script src="bower_components/alertify/alertify.min.js"></script>
 			<script src="bower_components/ckeditor/ckeditor.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script><!-- TODO dont know if we actually need this.s-->
 
 			<!-- Main Open Note Scripts -->
 				<script src="openNote/openNote.js"></script>
@@ -62,7 +61,7 @@
 				<!-- Controllers -->
 					<script src="openNote/controllers/folderController.js"></script>
 					<script src="openNote/controllers/noteController.js"></script>
-					<script src="openNote/controllers/listController.js"></script>
+					<script src="openNote/controllers/tagListController.js"></script>
 					<script src="openNote/controllers/searchController.js"></script>
 					<script src="openNote/controllers/settings/settingsController.js"></script>
 					<script src="openNote/controllers/settings/databaseController.js"></script>
@@ -72,7 +71,7 @@
 	<body>
 		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 
-		<div class="col-lg-2 col-md-3 col-sm-4 hidden-xs" ng-include="'openNote/partials/listPartial.html'"></div>
+		<div class="col-lg-2 col-md-3 col-sm-4 hidden-xs" ng-include="'openNote/partials/tagListPartial.html'"></div>
 
 		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	</div>
 
