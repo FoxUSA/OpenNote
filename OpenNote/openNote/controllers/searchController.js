@@ -22,6 +22,7 @@ openNote.controller("searchController", function(	$scope,
 	 * Search the database
 	 */
 	$scope.search = function(){
+		alertify.log("Search started");
 		$scope.notes=[];
 		$scope.folders=[];
 
@@ -44,6 +45,7 @@ openNote.controller("searchController", function(	$scope,
 
 		var appendFolders = function(folders){
 			$scope.folders=$scope.folders.concat(folders);
+			alertify.success(folders.length+" objects found");
 			$scope.$apply();
 		};
 

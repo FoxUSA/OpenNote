@@ -22,7 +22,7 @@ openNote.run(function (	$rootScope,
 						$http){
 
 	$rootScope.helpContent=config.getHelpContent();
-
+    $rootScope.version=config.getVersion();
     $rootScope.$on("$routeChangeStart", function () {
     	//server config values
     		serverConfigService.getConfig().then(function(config){
