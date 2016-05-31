@@ -15,7 +15,6 @@
     "angular-animate": "^1.5.5",
     "angular-mocks": "^1.5.5",
     "ckeditor": "ckeditor/ckeditor-releases#full/4.5.x",
-    "angular-ui-tree": "^2.15.0",
     "alertify": "0.3.10",
     "intro.js": "0.8.0",
     "pouchdb": "^5.3.2"
