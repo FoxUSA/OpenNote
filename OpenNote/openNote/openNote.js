@@ -18,10 +18,12 @@ openNote.run(function (	$rootScope,
 						userService,
 						config,
 						serverConfigService,
+                        tagService,
 						$http){
 
 	$rootScope.helpContent=config.getHelpContent();
     $rootScope.version=config.getVersion();
+    tagService.bindHandlers();
     $rootScope.$on("$routeChangeStart", function () {
     	//server config values
     		serverConfigService.getConfig().then(function(config){

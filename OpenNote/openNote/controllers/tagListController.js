@@ -7,18 +7,26 @@
  * Control
  */
 openNote.controller("tagListController", function(	$scope,
-												$rootScope,
-												storageService,
-												userService,
-												$timeout,
-												config) {
-	$scope.data = [];
+													$rootScope,
+													tagService,
+													storageService) {
+	$scope.tags = [];
+
+	var updateTags = function(){
+		tagService.getMap().then(function(map){
+			$scope.tags = [];
+			for(var tag in map.tags)
+				$scope.tags.push(tag);
+
+			$scope.$apply();
+		});
+	};
 
 	/**
-	 *
      * Move key
 	 * @param request.destFolder -
 	 * @param request.moveObject - object to move
+	 * TODO this is should be moved. It is left over from the list controller days
 	 */
     $rootScope.$on("moveKey", function(event, request) {
 		//Confirm action
@@ -40,4 +48,10 @@ openNote.controller("tagListController", function(	$scope,
 			return $rootScope.$emit("reloadListView", {});//Always reload
 		});
     });
+
+	$rootScope.$on("tagsUpdated", function() {
+		updateTags();
+	});
+
+	updateTags();
 });

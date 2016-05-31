@@ -1,12 +1,12 @@
 <div id="sideBar"
+	 class="startHidden randomFadeInDirective"
 	 ng-controller="tagListController"
 	 ng-show="showSideBar"
 	 data-intro="{{helpContent.listArea}}">
 	<div>
-		 <h3>Tags</h3>
-		 <ul>
-			 <li>Tag1</li>
-			 <li>Todo</li>
+		 <h4>Tags</h4>
+		 <ul class=" list-unstyled">
+			 <li ng-repeat="tag in tags" class="startHidden randomFadeInDirective">{{tag}}</li>
 		 </ul>
 	</div>
 </div>

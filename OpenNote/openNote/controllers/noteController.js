@@ -26,7 +26,7 @@ openNote.controller("noteController", function(	$scope,
 		return {
 			text: "Save",
 			action: function(){
-				$scope.save();
+				save();
 			},
 			helpText: $rootScope.helpContent.saveButton
 		};
@@ -125,11 +125,39 @@ openNote.controller("noteController", function(	$scope,
 	/**
 	 * Save a note
 	 */
-	$scope.save = function(){
+	var save = function(){
 		$scope.note.note = CKEDITOR.instances.note.getData();
 
-		$(".notePartial").fadeOut(config.fadeSpeedShort());
-		createNote($scope.note);
+		$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
+			$scope.note.type="note";
+
+			/**
+			 * Callback after successful save to reload note
+			 */
+			var saveCallback = function(response){
+				if(!response.ok)
+					throw "//FIXME";//FIXME
+				detachWindowUnload();
+
+				//Tags
+					$scope.note._id=response.id;
+					$rootScope.$emit("noteSaved",$scope.note);//Let any number of services know we have saved a note
+
+				$location.url("/note/"+response.id+"?rev="+response.rev);//revision number is here only to force angular to reload
+				alertify.success("Note Saved"); //all done. close the notify dialog
+				$scope.$apply();
+			};
+
+			//Upsert
+				if(!$scope.note._id)
+					storageService.database().post($scope.note).then(saveCallback,function(){
+						alertify.error("Error saving note");
+					});
+				else
+					storageService.database().put($scope.note).then(saveCallback,function(){
+						alertify.error("Error modifing note");
+					});
+		});
 	};
 
 	/**
@@ -192,34 +220,5 @@ openNote.controller("noteController", function(	$scope,
 	 */
 	var detachWindowUnload = function(){
 		window.onbeforeunload = null;
-	};
-
-	/**
-	 * Create a note object
-	 */
-	var createNote = function(note){
-		note.type="note";
-
-		/**
-		 * Callback after successful save to reload note
-		 */
-		var saveCallback = function(response){
-			if(!response.ok)
-				throw "//FIXME";//FIXME
-			detachWindowUnload();
-			$location.url("/note/"+response.id+"?rev="+response.rev);//revision number is here only to force angular to reload
-			alertify.success("Note Saved"); //all done. close the notify dialog
-			$scope.$apply();
-		};
-
-		//Upsert
-			if(!note._id)
-				storageService.database().post(note).then(saveCallback).catch(function(){
-					alertify.error("Error saving note");
-				});
-			else
-				storageService.database().put(note).then(saveCallback).catch(function(){
-					alertify.error("Error saving note");
-				});
 	};
 });
