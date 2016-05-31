@@ -6,6 +6,11 @@ openNote.config(function($routeProvider){
                 controller: "folderController",
                 templateUrl: "openNote/partials/folderPartial.html",
             })
+		.when("/tag/:tag",
+            {
+                controller: "tagController",
+                templateUrl: "openNote/partials/tagPartial.html",
+            })
         .when("/note/:id?",
             {
                 controller: "noteController",

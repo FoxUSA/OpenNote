@@ -6,7 +6,8 @@
 	<div>
 		 <h4>Tags</h4>
 		 <ul class=" list-unstyled">
-			 <li ng-repeat="tag in tags" class="startHidden randomFadeInDirective">{{tag}}</li>
+			 <li ng-repeat="tag in tags" class="startHidden randomFadeInDirective" ng-click="openTag(tag);">{{tag}}</li>
+			 <li ng-if="!tags || !tags.length" class="startHidden randomFadeInDirective">No tags found. Add a # to a note to add a tag.</li>
 		 </ul>
 	</div>
 </div>

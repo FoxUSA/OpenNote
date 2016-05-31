@@ -96,32 +96,6 @@ openNote.controller("noteController", function(	$scope,
 		});
 	};
 
-	//Load or new
-		if(!$routeParams.id){//new
-			$scope.note._id = null;
-			$scope.note.parentFolderID = $location.search().folderID;
-			$scope.note.title = "Note Title";
-
-			activateEditMode();
-			$(".notePartial").fadeIn(config.fadeSpeedLong());
-		}
-		else{
-			/**
-			 * Load note
-			 */
-			storageService.database().get($routeParams.id).then(function(doc){
-				$scope.note=doc;
-				$(".notePartial").fadeIn(config.fadeSpeedLong());
-
-				//Add buttons
-					$rootScope.buttons.push(upButton($scope.note.parentFolderID));
-					$rootScope.buttons.push(copyButton($scope.note));
-					$rootScope.buttons.push(editButton());
-
-				$scope.$apply();
-			});
-		}
-
 	/**
 	 * Save a note
 	 */
@@ -172,6 +146,7 @@ openNote.controller("noteController", function(	$scope,
 				var folderID = $scope.note.parentFolderID;//need to keep track of this because we are about to delete it
 				$(".notePartial").fadeOut(config.fadeSpeedShort());
 				storageService.database().remove($scope.note).then(function(){
+					$rootScope.$emit("noteDeleted",$scope.note);
 					detachWindowUnload();
 					alertify.success("Note Deleted"); //all done. close the notify dialog
 					$location.url("/folder/"+folderID);
@@ -221,4 +196,30 @@ openNote.controller("noteController", function(	$scope,
 	var detachWindowUnload = function(){
 		window.onbeforeunload = null;
 	};
+
+	//Load or new
+		if(!$routeParams.id){//new
+			$scope.note._id = null;
+			$scope.note.parentFolderID = $location.search().folderID;
+			$scope.note.title = "Note Title";
+
+			activateEditMode();
+			$(".notePartial").fadeIn(config.fadeSpeedLong());
+		}
+		else{
+			/**
+			 * Load note
+			 */
+			storageService.database().get($routeParams.id).then(function(doc){
+				$scope.note=doc;
+				$(".notePartial").fadeIn(config.fadeSpeedLong());
+
+				//Add buttons
+					$rootScope.buttons.push(upButton($scope.note.parentFolderID));
+					$rootScope.buttons.push(copyButton($scope.note));
+					$rootScope.buttons.push(editButton());
+
+				$scope.$apply();
+			});
+		}
 });

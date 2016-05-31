@@ -14,6 +14,10 @@ openNote.service("tagService", function ($rootScope,storageService) {
                 addTagsToMap(results,note._id);
             });
         });
+
+        $rootScope.$on("noteDeleted", function(event, note) {
+            deleteTagsFromMap(note._id);
+        });
     };
 
     /**

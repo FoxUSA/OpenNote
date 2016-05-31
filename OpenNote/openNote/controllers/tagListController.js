@@ -9,6 +9,7 @@
 openNote.controller("tagListController", function(	$scope,
 													$rootScope,
 													tagService,
+													$location,
 													storageService) {
 	$scope.tags = [];
 
@@ -20,6 +21,14 @@ openNote.controller("tagListController", function(	$scope,
 
 			$scope.$apply();
 		});
+	};
+
+	/**
+	 * Open a tag
+	 * @param tag - Tag to open
+	 */
+	$scope.openTag = function(tag){
+		$location.url("/tag/"+encodeURIComponent(tag));
 	};
 
 	/**
