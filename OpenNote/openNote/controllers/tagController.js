@@ -6,6 +6,8 @@ openNote.controller("tagController", function(	$scope,
 												storageService,
 												config,
 												tagService) {
+		$rootScope.buttons=[];
+
 		/**
 		 * Load a note
 		 * @param note - load a note
@@ -29,7 +31,7 @@ openNote.controller("tagController", function(	$scope,
 						$scope.notes.push(note);
 						$scope.$apply();
 					});
-				});				
+				});
 			});
 		};
 		$scope.notes=[];

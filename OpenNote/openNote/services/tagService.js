@@ -35,6 +35,10 @@ openNote.service("tagService", function ($rootScope,storageService) {
 
         var addTags = function(map){
             tags.forEach(function(tag){
+                tag = tag.toLowerCase();
+                if(!tag.indexOf("#39;")||!tag.indexOf("#34;"))//Remove html and special characters
+                    return;
+
                 if(!map.tags[tag])
                     return (map.tags[tag]=[id]);
                 return map.tags[tag].push(id);
@@ -43,6 +47,7 @@ openNote.service("tagService", function ($rootScope,storageService) {
             map._id="tagMap";
             storageService.database().put(map).then(saveCallback);
         };
+
         service.getMap().then(addTags,function(err){
             if(err.status==404)
                 return addTags({tags:{}});//Nothing found nothing to delete

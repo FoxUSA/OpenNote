@@ -11,7 +11,7 @@ openNote.service("serverConfigService", function ($http, $q, config, userService
 	 * @return - config object promise
 	 */
 	this.getConfig = function(){
-		if(sessionStorage.serverConfig===null)//if we do not have it yet, request it
+		if(!sessionStorage.serverConfig)//if we do not have it yet, request it
 			return requestServerConfig();
 
 		//make a quick promise
