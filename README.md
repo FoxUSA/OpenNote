@@ -1,11 +1,6 @@
 OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
 =============
 ![][responsive]
-In a post 9/11 world of mass digital surveillance, there is only one way to keep your digital information safe.
-In the United States, you do not have have 5th amendment rights if you entrust you information to a third party.
-
-The fix is to take personal responsibility and host applications yourself.
-
 OpenNote was built to be a open source(MIT License), web based note taking software.
 It is designed to be self hosted and gives you ownership of your data.
 
