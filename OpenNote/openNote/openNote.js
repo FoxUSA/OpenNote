@@ -70,7 +70,7 @@ openNote.run(function (	$rootScope,
         	$http.get(config.getUpdateURL()).then(
     			function(response){//Successful
     				if(response.data.version!=config.getVersion())
-    					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
+    					alertify.log("<a href='https://github.com/FoxUSA/OpenNote' target='_blank'>Update available</a>", "", 0);
     			}
 			);
 

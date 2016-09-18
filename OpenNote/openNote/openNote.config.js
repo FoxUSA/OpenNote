@@ -14,7 +14,7 @@ openNote.value("config", {
 	 * Get update URL
 	 */
 	getUpdateURL: function(){
-		return "//stardrive.us/UpdateService/?appName=OpenNote-prod";
+		return "https://cdn.rawgit.com/FoxUSA/OpenNote/master/package.json";
 	},
 
 	/**

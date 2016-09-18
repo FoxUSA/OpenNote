@@ -14,8 +14,6 @@ openNote.service("userService", function ($http, $q, config) {
 	 * tell httpd to use our token in requests
 	 */
 	this.useAPITokenHeader = function(){
-		$http.defaults.headers.common.token = this.getAPITokenString();//used by the resources implicitly
-
 		document.cookie="token="+this.getAPITokenString()+"; path=/;"; //This is the download token, it is used for pulling files
 	};
 

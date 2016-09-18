@@ -25,7 +25,8 @@ openNote.service("legacyImportService", function (	$http,
 	 */
 	this.import = function(){
 		if(userService.hasValidToken)
-			return $http.get(config.servicePath() +"/folder?includeNotes=true&includeNotesHTML=true&levels=1000").then(function(response){//Successful
+			return $http.get(config.servicePath() +"/folder?includeNotes=true&includeNotesHTML=true&levels=1000",
+							{headers:{token:userService.getAPITokenString()}}).then(function(response){//Successful
 					if(response.status!=200)
 						return false;
 
