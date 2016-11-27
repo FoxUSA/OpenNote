@@ -50,7 +50,7 @@ curl -X PUT http://127.0.0.1:5984/_config/ssl/key_file \
 # Default SSL port 6984
 ```
 
-Now in `/OpenNote/#/settings/database/` put the following connection string in the `Replication url` field `https://admin:password@127.0.0.1:6984/opennote`
+Now in `/OpenNote/#/settings/database/` put the following connection string in the `Replication url` field `https://admin:password@127.0.0.1:5984/opennote`
 
 To import a database from older versions check out `/OpenNote/#/settings/legacy/`
 
