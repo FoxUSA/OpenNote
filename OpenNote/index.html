@@ -17,7 +17,6 @@
 
 		<!-- Style -->
 			<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-			<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css">
 			<link rel="stylesheet" href="bower_components/alertify/themes/alertify.core.css">
 
 			<!-- Theme -->
@@ -30,6 +29,7 @@
 		<!-- Scripts -->
 			<script src="bower_components/jquery/dist/jquery.min.js"></script>
 			<script src="bower_components/pouchdb/dist/pouchdb.min.js"></script>
+			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 			<!-- Angular and the gang -->
 				<script src="bower_components/angular/angular.js"></script>
@@ -37,14 +37,10 @@
 				<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 				<script src="bower_components/angular-route/angular-route.min.js"></script>
 				<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-				<script src="bower_components/angular-ui-tree/dist/angular-ui-tree.min.js" ></script>
-				<script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
-				<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 
 			<script src="bower_components/intro.js/minified/intro.min.js"></script>
 			<script src="bower_components/alertify/alertify.min.js"></script>
 			<script src="bower_components/ckeditor/ckeditor.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 			<!-- Main Open Note Scripts -->
 				<script src="openNote/openNote.js"></script>
@@ -56,6 +52,7 @@
 					<script src="openNote/services/serverConfigService.js"></script>
 					<script src="openNote/services/storageService.js"></script>
 					<script src="openNote/services/legacyImportService.js"></script>
+					<script src="openNote/services/tagService.js"></script>
 
 				<!-- Directives -->
 					<script src="openNote/directives/randomFadeInDirective.js"></script>
@@ -63,8 +60,9 @@
 
 				<!-- Controllers -->
 					<script src="openNote/controllers/folderController.js"></script>
+					<script src="openNote/controllers/tagController.js"></script>
 					<script src="openNote/controllers/noteController.js"></script>
-					<script src="openNote/controllers/listController.js"></script>
+					<script src="openNote/controllers/tagListController.js"></script>
 					<script src="openNote/controllers/searchController.js"></script>
 					<script src="openNote/controllers/settings/settingsController.js"></script>
 					<script src="openNote/controllers/settings/databaseController.js"></script>
@@ -74,10 +72,10 @@
 	<body>
 		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 
-		<div class="col-lg-2 col-md-3 col-sm-4 hidden-xs" ng-include="'openNote/partials/listPartial.html'"></div>
+		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-include="'openNote/partials/tagListPartial.html'"></div>
 
-		<div class="col-lg-10 col-md-9 col-sm-8" ng-view data-intro="{{helpContent.viewArea}}">	</div>
+		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view data-intro="{{helpContent.viewArea}}">	</div>
 
-		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2015 Jacob Liscom</div>
+		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2016 Jacob Liscom - Version {{version}}</div>
 	</body>
 </html>

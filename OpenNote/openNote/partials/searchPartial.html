@@ -32,7 +32,7 @@
 	</div>
 </div>
 
-<div class="folderPartial">	
+<div class="folderPartial">
 	<div ng-Repeat="folder in folders" class="startHidden randomFadeInDirective box folder" ng-click="loadFolder(folder);">
 		<h4>
 			{{folder.doc.name}}
@@ -42,7 +42,7 @@
 			Folder
 		</p>
 	</div>
-	
+
 	<div ng-Repeat="note in notes" class="startHidden box randomFadeInDirective note" ng-click="loadNote(note);">
 		<h4>
 			{{note.doc.title}}

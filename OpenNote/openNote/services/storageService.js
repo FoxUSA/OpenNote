@@ -1,18 +1,18 @@
 /**
- * @author - Jake Liscom 
+ * @author - Jake Liscom
  * @project - OpenNote
  */
 
 /**
  * Storage service
  */
-openNote.service("storageService", function ($rootScope) {	
-	
+openNote.service("storageService", function ($rootScope) {
+
 	var localDatabase = null;
 	var remoteDatabase = null;
 	var replicationTimeout = null;
 	var self=this;
-	
+
 	/**
 	 * helper function to create indexes
 	 * @param name - the name of the index
@@ -26,31 +26,31 @@ openNote.service("storageService", function ($rootScope) {
 		ddoc.views[name] = { map: mapFunction.toString() };
 		return ddoc;
 	};
-	
+
 	/**
 	 * Initialize the PouchDB database and create indexes
 	 */
 	this.init = function(){
 		//Create or find database
 			localDatabase = new PouchDB("openNote");
-		
-		//Indexes	
+
+		//Indexes
 			localDatabase.put(createDesignDoc("parentFolderID",function (doc) {
 				  emit(doc.parentFolderID);
 			})).catch(function (err) {
-				if (err.status != 409) 
+				if (err.status != 409)
 					throw err;
 				// ignore if doc already exists
 			});
-				
-		//Re-init sync		
+
+		//Re-init sync
 			var url = localStorage.getItem("remoteURL");
 			if(url){
 				remoteDatabase = new PouchDB(url);
 				this.setupSync();
-			};
+			}
 	};
-	
+
 	/**
 	 * @param url - The remote URL to use in replication
 	 */
@@ -58,48 +58,48 @@ openNote.service("storageService", function ($rootScope) {
 		localStorage.setItem("remoteURL",url);
 		remoteDatabase = new PouchDB(url);
 	};
-	
+
 	/**
 	 * @return - The remote URL to use in replication
 	 */
-	this.getRemoteURL = function(url){
+	this.getRemoteURL = function(){
 		return localStorage.getItem("remoteURL");
 	};
-	
+
 	/**
 	 * Get the local database
 	 */
 	this.database = function(){
 		return localDatabase;
 	};
-	
+
 	/**
 	 * Get the remote database
 	 */
 	this.remoteDatabase = function(){
 		return remoteDatabase;
 	};
-	
+
 	/**
 	 * Setup live sync
 	 */
 	this.setupSync = function(){
-		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function (info) {
+		localDatabase.sync(remoteDatabase,{live: true, retry: true}).on("complete", function () {
 			alertify.success("Replication complete");
-		}).on("error", function (err) {
+		}).on("error", function () {
 			alertify.error("Replication error");
 		}).on("paused", function () {
 			if(!replicationTimeout)
 				replicationTimeout = setTimeout(function(){
 					alertify.log("Replication complete");
 					replicationTimeout = null;
-					
+
 					$rootScope.$emit("replicationComplete", {});
-					$rootScope.$apply()
+					$rootScope.$apply();
 				}, 1000);
 		});
 	};
-	
+
 	/**
 	 * Load a folders contents
 	 * @param folderID - the folder id to load the content folder
@@ -108,18 +108,18 @@ openNote.service("storageService", function ($rootScope) {
 	this.loadFolderContents = function(folderID, callback){
 		localDatabase.query("parentFolderID", {key: folderID, include_docs: true}).then(callback);
 	};
-	
+
 	/**
 	 * Delete the database
 	 */
 	this.destroyDatabase = function(callback){
 		localDatabase.destroy().then(function(){
-			localStorage.removeItem("remoteURL")
+			localStorage.removeItem("remoteURL");
 			self.init();
 			callback();
 		});
 	};
-	
+
 	/**
 	 * Dump database to a file
 	 * @param callback - callback where data is returned to
@@ -128,10 +128,11 @@ openNote.service("storageService", function ($rootScope) {
 		localDatabase.allDocs({
 		  include_docs: true
 		}).then(function (result) {
-			callback("data:application/octet-stream;charset=utf8," + encodeURIComponent(JSON.stringify({ data:result.rows})));
+			var file = new Blob([JSON.stringify({ data:result.rows})], {type : "application/json"}); // the blob
+			callback(URL.createObjectURL(file));
 		});
 	};
-	
+
 	/**
 	 * Import database from a file
 	 */
@@ -147,36 +148,84 @@ openNote.service("storageService", function ($rootScope) {
 			});
 		});
 	};
-	
+
+	/**
+	 * Delete a folder tree
+	 * @param  folder - the folder doc to delete
+	 * @param callback - callback when the given folder has been removed
+	 */
+	this.deleteFolder = function(folder,callback){
+		self.loadFolderContents(folder.id, function (results) {
+			results.rows.filter(self.noteFilter).forEach(function(note){
+				localDatabase.remove(note.doc);
+			});
+
+			results.rows.filter(self.folderFilter).forEach(function(subFolder){
+				self.deleteFolder(subFolder);
+			});
+		});
+
+		localDatabase.remove(folder.doc).then(callback);
+	};
+
+
 	/**
 	 * Find an clean the orphans
 	 * That is delete docs whose parent id is not null and does not exist in the database
 	 */
 	this.cleanOrphans = function(){
-		
+		var map = {};
+		var length = 0;
+		var processed = 0;
+
 		/**
-		 * the results doc
+		 * Check to see if we have processed all the records
+		 * @return {[type]} [description]
+		 */
+		var doneCheck = function(){
+			processed++;
+			if(processed>=length)
+				orphanRemover();
+		};
+
+		/**
+		 * Find orphans
 		 * @param result - the result object as returned by allDocs
 		 */
 		var orphanHunter = function(result){
 			if(!result.doc.parentFolderID)//nulls are root and cannot be orphans
-				return;
-			
-			localDatabase.get(result.doc.parentFolderID).catch(function(err){
-				if(err.status=404)
-					localDatabase.remove(result.doc);
+				return doneCheck();
+
+			localDatabase.get(result.doc.parentFolderID).then(doneCheck).catch(function(err){
+				if(err.status==404)
+					map[result.id]=result;
 				else
-					throw err
+					throw err;
+
+				doneCheck();
 			});
 		};
-		
+
+		/**
+		 * Remove the orphans
+		 */
+		var orphanRemover = function(){
+			for(var orphan in map){
+				if(self.typeFilter(map[orphan],"folder"))
+					self.deleteFolder(map[orphan]);
+				else
+					localDatabase.remove(map[orphan].doc);
+			}
+		};
+
 		localDatabase.allDocs({
-		  include_docs: true
+			include_docs: true
 		}).then(function (result) {
+			length=result.rows.length;
 			result.rows.forEach(orphanHunter);
 		});
 	};
-	
+
 	/**
 	 * @param doc - the doc we are looping through
 	 * @param property - the property of the doc we want to compare
@@ -186,9 +235,9 @@ openNote.service("storageService", function ($rootScope) {
 		if(doc[property])
 			return doc[property].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
 		else
-			return false
-	}
-	
+			return false;
+	};
+
 	/**
 	 * Search folder names
 	 * @param searchString - the search string to use
@@ -201,7 +250,7 @@ openNote.service("storageService", function ($rootScope) {
 			callback(results.rows.filter(self.folderFilter));
 		});
 	};
-	
+
 	/**
 	 * Search note titles
 	 * @param searchString - the search string to use
@@ -214,7 +263,7 @@ openNote.service("storageService", function ($rootScope) {
 			callback(results.rows.filter(self.noteFilter));
 		});
 	};
-	
+
 	/**
 	 * Search note body
 	 * @param searchString - the search string to use
@@ -227,7 +276,7 @@ openNote.service("storageService", function ($rootScope) {
 			callback(results.rows.filter(self.noteFilter));
 		});
 	};
-	
+
 	/**
 	 * Filter out everything but a given type
 	 * @param object - the object to filter
@@ -236,21 +285,21 @@ openNote.service("storageService", function ($rootScope) {
 	this.typeFilter = function(object,type){
 		return object.doc.type==type;
 	};
-	
+
 	/**
 	 * Filter out everything but type folder
 	 */
 	this.folderFilter=function(object){
 		return self.typeFilter(object,"folder");
 	};
-	
+
 	/**
 	 * Filter out everything but type note
 	 */
 	this.noteFilter=function(object){
 		return self.typeFilter(object,"note");
 	};
-	
+
 	//First time create database
 		this.init();
 });

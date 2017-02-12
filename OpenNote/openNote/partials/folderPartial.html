@@ -16,7 +16,9 @@
 
 	</div>
 
-	<div ng-Repeat="folder in currentFolderContents.filter(folderFilter)" class="startHidden randomFadeInDirective box folder" ng-click="loadFolder(folder);">
+	<div ng-repeat="folder in currentFolderContents.filter(folderFilter) | orderBy: 'doc.name'"
+		 class="startHidden randomFadeInDirective box folder"
+		 ng-click="loadFolder(folder);">
 		<h4>
 			{{folder.doc.name}}
 		</h4>
@@ -26,7 +28,9 @@
 		</p>
 	</div>
 
-	<div ng-Repeat="note in currentFolderContents.filter(noteFilter)" class="startHidden box randomFadeInDirective note" ng-click="loadNote(note);">
+	<div ng-repeat="note in currentFolderContents.filter(noteFilter) | orderBy: 'doc.title'"
+		 class="startHidden box randomFadeInDirective note"
+		 ng-click="loadNote(note);">
 		<h4>
 			{{note.doc.title}}
 		</h4>

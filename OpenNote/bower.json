@@ -1,24 +1,22 @@
 {
-  "name": "OpenNote",
+  "name": "opennote",
   "authors": [
     "Jacob Liscom <https://github.com/FoxUSA>"
   ],
   "description": "A note taking software",
-  "version": "15.07.0",
+  "version": "17.02.0",
   "dependencies": {
     "jquery": "2.1.4",
-    "bootstrap": "3.3.4",
-    "angular": "1.3.15",
-    "angular-route": "1.3.15",
-    "angular-resource": "1.3.15",
-    "angular-sanitize": "1.3.15",
-    "angular-animate": "1.3.15",
-    "angular-mocks": "1.3.15",
-    "ckeditor": "ckeditor/ckeditor-releases#full/4.4.x",
-    "angular-ui-tree": "2.4.0",
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-resource": "^1.5.5",
+    "angular-sanitize": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-mocks": "^1.5.5",
+    "ckeditor": "ckeditor/ckeditor-releases#full/4.5.x",
     "alertify": "0.3.10",
     "intro.js": "0.8.0",
-    "pouchdb": "3.4.0",
-    "ng-file-upload": "4.0.0"
+    "pouchdb": "^5.3.2"
   }
 }

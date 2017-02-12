@@ -7,9 +7,7 @@
 var openNote = angular.module("openNote", [	"ngRoute",
                                            	"ngResource",
                                            	"ngSanitize",
-                                           	"ngAnimate",
-                                           	"ui.tree",
-                                           	"ngFileUpload"]);
+                                           	"ngAnimate"]);
 
 /**
  * Used to redirect users to login if their token has expired
@@ -20,11 +18,13 @@ openNote.run(function (	$rootScope,
 						userService,
 						config,
 						serverConfigService,
+                        tagService,
 						$http){
 
 	$rootScope.helpContent=config.getHelpContent();
-
-    $rootScope.$on("$routeChangeStart", function (event) {
+    $rootScope.version=config.getVersion();
+    tagService.bindHandlers();
+    $rootScope.$on("$routeChangeStart", function () {
     	//server config values
     		serverConfigService.getConfig().then(function(config){
     			if(!config)
@@ -47,7 +47,7 @@ openNote.run(function (	$rootScope,
 				alertify.success("Token refreshed");
 			else
 				alertify.error("Refreshed token failed");
-		}).catch(function(error){
+		}).catch(function(){
 			alertify.error("Refreshed token failed");
 		});
 
@@ -70,7 +70,7 @@ openNote.run(function (	$rootScope,
         	$http.get(config.getUpdateURL()).then(
     			function(response){//Successful
     				if(response.data.version!=config.getVersion())
-    					alertify.log("<a href='"+response.data.updateURL+"' target='_blank'>"+response.data.updateText+"</a>", "", 0);
+    					alertify.log("<a href='https://github.com/FoxUSA/OpenNote' target='_blank'>Update available</a>", "", 0);
     			}
 			);
 
@@ -78,8 +78,6 @@ openNote.run(function (	$rootScope,
         	if(userService.getUsername() && !$rootScope.autoLogInInterval){
         		tokenRefresh();
         		$rootScope.autoLogInInterval=setInterval(tokenRefresh, 1800000);
-        	};
+        	}
 	});
-
-
 });

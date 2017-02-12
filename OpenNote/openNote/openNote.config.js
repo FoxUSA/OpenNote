@@ -7,14 +7,14 @@ openNote.value("config", {
 	 * Get current version
 	 */
 	getVersion: function(){
-		return "15.07.00";
+		return "17.02.00";
 	},
 
 	/**
 	 * Get update URL
 	 */
 	getUpdateURL: function(){
-		return "//stardrive.us/UpdateService/?appName=OpenNote-prod";
+		return "https://cdn.rawgit.com/FoxUSA/OpenNote/master/package.json";
 	},
 
 	/**
@@ -59,7 +59,7 @@ openNote.value("config", {
 			saveButton: "Click this to save this note. Old version are kept.",
 			editButton: "Click this to change the note into edit mode.",
 			noteTitle: "This the note title field. In edit mode, you can use it to edit the notes title."
-		}
+		};
 	},
 
 	/**
@@ -67,18 +67,6 @@ openNote.value("config", {
 	 */
 	showHelpButton: function(){
 		return true;
-	},
-
-	/**
-	 * Get server config
-	 * return -
-	 */
-	getServerConfig: function(){
-		return $resource(config.servicePath()+"/config/", {}, {//{} default params
-	        get: {
-	            method: "GET"
-	        }
-	    }).$get();
 	},
 
 	/**

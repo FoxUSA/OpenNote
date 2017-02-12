@@ -1,0 +1,13 @@
+{
+    "undef": true,
+    "unused": true,
+    "mocha": true,
+    "strict": false,
+    "browser": true,
+    "couch": true,
+    "devel":true,
+    "jquery":true,
+    "jasmine": true,
+    "predef": [ "angular","alertify","", "PouchDB", "CKEDITOR","inject" ],
+    "globals":{"openNote":true}
+}

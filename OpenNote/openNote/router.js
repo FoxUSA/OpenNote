@@ -1,33 +1,31 @@
 //Router
 openNote.config(function($routeProvider){
 	$routeProvider
-        .when("/folder/:id?",
-            {
+        .when("/folder/:id?",{
                 controller: "folderController",
                 templateUrl: "openNote/partials/folderPartial.html",
             })
-        .when("/note/:id?",
-            {
+		.when("/tag/:tag",{
+                controller: "tagController",
+                templateUrl: "openNote/partials/tagPartial.html",
+            })
+        .when("/note/:id?",{
                 controller: "noteController",
                 templateUrl: "openNote/partials/notePartial.html"
             })
-        .when("/search/:id?",
-            {
+        .when("/search/:id?",{
         		controller: "searchController",
                 templateUrl: "openNote/partials/searchPartial.html"
             })
-        .when("/settings/",
-            {
+        .when("/settings/",{
         		controller: "settingsController",
                 templateUrl: "openNote/partials/settings/settingsPartial.html"
             })
-        .when("/settings/database/",
-            {
+        .when("/settings/database/",{
         		controller: "databaseController",
                 templateUrl: "openNote/partials/settings/databasePartial.html"
             })
-        .when("/settings/legacy/",
-            {
+        .when("/settings/legacy/",{
         		controller: "legacyController",
                 templateUrl: "openNote/partials/settings/legacyPartial.html"
             })
