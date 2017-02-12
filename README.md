@@ -79,11 +79,11 @@ License
 
 	OpenNote Code - Distributed under the MIT License
 
-	© Jacob Liscom 2015
+	© Jacob Liscom 2017
 
 Credits
 -------
-	J. Liscom - Supreme Programmer
+	J. Liscom - Creator
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
