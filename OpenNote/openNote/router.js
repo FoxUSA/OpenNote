@@ -1,5 +1,6 @@
 //Router
-openNote.config(function($routeProvider){
+openNote.config(function($routeProvider,$locationProvider){
+	$locationProvider.hashPrefix("");//Fixes #! angular people added stupidly
 	$routeProvider
         .when("/folder/:id?",{
                 controller: "folderController",
