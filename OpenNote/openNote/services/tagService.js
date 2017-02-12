@@ -1,6 +1,6 @@
 openNote.service("tagService", function ($rootScope,storageService) {
     var service = this;
-    var tagRegex = /(?:\ |^|\n)(#[^\ <\n]*)/ig;
+    var tagRegex = /(?:\ |^|\n|>)(#[^\ <\n]*)/ig;
 
     /**
      * Bind handlers to the root scope
