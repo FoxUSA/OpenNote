@@ -1,0 +1,38 @@
+{
+  "name": "pouchdb",
+  "version": "5.4.5",
+  "description": "PouchDB is a pocket-sized database.",
+  "repo": "daleharvey/pouchdb",
+  "keywords": [
+    "db",
+    "couchdb",
+    "pouchdb"
+  ],
+  "dependencies": {},
+  "development": {},
+  "license": "Apache",
+  "main": "dist/pouchdb.js",
+  "scripts": [
+    "dist/pouchdb.js",
+    "dist/pouchdb.min.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests",
+    "vendor",
+    "npm-debug.log",
+    "phantomjsdriver.log"
+  ],
+  "homepage": "https://github.com/pouchdb/pouchdb",
+  "_release": "5.4.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "5.4.5",
+    "commit": "e318490d68afd43644a6b547e4d3943e207db2c4"
+  },
+  "_source": "https://github.com/pouchdb/pouchdb.git",
+  "_target": "^5.3.2",
+  "_originalSource": "pouchdb"
+}
