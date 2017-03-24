@@ -8,10 +8,14 @@ openNote.service("tagService", function ($rootScope,storageService) {
     this.bindHandlers = function(){
         $rootScope.$on("noteSaved", function(event, note) {
             deleteTagsFromMap(note._id,function(){
-                var results = note.note.match(tagRegex);
-                if(!results||!results.length)
+                var matches;
+                var output = [];
+                while ((matches = tagRegex.exec(note.note)))
+                    output.push(matches[1]);
+
+                if(!output.length)
                     return;
-                addTagsToMap(results,note._id);
+                addTagsToMap(output,note._id);
             });
         });
 
