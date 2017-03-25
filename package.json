@@ -1,6 +1,6 @@
 {
   "name": "OpenNote",
-  "version": "17.02.00",
+  "version": "17.02.01",
   "description": "",
   "main": "Gruntfile.js",
   "author": "Jacob Liscom",
@@ -13,6 +13,7 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-compress": "^1.1.1",
     "grunt-karma": "^0.8.3",
     "phantomjs": "^1.9.7-5",
     "karma-phantomjs-launcher": "^0.1.4",
