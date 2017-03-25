@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
 	//Initializing the configuration object
 	    grunt.initConfig({
+			compress: {
+				main: {
+					options: {
+						archive: "version.zip"
+					},
+					src: ["OpenNote/**/*"]
+				}
+			},
 			jshint: {
 				options:{
 				},
@@ -138,6 +146,7 @@ module.exports = function(grunt) {
 	    grunt.loadNpmTasks("grunt-karma");
 	    grunt.loadNpmTasks("grunt-shell");
 	    grunt.loadNpmTasks("grunt-manifest");
+		grunt.loadNpmTasks("grunt-contrib-compress");
 
 	//Task definition
 	    //css
