@@ -4,9 +4,13 @@ module.exports = function(grunt) {
 			compress: {
 				main: {
 					options: {
-						archive: "version.zip"
+						archive: "build/version.zip"
 					},
-					src: ["OpenNote/**/*"]
+					files: [{
+						src: ["**/*"],
+						cwd:"OpenNote/",
+						expand: true
+		   			}]
 				}
 			},
 			jshint: {
@@ -105,15 +109,7 @@ module.exports = function(grunt) {
 		            	           	"cd OpenNote",
 		                			"rm -rf bower_components",
 		                			"cd openNote/style/invert/",
-		                			"rm -rf dark",
-		                			"rm -rf light"].join("&&")
-		            },
-		            phpPackage:{
-		            	command:  [	"mkdir build",
-		            	           	"cd build",
-		                			"cp -r ../OpenNote/* ./",
-		            	           	"cp -r ../../OpenNoteService-PHP/Service ./",
-									"cp -r ../../OpenNoteService-PHP/vendor ./"].join("&&")
+		                			"rm -rf dark light"].join("&&")
 		            }
 		        },
 	        //HTML 5
@@ -157,7 +153,7 @@ module.exports = function(grunt) {
 		    // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
 		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS", "manifest:generate"]);
 			grunt.registerTask("default", ["build"]);
-			grunt.registerTask("deploy", ["shell:clean", "shell:bowerInstall", "buildProdCSS", "manifest:generate"]);
+			grunt.registerTask("deploy", ["shell:clean", "shell:bowerInstall", "buildProdCSS", "manifest:generate","compress"]);
 
 		//testing
 			grunt.registerTask("devmode", ["karma:unit", "watch"]);
