@@ -188,14 +188,14 @@ openNote.controller("folderController", function(	$scope,
 				if(!confirm)
 					return;
 
-				var parrentFolderID = $scope.currentFolder.parrentFolderID;
+				var parentFolderID = $scope.currentFolder.parentFolderID;
 				storageService.deleteFolder($scope.currentFolder, function(){
 					$rootScope.$emit("reloadListView", {});
 
-					if(!parrentFolderID)
+					if(!parentFolderID)
 						$location.url("/folder/");
 					else
-						$location.url("/folder/"+parrentFolderID);
+						$location.url("/folder/"+parentFolderID);
 
 					$scope.$apply();
 				});
@@ -206,7 +206,7 @@ openNote.controller("folderController", function(	$scope,
 	 * Listen to changed folder events to see if its the current open folder
 	 */
 	$rootScope.$on("changedFolder", function(event, request) {
-	    if(request.folder.parrentFolderID==$scope.currentFolder.id || $scope.currentFolder.id==request.oldParrentFolderID){//does the change effect us?
+	    if(request.folder.parentFolderID==$scope.currentFolder.id || $scope.currentFolder.id==request.oldparentFolderID){//does the change effect us?
 	    	$scope.loadCurrentFolder();//reload
 	    }
     });
