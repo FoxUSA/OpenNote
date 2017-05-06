@@ -154,8 +154,8 @@ openNote.service("storageService", function ($rootScope) {
 	 * @param  folder - the folder doc to delete
 	 * @param callback - callback when the given folder has been removed
 	 */
-	this.deleteFolder = function(folder,callback){
-		self.loadFolderContents(folder.id, function (results) {
+	this.deleteFolder = function(folder,callback){//TODO test
+		self.loadFolderContents(folder._id, function (results) {
 			results.rows.filter(self.noteFilter).forEach(function(note){
 				localDatabase.remove(note.doc);
 			});
@@ -163,9 +163,8 @@ openNote.service("storageService", function ($rootScope) {
 			results.rows.filter(self.folderFilter).forEach(function(subFolder){
 				self.deleteFolder(subFolder);
 			});
+			localDatabase.remove(folder).then(callback);
 		});
-
-		localDatabase.remove(folder.doc).then(callback);
 	};
 
 
