@@ -155,6 +155,8 @@ openNote.service("storageService", function ($rootScope) {
 	 * @param callback - callback when the given folder has been removed
 	 */
 	this.deleteFolder = function(folder,callback){//TODO test
+		if(!folder._id)//Required
+			return;
 		self.loadFolderContents(folder._id, function (results) {
 			results.rows.filter(self.noteFilter).forEach(function(note){
 				localDatabase.remove(note.doc);
