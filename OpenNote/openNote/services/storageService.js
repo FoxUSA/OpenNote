@@ -161,7 +161,7 @@ openNote.service("storageService", function ($rootScope) {
 			});
 
 			results.rows.filter(self.folderFilter).forEach(function(subFolder){
-				self.deleteFolder(subFolder);
+				self.deleteFolder(subFolder.doc);
 			});
 			localDatabase.remove(folder).then(callback);
 		});
