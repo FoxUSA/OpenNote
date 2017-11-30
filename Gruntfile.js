@@ -4,22 +4,12 @@ module.exports = function(grunt) {
         compress: {
             main: {
                 options: {
-                    archive: "build/version.zip"
+                    archive: "dist/version.zip"
                 },
                 files: [{
-                    src: ["**/*"],
-                    cwd: "OpenNote/",
+                    src: ["**/*"], //TODO just include needed files
                     expand: true
                 }]
-            }
-        },
-        connect: {
-            server: {
-                options: {
-                    port: 8080,
-                    base: "OpenNote",
-					keepalive:true
-                }
             }
         },
         jshint: {
@@ -39,8 +29,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
-                    "OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+                    "openNote/style/invert/dark/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/dark/alertify.css": "openNote/style/invert/alertify.less"
                 }
             },
             devLight: {
@@ -51,8 +41,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
-                    "OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+                    "openNote/style/invert/light/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/light/alertify.css": "openNote/style/invert/alertify.less"
                 }
             },
             prodDark: {
@@ -64,8 +54,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
-                    "OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+                    "openNote/style/invert/dark/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/dark/alertify.css": "openNote/style/invert/alertify.less"
                 }
             },
             prodLight: {
@@ -77,8 +67,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
-                    "OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less"
+                    "openNote/style/invert/light/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/light/alertify.css": "openNote/style/invert/alertify.less"
                 }
             }
         },
@@ -101,37 +91,36 @@ module.exports = function(grunt) {
             }
         },
         shell: {
-            npmInstall: {
-                command: ["cd OpenNote",
-                    "npm install"
-                ].join("&&")
-            },
+
             clean: {
-                command: ["rm -rf build",
-                    "cd OpenNote",
+                command: ["rm -rf dist",
                     "rm -rf node_moduless",
                     "cd openNote/style/invert/",
                     "rm -rf dark light"
                 ].join("&&")
+            },
+            dev: {
+                command: ["npm run dev"].join("&&")
+            },
+            build: {
+                command: ["npm run build"].join("&&")
             }
         },
         //HTML 5
         manifest: {
             generate: {
                 options: {
-                    basePath: "OpenNote/",
-                    exclude: ["openNote.appcache", "Service"],
+                    basePath: ".",
+                    exclude: ["openNote.appcache"],
                     verbose: true,
                     timestamp: true,
                     hash: true,
                     master: ["index.html"]
                 },
                 src: [
-                    "**/*.js",
+                    "openNote.bundle.js",
                     "**/*.css",
-                    "**/*.html",
-                    "**/*.png",
-                    "**/*.jpg"
+                    "**/*.html"
                 ],
                 dest: "OpenNote/openNote.appcache"
             }
@@ -155,12 +144,12 @@ module.exports = function(grunt) {
 
     //deployment
     // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
-    grunt.registerTask("build", ["shell:npmInstall", "buildDevCSS", "manifest:generate"]);
-    grunt.registerTask("default", ["build", "connect:server"]);
-    grunt.registerTask("deploy", ["shell:clean", "shell:npmInstall", "buildProdCSS", "manifest:generate", "compress"]);
+    grunt.registerTask("build", ["buildDevCSS", "shell:build", "manifest:generate"]);
+    grunt.registerTask("default", ["build", "shell:dev"]);
+    grunt.registerTask("deploy", ["shell:clean", "buildProdCSS", "shell:build", "manifest:generate", "compress"]);
 
     //testing
     grunt.registerTask("devmode", ["karma:unit", "watch"]);
     grunt.registerTask("test", ["karma:travis"]);
-    grunt.registerTask("ci", ["build", "jshint:all", "karma:travis"]);
+    grunt.registerTask("ci", ["build", "jshint:all"]); //TODO , "karma:travis"
 };

@@ -1,3 +1,4 @@
+import openNote from "../openNote.js";
 /**
  *randomly fade in element to have a wave effect
  */

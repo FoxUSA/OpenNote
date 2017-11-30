@@ -1,3 +1,4 @@
+import openNote from "./openNote.js";
 /**
  * Angular js config file
  */

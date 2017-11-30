@@ -1,4 +1,5 @@
 {
+    "esversion":6,
     "undef": true,
     "unused": true,
     "mocha": true,
@@ -8,6 +9,5 @@
     "devel":true,
     "jquery":true,
     "jasmine": true,
-    "predef": [ "angular","alertify","", "PouchDB","inject" ],
-    "globals":{"openNote":true}
+    "predef": [ "angular","alertify","", "PouchDB","inject" ]
 }

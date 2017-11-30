@@ -1,3 +1,4 @@
+import openNote from "./openNote.js";
 //Router
 openNote.config(function($routeProvider,$locationProvider){
 	$locationProvider.hashPrefix("");//Fixes #! angular people added stupidly

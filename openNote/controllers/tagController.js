@@ -1,4 +1,4 @@
-
+import openNote from "../openNote.js";
 openNote.controller("tagController", function(	$scope,
 												$rootScope,
 												$location,

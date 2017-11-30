@@ -1,3 +1,4 @@
+import openNote from "../openNote.js";
 /**
  * @author - Jake Liscom
  * @project - OpenNote

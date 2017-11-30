@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="openNote"> <!-- manifest="openNote.appcache" -->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="description">
+
+		<!-- Disable scrolling and zooming to make app feed more native -->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon" type="image/png" href="openNote/style/OpenNote.png" />
+
+		<title>OpenNote</title>
+
+		<!--[if IE]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Style -->
+			<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+			<link rel="stylesheet" href="node_modules/alertify/themes/alertify.core.css">
+
+			<!-- Theme -->
+				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/alertify.css">
+				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/style.css">
+
+			<link rel="stylesheet" type="text/css" href="openNote/style/animations.css">
+
+		<!-- Scripts -->
+			<script src="openNote.bundle.js"></script>
+
+	</head>
+	<body>
+		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
+		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-include="'openNote/partials/tagListPartial.html'"></div>
+		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view>	</div>
+		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2017 Jacob Liscom - Version {{version}}</div>
+	</body>
+</html>

@@ -1,3 +1,13 @@
+import "script-loader!../node_modules/jquery/dist/jquery.min.js";
+import "script-loader!../node_modules/pouchdb/dist/pouchdb.min.js";
+import "script-loader!../node_modules/bootstrap/dist/js/bootstrap.min.js";
+import "script-loader!../node_modules/angular/angular.js";
+import "script-loader!../node_modules/angular-animate/angular-animate.min.js";
+import "script-loader!../node_modules/angular-resource/angular-resource.min.js";
+import "script-loader!../node_modules/angular-route/angular-route.min.js";
+import "script-loader!../node_modules/angular-sanitize/angular-sanitize.min.js";
+import "script-loader!../node_modules/alertify/lib/alertify.min.js";
+
 /**
  * @author - Jake Liscom
  * @project - OpenNote
@@ -45,3 +55,5 @@ openNote.run(function($rootScope,
         );
     });
 });
+
+export default openNote;

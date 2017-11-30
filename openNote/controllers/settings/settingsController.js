@@ -1,4 +1,4 @@
-
+import openNote from "../../openNote.js";
 openNote.controller("settingsController", function(	$scope,
 													$rootScope,
 													$location,
