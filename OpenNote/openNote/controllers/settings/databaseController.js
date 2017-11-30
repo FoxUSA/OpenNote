@@ -3,8 +3,7 @@
  */
 openNote.controller("databaseController", function(	$scope,
 													$rootScope,
-													storageService,
-													userService) {
+													storageService) {
 	$scope.downloadFile = null;
 	$scope.url = storageService.getRemoteURL();
 
@@ -38,7 +37,6 @@ openNote.controller("databaseController", function(	$scope,
 					return;
 
 				storageService.destroyDatabase(function(){
-					userService.destroyTokenHeader();
 					$rootScope.$emit("reloadListView", {});
 					window.location.href='#/';
 					$rootScope.$apply();

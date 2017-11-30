@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="openNote" manifest="openNote.appcache">
+<html ng-app="openNote"> <!-- manifest="openNote.appcache" -->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="description" content="description">
@@ -16,31 +16,28 @@
 		<![endif]-->
 
 		<!-- Style -->
-			<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-			<link rel="stylesheet" href="bower_components/alertify/themes/alertify.core.css">
+			<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+			<link rel="stylesheet" href="node_modules/alertify/themes/alertify.core.css">
 
 			<!-- Theme -->
-				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/intojs.css">
 				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/alertify.css">
 				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/style.css">
 
 			<link rel="stylesheet" type="text/css" href="openNote/style/animations.css">
 
 		<!-- Scripts -->
-			<script src="bower_components/jquery/dist/jquery.min.js"></script>
-			<script src="bower_components/pouchdb/dist/pouchdb.min.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+			<script src="node_modules/jquery/dist/jquery.min.js"></script>
+			<script src="node_modules/pouchdb/dist/pouchdb.min.js"></script>
+			<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 			<!-- Angular and the gang -->
-				<script src="bower_components/angular/angular.js"></script>
-				<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-				<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-				<script src="bower_components/angular-route/angular-route.min.js"></script>
-				<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+				<script src="node_modules/angular/angular.js"></script>
+				<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+				<script src="node_modules/angular-resource/angular-resource.min.js"></script>
+				<script src="node_modules/angular-route/angular-route.min.js"></script>
+				<script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
 
-			<script src="bower_components/intro.js/minified/intro.min.js"></script>
-			<script src="bower_components/alertify/alertify.min.js"></script>
-			<script src="bower_components/ckeditor/ckeditor.js"></script>
+			<script src="node_modules/alertify/lib/alertify.min.js"></script>
 
 			<!-- Main Open Note Scripts -->
 				<script src="openNote/openNote.js"></script>
@@ -48,10 +45,7 @@
 				<script src="openNote/router.js"></script>
 
 				<!-- Services -->
-					<script src="openNote/services/userService.js"></script>
-					<script src="openNote/services/serverConfigService.js"></script>
 					<script src="openNote/services/storageService.js"></script>
-					<script src="openNote/services/legacyImportService.js"></script>
 					<script src="openNote/services/tagService.js"></script>
 
 				<!-- Directives -->
@@ -66,7 +60,6 @@
 					<script src="openNote/controllers/searchController.js"></script>
 					<script src="openNote/controllers/settings/settingsController.js"></script>
 					<script src="openNote/controllers/settings/databaseController.js"></script>
-					<script src="openNote/controllers/settings/legacyController.js"></script>
 
 	</head>
 	<body>
@@ -74,7 +67,7 @@
 
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-include="'openNote/partials/tagListPartial.html'"></div>
 
-		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view data-intro="{{helpContent.viewArea}}">	</div>
+		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view>	</div>
 
 		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2017 Jacob Liscom - Version {{version}}</div>
 	</body>

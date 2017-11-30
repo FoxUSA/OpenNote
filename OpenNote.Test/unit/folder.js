@@ -23,12 +23,6 @@ describe("folderController", function() {
 		$scope = $rootScope.$new();
 		this.$rootScope=$rootScope;
 
-		$rootScope.helpContent={
-			newNoteButton: "",
-			newFolderButton: "",
-			findButton: ""
-		};
-
 		$rootScope.buttons=[];
 
 		/**

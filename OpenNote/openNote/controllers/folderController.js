@@ -20,8 +20,7 @@ openNote.controller("folderController", function(	$scope,
 					$scope.fadeOutFoldersAndNotes(function(){
 						$location.url("/note/").search("folderID",$scope.currentFolder._id);
 					});
-				},
-				helpText: $rootScope.helpContent.newNoteButton
+				}
 			});
 
 		//Create a folder
@@ -47,8 +46,7 @@ openNote.controller("folderController", function(	$scope,
 							createFolder(folder);
 						},
 						"");
-				},
-				helpText: $rootScope.helpContent.newFolderButton
+				}
 			});
 
 		if($routeParams.id)
@@ -76,8 +74,7 @@ openNote.controller("folderController", function(	$scope,
 			text: "Search",
 			action: function(){
 				$location.url("/search/"+$scope.currentFolder.id);
-			},
-			helpText: $rootScope.helpContent.findButton
+			}
 		});
 
 	/**

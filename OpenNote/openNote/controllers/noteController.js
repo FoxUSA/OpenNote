@@ -12,7 +12,6 @@ openNote.controller("noteController", function(	$scope,
 												$routeParams,
 												storageService,
 												config,
-												serverConfigService,
 												$sce) {
 	$rootScope.buttons=[];
 	$scope.note = {};
@@ -27,8 +26,7 @@ openNote.controller("noteController", function(	$scope,
 			text: "Save",
 			action: function(){
 				save();
-			},
-			helpText: $rootScope.helpContent.saveButton
+			}
 		};
 	};
 
@@ -50,8 +48,7 @@ openNote.controller("noteController", function(	$scope,
 			text: "Clear",
 			action: function(){
 				$scope.clear();
-			},
-			helpText: $rootScope.helpContent.clearButton
+			}
 		};
 	};
 
@@ -60,8 +57,7 @@ openNote.controller("noteController", function(	$scope,
 			text: "Edit",
 			action: function(){
 				activateEditMode();
-			},
-			helpText: $rootScope.helpContent.editButton
+			}
 		};
 	};
 
@@ -70,8 +66,7 @@ openNote.controller("noteController", function(	$scope,
 			text: "Go up a folder",
 			action: function(){
 				$location.url("/folder/"+folderID);
-			},
-			helpText: $rootScope.helpContent.editButton
+			}
 		};
 	};
 
@@ -79,28 +74,28 @@ openNote.controller("noteController", function(	$scope,
 	 * Take us into edit mode
 	 */
 	var activateEditMode = function(){
-		serverConfigService.getEditorConfig().then(function(config){
-			$scope.editMode=true;
+		//FIXME
 
-			if($scope.note._id)
-				$scope.showDeleteButton = true;
+		$scope.editMode=true;
 
-			CKEDITOR.replace("note", config);
-			$rootScope.buttons=[];
+		if($scope.note._id)
+			$scope.showDeleteButton = true;
 
-			attachWindowUnload();
+		$rootScope.buttons=[];
 
-			//Add new buttons
-				$rootScope.buttons.push(saveButton());
-				$rootScope.buttons.push(clearButton());
-		});
+		attachWindowUnload();
+
+		//Add new buttons
+			$rootScope.buttons.push(saveButton());
+			$rootScope.buttons.push(clearButton());
+
 	};
 
 	/**
 	 * Save a note
 	 */
 	var save = function(){
-		$scope.note.note = CKEDITOR.instances.note.getData();
+		//$scope.note.note = CKEDITOR.instances.note.getData();//FIXME
 
 		$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
 			$scope.note.type="note";

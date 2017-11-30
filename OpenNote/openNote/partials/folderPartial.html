@@ -4,7 +4,7 @@
 		  	<li id="parentFolder" ng-if="parentFolder!=null">
 		  		<a href="#/folder/{{parentFolder._id}}">{{parentFolder.name}}</a>
 		  	</li>
-		  	<li class="active" data-intro="{{helpContent.folderEditModeButton}}" ng-click="activateFolderEditMode();">
+		  	<li class="active" ng-click="activateFolderEditMode();">
 		  		{{currentFolder.name}}
 		  	</li>
 		</ol>

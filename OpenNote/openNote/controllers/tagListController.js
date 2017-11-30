@@ -20,6 +20,8 @@ openNote.controller("tagListController", function(	$scope,
 				$scope.tags.push(tag);
 
 			$scope.$apply();
+		}).catch(function(){
+			//TODO
 		});
 	};
 

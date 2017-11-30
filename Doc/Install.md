@@ -52,12 +52,6 @@ curl -X PUT http://127.0.0.1:5984/_config/ssl/key_file \
 
 Now in `/OpenNote/#/settings/database/` put the following connection string in the `Replication url` field `https://admin:password@127.0.0.1:6984/opennote`
 
-To import a database from older versions check out `/OpenNote/#/settings/legacy/`
-
-# Legacy service
-The legacy service is still included to migrate data to the new data structure.
-All write endpoints have been hidden with the exception of the file upload api's.
-
 ### Automatic(Wizard Based Install)
 To run the installer open
 `<install path>/Service/install.php`
