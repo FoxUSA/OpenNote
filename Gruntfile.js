@@ -108,13 +108,9 @@ module.exports = function(grunt) {
                     master: ["index.html"]
                 },
                 src: [
-                    "openNote.bundle.js",
-                    "node_modules/bootstrap/dist/**/*.*",
-                    "node_modules/codemirror/**/*.css",
-                    "node_modules/alertify/**/*.css",
-                    "openNote/**/*.*",
-                    "!**/*.js", // JS Files handled webpack
-                    "!**/*.less"
+                    "openNote.bundle.*",
+                    "webpack_files/**/*.*",
+                    "openNote/**/*.html",
                 ],
                 dest: "openNote.appcache"
             }

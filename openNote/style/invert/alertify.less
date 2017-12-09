@@ -2,10 +2,10 @@
  * Twitter Bootstrap Look and Feel
  * Based on http://twitter.github.com/bootstrap/
  */
- 
+
  /** offset all the other colors */
 	@offset: #000000;
- 
+
 .alertify,
 .alertify-log {
 	font-family: inherit;
@@ -33,7 +33,7 @@
 		}
 			.alertify-text {
 				color: negation(#CCC, @offset);
-				
+
 				padding: 8px;
 				border: 1px solid negation(#CCC, @offset);
 			}
@@ -61,27 +61,26 @@
 			.alertify-button:active {
 				position: relative;
 			}
-				.alertify-button-cancel,
-				.alertify-button-cancel:hover,
-				.alertify-button-cancel:focus,
-				.alertify-button-cancel:active {
-					color: negation(#CCC, @offset);
-				}
-				.alertify-button-cancel:hover,
-				.alertify-button-cancel:focus,
-				.alertify-button-cancel:active {
-					color: negation(#000, @offset);
-					background: negation(#fff, @offset);
-				}
+
 				.alertify-button-ok,
 				.alertify-button-ok:hover,
 				.alertify-button-ok:focus,
-				.alertify-button-ok:active {
+				.alertify-button-ok:active,
+                .alertify-button-cancel,
+				.alertify-button-cancel:hover,
+				.alertify-button-cancel:focus,
+				.alertify-button-cancel:active {
+                    border: none;
 					color: negation(#CCC, @offset);
+                    background: negation(#000, @offset);
 				}
 				.alertify-button-ok:hover,
 				.alertify-button-ok:focus,
-				.alertify-button-ok:active {
+				.alertify-button-ok:active,
+                .alertify-button-cancel:hover,
+				.alertify-button-cancel:focus,
+				.alertify-button-cancel:active {
+                    border: none;
 					color: negation(#000, @offset);
 					background: negation(#fff, @offset);
 				}
@@ -99,7 +98,7 @@
 	.alertify-log-success {
 		color: negation(#CCC, @offset);
 	}
-	
+
 .alertify-cover {
 	transition: opacity 1s ease-out, width 0s;
 	background-color: negation(#555, @offset);
@@ -111,7 +110,7 @@
 	right:0;
 }
 
-.alertify-cover.alertify-cover-hidden{/*For animation*/	
+.alertify-cover.alertify-cover-hidden{/*For animation*/
 	display: block;
 	opacity: 0;
 	width:0;

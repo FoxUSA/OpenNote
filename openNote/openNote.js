@@ -9,8 +9,15 @@ import "script-loader!../node_modules/angular-route/angular-route.min.js";
 import "script-loader!../node_modules/angular-sanitize/angular-sanitize.min.js";
 import "script-loader!../node_modules/alertify/lib/alertify.min.js";
 
-
 //Style
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/alertify/themes/alertify.core.css";
+import "../node_modules/codemirror/lib/codemirror.css";
+import "../node_modules/codemirror/theme/material.css";
+import "../openNote/style/invert/light/alertify.css";
+import "../openNote/style/invert/light/style.css";
+import "../openNote/style/animations.css";
+
 
 /**
  * @author - Jake Liscom
