@@ -1,6 +1,15 @@
 module.exports = function(grunt) {
     //Initializing the configuration object
     grunt.initConfig({
+        connect: {
+            server: {
+                options: {
+                    port: 8080,
+                    base: ".",
+                    keepalive: true
+                }
+            }
+        },
         compress: {
             main: {
                 options: {
@@ -94,7 +103,6 @@ module.exports = function(grunt) {
 
             clean: {
                 command: ["rm -rf dist",
-                    "rm -rf node_moduless",
                     "cd openNote/style/invert/",
                     "rm -rf dark light"
                 ].join("&&")
@@ -119,8 +127,12 @@ module.exports = function(grunt) {
                 },
                 src: [
                     "openNote.bundle.js",
-                    "**/*.css",
-                    "**/*.html"
+                    "node_modules/bootstrap/dist/**/*.*",
+                    "node_modules/codemirror/**/*.css",
+                    "node_modules/alertify/**/*.css",
+                    "openNote/**/*.*",
+                    "!**/*.js", // JS Files handled webpack
+                    "!**/*.less"
                 ],
                 dest: "openNote.appcache"
             }
@@ -145,8 +157,10 @@ module.exports = function(grunt) {
     //deployment
     // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
     grunt.registerTask("build", ["buildDevCSS", "shell:build", "manifest:generate"]);
+    grunt.registerTask("buildProd", ["buildProdCSS", "shell:build", "manifest:generate"]);
     grunt.registerTask("default", ["build", "shell:dev"]);
-    grunt.registerTask("deploy", ["shell:clean", "buildProdCSS", "shell:build", "manifest:generate", "compress"]);
+    grunt.registerTask("deploy", ["shell:clean", "buildProd", "compress"]);
+    grunt.registerTask("testDeploy", ["shell:clean", "buildProd", "connect:server"]);
 
     //testing
     grunt.registerTask("devmode", ["karma:unit", "watch"]);

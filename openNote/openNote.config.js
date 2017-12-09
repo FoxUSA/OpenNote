@@ -45,6 +45,6 @@ openNote.value("config", {
  * Change link behavior to not be stupid an allow all href links
  * @param $compileProvider
  */
-openNote.config(function($compileProvider) {
+openNote.config(["$compileProvider",function($compileProvider) {
 	$compileProvider.aHrefSanitizationWhitelist("[\s\S]*");
-});
+}]);

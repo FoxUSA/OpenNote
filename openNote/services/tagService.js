@@ -1,5 +1,5 @@
 import openNote from "../openNote.js";
-openNote.service("tagService", function ($rootScope,storageService) {
+openNote.service("tagService", ["$rootScope","storageService", function ($rootScope,storageService) {
     var service = this;
     var tagRegex = /(?:\ |^|\n|>)(#[^\ <\n]+)/ig;
 
@@ -98,4 +98,4 @@ openNote.service("tagService", function ($rootScope,storageService) {
     this.getMap = function(){
         return storageService.database().get("tagMap");
     };
-});
+}]);

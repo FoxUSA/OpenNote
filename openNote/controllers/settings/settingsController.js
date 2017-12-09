@@ -1,30 +1,32 @@
 import openNote from "../../openNote.js";
-openNote.controller("settingsController", function(	$scope,
-													$rootScope,
-													$location,
-													$routeParams,
-													storageService,
-													config) {
+openNote.controller("settingsController", [
+    "$scope",
+    "$location",
+    "config",
+    function($scope,
+        $location,
+        config) {
 
 
-	/**
-	 * fade out all folders
-	 */
-	$scope.fadeOutBoxes = function(callback){
-		$(".box").fadeTo(config.fadeSpeedShort(),0,function(){
-			$scope.$apply(function(){
-				callback();
-			});
-		});
-	};
+        /**
+         * fade out all folders
+         */
+        $scope.fadeOutBoxes = function(callback) {
+            $(".box").fadeTo(config.fadeSpeedShort(), 0, function() {
+                $scope.$apply(function() {
+                    callback();
+                });
+            });
+        };
 
-	/**
-	 * Load a settings
-	 * @param folder- the folder to load
-	 */
-	$scope.loadURL = function(url){
-		$scope.fadeOutBoxes(function(){
-			$location.url(url);
-		});
-	};
-});
+        /**
+         * Load a settings
+         * @param folder- the folder to load
+         */
+        $scope.loadURL = function(url) {
+            $scope.fadeOutBoxes(function() {
+                $location.url(url);
+            });
+        };
+    }
+]);

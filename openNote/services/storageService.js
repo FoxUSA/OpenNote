@@ -7,7 +7,7 @@ import openNote from "../openNote.js";
 /**
  * Storage service
  */
-openNote.service("storageService", function ($rootScope) {
+openNote.service("storageService", ["$rootScope", function ($rootScope) {
 
 	var localDatabase = null;
 	var remoteDatabase = null;
@@ -304,4 +304,4 @@ openNote.service("storageService", function ($rootScope) {
 
 	//First time create database
 		this.init();
-});
+}]);
