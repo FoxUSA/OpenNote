@@ -1,3 +1,11 @@
+var package_json = require(__dirname+"/package.json");
+var bundleFiles=[
+    "openNote.bundle.*",
+    "webpack_files/**/*.*",
+    "openNote/**/*.html"
+];
+
+
 module.exports = function(grunt) {
     //Initializing the configuration object
     grunt.initConfig({
@@ -13,10 +21,13 @@ module.exports = function(grunt) {
         compress: {
             main: {
                 options: {
-                    archive: "dist/version.zip"
+                    archive: "dist/"+package_json.version+".zip"
                 },
                 files: [{
-                    src: ["**/*"], //TODO just include needed files
+                    src: [
+                        "openNote.appcache",
+                        "index.html",
+                    ].concat(bundleFiles),
                     expand: true
                 }]
             }
@@ -107,11 +118,7 @@ module.exports = function(grunt) {
                     hash: true,
                     master: ["index.html"]
                 },
-                src: [
-                    "openNote.bundle.*",
-                    "webpack_files/**/*.*",
-                    "openNote/**/*.html",
-                ],
+                src: bundleFiles,
                 dest: "openNote.appcache"
             }
         }
