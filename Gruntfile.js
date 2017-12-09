@@ -122,7 +122,7 @@ module.exports = function(grunt) {
                     "**/*.css",
                     "**/*.html"
                 ],
-                dest: "OpenNote/openNote.appcache"
+                dest: "openNote.appcache"
             }
         }
     });

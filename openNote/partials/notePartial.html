@@ -6,10 +6,9 @@
 		</button>
 	</div>
 
-
-	<div id="note" ng-if="!editMode" class="box big" ng-bind-html="trustHTML(note.note)">
+	<div id="note" ng-if="!editMode" class="box big" ng-bind-html="noteHTML">
 	</div>
 
-	<textarea ng-if="editMode" class="box big" ng-model="note.note">
+	<textarea id="note-editor" ng-if="editMode" class="box big" ng-model="note.note">
 	</textarea>
 </div>

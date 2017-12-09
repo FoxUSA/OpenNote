@@ -1,4 +1,6 @@
 import openNote from "../openNote.js";
+import "script-loader!../../node_modules/codemirror/lib/codemirror.js";
+var marked = require("marked");
 /**
  * @author - Jake Liscom
  * @project - OpenNote
@@ -7,215 +9,225 @@ import openNote from "../openNote.js";
 /**
  * controller for note creation, editing and maintenance
  */
-openNote.controller("noteController", function(	$scope,
-												$rootScope,
-												$location,
-												$routeParams,
-												storageService,
-												config,
-												$sce) {
-	$rootScope.buttons=[];
-	$scope.note = {};
-	$scope.editMode = false;
-	$scope.showDeleteButton = false;
+openNote.controller("noteController", function($scope,
+    $rootScope,
+    $location,
+    $routeParams,
+    storageService,
+    config,
+    $sce,
+    $timeout) {
+    $rootScope.buttons = [];
+    $scope.note = {};
+    $scope.editMode = false;
+    $scope.showDeleteButton = false;
 
-	/**
-	 * Returns the save buttons object
-	 */
-	var saveButton = function(){
-		return {
-			text: "Save",
-			action: function(){
-				save();
-			}
-		};
-	};
+    /**
+     * Returns the save buttons object
+     */
+    var saveButton = function() {
+        return {
+            text: "Save",
+            action: function() {
+                save();
+            }
+        };
+    };
 
-	var copyButton = function(note){
-		return {
-			text: "Cut",
-			action: function(){
-				$rootScope.clipboard=note;
-				alertify.success("Note copied to clipboard");
-			}
-		};
-	};
+    var copyButton = function(note) {
+        return {
+            text: "Cut",
+            action: function() {
+                $rootScope.clipboard = note;
+                alertify.success("Note copied to clipboard");
+            }
+        };
+    };
 
-	/**
-	 * return the clear button
-	 */
-	var clearButton = function(){
-		return {
-			text: "Clear",
-			action: function(){
-				$scope.clear();
-			}
-		};
-	};
+    /**
+     * return the clear button
+     */
+    var clearButton = function() {
+        return {
+            text: "Clear",
+            action: function() {
+                $scope.clear();
+            }
+        };
+    };
 
-	var editButton = function(){
-		return {
-			text: "Edit",
-			action: function(){
-				activateEditMode();
-			}
-		};
-	};
+    var editButton = function() {
+        return {
+            text: "Edit",
+            action: function() {
+                activateEditMode();
+            }
+        };
+    };
 
-	var upButton = function(folderID){
-		return {
-			text: "Go up a folder",
-			action: function(){
-				$location.url("/folder/"+folderID);
-			}
-		};
-	};
+    var upButton = function(folderID) {
+        return {
+            text: "Go up a folder",
+            action: function() {
+                $location.url("/folder/" + folderID);
+            }
+        };
+    };
 
-	/**
-	 * Take us into edit mode
-	 */
-	var activateEditMode = function(){
-		//FIXME
+    /**
+     * Take us into edit mode
+     */
+    var activateEditMode = function() {
+        //FIXME
 
-		$scope.editMode=true;
 
-		if($scope.note._id)
-			$scope.showDeleteButton = true;
+        $scope.editMode = true;
 
-		$rootScope.buttons=[];
+        if ($scope.note._id)
+            $scope.showDeleteButton = true;
 
-		attachWindowUnload();
+        $rootScope.buttons = [];
 
-		//Add new buttons
-			$rootScope.buttons.push(saveButton());
-			$rootScope.buttons.push(clearButton());
+        attachWindowUnload();
 
-	};
+        //Add new buttons
+        $rootScope.buttons.push(saveButton());
+        $rootScope.buttons.push(clearButton());
 
-	/**
-	 * Save a note
-	 */
-	var save = function(){
-		//$scope.note.note = CKEDITOR.instances.note.getData();//FIXME
+        $timeout(function() {//trick to wait for page to rerender with text area
+            $scope.editor = CodeMirror.fromTextArea(document.getElementById("note-editor"), {
+                mode: "markdown",
+                //theme: "material", FIXME
+                lineNumbers: true
+            });
 
-		$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
-			$scope.note.type="note";
+        });
 
-			/**
-			 * Callback after successful save to reload note
-			 */
-			var saveCallback = function(response){
-				if(!response.ok)
-					throw "//FIXME";//FIXME
-				detachWindowUnload();
+    };
 
-				//Tags
-					$scope.note._id=response.id;
-					$rootScope.$emit("noteSaved",$scope.note);//Let any number of services know we have saved a note
+    /**
+     * Save a note
+     */
+    var save = function() {
+        $(".notePartial").fadeOut(config.fadeSpeedShort(), function() {
+            $scope.note.type = "note";
+            $scope.note.note = $scope.editor.getValue();
 
-				$location.url("/note/"+response.id+"?rev="+response.rev);//revision number is here only to force angular to reload
-				alertify.success("Note Saved"); //all done. close the notify dialog
-				$scope.$apply();
-			};
+            /**
+             * Callback after successful save to reload note
+             */
+            var saveCallback = function(response) {
+                if (!response.ok)
+                    throw "//FIXME"; //FIXME
+                detachWindowUnload();
 
-			//Upsert
-				if(!$scope.note._id)
-					storageService.database().post($scope.note).then(saveCallback,function(){
-						alertify.error("Error saving note");
-					});
-				else
-					storageService.database().put($scope.note).then(saveCallback,function(){
-						alertify.error("Error modifing note");
-					});
-		});
-	};
+                //Tags
+                $scope.note._id = response.id;
+                $rootScope.$emit("noteSaved", $scope.note); //Let any number of services know we have saved a note
 
-	/**
-	 * Delete a note
-	 */
-	$scope.delete = function(){
-		alertify.confirm("Are you sure you want to delete this note?",
-			function(confirm) {
-				if(!confirm)
-					return;
+                $location.url("/note/" + response.id + "?rev=" + response.rev); //revision number is here only to force angular to reload
+                alertify.success("Note Saved"); //all done. close the notify dialog
+                $scope.$apply();
+            };
 
-				var folderID = $scope.note.parentFolderID;//need to keep track of this because we are about to delete it
-				$(".notePartial").fadeOut(config.fadeSpeedShort());
-				storageService.database().remove($scope.note).then(function(){
-					$rootScope.$emit("noteDeleted",$scope.note);
-					detachWindowUnload();
-					alertify.success("Note Deleted"); //all done. close the notify dialog
-					$location.url("/folder/"+folderID);
-					$scope.$apply();
-				});
-			}
-		);
-	};
+            //Upsert
+            if (!$scope.note._id)
+                storageService.database().post($scope.note).then(saveCallback, function() {
+                    alertify.error("Error saving note");
+                });
+            else
+                storageService.database().put($scope.note).then(saveCallback, function() {
+                    alertify.error("Error modifing note");
+                });
+        });
+    };
 
-	/**
-	 * Reset changes
-	 */
-	$scope.clear = function(){
-		alertify.confirm("Are you sure you want to clear your changes?",
-			function(confirm) {
-				if(!confirm)
-					return;
+    /**
+     * Delete a note
+     */
+    $scope.delete = function() {
+        alertify.confirm("Are you sure you want to delete this note?",
+            function(confirm) {
+                if (!confirm)
+                    return;
 
-				$(".notePartial").fadeOut(config.fadeSpeedShort(),function(){
-					$scope.$apply(function(){
-						detachWindowUnload();
-						$location.url("/folder/"+$scope.note.parentFolderID);
-					});
-				});
-			});
-	};
+                var folderID = $scope.note.parentFolderID; //need to keep track of this because we are about to delete it
+                $(".notePartial").fadeOut(config.fadeSpeedShort());
+                storageService.database().remove($scope.note).then(function() {
+                    $rootScope.$emit("noteDeleted", $scope.note);
+                    detachWindowUnload();
+                    alertify.success("Note Deleted"); //all done. close the notify dialog
+                    $location.url("/folder/" + folderID);
+                    $scope.$apply();
+                });
+            }
+        );
+    };
 
-	/**
-	 * Mark html as trusted
-	 */
-	$scope.trustHTML = function(html) {
-	    return $sce.trustAsHtml(html);
-	};
+    /**
+     * Reset changes
+     */
+    $scope.clear = function() {
+        alertify.confirm("Are you sure you want to clear your changes?",
+            function(confirm) {
+                if (!confirm)
+                    return;
 
-	/**
-	 * Attach window on-load listener
-	 */
-	var attachWindowUnload = function(){
-		window.onbeforeunload = function() {
-            return "Are you sure you want to navigate away?";//Keep the page from closing
-		};
-	};
+                $(".notePartial").fadeOut(config.fadeSpeedShort(), function() {
+                    $scope.$apply(function() {
+                        detachWindowUnload();
+                        $location.url("/folder/" + $scope.note.parentFolderID);
+                    });
+                });
+            });
+    };
 
-	/**
-	 * Remove window on-load listener
-	 */
-	var detachWindowUnload = function(){
-		window.onbeforeunload = null;
-	};
+    /**
+     * Mark html as trusted
+     */
+    $scope.trustHTML = function(html) {
+        return $sce.trustAsHtml(html);
+    };
 
-	//Load or new
-		if(!$routeParams.id){//new
-			$scope.note._id = null;
-			$scope.note.parentFolderID = $location.search().folderID;
-			$scope.note.title = "Note Title";
+    /**
+     * Attach window on-load listener
+     */
+    var attachWindowUnload = function() {
+        window.onbeforeunload = function() {
+            return "Are you sure you want to navigate away?"; //Keep the page from closing
+        };
+    };
 
-			activateEditMode();
-			$(".notePartial").fadeIn(config.fadeSpeedLong());
-		}
-		else{
-			/**
-			 * Load note
-			 */
-			storageService.database().get($routeParams.id).then(function(doc){
-				$scope.note=doc;
-				$(".notePartial").fadeIn(config.fadeSpeedLong());
+    /**
+     * Remove window on-load listener
+     */
+    var detachWindowUnload = function() {
+        window.onbeforeunload = null;
+    };
 
-				//Add buttons
-					$rootScope.buttons.push(upButton($scope.note.parentFolderID));
-					$rootScope.buttons.push(copyButton($scope.note));
-					$rootScope.buttons.push(editButton());
+    //Load or new
+    if (!$routeParams.id) { //new
+        $scope.note._id = null;
+        $scope.note.parentFolderID = $location.search().folderID;
+        $scope.note.title = "Note Title";
 
-				$scope.$apply();
-			});
-		}
+        activateEditMode();
+        $(".notePartial").fadeIn(config.fadeSpeedLong());
+    } else {
+        /**
+         * Load note
+         */
+        storageService.database().get($routeParams.id).then(function(doc) {
+            $scope.note = doc;
+            $scope.noteHTML=marked($scope.note.note);
+            $(".notePartial").fadeIn(config.fadeSpeedLong());
+
+            //Add buttons
+            $rootScope.buttons.push(upButton($scope.note.parentFolderID));
+            $rootScope.buttons.push(copyButton($scope.note));
+            $rootScope.buttons.push(editButton());
+
+            $scope.$apply();
+        });
+    }
 });

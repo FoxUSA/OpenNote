@@ -9,5 +9,5 @@
     "devel":true,
     "jquery":true,
     "jasmine": true,
-    "predef": [ "angular","alertify","", "PouchDB","inject" ]
+    "predef": [ "angular","alertify","", "PouchDB","inject","CodeMirror" ]
 }
