@@ -52,7 +52,7 @@ Documentation
 
 [How to upgrade][Upgrade]
 
-[How to build][Build]
+[How to build](https://github.com/FoxUSA/OpenNote/blob/master/docs/Build.md)
 
 [Themes][Themes]
 
@@ -82,16 +82,15 @@ Credits
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
-[topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/topLevel.png
-[dark]: https://raw.github.com/FoxUSA/OpenNote/master/Doc/screenShots/dark1.png
-[responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/Doc/screenShots/OpenNote.png
+[topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/docs/screenShots/topLevel.png
+[dark]: https://raw.github.com/FoxUSA/OpenNote/master/docs/screenShots/dark1.png
+[responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/docs/screenShots/OpenNote.png
 
-[Install]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Install.md
-[Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Upgrade.md
-[Build]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Build.md
+[Install]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Install.md
+[Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Upgrade.md
 [PHP]: https://github.com/FoxUSA/OpenNoteService-PHP
-[Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Dependencies.md
-[Themes]: https://github.com/FoxUSA/OpenNote/blob/master/Doc/Themes.md
+[Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Dependencies.md
+[Themes]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Themes.md
 [GitTip]: https://www.gittip.com/FoxUSA/
 [Bitcoins]: http://blockchain.info/address/15Q2jhnTvxDQm4LvTku68vTzU8j8dcLnLB
 [Alternative]: http://alternativeto.net/software/opennote/

@@ -1,4 +1,4 @@
-module.exports = function(config){
+module.exports = function(config){//TODO move this stuff into another project
 	config.set({
 		basePath : "../",
 		files : [

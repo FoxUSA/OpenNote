@@ -81,24 +81,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        //Testing setup
-        karma: {
-            unit: {
-                configFile: "OpenNote.Test/karma.conf.js",
-                background: true
-            },
-            travis: {
-                configFile: "OpenNote.Test/karma.conf.js",
-                singleRun: true,
-                browsers: ["PhantomJS"] //Override config browsers
-            }
-        },
-        watch: {
-            karma: {
-                files: ["src/**/*.js", "test/unit/**/*.js"],
-                tasks: ["karma:unit:run"]
-            }
-        },
         shell: {
 
             clean: {
@@ -143,7 +125,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-manifest");
     grunt.loadNpmTasks("grunt-contrib-compress");
@@ -164,6 +145,5 @@ module.exports = function(grunt) {
 
     //testing
     grunt.registerTask("devmode", ["karma:unit", "watch"]);
-    grunt.registerTask("test", ["karma:travis"]);
-    grunt.registerTask("ci", ["build", "jshint:all"]); //TODO , "karma:travis"
+    grunt.registerTask("ci", ["build", "jshint:all"]);
 };
