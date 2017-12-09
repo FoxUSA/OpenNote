@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="openNote"> <!-- manifest="openNote.appcache" -->
+<html ng-app="openNote" manifest="openNote.appcache" -->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="description" content="description">
@@ -11,14 +11,11 @@
 
 		<title>OpenNote</title>
 
-		<!--[if IE]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-
 		<!-- Style -->
 			<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 			<link rel="stylesheet" href="node_modules/alertify/themes/alertify.core.css">
 			<link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+			<link rel="stylesheet" href="node_modules/codemirror/theme/material.css">
 
 			<!-- Theme -->
 				<link rel="stylesheet" type="text/css" href="openNote/style/invert/light/alertify.css">
@@ -34,6 +31,6 @@
 		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-include="'openNote/partials/tagListPartial.html'"></div>
 		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view>	</div>
-		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2017 Jacob Liscom - Version {{version}}</div>
+		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2018 Jacob Liscom - Version {{version}}</div>
 	</body>
 </html>

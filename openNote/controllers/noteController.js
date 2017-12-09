@@ -97,7 +97,7 @@ openNote.controller("noteController", function($scope,
         $timeout(function() {//trick to wait for page to rerender with text area
             $scope.editor = CodeMirror.fromTextArea(document.getElementById("note-editor"), {
                 mode: "markdown",
-                //theme: "material", FIXME
+                theme: "material",
                 lineNumbers: true
             });
 

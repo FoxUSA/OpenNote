@@ -1,7 +1,7 @@
 import openNote from "../openNote.js";
 openNote.service("tagService", function ($rootScope,storageService) {
     var service = this;
-    var tagRegex = /(?:\ |^|\n|>)(#[^\ <\n]*)/ig;
+    var tagRegex = /(?:\ |^|\n|>)(#[^\ <\n]+)/ig;
 
     /**
      * Bind handlers to the root scope
@@ -21,7 +21,7 @@ openNote.service("tagService", function ($rootScope,storageService) {
         });
 
         $rootScope.$on("noteDeleted", function(event, note) {
-            deleteTagsFromMap(note._id);
+            deleteTagsFromMap(note._id,function(){});
         });
     };
 
