@@ -3,6 +3,7 @@ openNote.controller("folderController", ["$scope",
     "$rootScope",
     "$location",
     "$routeParams",
+    "tagService",
     "storageService",
     "config",
     "$timeout",
@@ -10,6 +11,7 @@ openNote.controller("folderController", ["$scope",
         $rootScope,
         $location,
         $routeParams,
+        tagService,
         storageService,
         config,
         $timeout) {
@@ -194,15 +196,17 @@ openNote.controller("folderController", ["$scope",
                         return;
 
                     var parentFolderID = $scope.currentFolder.parentFolderID;
-                    storageService.deleteFolder($scope.currentFolder, function() {
-                        $rootScope.$emit("reloadListView", {});
+                    tagService.deleteFolder($scope.currentFolder).then(function(){ // This needs to be done synchronously instead of an event because its possible for the storage service delete loop to get ahead and destoy the notes before the tag service has a change to delete them.
+                        storageService.deleteFolder($scope.currentFolder, function() {
+                            $rootScope.$emit("reloadListView", {});
 
-                        if (!parentFolderID)
-                            $location.url("/folder/");
-                        else
-                            $location.url("/folder/" + parentFolderID);
+                            if (!parentFolderID)
+                                $location.url("/folder/");
+                            else
+                                $location.url("/folder/" + parentFolderID);
 
-                        $scope.$apply();
+                            $scope.$apply();
+                        });
                     });
                 });
         };

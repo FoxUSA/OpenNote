@@ -1,5 +1,5 @@
 {
-    "esversion":6,
+    "esversion":5,
     "node": true,
     "undef": true,
     "unused": true,
@@ -10,5 +10,5 @@
     "devel":true,
     "jquery":true,
     "jasmine": true,
-    "predef": [ "angular","alertify","", "PouchDB","inject","CodeMirror" ]
+    "predef": [ "angular","alertify","", "PouchDB","inject","CodeMirror"]
 }

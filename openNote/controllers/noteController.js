@@ -86,9 +86,6 @@ openNote.controller("noteController", ["$scope",
          * Take us into edit mode
          */
         var activateEditMode = function() {
-            //FIXME
-
-
             $scope.editMode = true;
 
             if ($scope.note._id)
@@ -106,8 +103,15 @@ openNote.controller("noteController", ["$scope",
                 $scope.editor = CodeMirror.fromTextArea(document.getElementById("note-editor"), {
                     mode: "markdown",
                     theme: "material",
-                    lineNumbers: true
+                    lineNumbers: true,
+                    indentUnit: 4
                 });
+
+                // var resize = function() {
+                //     $(".CodeMirror").css({"height": ($(window).height()*0.75 )+ "px"});
+                // };
+                // window.onresize = resize;
+                // resize();
 
             });
 

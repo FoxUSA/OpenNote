@@ -42,6 +42,7 @@ openNote.controller("databaseController", ["$scope",
 
                     storageService.destroyDatabase(function() {
                         $rootScope.$emit("reloadListView", {});
+                        $rootScope.$emit("tagsUpdated");
                         window.location.href = '#/';
                         $rootScope.$apply();
                         alertify.success("Database deleted");
@@ -54,6 +55,7 @@ openNote.controller("databaseController", ["$scope",
          */
         $scope.cleanOrphans = function() {
             storageService.cleanOrphans();
+            //TODO implement tagService.cleanOrphans()
             alertify.log("Finding and removing orphans");
         };
 
