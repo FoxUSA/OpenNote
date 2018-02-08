@@ -1,5 +1,5 @@
 # How To Install
-[Download most resent release from here.][Download]
+[Download most recent release from here.][Download]
 
 # HTML5 based new super fancy version
 ## Web app
