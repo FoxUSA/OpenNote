@@ -5,18 +5,25 @@ var bundleFiles=[
     "openNote/**/*.html"
 ];
 
+// Helper function
+var serverConfig = function(keepalive){
+    if(keepalive==undefined)
+        keepalive = true;
+    return {
+        options: {
+            port: 8080,
+            base: ".",
+            keepalive: keepalive
+        }
+    };
+};
 
 module.exports = function(grunt) {
     //Initializing the configuration object
     grunt.initConfig({
         connect: {
-            server: {
-                options: {
-                    port: 8080,
-                    base: ".",
-                    keepalive: true
-                }
-            }
+            server: serverConfig(),
+            serverNoAlive: serverConfig(false)
         },
         compress: {
             main: {
@@ -33,8 +40,10 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            options: {},
-            all: ["**/*.js*", //Order matters
+            options: {
+                "esversion":6,
+            },
+            all: ["openNote/**/*.js*", //Order matters
                 "!node_modules/**",
                 "!OpenNote/node_moduless/**"
             ]
@@ -100,6 +109,9 @@ module.exports = function(grunt) {
                     "rm -rf dark light"
                 ].join("&&")
             },
+            test: {
+                command: ["npm run test"].join("&&")
+            },
             dev: {
                 command: ["npm run dev"].join("&&")
             },
@@ -148,5 +160,5 @@ module.exports = function(grunt) {
 
     //testing
     grunt.registerTask("devmode", ["karma:unit", "watch"]);
-    grunt.registerTask("ci", ["build", "jshint:all"]);
+    grunt.registerTask("ci", "Build the app and runs tests on it", ["jshint:all", "buildProd", "connect:serverNoAlive", "shell:test" ]);
 };

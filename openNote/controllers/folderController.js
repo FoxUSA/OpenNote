@@ -24,6 +24,7 @@ openNote.controller("folderController", ["$scope",
         //add buttons
         if ($routeParams.id)
             $rootScope.buttons.push({
+                id: "newNote",
                 text: "New note",
                 action: function() {
                     $scope.fadeOutFoldersAndNotes(function() {
@@ -34,6 +35,7 @@ openNote.controller("folderController", ["$scope",
 
         //Create a folder
         $rootScope.buttons.push({
+            id: "newFolder",
             text: "New folder",
             action: function() {
                 var prompt = "Please enter a name for the new folder";
@@ -243,10 +245,6 @@ openNote.controller("folderController", ["$scope",
         var loadCurrentFolderContents = function() {
             storageService.loadFolderContents($scope.currentFolder._id, function(results) {
                 $scope.currentFolderContents = results.rows;
-
-                //Do they have anything to display?
-                if (!$scope.currentFolder._id && !$scope.currentFolderContents.length)
-                    alertify.alert("It looks like you dont have any folders. You can create one using the \"New Folder\" button in the top right of the page. If you need to pull your remote notes <a href='#/settings/database'>click here</a>.");
 
                 $scope.$apply();
             });

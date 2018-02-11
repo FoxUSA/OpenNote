@@ -19,7 +19,7 @@
 	@treeHandleBackgroundColor: negation(#0b0908, @offset);
 	@treeHandleBorderColor: negation(#231d17, @offset);
 
-	@copyRightColor: negation(#656565, @offset);
+	@copyRightColor: negation(#777777, @offset);
 	@loginInputColor: negation(#444, @offset);
 
 body{
@@ -93,33 +93,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 	border-radius:4px;/*round the corners*/
 }
 
-#folderTitleBar{
-	padding: 0px 0px 15px 0px;
-	overflow: hidden;
-	font-size: 18px;
-
-	.breadcrumb{
-		margin-bottom:0;
-		padding: 0 15px 0 0;
-		background: none;
-		float:left;
-
-		>.active{
-			color:inherit;
-		}
-
-		li{
-			font-size: 20px;
-		}
-	}
-}
-
-	#folderTitle{
-		float:left;
-		padding-right:15px;
-		font-size: 20px;
-	}
-
 .customButton{ /*custom button class that removes all browser formating*/
 	border: none;
 	background:transparent;
@@ -145,21 +118,6 @@ img {
 .right{
 	float: right;
 }
-
-#sideBar{
-	background: @navBackground;
-
-	/*round the corners*/
-	border-radius:4px ;
-	margin-bottom: 15px;
-	padding: 15px 15px 15px 30px;
-}
-
-#sideBar ul{
-	padding-left: 20px;
-}
-
-
 
 .box{
 	width: 250px;
@@ -193,7 +151,7 @@ img {
 			resize:none;
 
 			/* copied from div.event */
-			color: inherit; /*inherit from parrent*/
+			color: inherit; /*inherit from parent*/
 
 			/*coped from body to prevent glitch*/
 			font-family: inherit;
@@ -259,7 +217,7 @@ img {
 			resize:none;
 
 			/* copied from div.event */
-			color: inherit; /*inherit from parrent*/
+			color: inherit; /*inherit from parent*/
 
 			/*coped from body to prevent glitch*/
 			font-family: inherit;
@@ -295,13 +253,68 @@ img {
 		box-shadow: none;
 	}
 
-	#copyRight{
-		color: @copyRightColor;
-		padding-left: 50px;
-	}
+
+
+// Main
+#copyRight{
+	color: @copyRightColor;
+	padding-left: 50px;
+}
+
+#sideBar{
+	background: @navBackground;
+
+	/*round the corners*/
+	border-radius:4px ;
+	margin-bottom: 15px;
+	padding: 15px 15px 15px 30px;
+}
+
+#sideBar ul{
+	padding-left: 20px;
+}
 
 // Note partial
-.notePartial .CodeMirror{
-	border-radius:0 0 4px 4px;/*round the corners*/
-	size: 75vh;
+.notePartial{
+	 .CodeMirror{
+		border-radius:0 0 4px 4px;/*round the corners*/
+		size: 75vh;
+	}
+}
+
+
+// Folder partial
+.folderPartial{
+	#folderTitleBar{
+		padding: 0px 0px 15px 0px;
+		overflow: hidden;
+		font-size: 18px;
+
+		.breadcrumb{
+			margin-bottom:0;
+			padding: 0 15px 0 0;
+			background: none;
+			float:left;
+
+			>.active{
+				color:inherit;
+			}
+
+			li{
+				font-size: 20px;
+			}
+		}
+	}
+
+		#folderTitle{
+			float:left;
+			padding-right:15px;
+			font-size: 20px;
+		}
+
+	.noFolderHelp{
+		margin-top: 25px;
+	    text-align: center;
+	    color: @copyRightColor
+	}
 }

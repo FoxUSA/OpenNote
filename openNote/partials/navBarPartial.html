@@ -11,10 +11,10 @@
 <div class="navbar-collapse collapse noShadow">
 	<ul class="nav navbar-nav navbar-right">
 		<li ng-repeat="button in buttons">
-        	<button  type="button" class="customButton" ng-click="button.action();">{{button.text}}</button>
+        	<button id="{{button.id}}" type="button" class="customButton" ng-click="button.action();">{{button.text}}</button>
         </li>
         <li>
-        	<button  type="button" class="customButton" onclick="window.location='#/settings'">Settings</button>
+        	<button id="setting" type="button" class="customButton" onclick="window.location='#/settings'">Settings</button>
         </li>
 	</ul>
 </div>

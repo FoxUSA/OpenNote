@@ -4,14 +4,14 @@
 		  	<li id="parentFolder" ng-if="parentFolder!=null">
 		  		<a href="#/folder/{{parentFolder._id}}">{{parentFolder.name}}</a>
 		  	</li>
-		  	<li class="active" ng-click="activateFolderEditMode();">
+		  	<li id="currentFolder" class="active" ng-click="activateFolderEditMode();">
 		  		{{currentFolder.name}}
 		  	</li>
 		</ol>
 		<div ng-show="folderEditMode" class="ng-hide fadeIn">
 			<button class="customButton ng-hide" ng-click="loadParentFolder();">Go up a folder</button>
-			<button class="customButton" ng-click="renameFolder();">Rename</button>
-			<button class="customButton" ng-click="removeFolder();">Delete</button>
+			<button id="rename" class="customButton" ng-click="renameFolder();">Rename</button>
+			<button id="delete" class="customButton" ng-click="removeFolder();">Delete</button>
 		</div>
 
 	</div>
@@ -38,5 +38,10 @@
 		<p class="options">
 			<span class="right">Note</span>
 		</p>
+	</div>
+
+	<div class="noFolderHelp startHidden randomFadeInDirective" ng-if="!currentFolderContents.length">
+		<h4 ng-if="!currentFolder._id">It looks like you dont have any folders. You can create one using the "New Folder" button in the top right of the page. If you need to pull your remote notes <a href='#/settings/database'>click here</a>.</h4>
+		<h4 ng-if="currentFolder._id">This folder is empty.</h4>
 	</div>
 </div>

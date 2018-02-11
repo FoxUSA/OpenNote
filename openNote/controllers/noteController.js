@@ -35,6 +35,7 @@ openNote.controller("noteController", ["$scope",
          */
         var saveButton = function() {
             return {
+                id: "save",
                 text: "Save",
                 action: function() {
                     save();
@@ -44,6 +45,7 @@ openNote.controller("noteController", ["$scope",
 
         var copyButton = function(note) {
             return {
+                id: "cut",
                 text: "Cut",
                 action: function() {
                     $rootScope.clipboard = note;
@@ -57,6 +59,7 @@ openNote.controller("noteController", ["$scope",
          */
         var clearButton = function() {
             return {
+                id: "clear",
                 text: "Clear",
                 action: function() {
                     $scope.clear();
@@ -66,6 +69,7 @@ openNote.controller("noteController", ["$scope",
 
         var editButton = function() {
             return {
+                id: "edit",
                 text: "Edit",
                 action: function() {
                     activateEditMode();
@@ -75,6 +79,7 @@ openNote.controller("noteController", ["$scope",
 
         var upButton = function(folderID) {
             return {
+                id: "goToParentFolder",
                 text: "Go up a folder",
                 action: function() {
                     $location.url("/folder/" + folderID);
