@@ -100,7 +100,7 @@ openNote.controller("folderController", ["$scope",
                 };
                 loadCurrentFolderContents();
             } else {
-                storageService.database().get($routeParams.id).then(function(doc) {
+                storageService.get($routeParams.id).then(function(doc) {
                     $scope.currentFolder = doc;
                     loadCurrentFolderContents();
 
@@ -109,7 +109,7 @@ openNote.controller("folderController", ["$scope",
                             name: "Home"
                         };
                     else
-                        storageService.database().get($scope.currentFolder.parentFolderID).then(function(doc) {
+                        storageService.get($scope.currentFolder.parentFolderID).then(function(doc) {
                             $scope.parentFolder = doc;
                             $scope.$apply();
                         });
@@ -175,7 +175,7 @@ openNote.controller("folderController", ["$scope",
                         return;
 
                     $scope.currentFolder.name = data;
-                    storageService.database().put($scope.currentFolder).then(function(result) {
+                    storageService.put($scope.currentFolder).then(function(result) {
                         $scope.currentFolder._rev = result.rev;
                         $rootScope.$emit("reloadListView", {});
                         $scope.$apply();
@@ -227,7 +227,7 @@ openNote.controller("folderController", ["$scope",
          */
         var createFolder = function(folder) {
             folder.type = "folder";
-            storageService.database().post(folder).then(function(response) {
+            storageService.post(folder).then(function(response) {
                 if (!response.ok)
                     throw "//FIXME";
                 $rootScope.$emit("reloadListView", {});
@@ -243,7 +243,7 @@ openNote.controller("folderController", ["$scope",
          * Load the current folders contents
          */
         var loadCurrentFolderContents = function() {
-            storageService.loadFolderContents($scope.currentFolder._id, function(results) {
+            storageService.loadFolderContents($scope.currentFolder._id).then(function(results) {
                 $scope.currentFolderContents = results.rows;
 
                 $scope.$apply();

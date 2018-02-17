@@ -149,11 +149,11 @@ openNote.controller("noteController", ["$scope",
 
                 //Upsert
                 if (!$scope.note._id)
-                    storageService.database().post($scope.note).then(saveCallback, function() {
+                    storageService.post($scope.note).then(saveCallback, function() {
                         alertify.error("Error saving note");
                     });
                 else
-                    storageService.database().put($scope.note).then(saveCallback, function() {
+                    storageService.put($scope.note).then(saveCallback, function() {
                         alertify.error("Error modifing note");
                     });
             });
@@ -170,7 +170,7 @@ openNote.controller("noteController", ["$scope",
 
                     var folderID = $scope.note.parentFolderID; //need to keep track of this because we are about to delete it
                     $(".notePartial").fadeOut(config.fadeSpeedShort());
-                    storageService.database().remove($scope.note).then(function() {
+                    storageService.delete($scope.note).then(function() {
                         $rootScope.$emit("noteDeleted", $scope.note);
                         detachWindowUnload();
                         alertify.success("Note Deleted"); //all done. close the notify dialog
@@ -234,7 +234,7 @@ openNote.controller("noteController", ["$scope",
             /**
              * Load note
              */
-            storageService.database().get($routeParams.id).then(function(doc) {
+            storageService.get($routeParams.id).then(function(doc) {
                 $scope.note = doc;
                 $scope.noteHTML = marked($scope.note.note);
                 $(".notePartial").fadeIn(config.fadeSpeedLong());

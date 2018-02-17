@@ -32,9 +32,8 @@ openNote.controller("tagController", ["$scope",
         var loadTags = function() {
             tagService.getMap().then(function(map) {
                 var tags = map.tags[$scope.tag];
-                var db = storageService.database();
                 tags.forEach(function(tag) {
-                    db.get(tag).then(function(note) {
+                    storageService.get(tag).then(function(note) {
                         $scope.notes.push(note);
                         $scope.$apply();
                     });

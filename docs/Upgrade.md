@@ -1,5 +1,9 @@
 # How to upgrade
 
+//TODO
+
+If you have an issue with the html use https://domchristie.github.io/turndown/ to convert
+
 ##Upgrading from 14.xx(Locomotive) to 15.07.01
 All you need to do is merge your existing deployment with the release folder while keeping your config files (`openNote\openNote.config.js` and `\Service\Config.php`).
 Make sure to backup your old folder and database.

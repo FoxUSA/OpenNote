@@ -53,7 +53,7 @@ openNote.controller("tagListController", [
                     var origParentFolderID = request.moveObject.parentFolderID;
 
                     request.moveObject.parentFolderID = request.destFolder._id;
-                    storageService.database().put(request.moveObject).then(function() {
+                    storageService.put(request.moveObject).then(function() {
                         $rootScope.$emit("changedFolder", { //fire off an event to tell everyone we just modified a folder
                             folder: request.moveObject,
                             oldParentFolderID: origParentFolderID

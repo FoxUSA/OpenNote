@@ -1,8 +1,8 @@
-OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
-=============
+# OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
+
 ![][responsive]
-OpenNote was built to be a open source(MIT License), web based note taking software.
-It is designed to be self hosted and gives you ownership of your data.
+OpenNote is a progressive web application(PWA)/HTML5 offline app that was built to be a open source(MIT License), web based text editor/note taking software.
+It is designed to be self hosted and gives you ownership of your data
 
 Please support this project by:
 - [Using GitTip][GitTip],
@@ -25,9 +25,7 @@ https://foxusa.github.io/OpenNote/OpenNote/
 Features
 --------
 - BYOS(Bring Your Own Server)
-- Full WYSIWYG editor
 - Touch friendly and mouse friendly ui
-- Upload manager (not enabled in demo :) )
 - Light weight
 - Multi user support
 - Search
@@ -36,36 +34,25 @@ Features
 - Move Folders(Drag into another folder in the list view.)
 - Rename/Delete Folders(Click on folder title to get menu.)
 - Responsive
-
+- Tags
+- [CLI](https://github.com/FoxUSA/OpenNote-CLI)
 Upcoming Features
 -----------------
-- Tags (You win)
 - Email to note
-- Implement history viewer
-- Install script
-- Move Notes (Feature lost when migrating to Angular based list)
 - Mobile App
 
 Documentation
 -----------------
-[How to install][Install]
+- [How to install][Install]
+- [How to upgrade][Upgrade]
+- [How to build](https://github.com/FoxUSA/OpenNote/blob/master/docs/Build.md)
+-[Themes][Themes]
 
-[How to upgrade][Upgrade]
-
-[How to build](https://github.com/FoxUSA/OpenNote/blob/master/docs/Build.md)
-
-[Themes][Themes]
-
-[PHP backend][php]
-
-
-![][dark]
 License
 -------
 	JQuery - Distributed under the MIT License
 	Angular - Distributed under the MIT License
 	Bootstrap - Distributed under the MIT License
-	CKEditor - Distributed under the MPL License
 	Angular UI Tree - Distributed under the MIT License
 	Alertify.js - Distributed under the MIT License
 	PouchDB - Distributed under the Apache License
@@ -74,7 +61,7 @@ License
 
 	OpenNote Code - Distributed under the MIT License
 
-	© Jacob Liscom 2017
+	© Jacob Liscom 2018
 
 Credits
 -------
@@ -82,13 +69,11 @@ Credits
 
 	Kam Bnkamalesh - His TODO project heavily influenced my UI design
 
-[topLevel]: https://raw.github.com/FoxUSA/OpenNote/master/docs/screenShots/topLevel.png
-[dark]: https://raw.github.com/FoxUSA/OpenNote/master/docs/screenShots/dark1.png
-[responsive]: https://raw.githubusercontent.com/FoxUSA/OpenNote/master/docs/screenShots/OpenNote.png
+[topLevel]: ./docs/screenShots/topLevel.png
+[responsive]: ./docs/screenShots/OpenNote.png
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Install.md
 [Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Upgrade.md
-[PHP]: https://github.com/FoxUSA/OpenNoteService-PHP
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Themes.md
 [GitTip]: https://www.gittip.com/FoxUSA/
