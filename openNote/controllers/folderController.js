@@ -84,7 +84,7 @@ openNote.controller("folderController", ["$scope",
         $rootScope.buttons.push({
             text: "Search",
             action: function() {
-                $location.url("/search/" + $scope.currentFolder.id);
+                $location.url("/search/");
             }
         });
 
@@ -125,45 +125,7 @@ openNote.controller("folderController", ["$scope",
                 $scope.folderEditMode = !$scope.folderEditMode;
         };
 
-        /**
-         * fade out all folders
-         */
-        $scope.fadeOutFoldersAndNotes = function(callback) {
-            if ($scope.currentFolder.foldersInside || $scope.currentFolder.notesInside) {
-                $(".note").fadeTo(config.fadeSpeedShort(), 0, function() {
-                    $scope.$apply(function() {
-                        callback();
-                    });
-                });
 
-                $(".folder").fadeTo(config.fadeSpeedShort(), 0, function() {
-                    $scope.$apply(function() {
-                        callback();
-                    });
-                });
-            } else
-                callback();
-        };
-
-        /**
-         * Load a folder
-         * @param folder- the folder to load
-         */
-        $scope.loadFolder = function(folder) {
-            $scope.fadeOutFoldersAndNotes(function() {
-                $location.url("/folder/" + folder.doc._id);
-            });
-        };
-
-        /**
-         * Load a note
-         * @param note - load a note
-         */
-        $scope.loadNote = function(note) {
-            $scope.fadeOutFoldersAndNotes(function() {
-                $location.url("/note/" + note.id);
-            });
-        };
 
         /**
          * Rename the current folder
@@ -248,20 +210,6 @@ openNote.controller("folderController", ["$scope",
 
                 $scope.$apply();
             });
-        };
-
-        /**
-         * Filter out everything but type folder
-         */
-        $scope.folderFilter = function(object) {
-            return storageService.folderFilter(object);
-        };
-
-        /**
-         * Filter out everything but type note
-         */
-        $scope.noteFilter = function(object) {
-            return storageService.noteFilter(object);
         };
 
         //Load current folder

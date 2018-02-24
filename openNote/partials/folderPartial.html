@@ -16,29 +16,7 @@
 
 	</div>
 
-	<div ng-repeat="folder in currentFolderContents.filter(folderFilter) | orderBy: 'doc.name'"
-		 class="startHidden randomFadeInDirective box folder"
-		 ng-click="loadFolder(folder);">
-		<h4>
-			{{folder.doc.name}}
-		</h4>
-		<p class="box_description"></p>
-		<p class="options">
-			Folder
-		</p>
-	</div>
-
-	<div ng-repeat="note in currentFolderContents.filter(noteFilter) | orderBy: 'doc.title'"
-		 class="startHidden box randomFadeInDirective note"
-		 ng-click="loadNote(note);">
-		<h4>
-			{{note.doc.title}}
-		</h4>
-		<p class="box_description"></p>
-		<p class="options">
-			<span class="right">Note</span>
-		</p>
-	</div>
+	<folder-contents-directive contents="currentFolderContents" fade-out="fadeOutFoldersAndNotes"></folder-contents-directive>
 
 	<div class="noFolderHelp startHidden randomFadeInDirective" ng-if="!currentFolderContents.length">
 		<h4 ng-if="!currentFolder._id">It looks like you dont have any folders. You can create one using the "New Folder" button in the top right of the page. If you need to pull your remote notes <a href='#/settings/database'>click here</a>.</h4>

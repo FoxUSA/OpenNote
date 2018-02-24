@@ -7,99 +7,46 @@ openNote.controller("searchController", ["$scope",
     "config",
     "storageService",
     "$location",
+    "$routeParams",
+    "$timeout",
     function($scope,
         $rootScope,
         config,
         storageService,
-        $location) {
-        /**
-         * Default valie
-         */
-        $scope.searchRequest = {
-            type: "Both",
-            field: "Both",
-            search: ""
-        };
+        $location,
+        $routeParams,
+        $timeout) {
 
-        $scope.notes = null;
-        $scope.folders = null;
+        $scope.searchString = $routeParams.id; //Default
 
-        /**
-         * Search the database
-         */
         $scope.search = function() {
+            $location.url("/search/" + $scope.searchString);
+        };
+
+        $scope.loadResults = function() {
+            if (!$routeParams.id)
+                return;
+
             alertify.log("Search started");
-            $scope.notes = [];
-            $scope.folders = [];
+            $scope.results = [];
 
-            var removeDuplicates = function(array) {
-                var listOfIDs = [];
-                array.forEach(function(element) { //for each is synchronous
-                    var index = listOfIDs.indexOf(element.id);
-                    if (index == -1) {
-                        listOfIDs.push(element.id);
-                    } else
-                        array.splice(index, 1);
+            storageService.allDocs().then(function(result) {
+                result.rows.filter(storageService.folderFilter).forEach(function(folder) { // search folders
+                    if (folder.doc.name.match($routeParams.id)) //search folder name
+                        return $scope.results.push(folder);
                 });
-                return array;
-            };
 
-            var appendNotes = function(notes) {
-                $scope.notes = removeDuplicates($scope.notes.concat(notes));
-                $scope.$apply();
-            };
-
-            var appendFolders = function(folders) {
-                $scope.folders = $scope.folders.concat(folders);
-                alertify.success(folders.length + " objects found");
-                $scope.$apply();
-            };
-
-            var type = $scope.searchRequest.type;
-            var search = $scope.searchRequest.search;
-            var field = $scope.searchRequest.field;
-
-            if (type == "Both" || type == "Folders")
-                storageService.searchFolderNames(search, appendFolders);
-
-            if (type == "Both" || type == "Notes") {
-                if (field == "Both" || type == "Title")
-                    storageService.searchNoteTitles(search, appendNotes);
-
-                if (field == "Both" || type == "Body")
-                    storageService.searchNoteBody(search, appendNotes);
-            }
-        };
-
-        /**
-         * Load a folder
-         * @param folder- the folder to load
-         */
-        $scope.loadFolder = function(folder) {
-            $scope.fadeOutBoxes(function() {
-                $location.url("/folder/" + folder.doc._id);
-            });
-        };
-
-        /**
-         * Load a note
-         * @param note - load a note
-         */
-        $scope.loadNote = function(note) {
-            $scope.fadeOutBoxes(function() {
-                $location.url("/note/" + note.doc._id);
-            });
-        };
-
-        /**
-         * fade out all boxes
-         */
-        $scope.fadeOutBoxes = function(callback) {
-            $(".box").fadeOut(config.fadeSpeedShort(), function() {
-                $scope.$apply(function() {
-                    callback();
+                result.rows.filter(storageService.noteFilter).forEach(function(note) { //Search notes
+                    if (note.doc.title.match($routeParams.id) || note.doc.note.match($routeParams.id)) //search note name and title
+                        return $scope.results.push(note);
                 });
+                $scope.$apply();
+                alertify.success($scope.results.length + " objects found");
             });
+
         };
+
+        //Load results
+        $timeout($scope.loadResults);
     }
 ]);

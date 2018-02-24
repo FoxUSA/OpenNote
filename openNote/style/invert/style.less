@@ -195,10 +195,6 @@ img {
 		}
 	}
 
-	.search, .search:hover, .search option{
-		background-color: negation(@folderColor, #FFFFFF);
-	}
-
 	.searchPartial,
 	.settingsPartials{
 		margin-bottom: 30px;
@@ -272,6 +268,21 @@ img {
 
 #sideBar ul{
 	padding-left: 20px;
+}
+
+// Search
+.searchPartial{
+
+	.search,
+	.search:hover,
+	.search option{
+		background-color: negation(@folderColor, #FFFFFF);
+	}
+
+	input::placeholder{
+		color: @navBackground;
+	}
+
 }
 
 // Note partial
