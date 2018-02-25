@@ -17,13 +17,11 @@ openNote.directive("folderContentsDirective", [
                  * fade out all folders
                  */
                 $scope.fadeOut = function(callback) {
-                    $(".note").fadeTo(config.fadeSpeedShort(), 0, function() {
-                        $scope.$apply(function() {
-                            callback();
-                        });
-                    });
+                    var selector = $(".note, .folder");
+                    if(!selector.length)//If its a blank folder just run the callback
+                        return callback();
 
-                    $(".folder").fadeTo(config.fadeSpeedShort(), 0, function() {
+                    selector.fadeTo(config.fadeSpeedShort(), 0, function() {
                         $scope.$apply(function() {
                             callback();
                         });
@@ -34,7 +32,7 @@ openNote.directive("folderContentsDirective", [
                  * Load a folder
                  * @param folder- the folder to load
                  */
-                $scope.loadFolder = function(folder) { //TODO DRY
+                $scope.loadFolder = function(folder) {
                     $scope.fadeOut(function() {
                         $location.url("/folder/" + folder.doc._id);
                     });
@@ -44,7 +42,7 @@ openNote.directive("folderContentsDirective", [
                  * Load a note
                  * @param note - load a note
                  */
-                $scope.loadNote = function(note) { //TODO DRY
+                $scope.loadNote = function(note) {
                     $scope.fadeOut(function() {
                         $location.url("/note/" + note.id);
                     });

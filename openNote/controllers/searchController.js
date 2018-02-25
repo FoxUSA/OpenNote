@@ -19,25 +19,27 @@ openNote.controller("searchController", ["$scope",
 
         $scope.searchString = $routeParams.id; //Default
 
+        // Handle search button
         $scope.search = function() {
-            $location.url("/search/" + $scope.searchString);
+            if(!$scope.searchString || !$scope.searchString.length)
+                return alertify.error("A query must be specified");
+            $location.url("/search/" + encodeURIComponent($scope.searchString));
         };
 
+        //Load results from URI parameter
         $scope.loadResults = function() {
-            if (!$routeParams.id)
-                return;
-
+            var searchRegex = new RegExp($routeParams.id,"i");
             alertify.log("Search started");
             $scope.results = [];
 
             storageService.allDocs().then(function(result) {
                 result.rows.filter(storageService.folderFilter).forEach(function(folder) { // search folders
-                    if (folder.doc.name.match($routeParams.id)) //search folder name
+                    if (folder.doc.name.match(searchRegex)) //search folder name
                         return $scope.results.push(folder);
                 });
 
                 result.rows.filter(storageService.noteFilter).forEach(function(note) { //Search notes
-                    if (note.doc.title.match($routeParams.id) || note.doc.note.match($routeParams.id)) //search note name and title
+                    if (note.doc.title.match(searchRegex) || note.doc.note.match($routeParams.id)) //search note name and title
                         return $scope.results.push(note);
                 });
                 $scope.$apply();
@@ -46,7 +48,8 @@ openNote.controller("searchController", ["$scope",
 
         };
 
-        //Load results
-        $timeout($scope.loadResults);
+        //Load results if set
+        if ($routeParams.id)
+            $timeout($scope.loadResults);
     }
 ]);

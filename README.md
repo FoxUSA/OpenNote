@@ -46,7 +46,8 @@ Documentation
 - [How to install][Install]
 - [How to upgrade][Upgrade]
 - [How to build](https://github.com/FoxUSA/OpenNote/blob/master/docs/Build.md)
--[Themes][Themes]
+- [Themes][Themes]
+- [Project history][History]
 
 License
 -------
@@ -73,6 +74,7 @@ Credits
 [responsive]: ./docs/screenShots/OpenNote.png
 
 [Install]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Install.md
+[History]: https://github.com/FoxUSA/OpenNote/blob/master/docs/History.md
 [Upgrade]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Upgrade.md
 [Dependencies]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Dependencies.md
 [Themes]: https://github.com/FoxUSA/OpenNote/blob/master/docs/Themes.md

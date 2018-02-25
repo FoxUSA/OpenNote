@@ -29,7 +29,6 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-less": "^0.11.1",
-    "grunt-contrib-watch": "^0.6.1",
     "grunt-manifest": "^0.4.0",
     "grunt-shell": "^0.7.0",
     "script-loader": "^0.7.2",
@@ -40,7 +39,8 @@
     "webpack-dev-server": "^2.9.5"
   },
   "scripts": {
-    "test": "testcafe chrome ./test/e2e/test.js -e -c 3",
+    "test": "testcafe chrome ./test/e2e/test.js --skip-js-errors -c 3",
+    "testSingle": "testcafe chrome ./test/e2e/test.js --skip-js-errors",
     "dev": "webpack-dev-server --open --hot --config ./build/webpack.dev.config.js",
     "build": "webpack --progress --hide-modules --config ./build/webpack.prod.config.js"
   }

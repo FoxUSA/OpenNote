@@ -139,7 +139,6 @@ module.exports = function(grunt) {
     //Plugin loading
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-less");
-    grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-manifest");
     grunt.loadNpmTasks("grunt-contrib-compress");
@@ -159,6 +158,5 @@ module.exports = function(grunt) {
     grunt.registerTask("testDeploy", ["shell:clean", "buildProd", "connect:server"]);
 
     //testing
-    grunt.registerTask("devmode", ["karma:unit", "watch"]);
     grunt.registerTask("ci", "Build the app and runs tests on it", ["jshint:all", "buildProd", "connect:serverNoAlive", "shell:test" ]);
 };

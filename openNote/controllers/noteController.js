@@ -134,8 +134,12 @@ openNote.controller("noteController", ["$scope",
                  * Callback after successful save to reload note
                  */
                 var saveCallback = function(response) {
-                    if (!response.ok)
-                        throw "//FIXME"; //FIXME
+                    if (!response.ok){
+                        alertify.error("There was an error saving the note");
+                        console.error(response);
+                        throw response;
+                    }
+                        
                     detachWindowUnload();
 
                     //Tags

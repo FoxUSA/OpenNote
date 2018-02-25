@@ -27,8 +27,11 @@ openNote.controller("tagListController", [
                     $scope.tags.push(tag);
 
                 $scope.$apply();
-            }).catch(function() {
-                //TODO
+            }).catch(function(error) {
+                if(error.status ==404)
+                    return;//Ignore
+                alertify.error("There was an error.");
+                console.error(error);
             });
         };
 

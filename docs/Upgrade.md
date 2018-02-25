@@ -1,10 +1,27 @@
 # How to upgrade
 
-//TODO
+## Upgrading from 17.xx to 18.xx
+There are major changes in this release. Make sure your data is backed up.
+Launch new instance of OpenNote via the [install instructions](./Install.md). Then simply change your replication url to the new replication url and your notes will sync across.
 
-If you have an issue with the html use https://domchristie.github.io/turndown/ to convert
+In 18.xx the editor is mark down. If you have an issue with the HTML use https://domchristie.github.io/turndown/ to convert the text into markdown.
 
-##Upgrading from 14.xx(Locomotive) to 15.07.01
+
+The `upgrade` command included in [OpenNote-CLI](https://github.com/FoxUSA/OpenNote-CLI) version 18.03 will allow you to migrate all your files to the Minio instance launched by compose. It will also change all the links and pre-sign them for you.
+
+Sample command
+```
+node index.js upgrade --jsonPath ../uploads.json \
+                      --legacyServiceUrl https://example \
+                      --s3Url http://127.0.0.1:9000 \
+                      --bucket opennote \
+                      --accessKey tests \
+                      --secretKey testssdfasdf
+```
+
+Only thing you will need is to dump the uploads table from the mysql legacy service and provide the path to it via the `--jsonPath` option.
+
+## Upgrading from 14.xx(Locomotive) to 15.07.01
 All you need to do is merge your existing deployment with the release folder while keeping your config files (`openNote\openNote.config.js` and `\Service\Config.php`).
 Make sure to backup your old folder and database.
 
@@ -12,7 +29,7 @@ There have been major changes in this release.
 You will need to follow the CouchDB instructions in the Install documentation.
 
 
-##Docker(14.07.01 to 14.07.02)
+## Docker(14.07.01 to 14.07.02)
 Find the container id of your running container by doing a `docker ps` or `docker ps -l` if the OpenNote conatiner was the last one you stopped.
 You should see output like this
 ```
@@ -61,16 +78,16 @@ or if port 80 is in use
 
 All done
 
-##Manual installs
+## Manual installs
 
-##Upgrading from 14.07(Locomotive) to 14.07.01(Steam Locomotive) or 14.07.01(Steam Locomotive) to 14.07.02 (Diesel Locomotive).
+## Upgrading from 14.07(Locomotive) to 14.07.01(Steam Locomotive) or 14.07.01(Steam Locomotive) to 14.07.02 (Diesel Locomotive).
 All you need to do is merge your existing deployment with the release folder while keeping your config files (`openNote\openNote.config.js` and `\Service\Config.php`).
 
-###MySQL(Recomended)
+### MySQL(Recomended)
 - Make sure you make a copy of you database and the OpenNote directory
 - Run `Service/model/sql/updateScripts/` scripts to roll the database up to current specs.
 - You will copy need to copy the upload directory contents into the new upload direcory in `Service/upload`.
 - You will also need to put int you database information in the new config `Service/Config.php`
 
-###SQLite
+### SQLite
 Same as the MySQL. You may need to slightly modify the sql upload script to be compatible with SQLite. I have included as much as I can in scripts with the postfix of .sqlite.sql. SQLite does not fully support the ALTER statement.

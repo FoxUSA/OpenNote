@@ -4,28 +4,36 @@
 - Grunt `npm install -g grunt-cli`
 
 ## Build
-Clone this project
-`cd` into the project
+Clone [this project](https://github.com/FoxUSA/OpenNote) an the [SharedServices Project](https://github.com/FoxUSA/OpenNoteService-PHP)
+
+My project folder structure is setup as follows
+```
+Some working folder
+├─ OpenNote
+├─ OpenNote-SharedServices
+├─ OpenNote-Docer
+└─ OpenNote-CLI
+```
+
+
+`cd` into the OpenNote
 Run `npm install` to fetch and install dependencies
-Then run
-`grunt build`
-this will start a webpack dev server.
+Then run`grunt` this will start a webpack dev server and open your browser.
 
-To test production bundles run `grunt testDeploy`
-
-//TODO new stuff and note in an ascii tree how the shared services are are expected to be neighbors of the cli and OpenNoteFolder
+To test production bundles run `grunt testDeploy`.
 
 
-//TODO grunt --help to get steps
+### Usefull commands
+You can see a full list of commands by running `grunt --help`.
 
-Super important
-grunt default or grunt
-grunt ci
-grunt deploy //TODO
+Below are the most important commands
+- `grunt default` or `grunt` to have webpack in development mode
+- `grunt ci` run linting and tests
+- `grunt deploy` Package up the project
 
 
 To develop tests
 ```
-grunt dev # in terminal A
-npm run testChrome # in terminal B. Iterate on this terminal
+grunt # in terminal A
+npm run testSingle # in terminal B. Iterate on this terminal
 ```

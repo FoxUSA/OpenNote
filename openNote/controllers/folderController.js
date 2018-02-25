@@ -94,7 +94,7 @@ openNote.controller("folderController", ["$scope",
         $scope.loadCurrentFolder = function() {
             //Load the folder
             if (!$routeParams.id) {
-                $scope.currentFolder = { //FIXME config special root
+                $scope.currentFolder = { //FIXME multiple DBs
                     _id: null,
                     name: "Home"
                 };
@@ -143,6 +143,7 @@ openNote.controller("folderController", ["$scope",
                         $scope.$apply();
                     }).catch(function(error) {
                         throw error;
+                        console.error(error);
                         //FIXME conflict resolution
                     });
                 },
@@ -190,14 +191,19 @@ openNote.controller("folderController", ["$scope",
         var createFolder = function(folder) {
             folder.type = "folder";
             storageService.post(folder).then(function(response) {
-                if (!response.ok)
-                    throw "//FIXME";
+                if (!response.ok){
+                    alertify.error("There was an error creating the folder");
+                    console.error(response);
+                    throw response;
+                }
                 $rootScope.$emit("reloadListView", {});
                 $location.url("/folder/" + response.id);
                 $scope.$apply();
 
             }).catch(function(error) {
-                console.log(error); //FIXME
+                alertify.error("There was an error creating the folder");
+                console.error(error);
+                throw error;
             });
         };
 
