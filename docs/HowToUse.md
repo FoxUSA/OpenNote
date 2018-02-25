@@ -8,7 +8,7 @@
      ^                                                                       ^
      |                                                                       |
      |                                                                       |PouchDB sync
-     |Pre-signed urls                                                        |
+     |Pre-signed urls (De-coupled)                                           |
      |                                                                       |
      v                                                                       v
 +----+-------------------------+                +----------------------------+----------+
@@ -23,7 +23,7 @@ Component | Purpose
 --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 OpenNote  | A PWA(Offline compatible) web application that allows you edit and access notes.
 CouchDB   | Couch DB is a database that stores your notes. When this is setup, you do not need to worry if your phone gets lost. When fully replicated, your notes will be safely stored in CouchDB. CouchDB also allows multiple browsers to sync. So you can have your notes on all your devices.
-Minio     | Minio is a blob storage server that implements the AWS S3 API. This allows you to upload your images and non text files for use with OpenNote/
+Minio     | Minio is a blob storage server that implements the AWS S3 API. This allows you to upload your images and non text files for use with OpenNote.
 [OpenNote-CLI](https://github.com/FoxUSA/OpenNote-CLI) | OpenNote CLI syncs the database to disk. This allows you to use other editors like Atom to create and edit notes.
 
 ## General

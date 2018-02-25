@@ -29,7 +29,7 @@ You can see a full list of commands by running `grunt --help`.
 Below are the most important commands
 - `grunt default` or `grunt` to have webpack in development mode
 - `grunt ci` run linting and tests
-- `grunt deploy` Package up the project
+- `grunt deploy` Package up the project into the `dist` folder. Creates a zip with the version number that can be uploaded to Github.
 
 
 To develop tests

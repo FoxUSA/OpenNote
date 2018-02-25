@@ -1,4 +1,4 @@
-# OpenNote [![Build Status](https://travis-ci.org/FoxUSA/OpenNote.png?branch=master)](https://travis-ci.org/FoxUSA/OpenNote)
+# OpenNote
 
 ![][responsive]
 OpenNote is a progressive web application(PWA)/HTML5 offline app that was built to be a open source(MIT License), web based text editor/note taking software.

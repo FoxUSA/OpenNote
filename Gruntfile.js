@@ -104,9 +104,9 @@ module.exports = function(grunt) {
         shell: {
 
             clean: {
-                command: ["rm -rf dist",
+                command: ["rm -rf dist webpack_files",
                     "cd openNote/style/invert/",
-                    "rm -rf dark light"
+                    "rm -rf dark light",
                 ].join("&&")
             },
             test: {
