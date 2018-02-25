@@ -111,13 +111,6 @@ openNote.controller("noteController", ["$scope",
                     lineNumbers: true,
                     indentUnit: 4
                 });
-
-                // var resize = function() {
-                //     $(".CodeMirror").css({"height": ($(window).height()*0.75 )+ "px"});
-                // };
-                // window.onresize = resize;
-                // resize();
-
             });
 
         };
@@ -139,7 +132,7 @@ openNote.controller("noteController", ["$scope",
                         console.error(response);
                         throw response;
                     }
-                        
+
                     detachWindowUnload();
 
                     //Tags

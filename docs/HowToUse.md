@@ -46,24 +46,6 @@ Once you click on a note you'll will be presented with it in a read only view.
 
 ![][seedsedit] This will bring you to the editor. Once you are all done editing, click "Save" to store the note.
 
-## Syncing
-By default OpenNote is storing info in your browser. Until you setup syncing, you are at risk of lousing your notes. To setup syncing. From the home page click `Settings`, then click database. On the right hand side of the panel you will see a Replication url field. This expect a url to your couchDB database in the form of `$protocol://$user:$password@$serverurl:$port/$database`.
-
-For example if your server information is as follows:
-
-Item | Value
---- | ---
-protocol | http
-user | admin
-password | password
-serverurl | 127.0.0.1
-port | 6984
-database | opennote
-
-then your replication url would be `http://admin:password@127.0.0.1:6984/opennote`
-
-You will see an alert if replication is working.
-
 [plants]: ./images/plants.png
 [seedsedit]: ./images/seedsEdit.png
 [seedsview]: ./images/seedsView.png

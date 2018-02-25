@@ -41,18 +41,20 @@ openNote.run([
     "config",
     "tagService",
     "$http",
+    "$timeout",
     function($rootScope,
         $location,
         config,
         tagService,
-        $http) {
+        $http,
+        $timeout) {
 
         $rootScope.version = config.getVersion();
         tagService.bindHandlers();
         $rootScope.$on("$routeChangeStart", function() {
 
             //Initial entry after if logged in
-            if (!$rootScope.showMenu && !$rootScope.showSideBar) //make sure we only fade in/run once
+            if (!$rootScope.showUI) //make sure we only fade in/run once
                 $rootScope.$emit("init");
         });
 
@@ -60,8 +62,9 @@ openNote.run([
          * Initialize app and start fade in
          */
         $rootScope.$on("init", function() {
-            $rootScope.showMenu = true;
-            $rootScope.showSideBar = true;
+            $timeout(function(){
+                $rootScope.showUI = true;
+            });//Wait for everything to make sure fade in is not skipped
 
             //Check for updates
             $http.get(config.getUpdateURL()).then(

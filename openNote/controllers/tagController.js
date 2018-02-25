@@ -34,7 +34,9 @@ openNote.controller("tagController", ["$scope",
                 var tags = map.tags[$scope.tag];
                 tags.forEach(function(tag) {
                     storageService.get(tag).then(function(note) {
-                        $scope.notes.push(note);
+                        $scope.notes.push({
+                            doc:note
+                        });
                         $scope.$apply();
                     });
                 });

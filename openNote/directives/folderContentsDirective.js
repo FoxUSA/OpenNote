@@ -44,7 +44,7 @@ openNote.directive("folderContentsDirective", [
                  */
                 $scope.loadNote = function(note) {
                     $scope.fadeOut(function() {
-                        $location.url("/note/" + note.id);
+                        $location.url("/note/" + note.doc._id);
                     });
                 };
 

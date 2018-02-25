@@ -24,7 +24,7 @@ openNote.controller("databaseController", ["$scope",
          * Save replication settings
          */
         $scope.save = function() {
-            storageService.setRemoteURL($scope.url);
+            storageService.setRemoteURL($scope.url);//TODO validate this with a regex or something
             $rootScope.$on("replicationComplete", function() {
                 $rootScope.$emit("reloadListView", {});
             });

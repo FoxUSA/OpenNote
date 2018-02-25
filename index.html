@@ -18,8 +18,8 @@
 			<script src="openNote.bundle.js"></script>
 
 	</head>
-	<body>
-		<div id="menu" class="ng-hide fadeIn" ng-show="showMenu" ng-include="'openNote/partials/navBarPartial.html'"></div>
+	<body class="ng-hide randomFadeInDirective" ng-show="showUI">
+		<div id="menu" ng-include="'openNote/partials/navBarPartial.html'"></div>
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-include="'openNote/partials/tagListPartial.html'"></div>
 		<div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" ng-view>	</div>
 		<div id="copyRight" class="col-xs-12 fadeOutDirective">&#169; 2018 Jacob Liscom - Version {{version}}</div>

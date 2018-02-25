@@ -4,14 +4,12 @@
 - Grunt `npm install -g grunt-cli`
 
 ## Build
-Clone [this project](https://github.com/FoxUSA/OpenNote) an the [SharedServices Project](https://github.com/FoxUSA/OpenNoteService-PHP)
-
-My project folder structure is setup as follows
+Clone the projects and set them up in the structure below
 ```
 Some working folder
 ├─ OpenNote
 ├─ OpenNote-SharedServices
-├─ OpenNote-Docer
+├─ OpenNote-Docker
 └─ OpenNote-CLI
 ```
 
