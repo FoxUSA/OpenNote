@@ -1,26 +1,9 @@
 <div class="searchPartial">
-	<div class="titleBar">Search in Home</div>
+	<div class="titleBar">Search</div>
 	<div id="search" class="box big search">
 		<form>
 			<div class="form-group">
-				<label>Folders and notes</label>
-				<select ng-model = "searchRequest.type" class="form-control">
-					<option>Both</option>
-					<option>Notes</option>
-					<option>Folders</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>Title and body</label>
-				<select ng-model = "searchRequest.field" class="form-control">
-					<option>Both</option>
-					<option>Title</option>
-					<option>Body</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>Value</label>
-				<input ng-model = "searchRequest.search" type="text" class="form-control"/>
+				<input ng-model = "searchString" type="text" class="form-control" placeholder="Query"/>
 			</div>
 
 			<div class="form-group">
@@ -32,24 +15,4 @@
 	</div>
 </div>
 
-<div class="folderPartial">
-	<div ng-Repeat="folder in folders" class="startHidden randomFadeInDirective box folder" ng-click="loadFolder(folder);">
-		<h4>
-			{{folder.doc.name}}
-		</h4>
-		<p class="box_description"></p>
-		<p class="options">
-			Folder
-		</p>
-	</div>
-
-	<div ng-Repeat="note in notes" class="startHidden box randomFadeInDirective note" ng-click="loadNote(note);">
-		<h4>
-			{{note.doc.title}}
-		</h4>
-		<p class="box_description"></p>
-		<p class="options">
-			<span class="right">Note</span>
-		</p>
-	</div>
-</div>
+<folder-contents-directive contents="results" fade-out="fadeOut"></folder-contents-directive>
