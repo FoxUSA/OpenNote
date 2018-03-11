@@ -1,0 +1,20 @@
+<div class="navbar-header">
+	<div class="left">
+		<button type="button" class="customButton" id="home" onclick="window.location.href='#/folder';">Notes</button>
+	</div>
+	<div class="right">
+		<button type="button" class="navbar-toggle noPadding noMargin" data-toggle="collapse" data-target=".navbar-collapse">
+        	Options
+        </button>
+	</div>
+</div>
+<div class="navbar-collapse collapse noShadow">
+	<ul class="nav navbar-nav navbar-right">
+		<li ng-repeat="button in buttons">
+        	<button id="{{button.id}}" type="button" class="customButton" ng-click="button.action();">{{button.text}}</button>
+        </li>
+        <li>
+        	<button id="setting" type="button" class="customButton" onclick="window.location='#/settings'">Settings</button>
+        </li>
+	</ul>
+</div>

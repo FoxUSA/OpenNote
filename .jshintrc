@@ -1,4 +1,6 @@
 {
+    "esversion":6,
+    "node": true,
     "undef": true,
     "unused": true,
     "mocha": true,
@@ -8,6 +10,5 @@
     "devel":true,
     "jquery":true,
     "jasmine": true,
-    "predef": [ "angular","alertify","", "PouchDB", "CKEDITOR","inject" ],
-    "globals":{"openNote":true}
+    "predef": [ "angular","alertify","", "PouchDB","inject","CodeMirror"]
 }

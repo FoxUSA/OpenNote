@@ -1,162 +1,162 @@
+var package_json = require(__dirname+"/package.json");
+var bundleFiles=[
+    "openNote.bundle.*",
+    "webpack_files/**/*.*",
+    "openNote/**/*.html"
+];
+
+// Helper function
+var serverConfig = function(keepalive){
+    if(keepalive==undefined)
+        keepalive = true;
+    return {
+        options: {
+            port: 8080,
+            base: ".",
+            keepalive: keepalive
+        }
+    };
+};
+
 module.exports = function(grunt) {
-	//Initializing the configuration object
-	    grunt.initConfig({
-			compress: {
-				main: {
-					options: {
-						archive: "build/version.zip"
-					},
-					files: [{
-						src: ["**/*"],
-						cwd:"OpenNote/",
-						expand: true
-		   			}]
-				}
-			},
-			jshint: {
-				options:{
-				},
-				all: [	"**/*.js*",//Order matters
-						"!node_modules/**",
-						"!OpenNote/bower_components/**"]
-			},
-	    	//Style
-				less: {
-					devDark: {
-					    options: {
-					    	paths: ["assets/css"],
-					    	modifyVars: {
-						    	  offset: "#000000"
-						    }
-					    },
-					    files: {
-					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
-					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
-					    }
-				 	},
-				 	devLight: {
-					    options: {
-					    	paths: ["assets/css"],
-					    	modifyVars: {
-						    	  offset: "#FFFFFF"
-						    }
-					    },
-					    files: {
-					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
-					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
-					    }
-				 	},
-				 	prodDark: {
-					    options: {
-							paths: ["assets/css"],
-							cleancss: true,
-							modifyVars: {
-								offset: "#000000"
-							}
-					    },
-					    files: {
-					    	"OpenNote/openNote/style/invert/dark/style.css": "OpenNote/openNote/style/invert/style.less",
-					    	"OpenNote/openNote/style/invert/dark/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/dark/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/dark/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
-					    }
-				 	},
-				 	prodLight: {
-					    options: {
-							paths: ["assets/css"],
-							cleancss: true,
-							modifyVars: {
-								offset: "#FFFFFF"
-							}
-					    },
-					    files: {
-					    	"OpenNote/openNote/style/invert/light/style.css": "OpenNote/openNote/style/invert/style.less",
-					    	"OpenNote/openNote/style/invert/light/note.css": "OpenNote/openNote/style/invert/note.less",
-					    	"OpenNote/openNote/style/invert/light/alertify.css": "OpenNote/openNote/style/invert/alertify.less",
-					    	"OpenNote/openNote/style/invert/light/intojs.css": "OpenNote/openNote/style/invert/introjs.less"
-					    }
-				 	}
-				},
-	    	//Testing setup
-			    karma: {
-		            unit: {
-		                configFile: "OpenNote.Test/karma.conf.js",
-		                background: true
-		            },
-					travis: {
-		                configFile: "OpenNote.Test/karma.conf.js",
-		                singleRun: true,
-		                browsers: ["PhantomJS"]//Override config browsers
-		            }
-		        },
-		        watch: {
-		            karma: {
-		                files: ["src/**/*.js", "test/unit/**/*.js"],
-		                tasks: ["karma:unit:run"]
-		            }
-		        },
-		        shell: {
-		            bowerInstall: {
-		                command:  [	"cd OpenNote",
-		                			"bower install" ].join("&&")
-		            },
-		            clean:{
-		            	command:  [	"rm -rf build",
-		            	           	"cd OpenNote",
-		                			"rm -rf bower_components",
-		                			"cd openNote/style/invert/",
-		                			"rm -rf dark light"].join("&&")
-		            }
-		        },
-	        //HTML 5
-		        manifest: {
-		            generate: {
-						options: {
-							basePath: "OpenNote/",
-							exclude: ["openNote.appcache", "Service", "bower_components/intro.js"],
-							verbose: true,
-							timestamp: true,
-							hash: true,
-							master: ["index.html"]
-						},
-		              src: [
-		                  "**/*.js",
-		                  "**/*.css",
-		                  "**/*.html",
-		                  "**/*.png",
-		                  "**/*.jpg"
-		              ],
-		              dest: "OpenNote/openNote.appcache"
-		            }
-		          }
-		});
+    //Initializing the configuration object
+    grunt.initConfig({
+        connect: {
+            server: serverConfig(),
+            serverNoAlive: serverConfig(false)
+        },
+        compress: {
+            main: {
+                options: {
+                    archive: "dist/"+package_json.version+".zip"
+                },
+                files: [{
+                    src: [
+                        "openNote.appcache",
+                        "index.html",
+                    ].concat(bundleFiles),
+                    expand: true
+                }]
+            }
+        },
+        jshint: {
+            options: {
+                "esversion":6,
+            },
+            all: ["openNote/**/*.js*", //Order matters
+                "!node_modules/**",
+                "!OpenNote/node_moduless/**"
+            ]
+        },
+        //Style
+        less: {
+            devDark: {
+                options: {
+                    paths: ["assets/css"],
+                    modifyVars: {
+                        offset: "#000000"
+                    }
+                },
+                files: {
+                    "openNote/style/invert/dark/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/dark/alertify.css": "openNote/style/invert/alertify.less"
+                }
+            },
+            devLight: {
+                options: {
+                    paths: ["assets/css"],
+                    modifyVars: {
+                        offset: "#FFFFFF"
+                    }
+                },
+                files: {
+                    "openNote/style/invert/light/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/light/alertify.css": "openNote/style/invert/alertify.less"
+                }
+            },
+            prodDark: {
+                options: {
+                    paths: ["assets/css"],
+                    cleancss: true,
+                    modifyVars: {
+                        offset: "#000000"
+                    }
+                },
+                files: {
+                    "openNote/style/invert/dark/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/dark/alertify.css": "openNote/style/invert/alertify.less"
+                }
+            },
+            prodLight: {
+                options: {
+                    paths: ["assets/css"],
+                    cleancss: true,
+                    modifyVars: {
+                        offset: "#FFFFFF"
+                    }
+                },
+                files: {
+                    "openNote/style/invert/light/style.css": "openNote/style/invert/style.less",
+                    "openNote/style/invert/light/alertify.css": "openNote/style/invert/alertify.less"
+                }
+            }
+        },
+        shell: {
 
-	//Plugin loading
-		grunt.loadNpmTasks("grunt-contrib-jshint");
-		grunt.loadNpmTasks("grunt-contrib-less");
-		grunt.loadNpmTasks("grunt-contrib-watch");
-	    grunt.loadNpmTasks("grunt-karma");
-	    grunt.loadNpmTasks("grunt-shell");
-	    grunt.loadNpmTasks("grunt-manifest");
-		grunt.loadNpmTasks("grunt-contrib-compress");
+            clean: {
+                command: ["rm -rf dist webpack_files",
+                    "cd openNote/style/invert/",
+                    "rm -rf dark light",
+                ].join("&&")
+            },
+            test: {
+                command: ["npm run test"].join("&&")
+            },
+            dev: {
+                command: ["npm run dev"].join("&&")
+            },
+            build: {
+                command: ["npm run build"].join("&&")
+            }
+        },
+        //HTML 5
+        manifest: {
+            generate: {
+                options: {
+                    basePath: ".",
+                    exclude: ["openNote.appcache"],
+                    verbose: true,
+                    timestamp: true,
+                    hash: true,
+                    master: ["index.html"]
+                },
+                src: bundleFiles,
+                dest: "openNote.appcache"
+            }
+        }
+    });
 
-	//Task definition
-	    //css
-		    grunt.registerTask("buildDevCSS", ["less:devDark","less:devLight"]);
-		    grunt.registerTask("buildProdCSS", ["less:prodDark","less:prodLight"]);
+    //Plugin loading
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks("grunt-manifest");
+    grunt.loadNpmTasks("grunt-contrib-compress");
+    grunt.loadNpmTasks("grunt-contrib-connect");
 
-		//deployment
-		    // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
-		    grunt.registerTask("build", ["shell:bowerInstall", "buildDevCSS", "manifest:generate"]);
-			grunt.registerTask("default", ["build"]);
-			grunt.registerTask("deploy", ["shell:clean", "shell:bowerInstall", "buildProdCSS", "manifest:generate","compress"]);
+    //Task definition
+    //css
+    grunt.registerTask("buildDevCSS", ["less:devDark", "less:devLight"]);
+    grunt.registerTask("buildProdCSS", ["less:prodDark", "less:prodLight"]);
 
-		//testing
-			grunt.registerTask("devmode", ["karma:unit", "watch"]);
-			grunt.registerTask("test", ["karma:travis"]);
-			grunt.registerTask("ci", ["build","jshint:all","karma:travis"]);
+    //deployment
+    // you can run individual command using  the plug-in command syntax suck as manifest:generate or shell:clean
+    grunt.registerTask("build", ["buildDevCSS", "shell:build", "manifest:generate"]);
+    grunt.registerTask("buildProd", ["buildProdCSS", "shell:build", "manifest:generate"]);
+    grunt.registerTask("default", ["build", "shell:dev"]);
+    grunt.registerTask("deploy", ["shell:clean", "buildProd", "compress"]);
+    grunt.registerTask("testDeploy", ["shell:clean", "buildProd", "connect:server"]);
+
+    //testing
+    grunt.registerTask("ci", "Build the app and runs tests on it", ["jshint:all", "buildProd", "connect:serverNoAlive", "shell:test" ]);
 };

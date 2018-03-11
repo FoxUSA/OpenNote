@@ -1,0 +1,18 @@
+<div class="searchPartial">
+	<div class="titleBar">Search</div>
+	<div id="search" class="box big search">
+		<form>
+			<div class="form-group">
+				<input ng-model = "searchString" type="text" class="form-control" placeholder="Query"/>
+			</div>
+
+			<div class="form-group">
+				<button class="form-control customButton" ng-click="search()">
+					Search
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<folder-contents-directive contents="results" fade-out="fadeOut"></folder-contents-directive>

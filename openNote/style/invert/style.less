@@ -1,0 +1,332 @@
+/** offset all the other colors */
+	@offset: #000000;
+
+/*Colors*/
+	@pageBackground: negation(#111, @offset);
+	@navBackground: negation(#000, @offset);
+
+	@updateColor: negation(#CC0000, @offset);
+	@folderColor: negation(#8D40CC, @offset);
+	@settingColor: negation(#bbb, @offset);
+	@blankBoxColor: negation(#F06D29, @offset);
+	@defaultTextColor: negation(#CCC, @offset);
+	@primaryTextColor: negation(#fff, @offset);
+
+	@treePlaceholderBorder: negation(#412d24, @offset);
+	@treePlaceholderBackground: negation(#0f0600, @offset);
+
+	@treeHandleColor: negation(#bc7146, @offset);
+	@treeHandleBackgroundColor: negation(#0b0908, @offset);
+	@treeHandleBorderColor: negation(#231d17, @offset);
+
+	@copyRightColor: negation(#777777, @offset);
+	@loginInputColor: negation(#444, @offset);
+
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: Helvetica Neue, Helvetica, Arial;
+	font-size: 12px;
+	line-height: 22px;
+	background: @pageBackground;
+	background-attachment: fixed;
+	color: @defaultTextColor;
+	cursor: pointer; /* fix for IOS */
+
+	margin-top: 15px;
+}
+
+.form-control, select{
+	background-color: transparent;
+	border-width: 1px;
+	border-radius: 4px;
+	border-style: solid;
+	border-color: @loginInputColor;
+	box-shadow:none;
+	color: inherit;
+
+	&:focus{
+		box-shadow:none;
+	}
+
+	.customButton{
+		font-weight: bold;
+	}
+}
+
+#update{/*Update span style*/
+	color: @updateColor;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none; /* dont outline text boxes and buttons when they are selected*/
+}
+
+.startHidden{/*used to initialy hide element so jquery can fade it in*/
+	display: none;
+}
+
+/* dont color hyperlinks*/
+	a:link,a:hover,a:visited,a:active {
+	  	color:inherit;
+	  	text-decoration:inherit;
+	}
+
+#menu{
+	background: @navBackground;
+	padding: 15px 30px;
+	overflow: hidden;
+	font-size: 18px;
+
+	border-radius:4px;/*round the corners*/
+
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.titleBar{
+	background: @navBackground;
+	padding: 15px 30px;
+	overflow: hidden;
+	font-size: 18px;
+	border-radius:4px;/*round the corners*/
+}
+
+.customButton{ /*custom button class that removes all browser formating*/
+	border: none;
+	background:transparent;
+	overflow: hidden;
+
+	background-color: transparent;
+	color: inherit;
+
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	border-radius:4px;/*round the corners*/
+}
+
+img {
+	border: none; /*stupid IE*/
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.box{
+	width: 250px;
+	height: 150px;
+	padding: 10px;
+	float: left;
+	margin: 0 10px 10px 0;
+
+	background-color: @blankBoxColor;
+	color: @navBackground;
+	position: relative;
+
+	overflow: hidden;
+	border-radius:4px;/*round the corners*/
+}
+	.box:hover {/*overiding css when up class is present*/
+			background: lighten(@blankBoxColor, 10%);
+		}
+
+	.box_description{
+		height: 80px;
+		overflow: hidden;
+	}
+
+		#itemClass_description{
+			border: none;
+			background:transparent;
+			height: 80px;
+			width: 100%;
+			overflow: auto;
+			resize:none;
+
+			/* copied from div.event */
+			color: inherit; /*inherit from parent*/
+
+			/*coped from body to prevent glitch*/
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit;
+		}
+
+	.big, .big:hover  {
+		width: 100%;
+		height: 100%;
+		margin: 0px 0px 0px 0px;/*reset from box*/
+		background-color: @blankBoxColor;
+		padding:10px 30px;
+
+		overflow: hidden;
+		float: none;
+	}
+
+
+	.folder {/*overiding css when up class is present*/
+		background: @folderColor; /*green*/
+
+		&:hover {/*overiding css when up class is present*/
+			background: lighten(@folderColor, 10%);
+		}
+	}
+
+	div.box.settings {
+		background: @settingColor;
+
+		&:hover {
+			background: lighten(@settingColor, 10%);
+		}
+	}
+
+	div.box.big.settings {
+		background: @settingColor;
+
+		&:hover {
+			background: @settingColor;;
+		}
+	}
+
+	.searchPartial,
+	.settingsPartials{
+		margin-bottom: 30px;
+	}
+
+
+	h1,h2,h3,h4,h5,h6 {
+		margin: 0 0 10px 0;
+		font-weight: normal;
+	}
+
+		.inputField{
+			border: none;
+			background:transparent;
+			overflow: hidden;
+			resize:none;
+
+			/* copied from div.event */
+			color: inherit; /*inherit from parent*/
+
+			/*coped from body to prevent glitch*/
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit;
+
+			width: 80%;
+		}
+
+		.smallInputField{ width: 35px;}/*override*/
+
+		.options {
+			position: absolute;/*Always putting the option on the bottom*/
+			width: 93%;
+			bottom: 0px;
+		}
+
+
+	.bar .options{ /*override*/
+		width: 98%;
+	}
+
+	.noPadding{
+		padding: 0;
+	}
+
+	.noMargin{
+		margin: 0;
+
+	}
+
+	.noShadow{
+		box-shadow: none;
+	}
+
+
+
+// Main
+#copyRight{
+	color: @copyRightColor;
+	padding-left: 50px;
+}
+
+#sideBar{
+	background: @navBackground;
+
+	/*round the corners*/
+	border-radius:4px ;
+	margin-bottom: 15px;
+	padding: 15px 15px 15px 30px;
+}
+
+#sideBar ul{
+	padding-left: 20px;
+}
+
+// Search
+.searchPartial{
+
+	.search,
+	.search:hover,
+	.search option{
+		background-color: negation(@folderColor, #FFFFFF);
+	}
+
+	input::placeholder{
+		color: @navBackground;
+	}
+
+}
+
+// Note partial
+.notePartial{
+	 .CodeMirror{
+		border-radius:4px;/*round the corners*/
+		height: 75vh;
+	}
+}
+
+
+// Folder partial
+.folderPartial,
+.tagPartial{
+	#folderTitleBar{
+		padding: 0px 0px 15px 0px;
+		overflow: hidden;
+		font-size: 18px;
+
+		.breadcrumb{
+			margin-bottom:0;
+			padding: 0 15px 0 0;
+			background: none;
+			float:left;
+
+			>.active{
+				color:inherit;
+			}
+
+			li{
+				font-size: 20px;
+			}
+		}
+	}
+
+		#folderTitle{
+			float:left;
+			padding-right:15px;
+			font-size: 20px;
+		}
+
+	.noFolderHelp{
+		margin-top: 25px;
+	    text-align: center;
+	    color: @copyRightColor
+	}
+}
