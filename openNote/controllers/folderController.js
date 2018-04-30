@@ -41,7 +41,7 @@ openNote.controller("folderController", ["$scope",
                 var prompt = "Please enter a name for the new folder";
 
                 if ($scope.currentFolder.name)
-                    prompt += "that will be created in " + $scope.currentFolder.name;
+                    prompt += " that will be created in " + $scope.currentFolder.name;
 
                 alertify.prompt(
                     prompt,
