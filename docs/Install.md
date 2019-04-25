@@ -7,6 +7,7 @@ version: "2"
 services:
     opennote:
         image: foxusa/opennote
+        restart: always
         volumes:
             -   "<HOST_LOCATION>:/root/certs:ro"#TODO set this
         ports:
@@ -17,6 +18,7 @@ services:
             - "couchdb:couchdb"
     couchdb:
         image: couchdb
+        restart: always
         volumes:
             -   "<HOST_LOCATION>:/opt/couchdb/data" #TODO set this
             -   "<HOST_LOCATION>:/root/certs:ro" #TODO set this
@@ -29,6 +31,7 @@ services:
 
     minio:
         image: minio/minio
+        restart: always
         volumes:
             -   "<HOST_LOCATION>:/data" #TODO set this
             -   "<HOST_LOCATION>:/root/.minio/certs:ro" #TODO set this
@@ -50,7 +53,8 @@ the `public.crt` file should have your servers cert and the whole cert chain app
 
 ### OpenNote
 - [ ] (Optional) Configure SSL:  
-Run `docker-compose exec opennote nano /etc/nginx/conf.d/default.conf` and use [this config](https://github.com/FoxUSA/OpenNote-Docker/blob/master/samples/nginx/default.conf) as a template.
+Run `docker-compose exec opennote nano /etc/nginx/conf.d/default.conf` and use [this config](https://github.com/FoxUSA/OpenNote-Docker/blob/master/samples/nginx/default.conf) as a template. 
+Optionally you can place this config on the host and mount it to the container by addding `-   "<HOST_LOCATION>:/etc/nginx/conf.d/default.conf:ro` to the openote service definition in the `docker-compose` file.
 - [ ] Run `docker-compose exec opennote nano /etc/nginx/nginx.conf`  and add this line at the end of the http block
 `client_max_body_size 100M;`
 
