@@ -1,5 +1,8 @@
 # OpenNote
 
+> This project has received the kiss of death. That is, I myself don't use it anymore. I have switched to using a [text editor with markdown support](https://vscodium.com/), Git, and [Syncthing](https://syncthing.net/) for my journaling/note taking.
+> If you want to export your notes, the [cli](https://github.com/FoxUSA/OpenNote-CLI) can dump them to text files. 
+
 ![][responsive]
 OpenNote is a progressive web application(PWA)/HTML5 offline app that was built to be a open source(MIT License), web based text editor/note taking software.
 It is designed to be self hosted and gives you ownership of your data
